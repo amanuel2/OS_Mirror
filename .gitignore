@@ -1,0 +1,8 @@
+#Commonly Ignored Files
+*.o
+*.out
+BoneOS.bin
+BoneOS.iso
+
+#Ignored Folders
+cross/
