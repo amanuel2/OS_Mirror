@@ -6,6 +6,7 @@
 
 #include "port.h"
 #include "stdio.h"
+#include "mem.h"
 
 #define IDT_SIZE 256
 

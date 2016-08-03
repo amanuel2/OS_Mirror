@@ -32,7 +32,7 @@ struct idt_entry {
     uint8_t always0;
     uint8_t flags; // Set using the table.
     uint16_t base_hi;
-} __attribute__((packed));
+};
 
 
 
@@ -117,7 +117,7 @@ IDT::IDT(void) {
     idtp.limit = (sizeof(struct idt_entry) * 256) - 1;
     idtp.base = (uint32_t) & idt;
 
-    //memset(&idt, 0, sizeof(struct idt_entry) * 256);
+    Lib::Mem::memset(&idt, 0, sizeof(struct idt_entry) * 256);
 
     idt_set_gate(0, (uint32_t)isr0, 0x08, 0x8e);
     idt_set_gate(1, (uint32_t)isr1, 0x08, 0x8e);
