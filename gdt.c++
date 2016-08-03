@@ -37,8 +37,9 @@ gdt::gdt()
 	    gp.limit = (sizeof(struct gdt_entry) * 3) - 1;
 	    gp.base = (uintptr_t)&gdt_ent;
 
+	    Lib::Mem::memset(&gdt_ent[0], 0, sizeof(struct gdt_entry));
 	    /* Our NULL descriptor */
-	    gdt_set_gate(0, 0, 0, 0, 0);
+	    //gdt_set_gate(0, 0, 0, 0, 0);
 
 	    /* The second entry is our Code Segment. The base address
 	    *  is 0, the limit is 4GBytes, it uses 4KByte granularity,
@@ -66,7 +67,7 @@ gdt::~gdt()
 /* Setup a descriptor in the Global Descriptor Table */
 void gdt::gdt_set_gate(uint8_t num, uint64_t base, uint64_t limit, uint8_t access, uint8_t gran)
 {
-	Lib::Mem::memset(&gdt_ent[num], 0, sizeof(struct gdt_entry));
+
     /* Setup the descriptor base address */
     gdt_ent[num].base_low = (base & 0xFFFF);
     gdt_ent[num].base_middle = (base >> 16) & 0xFF;
