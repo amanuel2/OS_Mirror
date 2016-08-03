@@ -1,20 +1,22 @@
 GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall -Werror
 LDPARAMS =  -melf_i386
-objects = stdio.o kernel.o mem.o string.o serial.o gdt.o port.o  gdt_flush.o port_a.o boot.o 
+objects = stdio.o kernel.o idt.o mem.o string.o serial.o gdt.o port.o  gdt_flush.o port_a.o boot.o idt_a.o
 i686 = i686-elf-
-
+ASPARAMS = --32 
 all: run_vb
 
 compile:
-	$(i686)g++ $(GPPARAMS) -o stdio.o -c stdio.c++ -ffreestanding
+	$(i686)g++ $(GPPARAMS) -o stdio.o -c stdio.c++ -ffreestanding 
 	$(i686)g++ $(GPPARAMS) -o kernel.o -c kernel.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o gdt.o -c gdt.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o port.o -c port.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o serial.o -c serial.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o mem.o -c mem.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o string.o -c string.c++ -ffreestanding
+	$(i686)g++ $(GPPARAMS) -o idt.o -c idt.c++ -ffreestanding
 	$(i686)as $(ASPARAMS) -g -o boot.o boot.S
 	$(i686)as $(ASPARAMS) -g -o port_a.o port.S
+	$(i686)as $(ASPARAMS) -g -o idt_a.o idt.S
 	$(i686)as $(ASPARAMS) -g -o gdt_flush.o gdt_flush.S
 	
 BoneOS.bin : linker.ld $(objects)
