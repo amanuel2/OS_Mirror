@@ -36,6 +36,9 @@ qemu_compile: compile BoneOS.bin qemu
 qemu:
 	qemu-system-i386 -kernel BoneOS.bin
 
+qemu_debug:
+	qemu-system-i386 -kernel BoneOS.bin -d in_asm,cpu_reset,exec,int,guest_errors,pcall -no-reboot &>qemu.log
+
 BoneOS.iso: BoneOS.bin 
 	mkdir iso
 	mkdir iso/boot

@@ -26,13 +26,15 @@
  * interrupt.
  * For more information, read Volume 3 Chapter 6 of the Intel Manual.
  */
-static struct idt_entry {
+struct idt_entry {
     uint16_t base_lo;
     uint16_t sel; // Kernel segment goes here.
     uint8_t always0;
     uint8_t flags; // Set using the table.
     uint16_t base_hi;
-} __attribute((packed)) idt[IDT_SIZE] = {{0}};
+} __attribute__((packed));
+
+
 
 /*
  * Similar to the <gdt_ptr>, this is a special pointer to the <idt>.
@@ -40,8 +42,9 @@ static struct idt_entry {
 struct idt_ptr {
     uint16_t limit;
     uint32_t base;
-} __attribute((packed));
+} __attribute__((packed));
 
+ struct idt_entry idt[IDT_SIZE];
  struct idt_ptr idtp;
 
 
@@ -177,7 +180,7 @@ IDT::IDT(void) {
 
 IDT::~IDT()
 {
-    
+
 }
 /* Dispatch event handler or, if none exists, log information and kernel panic.
  */
