@@ -2,8 +2,9 @@
 .section .text
 .global idt_load
 .extern idtp
+.extern common_interrupt_handler
 idt_load:
-	lidt idtp
+	lidt 4(%esp)
 	sti
 	ret
 
@@ -34,7 +35,7 @@ common_handler:
 
 	mov 0x10,%ax
 	mov %ax,%ds
-	mov %ax,%es 
+#	mov %ax,%es 
 	mov %ax,%fs
 	mov %ax,%gs
 
@@ -43,7 +44,7 @@ common_handler:
 	popl %eax
 
 	mov %ax,%ds 
-	mov %ax,%es 
+#	mov %ax,%es 
 	mov %ax,%fs 
 	mov %ax,%gs 
 

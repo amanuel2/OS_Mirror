@@ -60,7 +60,7 @@ struct regs {
 /* A wrapper around lidt.
  * Load the provided <idt_ptr> onto the CPU.
  */
-extern "C" void idt_load();
+extern "C" void idt_load(struct idt_ptr);
 
 extern "C" void _service_interrupt(void);
 
@@ -175,7 +175,7 @@ IDT::IDT(void) {
     p8b.out((uint8_t)PIC_MASTER_MASK, (uint16_t)0xff);
     p8b.out((uint8_t)PIC_SLAVE_MASK, (uint16_t)0xff);
 
-    idt_load();
+    idt_load(idtp);
 }
 
 IDT::~IDT()

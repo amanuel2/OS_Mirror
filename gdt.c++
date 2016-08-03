@@ -66,6 +66,7 @@ gdt::~gdt()
 /* Setup a descriptor in the Global Descriptor Table */
 void gdt::gdt_set_gate(uint8_t num, uint64_t base, uint64_t limit, uint8_t access, uint8_t gran)
 {
+	Lib::Mem::memset(&gdt_ent[num], 0, sizeof(struct gdt_entry));
     /* Setup the descriptor base address */
     gdt_ent[num].base_low = (base & 0xFFFF);
     gdt_ent[num].base_middle = (base >> 16) & 0xFF;
