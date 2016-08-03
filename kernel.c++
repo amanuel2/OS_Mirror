@@ -34,7 +34,7 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    printf("Hello World");
    sp.write_string_serial("Hello World");
 
-//   IDT idt;
+  IDT idt;
 
    while(1);
    err:
