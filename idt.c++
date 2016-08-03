@@ -111,15 +111,6 @@ static void idt_set_gate(uint8_t num, uint32_t base, uint16_t sel,
     idt[num].flags = flags;
 }
 
-void lidt(uintptr_t base, size_t limit)
-{
-    asm volatile ("subl $6, %%esp\n\t"
-                  "movw %w0, 0(%%esp)\n\t"
-                  "movl %1, 2(%%esp)\n\t"
-                  "lidt (%%esp)\n\t"
-                  "addl $6, %%esp" : : "rN"(limit), "r"(base));
-}
-
 
 IDT::IDT(void) {
     // 256 is the number of entries in the table.
@@ -184,7 +175,7 @@ IDT::IDT(void) {
     p8b.out((uint8_t)PIC_MASTER_MASK, (uint16_t)0xff);
     p8b.out((uint8_t)PIC_SLAVE_MASK, (uint16_t)0xff);
 
-    lidt((uintptr_t) idt, sizeof(idt) - 1);
+    idt_load(idtp);
 }
 
 IDT::~IDT()

@@ -1,7 +1,7 @@
 .section .text
     .global gdt_flush
     gdt_flush:
-        lgdt gp
+        lgdt (gp)
         mov $0x10,%ax
         mov %ax,%ds
         mov %ax,%es
