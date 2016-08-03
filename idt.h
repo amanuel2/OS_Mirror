@@ -22,8 +22,8 @@ class IDT
 			 * which dispatches the <timer_handler>. Interrupt 33 is used by the keyboard,
 			 * and dispatches the <keyboard_handler>.
 			 */
-			void idt_install(void);
-
+			IDT();
+			~IDT();
 		private:
 			// Interrupt Service Routine function signature.
 			// ISRs with this signature are installed to a dispatch table.

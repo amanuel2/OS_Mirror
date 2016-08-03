@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "serial.h"
 #include "mem.h"
+#include "idt.h"
 
 
 
@@ -29,9 +30,12 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    printf("s %d %d %d %d %c %o %s \t %x" , 12, 150, 230, 560, 'H', 23323, "TestingString", 0xBADBEEF);
 
 
-   cls();
+//   cls();
    printf("Hello World");
    sp.write_string_serial("Hello World");
+
+//   IDT idt;
+
    while(1);
    err:
    	   while(1);

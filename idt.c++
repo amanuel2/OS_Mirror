@@ -109,7 +109,7 @@ static void idt_set_gate(uint8_t num, uint32_t base, uint16_t sel,
 }
 
 
-void IDT::idt_install(void) {
+IDT::IDT(void) {
     // 256 is the number of entries in the table.
     idtp.limit = (sizeof(struct idt_entry) * 256) - 1;
     idtp.base = (uint32_t) & idt;
@@ -175,6 +175,10 @@ void IDT::idt_install(void) {
     idt_load();
 }
 
+IDT::~IDT()
+{
+    
+}
 /* Dispatch event handler or, if none exists, log information and kernel panic.
  */
 extern "C" void common_interrupt_handler(struct regs r) {
