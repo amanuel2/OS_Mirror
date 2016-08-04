@@ -1,4 +1,3 @@
-
 .section .text
 .global idt_load
 .extern idtp
@@ -14,7 +13,7 @@ idt_load:
 	.global isr\number
 	isr\number:
 		cli
-		pushl \number
+		pushl $\number
 		jmp common_handler
 .endm
 
@@ -22,8 +21,8 @@ idt_load:
 	.global isr\number
 	isr\number:
 		cli
-		pushl 0
-		pushl \number
+		pushl $0
+		pushl $\number
 		jmp common_handler
 .endm
 

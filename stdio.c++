@@ -89,7 +89,7 @@ void putchar(char str,char next_str, va_list &arg)
 	{
 	  uint32_t ch_per;
 	  char* str_use;
-	  const char per = '%';
+	  //const char per = '%';
 		 if(str == '\b')
 		    {
 		      terminal_column--;
@@ -159,14 +159,14 @@ void putchar(char str,char next_str, va_list &arg)
 		        		}
 		        		continue_ex = true;
 		        		break;
-		        	default:
-		        		terminal_column++;
-		        		VideoMemory[index]= (VideoMemory[index] & 0xFF00)|per;
+		        	//default:
+		        	//	terminal_column++;
+		        	//	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|per;
 		        	}
 		        	break;
-		        default:
-		          terminal_column++;
-		          VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str;
+		        //default:
+		         // terminal_column++;
+		         // VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str;
 		          break;
 		    }
 	}

@@ -1,7 +1,8 @@
 .section .text
     .global gdt_flush
+    .extern gp
     gdt_flush:
-        lgdt (gp)
+        lgdt 4(%esp)
         mov $0x10,%ax
         mov %ax,%ds
         mov %ax,%es

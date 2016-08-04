@@ -114,7 +114,7 @@ static void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
 
 IDT::IDT(void) {
     // 256 is the number of entries in the table.
-    idtp.limit = (sizeof(struct idt_entry) * 256) - 1;
+    idtp.limit = (sizeof(idt)) - 1;
     idtp.base = (uint32_t) & idt;
 
     Lib::Mem::memset(&idt, 0, sizeof(struct idt_entry) * 256);
