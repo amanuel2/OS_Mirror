@@ -46,9 +46,9 @@ void printf(char *str, ...)
 	va_start(arg, str);
 
 	for(int32_t i=0;str[i]!='\0'; ++i)
-        {
-            putchar(str[i],str[i+1],arg);
-        }
+    {
+        putchar(str[i],str[i+1],arg);
+    }
 
 	va_end(arg);
 }

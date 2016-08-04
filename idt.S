@@ -30,14 +30,7 @@ idt_load:
 common_handler:
     # save registers
     
-    pushl %ebp
-    pushl %edi
-    pushl %esi
-
-    pushl %edx
-    pushl %ecx
-    pushl %ebx
-    pushl %eax
+    pusha
 
     # call C++ Handler
     call common_interrupt_handler
@@ -45,16 +38,8 @@ common_handler:
     mov %eax, %esp # switch the stack
 
     # restore registers
-    popl %eax
-    popl %ebx
-    popl %ecx
-    popl %edx
-
-    popl %esi
-    popl %edi
-    popl %ebp
+    popa
     
-    add $4, %esp
     iret
 
 

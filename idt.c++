@@ -185,5 +185,5 @@ IDT::~IDT()
 /* Dispatch event handler or, if none exists, log information and kernel panic.
  */
 extern "C" void common_interrupt_handler(struct regs r) {
-        printf("Unhandled Interrupt Triggered!\nRegisters");
+        printf(" \n Unhandled Interrupt Triggered!");
 }

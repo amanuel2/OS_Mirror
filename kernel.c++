@@ -26,13 +26,7 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    gdt gt;
    SerialPort sp;
 
-   printf("Hello People \b");
-   printf("s %d %d %d %d %c %o %s \t %x" , 12, 150, 230, 560, 'H', 23323, "TestingString", 0xBADBEEF);
-
-
-//   cls();
-   printf("Hello World");
-   sp.write_string_serial("Hello World");
+   printf("Hello World. My name is %s  and I am %d years old" , "Amanuel",100);
 
   IDT idt;
 
