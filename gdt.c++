@@ -1,5 +1,23 @@
 #include "gdt.h"
 
+#define SEGMENT_32_BIT 0
+#define SEGMENT_64_BIT 1
+
+#define SEGMENT_RW_DATA 2
+#define SEGMENT_RX_CODE 10
+
+#define KERNEL_MODE 0
+#define USER_MODE 3
+
+#define GRANULARITY_BYTE 0
+#define GRANULARITY_PAGE 1
+
+#define SYSTEM_TYPE 0
+#define CODE_OR_DATA_TYPE 1
+
+#define OP_16_bit 0
+#define OP_32_bit 1
+
 /* The Global Descriptor Table and its entries.
  * x86 uses a backward, antiquated segmented memory model for compatibility
  * with computers which were around in the late Cretaceous. The Global
@@ -60,23 +78,7 @@ static struct gdt_ptr {
  */
 extern "C" void gdt_flush(struct gdt_ptr gdtp);
 
-#define SEGMENT_32_BIT 0
-#define SEGMENT_64_BIT 1
 
-#define SEGMENT_RW_DATA 2
-#define SEGMENT_RX_CODE 10
-
-#define KERNEL_MODE 0
-#define USER_MODE 3
-
-#define GRANULARITY_BYTE 0
-#define GRANULARITY_PAGE 1
-
-#define SYSTEM_TYPE 0
-#define CODE_OR_DATA_TYPE 1
-
-#define OP_16_bit 0
-#define OP_32_bit 1
 
 /* Properly initialize an entry in the <gdt> */
 void gdt::gdt_set_gate(uint32_t index, uint64_t base, uint64_t limit,

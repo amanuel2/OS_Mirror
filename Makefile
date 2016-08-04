@@ -54,6 +54,10 @@ BoneOS.iso: BoneOS.bin
 	grub-mkrescue --output=BoneOS.iso iso
 	rm -rf iso
 
+start-debug:
+	qemu-system-i386 -S -s -kernel BoneOS.bin -m 1G -serial file:qemu-serial.log 
+	
+
 run_vb: compile BoneOS.bin BoneOS.iso
 	(killall VirtualBox && sleep 1)||true
 	VirtualBox --startvm "BoneOS" &

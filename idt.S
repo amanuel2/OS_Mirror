@@ -28,29 +28,34 @@ idt_load:
 
 
 common_handler:
-	pusha
-	mov %ds,%ax
-	pushl %eax
+    # save registers
+    
+    pushl %ebp
+    pushl %edi
+    pushl %esi
 
-	mov 0x10,%ax
-	mov %ax,%ds
-	mov %ax,%es 
-	mov %ax,%fs
-	mov %ax,%gs
+    pushl %edx
+    pushl %ecx
+    pushl %ebx
+    pushl %eax
 
-	call common_interrupt_handler
+    # call C++ Handler
+    call common_interrupt_handler
+    
+    mov %eax, %esp # switch the stack
 
-	popl %eax
+    # restore registers
+    popl %eax
+    popl %ebx
+    popl %ecx
+    popl %edx
 
-	mov %ax,%ds 
-	mov %ax,%es 
-	mov %ax,%fs 
-	mov %ax,%gs 
-
-	popa
-	add 8,%esp
-	sti
-	iret
+    popl %esi
+    popl %edi
+    popl %ebp
+    
+    add $4, %esp
+    iret
 
 
 no_error_code_interrupt 0
