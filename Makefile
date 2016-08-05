@@ -2,6 +2,8 @@ GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rt
 LDPARAMS =  -melf_i386
 objects = stdio.o kernel.o isr.o idt.o mem.o string.o serial.o gdt.o port.o  gdt_flush.o port_a.o boot.o idt_a.o isr_a.o 	
 i686 = i686-elf-
+Asm_files =  idt boot isr port gdt_flush
+C++_FILES = stdio kernel gdt port serial mem string isr idt
 ASPARAMS = --32 
 all: run_vb
 
@@ -20,7 +22,14 @@ compile:
 	$(i686)as $(ASPARAMS) -g -o port_a.o port.S
 	$(i686)as $(ASPARAMS) -g -o idt_a.o idt.S
 	$(i686)as $(ASPARAMS) -g -o gdt_flush.o gdt_flush.S
-	
+
+#IN TEST  START	
+compile_c++: $(C++_FILES)
+	$(i686)g++ $(GPPARAMS) -o $<.o -c $<.o -ffreestanding 
+compile_asm: $(Asm_files)
+	$(i686)as $(ASPARAMS) -g -o $<_a.o $<.S	
+#IN TEST END
+
 BoneOS.bin : linker.ld $(objects)
 	ld $(LDPARAMS) -T $< -o $@ $(objects)
 	
