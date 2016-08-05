@@ -59,7 +59,7 @@ interrupt 13
 interrupt 14
 no_error_code_interrupt 15
 no_error_code_interrupt 16
-interrupt 17
+no_error_code_interrupt 17
 no_error_code_interrupt 18
 no_error_code_interrupt 19
 no_error_code_interrupt 20
@@ -72,8 +72,5 @@ no_error_code_interrupt 26
 no_error_code_interrupt 27
 no_error_code_interrupt 28
 no_error_code_interrupt 29
-interrupt 30
+no_error_code_interrupt 30
 no_error_code_interrupt 31
-no_error_code_interrupt 32
-no_error_code_interrupt 33
-no_error_code_interrupt 34

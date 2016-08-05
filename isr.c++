@@ -62,9 +62,6 @@ extern "C" void isr28(void);
 extern "C" void isr29(void);
 extern "C" void isr30(void);
 extern "C" void isr31(void);
-extern "C" void isr32(void);
-extern "C" void isr33(void);
-extern "C" void isr34(void);
 
 /* Set an entry in the <idt>.
  */
@@ -116,13 +113,13 @@ void ISR::install_isrs()
     idt_set_gate(29, isr29, 0x08, 0x8e);
     idt_set_gate(30, isr30, 0x08, 0x8e);
     idt_set_gate(31, isr31, 0x08, 0x8e);
-    idt_set_gate(32, isr32, 0x08, 0x8e);
-    idt_set_gate(33, isr33, 0x08, 0x8e);
-    idt_set_gate(34, isr34, 0x08, 0x8e);
 }
 
 /* Dispatch event handler 
  */
-extern "C" void common_interrupt_handler(struct regs r) {
-        printf(" \n Unhandled Interrupt Triggered! %d" , r.ds);
+extern "C" void common_interrupt_handler(struct regs *r) {
+	if(r->int_no < 32)
+	{	
+		printf("Exception Number : %d" , r->int_no);
+	}
 }
