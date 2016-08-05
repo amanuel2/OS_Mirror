@@ -4,5 +4,9 @@
 BoneOS.bin
 BoneOS.iso
 
+#Log File
+qemu.log
+
 #Ignored Folders
 cross/
+
