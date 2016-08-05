@@ -7,8 +7,11 @@
 #include "port.h"
 #include "stdio.h"
 #include "mem.h"
+#include "isr.h"
 
 #define IDT_SIZE 256
+
+
 
 class IDT
 {
@@ -39,6 +42,7 @@ class IDT
 			//int install_interrupt(uint8_t num, isr_t function);
 
 			PORT::Port8Bits p8b;
+			ISR isr;
 
 };
 
