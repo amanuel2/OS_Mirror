@@ -1,9 +1,9 @@
 GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall 
 LDPARAMS =  -melf_i386
-objects = stdlib.o stdio.o kernel.o isr.o idt.o mem.o string.o serial.o  gdt.o port.o  gdt_flush.o port_a.o boot.o idt_a.o isr_a.o 	
+objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o  gdt.o port.o  gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o	
 i686 = i686-elf-
-Asm_files =  idt boot isr port gdt_flush
-C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib
+Asm_files =  idt boot isr port gdt_flush irq
+C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq
 ASPARAMS = --32 
 all: run_vb
 
@@ -17,11 +17,13 @@ compile:
 	$(i686)g++ $(GPPARAMS) -o string.o -c string.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o isr.o -c isr.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o idt.o -c idt.c++ -ffreestanding
+	$(i686)g++ $(GPPARAMS) -o irq.o -c irq.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o stdlib.o -c stdlib.c++ -ffreestanding
 	$(i686)as $(ASPARAMS) -g -o boot.o boot.S
 	$(i686)as $(ASPARAMS) -g -o isr_a.o isr.S
 	$(i686)as $(ASPARAMS) -g -o port_a.o port.S
 	$(i686)as $(ASPARAMS) -g -o idt_a.o idt.S
+	$(i686)as $(ASPARAMS) -g -o irq_a.o irq.S
 	$(i686)as $(ASPARAMS) -g -o gdt_flush.o gdt_flush.S
 
 #IN TEST  START	

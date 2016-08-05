@@ -1,0 +1,634 @@
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:66:15: The 'icon-shadow' property has been renamed to '-gtk-icon-shadow'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:75:13: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:76:13: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:76:25: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:81:13: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:82:21: The '-gtk-image-effect' property has been renamed to '-gtk-icon-effect'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:86:21: The '-gtk-image-effect' property has been renamed to '-gtk-icon-effect'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:94:27: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:104:30: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:115:20: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:117:20: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:119:18: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:121:19: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:189:26: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:190:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:191:35: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:192:38: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:193:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:194:44: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:195:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:196:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:197:18: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:262:19: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:268:26: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:269:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:300:24: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:385:27: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:394:30: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:415:39: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:416:42: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:428:26: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:448:24: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:456:30: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:475:62: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:479:45: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:489:63: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:494:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:528:18: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:996:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:997:32: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:998:24: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1104:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1105:29: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1113:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1114:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1126:34: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1156:34: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1237:33: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1238:40: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1635:25: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1687:25: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1688:33: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1736:36: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1765:19: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1766:23: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1789:30: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1790:29: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1796:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1799:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1808:34: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1811:32: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1832:47: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1833:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1834:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1835:38: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1839:42: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1840:41: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1841:40: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1842:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1895:21: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1896:27: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1903:30: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1904:36: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1942:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2004:40: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2052:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2097:28: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2119:28: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2324:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2330:38: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2331:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2397:20: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2456:45: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2457:41: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2458:45: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2459:41: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2460:37: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2461:33: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2516:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2517:28: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2523:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2524:35: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2525:44: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2526:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2620:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2621:57: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2627:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2628:64: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2629:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2630:65: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2661:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2662:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2663:57: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2664:59: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2671:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2672:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2673:34: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2674:34: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2675:35: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2676:35: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2679:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2680:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2681:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2682:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2683:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2684:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2687:70: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2688:70: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2689:77: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2690:77: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2691:78: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2692:78: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2721:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2725:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2729:57: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2743:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2747:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2751:69: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2766:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2770:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2774:68: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2789:27: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2793:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2797:68: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2821:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2822:52: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2823:68: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2830:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2831:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2832:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2833:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2834:44: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2835:44: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2838:52: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2839:52: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2840:59: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2841:59: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2842:60: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2843:60: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2846:79: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2847:79: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2848:86: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2849:86: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2850:87: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2851:87: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2886:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2900:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2915:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2930:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2959:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2960:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2961:42: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2962:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2963:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2970:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2971:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2972:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2973:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2974:44: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2975:44: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2978:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2979:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2980:58: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2981:58: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2982:59: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2983:59: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2986:28: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2987:28: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2988:35: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2989:35: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2990:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2991:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2994:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2995:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2996:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2997:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2998:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2999:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3002:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3003:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3004:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3005:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3006:44: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3007:44: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3041:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3045:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3049:42: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3053:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3057:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3068:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3072:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3076:42: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3080:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3095:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3099:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3103:42: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3107:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3111:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3123:50: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3127:51: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3131:42: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3135:43: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3139:36: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3166:45: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3167:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3168:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3175:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3176:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3177:38: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3178:38: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3179:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3180:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3183:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3184:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3185:53: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3186:53: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3187:54: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3188:54: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3191:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3192:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3193:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3194:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3195:47: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3196:47: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3220:45: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3224:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3228:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3239:45: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3242:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3245:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3258:45: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3262:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3266:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3278:45: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3282:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3286:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3342:17: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3343:17: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3343:29: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3494:20: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3522:23: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3523:24: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3529:30: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3530:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3531:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3532:32: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3588:32: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3594:39: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3595:40: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3653:30: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3674:30: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3675:40: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3835:48: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3836:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3837:57: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3838:55: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3839:57: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:3840:55: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:4086:15: The 'icon-shadow' property has been renamed to '-gtk-icon-shadow'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:4135:15: The 'icon-shadow' property has been renamed to '-gtk-icon-shadow'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:9:18: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:17:26: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:21:19: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:25:19: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:25:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:33:18: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:41:26: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:45:19: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:49:19: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:49:31: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:75:40: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:76:41: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:81:34: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:82:34: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:87:34: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:88:34: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:93:34: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:93:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:94:34: The :inconsistent pseudo-class is deprecated. Use :indeterminate instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:94:46: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:121:40: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:122:41: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:194:28: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:212:28: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gtk-widgets-assets.css:218:35: The :insensitive pseudo-class is deprecated. Use :disabled instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gnome-applications.css:61:28: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gnome-applications.css:62:35: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gnome-applications.css:90:47: The :prelight pseudo-class is deprecated. Use :hover instead.
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: gnome-applications.css:238:15: The 'icon-shadow' property has been renamed to '-gtk-icon-shadow'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: xfce.css:49:21: The '-gtk-image-effect' property has been renamed to '-gtk-icon-effect'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: nemo.css:17:15: The 'icon-shadow' property has been renamed to '-gtk-icon-shadow'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: nemo.css:24:15: The 'icon-shadow' property has been renamed to '-gtk-icon-shadow'
+
+(qemu-system-i386:21238): Gtk-WARNING **: Theme parsing error: nemo.css:7:15: The 'icon-shadow' property has been renamed to '-gtk-icon-shadow'
+CPU Reset (CPU 0)
+EAX=00000000 EBX=00000000 ECX=00000000 EDX=00000000
+ESI=00000000 EDI=00000000 EBP=00000000 ESP=00000000
+EIP=00000000 EFL=00000000 [-------] CPL=0 II=0 A20=0 SMM=0 HLT=0
+ES =0000 00000000 00000000 00000000
+CS =0000 00000000 00000000 00000000
+SS =0000 00000000 00000000 00000000
+DS =0000 00000000 00000000 00000000
+FS =0000 00000000 00000000 00000000
+GS =0000 00000000 00000000 00000000
+LDT=0000 00000000 00000000 00000000
+TR =0000 00000000 00000000 00000000
+GDT=     00000000 00000000
+IDT=     00000000 00000000
+CR0=00000000 CR2=00000000 CR3=00000000 CR4=00000000
+DR0=00000000 DR1=00000000 DR2=00000000 DR3=00000000 
+DR6=00000000 DR7=00000000
+CCS=00000000 CCD=00000000 CCO=DYNAMIC 
+EFER=0000000000000000
+FCW=0000 FSW=0000 [ST=0] FTW=ff MXCSR=00000000
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+XMM00=00000000000000000000000000000000 XMM01=00000000000000000000000000000000
+XMM02=00000000000000000000000000000000 XMM03=00000000000000000000000000000000
+XMM04=00000000000000000000000000000000 XMM05=00000000000000000000000000000000
+XMM06=00000000000000000000000000000000 XMM07=00000000000000000000000000000000

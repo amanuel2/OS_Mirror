@@ -30,8 +30,6 @@
             call common_interrupt_handler
 
 
-      #      mov %eax, %esp # switch the stack
-
             # restore registers
             popa
             iret

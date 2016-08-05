@@ -3,11 +3,6 @@
 // Definitions of locations of the PIC ports.
 // The Programmable Interrupt Controller, or PIC, has two parts, the master and
 // the slave.
-#define PIC_MASTER_CONTROL 0x20
-#define PIC_MASTER_MASK 0x21
-#define PIC_SLAVE_CONTROL 0xa0
-#define PIC_SLAVE_MASK 0xa1
-
 #define IDT_GATE_PRESENT (1<<7)
 
 /* The Interrupt Descriptor Table and its entries.
@@ -64,25 +59,7 @@ IDT::IDT(void) {
     Lib::Mem::memset(&idt, 0, sizeof(struct idt_entry) * 256); //Clear the 256 Entries First
 
     isr.install_isrs();
-    // ICW1 - begin initialization
-    p8b.out(0x11,PIC_MASTER_CONTROL);
-    p8b.out(0x11,PIC_SLAVE_CONTROL);
-
-    // Remap interrupts beyond 0x20 because the first 32 are cpu exceptions
-    p8b.out(0x21,PIC_MASTER_MASK);
-    p8b.out(0x28,PIC_SLAVE_MASK);
-
-    // ICW3 - setup cascading
-    p8b.out(0x00,PIC_MASTER_MASK);
-    p8b.out(0x00,PIC_SLAVE_MASK);
-
-    // ICW4 - environment info
-    p8b.out(0x01,PIC_MASTER_MASK);
-    p8b.out(0x01,PIC_SLAVE_MASK);
-
-    // mask interrupts
-    p8b.out(0xff,PIC_MASTER_MASK);
-    p8b.out(0xff,PIC_SLAVE_MASK);
+    irq.install_handler_irq();
 
     idt_load(idtp);
 }
