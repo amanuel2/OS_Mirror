@@ -25,16 +25,12 @@
             # save registers
             
             pusha
-            #    mov %ds,%ax
-            #    pushl %eax
 
             # call C++ Handler
             call common_interrupt_handler
-            
-            #    popl %eax
-            #       mov %ds, %ax
-            
-            mov %eax, %esp # switch the stack
+
+
+      #      mov %eax, %esp # switch the stack
 
             # restore registers
             popa

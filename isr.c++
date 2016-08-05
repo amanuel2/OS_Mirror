@@ -1,6 +1,10 @@
 
 #include "isr.h"
 
+ISR::ISR(){}
+
+ISR::~ISR(){}
+
 
 /* The state of the CPU when an interrupt is triggered. */
 struct regs {
@@ -9,11 +13,6 @@ struct regs {
      uint32_t int_no, err_code; /* our 'push byte #' and ecodes do this */
      uint32_t eip, cs, eflags, useresp, ss; /* pushed by the processor automatically */
 };
-
-
-ISR::ISR(){}
-
-ISR::~ISR(){}
 
 //Basically a declaration of IDT_ENTRY in 
 //idt.c++
@@ -28,6 +27,7 @@ struct idt_entry {
 //Get the Exact IDT array from idt.c++
 extern struct idt_entry idt[256];
 
+extern void panic(const char* exception);
 
 //Extern the ISR Handlers
 extern "C" void isr0(void);
@@ -75,6 +75,41 @@ static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
     idt[num].flags = flags;
 }
 
+static const char *exception_messages[32] = {
+	"Division by zero",
+	"Debug",
+	"Non-maskable interrupt",
+	"Breakpoint",
+	"Detected overflow",
+	"Out-of-bounds",
+	"Invalid opcode",
+	"No coprocessor",
+	"Double fault",
+	"Coprocessor segment overrun",
+	"Bad TSS",
+	"Segment not present",
+	"Stack fault",
+	"General protection fault",
+	"Page fault",
+	"Unknown interrupt",
+	"Coprocessor fault",
+	"Alignment check",
+	"Machine check",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved"
+};
+
 /*
  * Install the ISR Handlers to Interupt Descriptor Table
  */
@@ -120,6 +155,6 @@ void ISR::install_isrs()
 extern "C" void common_interrupt_handler(struct regs *r) {
 	if(r->int_no < 32)
 	{	
-		printf("Exception Number : %d" , r->int_no);
+		panic(exception_messages[r->int_no]);
 	}
 }

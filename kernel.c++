@@ -25,10 +25,9 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 {
    gdt gt;
    SerialPort sp;
+   IDT idt;
 
    printf("Hello World. My name is %s  and I am %d years old" , "Amanuel",100);
-
-  IDT idt;
 
    while(1);
    err:
