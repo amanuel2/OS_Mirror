@@ -26,10 +26,24 @@ extern "C" void irq14(void);
 extern "C" void irq15(void);
 
 void* irq_routines[16] = {
-	0 ,0 ,0 ,0 ,0 ,0 ,0 ,0
-	0 ,0 ,0 ,0 ,0 ,0 ,0 ,0
-	0
+	 0,0,0,0,0,0,0,0
+	,0,0,0,0,0,0,0,0
 };
+
+static PORT::Port8Bits p8b_irq;
+
+//Basically a declaration of IDT_ENTRY in 
+//idt.c++
+struct idt_entry {
+    uint16_t base_lo;
+    uint16_t sel; // Kernel segment goes here.
+    uint8_t always0;
+    uint8_t flags; // Set using the table.
+    uint16_t base_hi;
+}__attribute__((packed));
+
+//Get the Exact IDT array from idt.c++
+extern struct idt_entry idt[256];
 
 static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
         	  uint8_t flags) 
@@ -44,9 +58,9 @@ static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
 IRQ::IRQ(){}; 
 IRQ::~IRQ(){};
 
-void IRQ::install_handler_irq(int irq, (*handler)(struct regs *r))
+void IRQ::install_handler_irq(int irq, void (*handler)(struct regs *r))
 {
-	irq_routines[irq] = handler;
+	irq_routines[irq] = (void *)handler;
 }
 
 void IRQ::uninstall_handler_irq(int irq)
@@ -63,27 +77,27 @@ void IRQ::uninstall_handler_irq(int irq)
 *  Interrupt Controller (PICs - also called the 8259's) in
 *  order to make IRQ0 to 15 be remapped to IDT entries 32 to
 *  47 */
-void IRQ::remap()
+void IRQ::irq_remap()
 {
 	    // ICW1 - begin initialization
-    p8b.out(0x11,PIC_MASTER_CONTROL);
-    p8b.out(0x11,PIC_SLAVE_CONTROL);
+    p8b_irq.out(0x11,PIC_MASTER_CONTROL);
+    p8b_irq.out(0x11,PIC_SLAVE_CONTROL);
 
     // Remap interrupts beyond 0x20 because the first 32 are cpu exceptions
-    p8b.out(0x21,PIC_MASTER_MASK);
-    p8b.out(0x28,PIC_SLAVE_MASK);
+    p8b_irq.out(0x21,PIC_MASTER_MASK);
+    p8b_irq.out(0x28,PIC_SLAVE_MASK);
 
     // ICW3 - setup cascading
-    p8b.out(0x00,PIC_MASTER_MASK);
-    p8b.out(0x00,PIC_SLAVE_MASK);
+    p8b_irq.out(0x00,PIC_MASTER_MASK);
+    p8b_irq.out(0x00,PIC_SLAVE_MASK);
 
     // ICW4 - environment info
-    p8b.out(0x01,PIC_MASTER_MASK);
-    p8b.out(0x01,PIC_SLAVE_MASK);
+    p8b_irq.out(0x01,PIC_MASTER_MASK);
+    p8b_irq.out(0x01,PIC_SLAVE_MASK);
 
     // mask interrupts
-    p8b.out(0xff,PIC_MASTER_MASK);
-    p8b.out(0xff,PIC_SLAVE_MASK);
+    p8b_irq.out(0xff,PIC_MASTER_MASK);
+    p8b_irq.out(0xff,PIC_SLAVE_MASK);
 }
 
 /* First remap the interrupt controllers, and then we install
@@ -93,22 +107,22 @@ void IRQ::remap()
 void IRQ::install_irqs()
 {
 	this->irq_remap();
-    idt_set_gate(32, (unsigned)irq0, 0x08, 0x8E);
-    idt_set_gate(33, (unsigned)irq1, 0x08, 0x8E);
-    idt_set_gate(34, (unsigned)irq2, 0x08, 0x8E);
-    idt_set_gate(35, (unsigned)irq3, 0x08, 0x8E);
-    idt_set_gate(36, (unsigned)irq4, 0x08, 0x8E);
-    idt_set_gate(37, (unsigned)irq5, 0x08, 0x8E);
-    idt_set_gate(38, (unsigned)irq6, 0x08, 0x8E);
-    idt_set_gate(39, (unsigned)irq7, 0x08, 0x8E);
-    idt_set_gate(40, (unsigned)irq8, 0x08, 0x8E);
-    idt_set_gate(41, (unsigned)irq9, 0x08, 0x8E);
-    idt_set_gate(42, (unsigned)irq10, 0x08, 0x8E);
-    idt_set_gate(43, (unsigned)irq11, 0x08, 0x8E);
-    idt_set_gate(44, (unsigned)irq12, 0x08, 0x8E);
-    idt_set_gate(45, (unsigned)irq13, 0x08, 0x8E);
-    idt_set_gate(46, (unsigned)irq14, 0x08, 0x8E);    
-    idt_set_gate(47, (unsigned)irq15, 0x08, 0x8E);
+    idt_set_gate(32, irq0, 0x08, 0x8E);
+    idt_set_gate(33, irq1, 0x08, 0x8E);
+    idt_set_gate(34, irq2, 0x08, 0x8E);
+    idt_set_gate(35, irq3, 0x08, 0x8E);
+    idt_set_gate(36, irq4, 0x08, 0x8E);
+    idt_set_gate(37, irq5, 0x08, 0x8E);
+    idt_set_gate(38, irq6, 0x08, 0x8E);
+    idt_set_gate(39, irq7, 0x08, 0x8E);
+    idt_set_gate(40, irq8, 0x08, 0x8E);
+    idt_set_gate(41, irq9, 0x08, 0x8E);
+    idt_set_gate(42, irq10, 0x08, 0x8E);
+    idt_set_gate(43, irq11, 0x08, 0x8E);
+    idt_set_gate(44, irq12, 0x08, 0x8E);
+    idt_set_gate(45, irq13, 0x08, 0x8E);
+    idt_set_gate(46, irq14, 0x08, 0x8E);    
+    idt_set_gate(47, irq15, 0x08, 0x8E);
 }
 
 /* Each of the IRQ ISRs point to this function, rather than
@@ -128,7 +142,7 @@ extern "C" void irq_handler(struct regs *r)
 
     /* Find out if we have a custom handler to run for this
     *  IRQ, and then finally, run it */
-    handler = irq_routines[r->int_no - 32];
+    handler = (void(*)(regs*))irq_routines[r->int_no - 32];
     if (handler)
     {
         handler(r);
@@ -139,11 +153,11 @@ extern "C" void irq_handler(struct regs *r)
     *  the slave controller */
     if (r->int_no >= 40)
     {
-        p8b.out(PIC_MASTER_CONTROL,PIC_SLAVE_CONTROL);
+        p8b_irq.out(PIC_MASTER_CONTROL,PIC_SLAVE_CONTROL);
     }
 
     /* In either case, we need to send an EOI to the master
     *  interrupt controller too */
-    p8b.out(PIC_MASTER_CONTROL, PIC_MASTER_CONTROL);
+    p8b_irq.out(PIC_MASTER_CONTROL, PIC_MASTER_CONTROL);
 }
 	

@@ -59,7 +59,7 @@ IDT::IDT(void) {
     Lib::Mem::memset(&idt, 0, sizeof(struct idt_entry) * 256); //Clear the 256 Entries First
 
     isr.install_isrs();
-    irq.install_handler_irq();
+    irq.install_irqs();
 
     idt_load(idtp);
 }
@@ -67,4 +67,4 @@ IDT::IDT(void) {
 IDT::~IDT()
 {
 
-}
+}Yo 

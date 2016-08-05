@@ -1,5 +1,5 @@
-#ifndef _IDT_H_
-#define _IDT_H_ 1
+#ifndef _IRQ_H_
+#define _IRQ_H_ 1
 
 #include "port.h"
 
@@ -18,14 +18,13 @@ class IRQ
 public:
 	IRQ();
 	~IRQ();
-    void install_handler_irq(int irq, (*handler)(struct regs *r));	
+	void install_irqs();
 private:
-
+	void install_handler_irq(int irq, void (*handler)(struct regs *r));	
 	void uninstall_handler_irq(int irq);	
-	void remap();
+	void irq_remap();
 };
 
-PORT::Port8Bits p8b;
 
 
 #endif
