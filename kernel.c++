@@ -4,6 +4,7 @@
 #include "serial.h"
 #include "mem.h"
 #include "idt.h"
+#include "timer.h"
 
 
 
@@ -26,6 +27,7 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    gdt gt;
    SerialPort sp;
    IDT idt;
+   Timer timer;
 
    printf("Hello World. My name is %s  and I am %d years old" , "Amanuel",100);
 

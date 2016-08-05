@@ -31,6 +31,7 @@ void* irq_routines[16] = {
 };
 
 static PORT::Port8Bits p8b_irq;
+static SerialPort sp_irq;
 
 //Basically a declaration of IDT_ENTRY in 
 //idt.c++
@@ -58,12 +59,12 @@ static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
 IRQ::IRQ(){}; 
 IRQ::~IRQ(){};
 
-void IRQ::install_handler_irq(int irq, void (*handler)(struct regs *r))
+void install_handler_irq(int irq, void (*handler)(struct regs *r))
 {
 	irq_routines[irq] = (void *)handler;
 }
 
-void IRQ::uninstall_handler_irq(int irq)
+void uninstall_handler_irq(int irq)
 {
 	irq_routines[irq] = 0;
 }
@@ -106,6 +107,7 @@ void IRQ::irq_remap()
 
 void IRQ::install_irqs()
 {
+
 	this->irq_remap();
     idt_set_gate(32, irq0, 0x08, 0x8E);
     idt_set_gate(33, irq1, 0x08, 0x8E);
@@ -137,8 +139,10 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
+		sp_irq.write_string_serial("Check IRQ");
     /* This is a blank function pointer */
     void (*handler)(struct regs *r);
+
 
     /* Find out if we have a custom handler to run for this
     *  IRQ, and then finally, run it */
@@ -159,5 +163,6 @@ extern "C" void irq_handler(struct regs *r)
     /* In either case, we need to send an EOI to the master
     *  interrupt controller too */
     p8b_irq.out(PIC_MASTER_CONTROL, PIC_MASTER_CONTROL);
+
 }
 	

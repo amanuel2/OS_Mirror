@@ -2,7 +2,8 @@
 #define _IRQ_H_ 1
 
 #include "port.h"
-
+#include "stdio.h"
+#include "serial.h"
 	/* The state of the CPU when an interrupt is triggered. */
 struct regs {
      uint32_t ds; /* pushed the segs last */
@@ -20,11 +21,9 @@ public:
 	~IRQ();
 	void install_irqs();
 private:
-	void install_handler_irq(int irq, void (*handler)(struct regs *r));	
-	void uninstall_handler_irq(int irq);	
 	void irq_remap();
 };
-
-
+	void install_handler_irq(int irq, void (*handler)(struct regs *r));	
+	void uninstall_handler_irq(int irq);	
 
 #endif
