@@ -47,7 +47,7 @@ struct idt_ptr {
 
  struct idt_entry idt[IDT_SIZE];
  struct idt_ptr idtp;
- 
+
 
 /* A wrapper around lidt.
  * Load the provided <idt_ptr> onto the CPU.
@@ -65,24 +65,24 @@ IDT::IDT(void) {
 
     isr.install_isrs();
     // ICW1 - begin initialization
-    p8b.out((uint8_t)PIC_MASTER_CONTROL, (uint16_t)0x11);
-    p8b.out((uint8_t)PIC_SLAVE_CONTROL, (uint16_t)0x11);
+    p8b.out(0x11,PIC_MASTER_CONTROL);
+    p8b.out(0x11,PIC_SLAVE_CONTROL);
 
     // Remap interrupts beyond 0x20 because the first 32 are cpu exceptions
-    p8b.out((uint8_t)PIC_MASTER_MASK, (uint16_t)0x21);
-    p8b.out((uint8_t)PIC_SLAVE_MASK, (uint16_t)0x28);
+    p8b.out(0x21,PIC_MASTER_MASK);
+    p8b.out(0x28,PIC_SLAVE_MASK);
 
     // ICW3 - setup cascading
-    p8b.out((uint8_t)PIC_MASTER_MASK, (uint16_t)0x00);
-    p8b.out((uint8_t)PIC_SLAVE_MASK, (uint16_t)0x00);
+    p8b.out(0x00,PIC_MASTER_MASK);
+    p8b.out(0x00,PIC_SLAVE_MASK);
 
     // ICW4 - environment info
-    p8b.out((uint8_t)PIC_MASTER_MASK, (uint16_t)0x01);
-    p8b.out((uint8_t)PIC_SLAVE_MASK, (uint16_t)0x01);
+    p8b.out(0x01,PIC_MASTER_MASK);
+    p8b.out(0x01,PIC_SLAVE_MASK);
 
     // mask interrupts
-    p8b.out((uint8_t)PIC_MASTER_MASK, (uint16_t)0xff);
-    p8b.out((uint8_t)PIC_SLAVE_MASK, (uint16_t)0xff);
+    p8b.out(0xff,PIC_MASTER_MASK);
+    p8b.out(0xff,PIC_SLAVE_MASK);
 
     idt_load(idtp);
 }

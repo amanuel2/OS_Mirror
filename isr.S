@@ -34,7 +34,6 @@
 
             # restore registers
             popa
-            sti
             iret
 
 

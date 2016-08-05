@@ -28,7 +28,6 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    IDT idt;
 
    printf("Hello World. My name is %s  and I am %d years old" , "Amanuel",100);
-
    while(1);
    err:
    	   while(1);
