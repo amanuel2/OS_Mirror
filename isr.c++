@@ -152,7 +152,9 @@ void ISR::install_isrs()
 
 /* Dispatch event handler 
  */
-extern "C" void common_interrupt_handler(struct regs *r) {
+extern "C" void common_interrupt_exception_handler(struct regs *r) {
+
+    printf("\n Exception Handling Initalized \n ");
 	if(r->int_no < 32)
 	{	
 		panic(exception_messages[r->int_no]);

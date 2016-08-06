@@ -5,6 +5,7 @@
 #define PIC_SLAVE_CONTROL 0xa0
 #define PIC_SLAVE_MASK 0xa1
 
+typedef void(*regs_func)(struct regs *r);
 
 
 /*Get all irq's*/
@@ -25,8 +26,10 @@ extern "C" void irq13(void);
 extern "C" void irq14(void);
 extern "C" void irq15(void);
 
-void* irq_routines[16] = {
-	 0,0,0,0,0,0,0,0
+extern void panic(const char* exception);
+
+regs_func irq_routines[16] = {
+	 timer_handler_driver,0,0,0,0,0,0,0
 	,0,0,0,0,0,0,0,0
 };
 
@@ -59,14 +62,18 @@ static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
 IRQ::IRQ(){}; 
 IRQ::~IRQ(){};
 
-void install_handler_irq(int irq, void (*handler)(struct regs *r))
+void install_handler_irq(int irq, regs_func handler)
 {
-	irq_routines[irq] = (void *)handler;
+	irq_routines[irq] = handler;
 }
 
 void uninstall_handler_irq(int irq)
 {
 	irq_routines[irq] = 0;
+}
+extern "C" void test_func()
+{
+    panic("FSDFDSFSD");
 }
 
 
@@ -80,7 +87,7 @@ void uninstall_handler_irq(int irq)
 *  47 */
 void IRQ::irq_remap()
 {
-	    // ICW1 - begin initialization
+	// ICW1 - begin initialization
     p8b_irq.out(0x11,PIC_MASTER_CONTROL);
     p8b_irq.out(0x11,PIC_SLAVE_CONTROL);
 
@@ -123,6 +130,7 @@ void IRQ::install_irqs()
     idt_set_gate(45, irq13, 0x08, 0x8E);
     idt_set_gate(46, irq14, 0x08, 0x8E);    
     idt_set_gate(47, irq15, 0x08, 0x8E);
+
 }
 
 /* Each of the IRQ ISRs point to this function, rather than
@@ -137,6 +145,7 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
+    printf("IORQ STTDFD");
     /* This is a blank function pointer */
     void (*handler)(struct regs *r);
 
@@ -162,4 +171,4 @@ extern "C" void irq_handler(struct regs *r)
     p8b_irq.out(PIC_MASTER_CONTROL, PIC_MASTER_CONTROL);
 
 }
-	
+

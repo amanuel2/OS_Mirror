@@ -5,6 +5,7 @@
 #include "stdio.h"
 #include "serial.h"
 #include "timer.h"
+#include "stdlib.h"
 	/* The state of the CPU when an interrupt is triggered. */
 struct regs {
      uint32_t ds; /* pushed the segs last */

@@ -14,7 +14,7 @@ extern void install_handler_irq(int irq, void (*handler)(struct regs *r));
 *  timer fires. By default, the timer fires 18.222 times
 *  per second. Why 18.222Hz? Some engineer at IBM must've
 *  been smoking something funky */
-void timer_handler(struct regs *r)
+void timer_handler_driver(struct regs *r)
 {
     /* Increment our 'tick count' */
     timer_ticks++;
@@ -44,7 +44,7 @@ void Timer::timer_wait(int ticks)
 void Timer::install_timer()
 {
     printf(" \n Installing Timer Driver \n");
-    install_handler_irq(0, timer_handler);
+    install_handler_irq(0, timer_handler_driver);
 }
 
 /* Sets up the system clock by installing the timer handler

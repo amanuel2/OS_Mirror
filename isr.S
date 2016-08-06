@@ -1,7 +1,7 @@
 .section .text
 
         .global common_handler
-        .extern common_interrupt_handler
+        .extern common_interrupt_exception_handler
 
         .macro interrupt number
         	.global isr\number
@@ -27,7 +27,7 @@
             pusha
 
             # call C++ Handler
-            call common_interrupt_handler
+            call common_interrupt_exception_handler
 
 
             # restore registers

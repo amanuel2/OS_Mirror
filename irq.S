@@ -1,6 +1,7 @@
 .section .text
 
 .extern irq_handler
+
         .macro irq number
         	.global irq\number
         	irq\number:
