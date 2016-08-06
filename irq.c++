@@ -107,9 +107,7 @@ void IRQ::irq_remap()
 
 void IRQ::install_irqs()
 {
-
 	this->irq_remap();
-    idt_set_gate(32, irq0, 0x08, 0x8E);
     idt_set_gate(33, irq1, 0x08, 0x8E);
     idt_set_gate(34, irq2, 0x08, 0x8E);
     idt_set_gate(35, irq3, 0x08, 0x8E);
@@ -139,7 +137,6 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
-		sp_irq.write_string_serial("Check IRQ");
     /* This is a blank function pointer */
     void (*handler)(struct regs *r);
 

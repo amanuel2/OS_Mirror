@@ -27,9 +27,10 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    gdt gt;
    SerialPort sp;
    IDT idt;
-   Timer timer;
+   	Timer timer;
+   	timer.install_timer();
+   __asm__ __volatile__ ("sti");
 
-   printf("Hello World. My name is %s  and I am %d years old" , "Amanuel",100);
 
 //   int x = 5/0;
    while(1);

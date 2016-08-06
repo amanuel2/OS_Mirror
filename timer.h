@@ -2,14 +2,14 @@
 #define _TIMER_H_ 1
 
 #include <stdint.h>
-#include "irq.h"
-
+#include "stdio.h"
 
 class Timer
 {
 public:
 	Timer();
 	~Timer();
+	void install_timer();
 private:
 	void timer_wait(int ticks);
 };
