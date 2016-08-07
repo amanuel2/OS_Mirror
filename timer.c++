@@ -3,9 +3,12 @@
 /* This will keep track of how many ticks that the system
 *  has been running for */
 
+typedef void(*regs_func)(struct regs *r);
+
+
 static int32_t timer_ticks = 0;
 
-extern void install_handler_irq(int irq, void (*handler)(struct regs *r));
+extern void install_handler_irq(int irq, regs_func handler);
 
 
 
@@ -43,7 +46,6 @@ void Timer::timer_wait(int ticks)
 
 void Timer::install_timer()
 {
-    printf(" \n Installing Timer Driver \n");
     install_handler_irq(0, timer_handler_driver);
 }
 

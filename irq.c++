@@ -30,7 +30,7 @@ extern "C" void irq15(void);
 extern void panic(const char* exception);
 
 regs_func irq_routines[16] = {
-	 timer_handler_driver,0,0,0,0,0,0,0
+	 0,0,0,0,0,0,0,0
 	,0,0,0,0,0,0,0,0
 };
 
@@ -65,6 +65,7 @@ IRQ::~IRQ(){};
 
 void install_handler_irq(int irq, regs_func handler)
 {
+    printf(" \n Installing Timer Driver \n ");
 	irq_routines[irq] = handler;
 }
 
@@ -147,7 +148,7 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
-    printf("IORQ STTDFD");
+    printf("SOME TEST BLAH BLAH BLAH \n ");
     /* This is a blank function pointer */
     void (*handler)(struct regs *r);
 

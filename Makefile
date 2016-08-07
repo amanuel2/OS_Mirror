@@ -33,7 +33,7 @@ compile:
 
 #IN TEST  START	
 compile_c++: $(C++_FILES)
-	$(i686)g++ $(GPPARAMS) -o $<.o -c $<.o -ffreestanding 
+	$(i686)g++ $(GPPARAMS) -o $<.o -c $<.c++ -ffreestanding 
 compile_asm: $(Asm_files)
 	$(i686)as $(ASPARAMS) -g -o $<_a.o $<.S	
 #IN TEST END
