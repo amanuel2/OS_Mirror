@@ -11,7 +11,6 @@ static int32_t timer_ticks = 0;
 extern void install_handler_irq(int irq, regs_func handler);
 
 
-
 /* Handles the timer. In this case, it's very simple: We
 *  increment the 'Timer::timer_ticks' variable every time the
 *  timer fires. By default, the timer fires 18.222 times

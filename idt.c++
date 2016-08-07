@@ -51,7 +51,7 @@ extern "C" void idt_load(struct idt_ptr);
 
 
 
-IDT::IDT(void) {
+IDT::IDT() {
     // 256 is the number of entries in the table.
     idtp.limit = (sizeof(idt)) - 1; //Number of IDT's = 256-1; (index starts by 0)
     idtp.base = (uint32_t) & idt; //Base = Pointer to Interupt Desciptor Table

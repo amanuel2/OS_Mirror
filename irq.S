@@ -1,5 +1,4 @@
 .section .text
-
 .extern irq_handler
 
         .macro irq number

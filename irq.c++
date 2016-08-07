@@ -27,6 +27,7 @@ extern "C" void irq13(void);
 extern "C" void irq14(void);
 extern "C" void irq15(void);
 
+
 extern void panic(const char* exception);
 
 regs_func irq_routines[16] = {
@@ -67,16 +68,13 @@ void install_handler_irq(int irq, regs_func handler)
 {
     printf(" \n Installing Timer Driver \n ");
 	irq_routines[irq] = handler;
+    irq0();
 }
 
 void uninstall_handler_irq(int irq)
 {
 	irq_routines[irq] = 0;
-}
-extern "C" void test_func()
-{
-    panic("FSDFDSFSD");
-}
+} 
 
 
 /* Normally, IRQs 0 to 7 are mapped to entries 8 to 15. This
@@ -118,6 +116,7 @@ void IRQ::irq_remap()
 void IRQ::install_irqs()
 {
 	this->irq_remap();
+    idt_set_gate(32, irq0, 0x08, 0x8E);
     idt_set_gate(33, irq1, 0x08, 0x8E);
     idt_set_gate(34, irq2, 0x08, 0x8E);
     idt_set_gate(35, irq3, 0x08, 0x8E);
@@ -148,30 +147,33 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
-    printf("SOME TEST BLAH BLAH BLAH \n ");
+//    printf("%d \n", r->int_no);
     /* This is a blank function pointer */
-    void (*handler)(struct regs *r);
+ //   regs_func handler;
 
 
     /* Find out if we have a custom handler to run for this
     *  IRQ, and then finally, run it */
-    handler = (void(*)(regs*))irq_routines[r->int_no - 32];
-    if (handler)
-    {
-        handler(r);
-    }
-
+   // handler = irq_routines[r->int_no];
+   // if (handler)
+  //  {
+//        handler(r);
+   // }
     /* If the IDT entry that was invoked was greater than 40
     *  (meaning IRQ8 - 15), then we need to send an EOI to
     *  the slave controller */
-    if (r->int_no >= 40)
-    {
-        p8b_irq.out(PIC_MASTER_CONTROL,PIC_SLAVE_CONTROL);
-    }
-
+ //   if (r->int_no >= 8)
+ //   {
+   //     p8b_irq.out(PIC_MASTER_CONTROL,PIC_SLAVE_CONTROL);
+    //}
     /* In either case, we need to send an EOI to the master
     *  interrupt controller too */
-    p8b_irq.out(PIC_MASTER_CONTROL, PIC_MASTER_CONTROL);
+  //  p8b_irq.out(PIC_MASTER_CONTROL, PIC_MASTER_CONTROL);
 
+}
+
+extern "C" void test_func()
+{
+    printf("\n This is a test \n");
 }
 
