@@ -5,6 +5,9 @@
 #include "mem.h"
 #include "idt.h"
 #include "timer.h"
+#include "isr.h"
+#include "irq.h"
+
 
 
 
@@ -24,15 +27,21 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 {
+   cls();
+   ISR isr;
+   IRQ irq;
    gdt gt;
    SerialPort sp;
    IDT idt;
+   isr.install_isrs();
+   irq.install_irqs();
    	Timer timer;
    	timer.install_timer();
    __asm__ __volatile__ ("sti");
 
 
-//   int x = 5/0;
+
+//  int x = 5/0;
    while(1);
    err:
    	   while(1);

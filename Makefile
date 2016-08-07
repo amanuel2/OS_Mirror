@@ -5,6 +5,10 @@ i686 = i686-elf-
 Asm_files =  idt boot isr port gdt_flush irq
 C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq timer
 ASPARAMS = --32 
+VB=virtualbox
+VBM=VBoxManage
+
+
 all: run_vb
 
 compile:
@@ -59,12 +63,12 @@ BoneOS.iso: BoneOS.bin
 	mkdir iso/boot
 	mkdir iso/boot/grub
 	cp BoneOS.bin iso/boot/BoneOS.bin
-	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
-	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
-	echo ''                                  >> iso/boot/grub/grub.cfg
+#	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
+#	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
+#	echo ''                                  >> iso/boot/grub/grub.cfg
 	echo 'menuentry "My Operating System" {' >> iso/boot/grub/grub.cfg
 	echo '  multiboot /boot/BoneOS.bin'    >> iso/boot/grub/grub.cfg
-	echo '  boot'                            >> iso/boot/grub/grub.cfg
+#	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=BoneOS.iso iso
 	rm -rf iso
@@ -74,7 +78,19 @@ start-debug:
 	
 
 run_vb: compile BoneOS.bin BoneOS.iso
-	(killall VirtualBox && sleep 1)||true
-	VirtualBox --startvm "BoneOS" &
+	-${VBM} unregistervm BoneOS --delete;
+	echo "Creating VM"
+	${VBM} createvm --name BoneOS --register
+	${VBM} modifyvm BoneOS --memory 1024
+	${VBM} modifyvm BoneOS --vram 64
+	${VBM} modifyvm BoneOS --nic1 nat
+	${VBM} modifyvm BoneOS --nictype1 82540EM
+	${VBM} modifyvm BoneOS --nictrace1 on
+	${VBM} modifyvm BoneOS --uart1 0x3F8 4
+	${VBM} storagectl BoneOS --name "IDE Controller" --add ide
+	${VBM} storageattach BoneOS --storagectl "IDE Controller" --port 0 \
+	--device 0 --type dvddrive --medium BoneOS.iso
+	echo "Run VM"
+	${VB} --startvm BoneOS --dbg
 
 compile_iso: compile BoneOS.bin BoneOS.iso

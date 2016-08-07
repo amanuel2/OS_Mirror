@@ -5,6 +5,7 @@
 #define PIC_SLAVE_CONTROL 0xa0
 #define PIC_SLAVE_MASK 0xa1
 
+
 typedef void(*regs_func)(struct regs *r);
 
 
@@ -87,6 +88,7 @@ extern "C" void test_func()
 *  47 */
 void IRQ::irq_remap()
 {
+
 	// ICW1 - begin initialization
     p8b_irq.out(0x11,PIC_MASTER_CONTROL);
     p8b_irq.out(0x11,PIC_SLAVE_CONTROL);

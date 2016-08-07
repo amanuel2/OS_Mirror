@@ -6,8 +6,6 @@
 
 #include "stdio.h"
 #include "mem.h"
-#include "isr.h"
-#include "irq.h"
 
 #define IDT_SIZE 256
 
@@ -40,9 +38,6 @@ class IDT
 			 * and -1 if that interrupt number has already been registered.
 			 */
 			//int install_interrupt(uint8_t num, isr_t function);
-
-			IRQ irq;
-			ISR isr;
 
 };
 
