@@ -64,19 +64,6 @@ static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
 IRQ::IRQ(){}; 
 IRQ::~IRQ(){};
 
-void install_handler_irq(int irq, regs_func handler)
-{
-    printf(" \n Installing Timer Driver \n ");
-	irq_routines[irq] = handler;
-    irq0();
-}
-
-void uninstall_handler_irq(int irq)
-{
-	irq_routines[irq] = 0;
-} 
-
-
 /* Normally, IRQs 0 to 7 are mapped to entries 8 to 15. This
 *  is a problem in protected mode, because IDT entry 8 is a
 *  Double Fault! Without remapping, every time IRQ0 fires,
@@ -88,12 +75,12 @@ void uninstall_handler_irq(int irq)
 void IRQ::irq_remap()
 {
 
-	// ICW1 - begin initialization
+    // ICW1 - begin initialization
     p8b_irq.out(0x11,PIC_MASTER_CONTROL);
     p8b_irq.out(0x11,PIC_SLAVE_CONTROL);
 
     // Remap interrupts beyond 0x20 because the first 32 are cpu exceptions
-    p8b_irq.out(0x21,PIC_MASTER_MASK);
+    p8b_irq.out(0x20,PIC_MASTER_MASK);
     p8b_irq.out(0x28,PIC_SLAVE_MASK);
 
     // ICW3 - setup cascading
@@ -107,7 +94,23 @@ void IRQ::irq_remap()
     // mask interrupts
     p8b_irq.out(0xff,PIC_MASTER_MASK);
     p8b_irq.out(0xff,PIC_SLAVE_MASK);
+
 }
+
+void install_handler_irq(int irq, regs_func handler)
+{
+    printf(" \n Installing Timer Driver \n ");
+	irq_routines[irq] = handler;
+    irq0();
+}
+
+void uninstall_handler_irq(int irq)
+{
+	irq_routines[irq] = 0;
+} 
+
+
+
 
 /* First remap the interrupt controllers, and then we install
 *  the appropriate ISRs to the correct entries in the IDT. This
@@ -147,7 +150,7 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
-//    printf("%d \n", r->int_no);
+    printf("%d \n", r->int_no);
     /* This is a blank function pointer */
  //   regs_func handler;
 

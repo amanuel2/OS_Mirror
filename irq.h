@@ -23,9 +23,10 @@ public:
 	~IRQ();
 	void install_irqs();
 private:
-	void irq_remap();
+		void irq_remap();
 };
 	void install_handler_irq(int irq, void (*handler)(struct regs *r));	
 	void uninstall_handler_irq(int irq);	
+
 
 #endif

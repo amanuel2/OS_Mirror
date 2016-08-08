@@ -57,7 +57,7 @@ IDT::IDT() {
     idtp.base = (uint32_t) & idt; //Base = Pointer to Interupt Desciptor Table
 
     Lib::Mem::memset(&idt, 0, sizeof(struct idt_entry) * 256); //Clear the 256 Entries First
-
+    
     idt_load(idtp);
 }
 
