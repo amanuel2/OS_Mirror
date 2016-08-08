@@ -156,6 +156,8 @@ extern "C" void common_interrupt_exception_handler(struct regs *r)
 {
 	if(r->int_no < 32)
 	{	
-		panic(exception_messages[r->int_no]);
+	//	panic(exception_messages[r->int_no]);
+        printf("Error %d" , r->int_no);
+        //while(true);
 	}
 }

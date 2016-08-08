@@ -42,7 +42,7 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 
 
 //  int x = 5/0;
-   while(1);
+   while(1);	
    err:
    	   while(1);
 }
