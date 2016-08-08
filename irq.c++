@@ -74,27 +74,6 @@ IRQ::~IRQ(){};
 *  47 */
 void IRQ::irq_remap()
 {
-
-    // // ICW1 - begin initialization
-    // p8b_irq.out(0x11,PIC_MASTER_CONTROL);
-    // p8b_irq.out(0x11,PIC_SLAVE_CONTROL);
-
-    // // Remap interrupts beyond 0x20 because the first 32 are cpu exceptions
-    // p8b_irq.out(0x20,PIC_MASTER_MASK);
-    // p8b_irq.out(0x28,PIC_SLAVE_MASK);
-
-    // // ICW3 - setup cascading
-    // p8b_irq.out(0x00,PIC_MASTER_MASK);
-    // p8b_irq.out(0x00,PIC_SLAVE_MASK);
-
-    // // ICW4 - environment info
-    // p8b_irq.out(0x01,PIC_MASTER_MASK);
-    // p8b_irq.out(0x01,PIC_SLAVE_MASK);
-
-    // // mask interrupts
-    // p8b_irq.out(0xff,PIC_MASTER_MASK);
-    // p8b_irq.out(0xff,PIC_SLAVE_MASK);
-
     p8b_irq.out(0x11,0x20);
     p8b_irq.out(0x11,0xA0);
     p8b_irq.out(0x20,0x21);
@@ -105,7 +84,6 @@ void IRQ::irq_remap()
     p8b_irq.out(0x01,0xA1);
     p8b_irq.out(0x0,0x21);
     p8b_irq.out(0x0,0xA1);
-
 }
 
 void install_handler_irq(int irq, regs_func handler)
