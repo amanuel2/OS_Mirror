@@ -29,10 +29,10 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 {
  //  cls();
    gdt gt;
-   for( ; ; ) asm("hlt");
    IDT idt;
    ISR isr;
    IRQ irq;
+   for( ; ; ) asm("hlt");
    SerialPort sp;
    isr.install_isrs();
    irq.install_irqs();
