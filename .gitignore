@@ -2,7 +2,6 @@
 *.o
 *.out
 BoneOS.bin
-BoneOS.iso
 
 #Log File
 qemu.log
