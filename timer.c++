@@ -40,7 +40,7 @@ void Timer::timer_wait(int ticks)
     unsigned long eticks;
 
     eticks = timer_ticks + ticks;
-    while(timer_ticks < eticks);
+    while((unsigned)timer_ticks < eticks);
 }
 
 void Timer::install_timer()

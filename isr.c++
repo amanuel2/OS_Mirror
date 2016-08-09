@@ -109,7 +109,6 @@ static const char *exception_messages[32] = {
 	"Reserved",
 	"Reserved"
 };
-
 /*
  * Install the ISR Handlers to Interupt Descriptor Table
  */
@@ -156,8 +155,6 @@ extern "C" void common_interrupt_exception_handler(struct regs *r)
 {
 	if(r->int_no < 32)
 	{	
-	//	panic(exception_messages[r->int_no]);
-        printf("Error %d" , r->int_no);
-        //while(true);
+	   printf("Error %s " , exception_messages[r->int_no]);
 	}
 }

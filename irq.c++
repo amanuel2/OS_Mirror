@@ -74,16 +74,6 @@ IRQ::~IRQ(){};
 *  47 */
 void IRQ::irq_remap()
 {
-        // p8b_irq.out(0x11,0x20);
-        // p8b_irq.out(0x11,0xA0);
-        // p8b_irq.out(0x20,0x21);
-        // p8b_irq.out(0x28,0xA1);
-        // p8b_irq.out(0x04,0x21);
-        // p8b_irq.out(0x02,0xA1);
-        // p8b_irq.out(0x01,0x21);
-        // p8b_irq.out(0x01,0xA1);
-        // p8b_irq.out(0x0,0x21);
-        // p8b_irq.out(0x0,0xA1);
 
         // ICW1 - begin initialization
     p8b_irq.out(0x11,PIC_MASTER_CONTROL);
@@ -108,7 +98,7 @@ void IRQ::irq_remap()
 
 void install_handler_irq(int irq, regs_func handler)
 {
-    printf(" \n Installing Timer Driver \n ");
+    printf(" \n Installer IRQ %d \n ", irq);
 	irq_routines[irq] = handler;
     irq0();
 }
@@ -159,11 +149,6 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
-
-}
-
-extern "C" void test_func()
-{
-    printf("\n This is a test \n");
+    printf("IRQ Being Handled");
 }
 
