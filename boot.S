@@ -17,7 +17,6 @@
     .globl loader
     
         loader:
-                jmp _eof
                 mov $kernel_stack , %esp
                 call callConstructors
                 push %eax

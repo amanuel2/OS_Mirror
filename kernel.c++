@@ -27,8 +27,9 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 {
-   cls();
+ //  cls();
    gdt gt;
+   asm("hlt");
    IDT idt;
    ISR isr;
    IRQ irq;
