@@ -32,7 +32,7 @@ void timer_handler_driver(struct regs *r)
 
     /* Every 18 clocks (approximately 1 second), we will
     *  display a message on the screen */
-    if (timer_ticks % 18 == 0)
+    if (timer_ticks % 19 == 0)
     {
         update_clock_time_taken(timer_ticks/18);
     }
@@ -54,7 +54,7 @@ void Timer::timer_wait(int ticks)
 
 void Timer::install_timer()
 {
-    //timer_phase(18);
+    timer_phase(19);
     install_handler_irq(0, timer_handler_driver);
 }
 
