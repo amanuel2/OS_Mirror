@@ -28,11 +28,11 @@ extern "C" void callConstructors()
 extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 {
    cls();
+   gdt gt;
+   IDT idt;
    ISR isr;
    IRQ irq;
-   gdt gt;
    SerialPort sp;
-   IDT idt;
    isr.install_isrs();
    irq.install_irqs();
    	Timer timer;
