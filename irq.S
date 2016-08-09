@@ -6,6 +6,8 @@
             .global irq\number
             irq\number:
                 cli
+                pushl $0
+                pushl $\number
                 jmp common_handler_irq
         .endm
 
@@ -14,12 +16,15 @@ common_handler_irq:
             
             
             pusha
-
+            pushl %ds
+            pushl %esp
        # call C++ Handler
            call irq_handler
-
+            add $4,%esp
        # restore registers
+            popl %ds
             popa
+            addl $8,%esp
             iret
 
 #TODO FOR LOOP

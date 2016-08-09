@@ -39,7 +39,6 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    	     
    	timer.install_timer();	
    	__asm__ __volatile__ ("sti");
-   for( ; ; ) asm("hlt");
 //   __asm__ __volatile__ ("sti");
 
 
