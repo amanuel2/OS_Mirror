@@ -84,23 +84,22 @@ void IRQ::irq_remap()
     p8b_irq.out(0x28,PIC_SLAVE_MASK);
 
     // ICW3 - setup cascading
-    p8b_irq.out(0x00,PIC_MASTER_MASK);
-    p8b_irq.out(0x00,PIC_SLAVE_MASK);
+    p8b_irq.out(0x04,PIC_MASTER_MASK);
+    p8b_irq.out(0x02,PIC_SLAVE_MASK);
 
     // ICW4 - environment info
     p8b_irq.out(0x01,PIC_MASTER_MASK);
     p8b_irq.out(0x01,PIC_SLAVE_MASK);
 
     // mask interrupts
-    p8b_irq.out(0xff,PIC_MASTER_MASK);
-    p8b_irq.out(0xff,PIC_SLAVE_MASK);
+    p8b_irq.out(0,PIC_MASTER_MASK);
+    p8b_irq.out(0,PIC_SLAVE_MASK);
 }
 
 void install_handler_irq(int irq, regs_func handler)
 {
     printf(" \n Installer IRQ %d \n ", irq);
 	irq_routines[irq] = handler;
-    irq0();
 }
 
 void uninstall_handler_irq(int irq)
@@ -134,7 +133,6 @@ void IRQ::install_irqs()
     idt_set_gate(45, irq13, 0x08, 0x8E);
     idt_set_gate(46, irq14, 0x08, 0x8E);    
     idt_set_gate(47, irq15, 0x08, 0x8E);
-
 }
 
 /* Each of the IRQ ISRs point to this function, rather than
