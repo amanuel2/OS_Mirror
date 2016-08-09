@@ -31,8 +31,8 @@ extern "C" void irq15(void);
 extern void panic(const char* exception);
 
 regs_func irq_routines[16] = {
-	 0,0,0,0,0,0,0,0
-	,0,0,0,0,0,0,0,0
+    0,0,0,0,0,0,0,0
+   ,0,0,0,0,0,0,0,0
 };
 
 static PORT::Port8Bits p8b_irq;
@@ -52,7 +52,7 @@ struct idt_entry {
 extern struct idt_entry idt[256];
 
 static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
-        	  uint8_t flags) 
+             uint8_t flags) 
 {
     idt[num].base_lo = (uintptr_t)handler >> 0 & 0xFFFF;
     idt[num].base_hi = (uintptr_t)handler >> 16 & 0xffff;
@@ -99,12 +99,12 @@ void IRQ::irq_remap()
 void install_handler_irq(int irq, regs_func handler)
 {
     printf(" \n Installer IRQ %d \n ", irq);
-	irq_routines[irq] = handler;
+   irq_routines[irq] = handler;
 }
 
 void uninstall_handler_irq(int irq)
 {
-	irq_routines[irq] = 0;
+   irq_routines[irq] = 0;
 } 
 
 
@@ -116,7 +116,7 @@ void uninstall_handler_irq(int irq)
 
 void IRQ::install_irqs()
 {
-	this->irq_remap();
+   this->irq_remap();
     idt_set_gate(32, irq0, 0x08, 0x8E);
     idt_set_gate(33, irq1, 0x08, 0x8E);
     idt_set_gate(34, irq2, 0x08, 0x8E);
@@ -147,6 +147,26 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
-    printf("IRQ Being Handled");
-}
+     /* This is a blank function pointer */
+    regs_func handler;
 
+    /* Find out if we have a custom handler to run for this
+    *  IRQ, and then finally, run it */
+    handler = irq_routines[r->int_no];
+    if (handler)
+    {
+        handler(r);
+    }
+
+    /* If the IDT entry that was invoked was greater than 40
+    *  (meaning IRQ8 - 15), then we need to send an EOI to
+    *  the slave controller */
+    if (r->int_no >= 40)
+    {
+        p8b_irq.out(0x20,0xA0);
+    }
+
+    /* In either case, we need to send an EOI to the master
+    *  interrupt controller too */
+    p8b_irq.out(0x20, 0x20);
+}
