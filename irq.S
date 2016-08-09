@@ -6,9 +6,7 @@
             .global irq\number
             irq\number:
                 cli
-               pushl $0
-                pushl $\number
-               jmp common_handler_irq
+                jmp common_handler_irq
         .endm
 
 common_handler_irq:

@@ -80,8 +80,8 @@ void IRQ::irq_remap()
     p8b_irq.out(0x11,PIC_SLAVE_CONTROL);
 
     // Remap interrupts beyond 0x20 because the first 32 are cpu exceptions
-    p8b_irq.out(0x21,PIC_MASTER_MASK);
-    p8b_irq.out(0x28,PIC_SLAVE_MASK);
+    p8b_irq.out(0x20,PIC_MASTER_MASK);
+    p8b_irq.out(0x27,PIC_SLAVE_MASK);
 
     // ICW3 - setup cascading
     p8b_irq.out(0x04,PIC_MASTER_MASK);
@@ -92,8 +92,8 @@ void IRQ::irq_remap()
     p8b_irq.out(0x01,PIC_SLAVE_MASK);
 
     // mask interrupts
-    p8b_irq.out(0,PIC_MASTER_MASK);
-    p8b_irq.out(0,PIC_SLAVE_MASK);
+    p8b_irq.out(0x00,PIC_MASTER_MASK);
+    p8b_irq.out(0x00,PIC_SLAVE_MASK);
 }
 
 void install_handler_irq(int irq, regs_func handler)
@@ -161,7 +161,7 @@ extern "C" void irq_handler(struct regs *r)
     /* If the IDT entry that was invoked was greater than 40
     *  (meaning IRQ8 - 15), then we need to send an EOI to
     *  the slave controller */
-    if (r->int_no >= 40)
+    if (r->int_no >= 8)
     {
         p8b_irq.out(0x20,0xA0);
     }
