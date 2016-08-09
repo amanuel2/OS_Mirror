@@ -12,7 +12,7 @@ static PORT::Port8Bits p8b_timer_drv;
 
 extern void install_handler_irq(int irq, regs_func handler);
 
-static void timer_phase(int hz)
+ void timer_phase(int hz)
 {
     int divisor = 1193180 / hz;       /* Calculate our divisor */
     p8b_timer_drv.out(0x36,0x43);             /* Set our command byte 0x36 */
@@ -54,7 +54,7 @@ void Timer::timer_wait(int ticks)
 
 void Timer::install_timer()
 {
-    timer_phase(18);
+    //timer_phase(18);
     install_handler_irq(0, timer_handler_driver);
 }
 

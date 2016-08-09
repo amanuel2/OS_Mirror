@@ -4,34 +4,34 @@
         .extern common_interrupt_exception_handler
 
         .macro interrupt number
-        	.global isr\number
-        	isr\number:
-        		cli
-        		pushl $\number
-        		jmp common_handler
+            .global isr\number
+            isr\number:
+                cli
+                pushl $\number
+                jmp common_handler
         .endm
 
         .macro no_error_code_interrupt number
-        	.global isr\number
-        	isr\number:
-        		cli
-        		pushl $0
-        		pushl $\number
-        		jmp common_handler
+            .global isr\number
+            isr\number:
+                cli
+                pushl $0
+                pushl $\number
+                jmp common_handler
         .endm
 
 
         common_handler:
-            # save registers
-            
             pusha
-
-            # call C++ Handler
-            call common_interrupt_exception_handler
-
-
-            # restore registers
+            pushl %ds
+            pushl %esp
+       # call C++ Handler
+           call common_interrupt_exception_handler
+            addl $4,%esp
+       # restore registers
+            popl %ds
             popa
+            addl $8,%esp
             iret
 
 

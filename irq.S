@@ -20,7 +20,7 @@ common_handler_irq:
             pushl %esp
        # call C++ Handler
            call irq_handler
-            add $4,%esp
+            addl $4,%esp
        # restore registers
             popl %ds
             popa

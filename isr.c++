@@ -66,7 +66,7 @@ extern "C" void isr31(void);
 /* Set an entry in the <idt>.
  */
 static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
-        	  uint8_t flags) 
+              uint8_t flags) 
 {
     idt[num].base_lo = (uintptr_t)handler >> 0 & 0xFFFF;
     idt[num].base_hi = (uintptr_t)handler >> 16 & 0xffff;
@@ -76,38 +76,38 @@ static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
 }
 
 static const char *exception_messages[32] = {
-	"Division by zero",
-	"Debug",
-	"Non-maskable interrupt",
-	"Breakpoint",
-	"Detected overflow",
-	"Out-of-bounds",
-	"Invalid opcode",
-	"No coprocessor",
-	"Double fault",
-	"Coprocessor segment overrun",
-	"Bad TSS",
-	"Segment not present",
-	"Stack fault",
-	"General protection fault",
-	"Page fault",
-	"Unknown interrupt",
-	"Coprocessor fault",
-	"Alignment check",
-	"Machine check",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved",
-	"Reserved"
+    "Division by zero",
+    "Debug",
+    "Non-maskable interrupt",
+    "Breakpoint",
+    "Detected overflow",
+    "Out-of-bounds",
+    "Invalid opcode",
+    "No coprocessor",
+    "Double fault",
+    "Coprocessor segment overrun",
+    "Bad TSS",
+    "Segment not present",
+    "Stack fault",
+    "General protection fault",
+    "Page fault",
+    "Unknown interrupt",
+    "Coprocessor fault",
+    "Alignment check",
+    "Machine check",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved"
 };
 /*
  * Install the ISR Handlers to Interupt Descriptor Table
@@ -115,7 +115,7 @@ static const char *exception_messages[32] = {
 void ISR::install_isrs()
 
 {
-	idt_set_gate(0, isr0, 0x08, 0x8e);
+    idt_set_gate(0, isr0, 0x08, 0x8e);
     idt_set_gate(1, isr1, 0x08, 0x8e);
     idt_set_gate(2, isr2, 0x08, 0x8e);
     idt_set_gate(3, isr3, 0x08, 0x8e);
@@ -151,10 +151,14 @@ void ISR::install_isrs()
 
 /* Dispatch event handler 
  */
-extern "C" void common_interrupt_exception_handler(struct regs *r) 
+extern "C" void common_interrupt_exception_handler(struct regs *r)
 {
-	if(r->int_no < 32)
-	{	
-	   printf("Error %s " , exception_messages[r->int_no]);
-	}
+    if(r->int_no < 32)
+    {  
+       printf("Error %s " , exception_messages[r->int_no]);
+    } else {
+        printf("Got an unknown exception %d", r->int_no);
+    }
+ 
+    for( ; ; ) __asm__ __volatile__ ("hlt");
 }
