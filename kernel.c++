@@ -32,10 +32,10 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    IDT idt;
    ISR isr;
    IRQ irq;
-   for( ; ; ) asm("hlt");
    SerialPort sp;
    isr.install_isrs();
    irq.install_irqs();
+   for( ; ; ) asm("hlt");
    	Timer timer;
    	timer.install_timer();	
    __asm__ __volatile__ ("sti");
