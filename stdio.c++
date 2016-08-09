@@ -83,6 +83,40 @@ void putchr_t(char str)
 }
 
 
+void update_clock_time_taken(int sec)
+{
+	size_t terminal_column_res = terminal_column;
+	size_t terminal_row_res = terminal_row;
+	char* cust_msg = " Seconds Taken";
+	char* sec_chr = itoa(sec);
+
+	terminal_row = 0;
+	terminal_column = 60;
+
+
+	//Conversion
+	for(int i=0;sec_chr[i]!='\0'; ++i)
+	{
+		const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
+
+    	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|sec_chr[i];
+
+    	terminal_column++;
+	}
+
+	for(int i=0;cust_msg[i]!='\0'; ++i)
+	{
+		const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
+
+    	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|cust_msg[i];
+
+    	terminal_column++;
+	}
+	
+    terminal_column = terminal_column_res;
+	terminal_row = terminal_row_res;
+}
+
 void putchar(char str,char next_str, va_list &arg)
 {
 	if(!continue_ex)

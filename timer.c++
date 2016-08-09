@@ -25,7 +25,7 @@ void timer_handler_driver(struct regs *r)
     *  display a message on the screen */
     if (timer_ticks % 18 == 0)
     {
-        printf("One second has passed\n");
+        update_clock_time_taken(timer_ticks/18);
     }
 }
 
