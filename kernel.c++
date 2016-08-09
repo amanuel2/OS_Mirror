@@ -35,9 +35,9 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    SerialPort sp;
    isr.install_isrs();
    irq.install_irqs();
-      __asm__ __volatile__ ("sti");
-   for( ; ; ) asm("hlt");
    	Timer timer;
+   	      __asm__ __volatile__ ("sti");
+   for( ; ; ) asm("hlt");
    	timer.install_timer();	
 //   __asm__ __volatile__ ("sti");
 
