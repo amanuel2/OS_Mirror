@@ -6,6 +6,7 @@
 #include "idt.h"
 #include "timer.h"
 #include "isr.h"
+#include "kbd.h"
 #include "irq.h"
 
 
@@ -27,7 +28,7 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 {
- //  cls();
+   cls();
    gdt gt;
    IDT idt;
    ISR isr;
@@ -37,6 +38,9 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    irq.install_irqs();
    	Timer timer;
    	timer.install_timer();	
+   	KBD kbd;
+   	kbd.install_kbd_driver();
+   	printf("\n Write your name : ");
    	__asm__ __volatile__ ("sti");
 
 //  int x = 5/0;
