@@ -46,8 +46,8 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
     Paging paging;
     paging.paging_init();
 
-//   	MOUSE mouse;
-//   	mouse.install_mouse_driver();
+   	MOUSE mouse;
+   	mouse.install_mouse_driver();
    	__asm__ __volatile__ ("sti");
 
 //  int x = 5/0;

@@ -6,12 +6,14 @@ typedef void(*regs_func)(struct regs *r);
 extern void install_handler_irq(int irq, regs_func handler);
 
 static PORT::Port8Bits p8b_mouse_drv;
+static byte mouse_cycle=0;     //unsigned char
+static sbyte mouse_byte[3];    //signed char
+static sbyte mouse_x=0;         //signed char
+static sbyte mouse_y=0;         //signed char
 
 
-void mouse_ps2_handler(struct regs *r)
-{
-  printf("IRQ 12 \n ");
-}
+
+
 void mouse_wait(unsigned char type)
 {
   unsigned int _time_out=100000;
@@ -59,6 +61,31 @@ mouse_wait(1);
 p8b_mouse_drv.out(a_write,0x60);
 }
 
+
+void mouse_ps2_handler(struct regs *r)
+{
+  mouse_read();
+    switch(mouse_cycle)
+  {
+    case 0:
+      mouse_byte[0]=p8b_mouse_drv.in(0x60);
+      mouse_cycle++;
+      break;
+    case 1:
+      mouse_byte[1]=p8b_mouse_drv.in(0x60);
+      mouse_cycle++;
+      break;
+    case 2:
+      mouse_byte[2]=p8b_mouse_drv.in(0x60);
+      mouse_x=mouse_byte[1];
+      mouse_y=mouse_byte[2];
+      mouse_cycle=0;
+      break;
+  }
+  mouse_move_print(mouse_x,mouse_y);
+}
+
+
 void MOUSE::install_mouse_driver()
 {
    mouse_wait(1);
@@ -86,5 +113,7 @@ void MOUSE::install_mouse_driver()
 	mouse_write(0xF4);
 	mouse_read();
 
-  	install_handler_irq(12, mouse_ps2_handler);
+  install_handler_irq(12, mouse_ps2_handler);
+
+  printf("Initalized PS2/MOUSE");
 }

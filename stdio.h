@@ -27,4 +27,5 @@ void reverse(char str[], int32_t length);
 char* itoa(int val);
 void cls();
 void update_clock_time_taken(int sec);
+void mouse_move_print(int x, int y);
 #endif

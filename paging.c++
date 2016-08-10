@@ -49,5 +49,5 @@ void Paging::paging_init()
 	paging_map_virtual_to_phys(0, 0);
 	paging_map_virtual_to_phys(0x400000, 0x400000);
 	paging_enable();
-	printf("Paging was successfully enabled!\n");
+	printf("Paging was successfully enabled!");
 }

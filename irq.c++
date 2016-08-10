@@ -81,7 +81,7 @@ void IRQ::irq_remap()
 
     // Remap interrupts beyond 0x20 because the first 32 are cpu exceptions
     p8b_irq.out(0x20,PIC_MASTER_MASK);
-    p8b_irq.out(0x27,PIC_SLAVE_MASK);
+    p8b_irq.out(0x28,PIC_SLAVE_MASK);
 
     // ICW3 - setup cascading
     p8b_irq.out(0x04,PIC_MASTER_MASK);
@@ -147,7 +147,6 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
-  //  printf("%d",r->int_no);
      /* This is a blank function pointer */
     regs_func handler;
 

@@ -77,7 +77,7 @@ BoneOS.iso: BoneOS.bin
 	rm -rf iso
 
 start-debug:
-	qemu-system-i386 -S -s -kernel BoneOS.bin -m 1G -serial file:qemu-serial.log 
+	qemu-system-i386 -S -s -kernel BoneOS.bin -m 1G -serial file:qemu-serial.log  -serial stdio -usb -device usb-host,hostbus=2,hostaddr=1
 	
 
 run_vb: compile BoneOS.bin BoneOS.iso

@@ -118,6 +118,28 @@ void putchr_t(char str)
 		   VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str;
 }
 
+void mouse_move_print(int x, int y)
+{
+	size_t terminal_column_res = terminal_column;
+	size_t terminal_row_res = terminal_row;
+
+	terminal_row = y;
+	terminal_column =x;
+	 size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
+	 
+
+	char* str = "ф";
+
+	for(int32_t i=0;str[i]!='\0'; ++i)
+    {
+        VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str[i];
+    }
+
+    terminal_column = terminal_column_res;
+	terminal_row = terminal_row_res;
+
+}
+
 
 void update_clock_time_taken(int sec)
 {
