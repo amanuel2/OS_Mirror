@@ -6,6 +6,7 @@ static size_t terminal_column = 0;
 static  uint16_t* VideoMemory =((uint16_t*)0xb8000);
 static bool continue_ex = false;
 
+//static char* mouse_prev_chr;
 	
 SerialPort sp_std_io;
 //80 * 25
@@ -128,8 +129,12 @@ void mouse_move_print(int x, int y)
 	 size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
 	 
 
-	char* str = "ф";
+	char str[3] = "|";
 
+//	for(int32_t i=0;str[i]!='\0'; ++i)
+ //   {
+ //   	mouse_prev_chr[i] = str[i];
+ //   }
 	for(int32_t i=0;str[i]!='\0'; ++i)
     {
         VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str[i];
@@ -138,6 +143,28 @@ void mouse_move_print(int x, int y)
     terminal_column = terminal_column_res;
 	terminal_row = terminal_row_res;
 
+}
+
+void mouse_clear_print(int x, int y)
+{
+	size_t terminal_column_res = terminal_column;
+	size_t terminal_row_res = terminal_row;
+
+	terminal_row = y;
+	terminal_column =x;
+	 
+
+	char* str = " ";
+
+	for(int32_t i=0;str[i]!='\0'; ++i)
+    {
+    	size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
+        VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str[i];
+        terminal_column++;
+    }
+
+    terminal_column = terminal_column_res;
+	terminal_row = terminal_row_res;
 }
 
 

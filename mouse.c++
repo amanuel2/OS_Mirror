@@ -65,6 +65,7 @@ p8b_mouse_drv.out(a_write,0x60);
 void mouse_ps2_handler(struct regs *r)
 {
   mouse_read();
+  mouse_clear_print(mouse_x,mouse_y);
     switch(mouse_cycle)
   {
     case 0:
