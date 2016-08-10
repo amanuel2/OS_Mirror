@@ -98,7 +98,7 @@ void IRQ::irq_remap()
 
 void install_handler_irq(int irq, regs_func handler)
 {
-    printf(" \n Installer IRQ %d \n ", irq);
+    printf("\nIntstalling IRQ %d ", irq);
     irq_routines[irq] = handler;
 }
 
@@ -147,7 +147,7 @@ void IRQ::install_irqs()
 *  an EOI, you won't raise any more IRQs */
 extern "C" void irq_handler(struct regs *r)
 {
-    printf("%d",r->int_no);
+  //  printf("%d",r->int_no);
      /* This is a blank function pointer */
     regs_func handler;
 

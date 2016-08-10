@@ -6,6 +6,8 @@ BoneOS.bin
 #Log File
 qemu.log
 
+VBox-*.*
+
 #Ignored Folders
 cross/
 

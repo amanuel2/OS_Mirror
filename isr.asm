@@ -15,7 +15,7 @@ section .text
                 global isr%1
                 isr%1:
                     cli
-                    push %0
+                    push 0
                     push %1
                     jmp common_handler
             %endmacro

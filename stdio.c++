@@ -64,6 +64,31 @@ void printf(char *str, ...)
 	va_end(arg);
 }
 
+char tbuf[32];
+char bchars[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+
+void __itoa(unsigned i,unsigned base,char* buf) {
+	int pos = 0;
+	int opos = 0;
+	int top = 0;
+
+	if (i == 0 || base > 16) {
+		buf[0] = '0';
+		buf[1] = '\0';
+		return;
+	}
+
+	while (i != 0) {
+		tbuf[pos] = bchars[i % base];
+		pos++;
+		i /= base;
+	}
+	top=pos--;
+	for (opos=0; opos<top; pos--,opos++)
+		buf[opos] = tbuf[pos];
+	buf[opos] = 0;
+}
+
 void strcat(char *destination, const char *source)
 {
     int x = 0;
@@ -143,6 +168,8 @@ void putchar(char str,char next_str, va_list &arg)
 		    char space = ' ';
 		    int ch_per_chr;
 		    char *c_per_str;
+		    int ch_x;
+		    char str_x[32];
 		    switch(str)
 		    {
 		        case '\n':
@@ -193,6 +220,15 @@ void putchar(char str,char next_str, va_list &arg)
 		        		continue_ex = true;
 		        		break;
 		        	case 'x':
+		        		ch_x = va_arg(arg, int);
+		        		str_x[32]= {0};
+		        		__itoa(ch_x, 16, str_x);
+		        		for(int32_t i=0;str_x[i]!='\0'; ++i)
+		        		{
+		        		  putchr_t(str_x[i]);
+		        		}
+		        		continue_ex = true;
+		        		break;
 		        	case 'o':
 		        	   ch_per = va_arg(arg,unsigned int);
 		        	   str_use = itoa(ch_per);
