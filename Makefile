@@ -1,9 +1,9 @@
 GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall -Werror
 LDPARAMS =  -melf_i386
-objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o timer.o gdt.o port.o  gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o
+objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o timer.o gdt.o port.o  gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o mouse.o
 i686 = i686-elf-
 Asm_files =  idt boot isr port gdt_flush irq
-C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq timer kbd
+C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq timer kbd mouse
 ASPARAMS = --32 	
 VB=virtualbox
 VBM=VBoxManage
@@ -25,6 +25,7 @@ compile:
 	$(i686)g++ $(GPPARAMS) -o stdlib.o -c stdlib.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o timer.o -c timer.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o kbd.o -c kbd.c++ -ffreestanding
+	$(i686)g++ $(GPPARAMS) -o mouse.o -c mouse.c++ -ffreestanding
 	$(i686)as $(ASPARAMS) -g -o boot.o boot.S
 	$(i686)as $(ASPARAMS) -g -o isr_a.o isr.S
 	$(i686)as $(ASPARAMS) -g -o port_a.o port.S

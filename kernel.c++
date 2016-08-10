@@ -7,6 +7,7 @@
 #include "timer.h"
 #include "isr.h"
 #include "kbd.h"
+#include "mouse.h"
 #include "irq.h"
 
 
@@ -40,7 +41,9 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    	timer.install_timer();	
    	KBD kbd;
    	kbd.install_kbd_driver();
-   	printf("\n Write your name : ");
+
+   	MOUSE mouse;
+   	mouse.install_mouse_driver();
    	__asm__ __volatile__ ("sti");
 
 //  int x = 5/0;
