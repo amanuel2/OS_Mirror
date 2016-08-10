@@ -4,7 +4,7 @@ objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o ti
 i686 = i686-elf-
 Asm_files =  idt boot isr port gdt_flush irq
 C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq timer kbd mouse
-ASPARAMS = --32 	
+ASPARAMS = 	
 VB=virtualbox
 VBM=VBoxManage
 
@@ -27,11 +27,11 @@ compile:
 	$(i686)g++ $(GPPARAMS) -o kbd.o -c kbd.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o mouse.o -c mouse.c++ -ffreestanding
 	$(i686)as $(ASPARAMS) -g -o boot.o boot.S
-	$(i686)as $(ASPARAMS) -g -o isr_a.o isr.S
-	$(i686)as $(ASPARAMS) -g -o port_a.o port.S
-	$(i686)as $(ASPARAMS) -g -o idt_a.o idt.S
-	$(i686)as $(ASPARAMS) -g -o irq_a.o irq.S
-	$(i686)as $(ASPARAMS) -g -o gdt_flush.o gdt_flush.S
+	nasm -f elf32 isr.asm -o isr_a.o
+	nasm -f elf32 port.asm -o port_a.o
+	nasm -f elf32 idt.asm -o idt_a.o
+	nasm -f elf32 irq.asm -o irq_a.o
+	nasm -f elf32 gdt_flush.asm -o gdt_flush.o
 
 #IN TEST  START	
 compile_c++: $(C++_FILES)

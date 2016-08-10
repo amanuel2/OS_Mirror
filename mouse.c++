@@ -10,9 +10,8 @@ static PORT::Port8Bits p8b_mouse_drv;
 
 void mouse_ps2_handler(struct regs *r)
 {
-	printf("Hello");
+  printf("IRQ 12 \n ");
 }
-
 void mouse_wait(unsigned char type)
 {
   unsigned int _time_out=100000;
@@ -47,16 +46,17 @@ mouse_wait(0);
 return p8b_mouse_drv.in(0x60);
 }
 
+
 void mouse_write(unsigned char a_write)
 {
-	//Wait to be able to send a command
-	mouse_wait(1);
-	//Tell the mouse we are sending a command
-	p8b_mouse_drv.out(0xD4,0x64);
-	//Wait for the final part
-	mouse_wait(1);
-	//Finally write
-	p8b_mouse_drv.out(a_write,0x60);
+//Wait to be able to send a command
+mouse_wait(1);
+//Tell the mouse we are sending a command
+p8b_mouse_drv.out(0xD4,0x64);
+//Wait for the final part
+mouse_wait(1);
+//Finally write
+p8b_mouse_drv.out(a_write,0x60);
 }
 
 void MOUSE::install_mouse_driver()

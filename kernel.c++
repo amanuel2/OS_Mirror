@@ -42,8 +42,8 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    	KBD kbd;
    	kbd.install_kbd_driver();
 
-   	MOUSE mouse;
-   	mouse.install_mouse_driver();
+//   	MOUSE mouse;
+//   	mouse.install_mouse_driver();
    	__asm__ __volatile__ ("sti");
 
 //  int x = 5/0;
