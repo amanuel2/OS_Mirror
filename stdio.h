@@ -18,6 +18,7 @@ static const size_t VGA_HEIGHT = 25;
 
 void printf(char *str,...);
 void putchar(char str,char next_str,va_list &arg);
+char toUpper(char sv);
 void putchr_t(char str);
 int32_t strlen(int8_t *str);
 void strcat(char * Dest, char const * Src);

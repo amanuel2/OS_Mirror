@@ -4,6 +4,8 @@ typedef void(*regs_func)(struct regs *r);
 
 static PORT::Port8Bits p8b_kbd_drv;
 
+static bool shift = false;
+
 extern void install_handler_irq(int irq, regs_func handler);
 
 /* KBDUS means US Keyboard Layout. This is a scancode table
@@ -11,7 +13,7 @@ extern void install_handler_irq(int irq, regs_func handler);
 *  comments in to give you an idea of what key is what, even
 *  though I set it's array index to 0. You can change that to
 *  whatever you want using a macro, if you wish! */
-static const unsigned char kbdus[128] =
+unsigned char kbdus[183] =
 {
     0,  27, '1', '2', '3', '4', '5', '6', '7', '8',	/* 9 */
   '9', '0', '-', '=', '\b',	/* Backspace */
@@ -20,9 +22,9 @@ static const unsigned char kbdus[128] =
   't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n',	/* Enter key */
     0,			/* 29   - Control */
   'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',	/* 39 */
- '\'', '`',   0,		/* Left shift */
+ '\'', '`',   1,		/* Left shift */
  '\\', 'z', 'x', 'c', 'v', 'b', 'n',			/* 49 */
-  'm', ',', '.', '/',   0,				/* Right shift */	
+  'm', ',', '.', '/',   2,				/* Right shift */	
   '*',
     0,	/* Alt */
   ' ',	/* Space bar */
@@ -51,6 +53,12 @@ static const unsigned char kbdus[128] =
     0,	/* All other keys are undefined */
 };
 
+void kbd_init()
+{
+	//
+	kbdus[182] = 109;
+	kbdus[170] = 110;
+}
 /* Handles the keyboard interrupt */
 void keyboard_handler(struct regs *r)
 {
@@ -65,6 +73,20 @@ void keyboard_handler(struct regs *r)
     {
         /* You can use this one to see if the user released the
         *  shift, alt, or control keys... */
+
+        switch(scancode)
+        {
+        	case 170:
+        	case 182:
+        		shift = false;
+        		break;
+        	case 186:
+        		if(shift == false)
+        			shift = true;
+        		else
+        			shift = false;
+        		break;
+		}
     }
     else
     {
@@ -87,11 +109,20 @@ void keyboard_handler(struct regs *r)
 	        	//Use Build in Printf Backspace
 	        	printf("\b");
 	        	break;
-	        case 0x2A:
-	        	printf("Shift Key");
+	        case 1:
+	        case 2:
+	        	shift = true;
 	        	break;	
 	        default:
-	        	putchr_t(kbdus[scancode]);
+	       		if( ((int)kbdus[scancode]) >= 97 && ((int)kbdus[scancode]) <= 122)
+	       		{
+	    			if(shift == false)
+	        			printf("%c" , kbdus[scancode]);
+	        		else
+	        		{
+	        			printf("%c" ,toUpper(kbdus[scancode]));
+	        		}
+	       		}
 	        	break;	
         }
     }

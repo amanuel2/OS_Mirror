@@ -10,6 +10,17 @@ static bool continue_ex = false;
 SerialPort sp_std_io;
 //80 * 25
 
+char toUpper(char sv)
+{
+	char sv_ret = 0;
+	if(sv >= 'a' && sv <= 'z')
+	{
+		int sv_int = (int) sv-32;
+		sv_ret = (char) sv_int;
+	}
+
+	return sv_ret;
+}
 
 void cls()		
 {
