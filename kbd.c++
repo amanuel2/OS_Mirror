@@ -22,7 +22,7 @@ static const unsigned char kbdus[128] =
   'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',	/* 39 */
  '\'', '`',   0,		/* Left shift */
  '\\', 'z', 'x', 'c', 'v', 'b', 'n',			/* 49 */
-  'm', ',', '.', '/',   0,				/* Right shift */
+  'm', ',', '.', '/',   0,				/* Right shift */	
   '*',
     0,	/* Alt */
   ' ',	/* Space bar */
@@ -80,7 +80,20 @@ void keyboard_handler(struct regs *r)
         *  to the above layout to correspond to 'shift' being
         *  held. If shift is held using the larger lookup table,
         *  you would add 128 to the scancode when you look for it */
-        putchr_t(kbdus[scancode]);
+
+        switch(kbdus[scancode])
+        {
+        	case '\b':
+	        	//Use Build in Printf Backspace
+	        	printf("\b");
+	        	break;
+	        case 0x2A:
+	        	printf("Shift Key");
+	        	break;	
+	        default:
+	        	putchr_t(kbdus[scancode]);
+	        	break;	
+        }
     }
 }
 

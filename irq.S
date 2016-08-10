@@ -13,8 +13,6 @@
 
 common_handler_irq:
       # save registers
-            
-            
             pusha
             pushl %ds
             pushl %esp
