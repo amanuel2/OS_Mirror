@@ -3,8 +3,13 @@
 *.out
 BoneOS.bin
 
+#Eclipse Rememnants
+.project/
+.settings/
+
 #Log File
 qemu.log
+
 
 VBox-*.*
 
