@@ -12,7 +12,6 @@ public:
 	~Timer();
 	void install_timer();
 private:
-	void timer_wait(int ticks);
 };
 
 void timer_handler_driver(struct regs *r);

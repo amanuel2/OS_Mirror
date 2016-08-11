@@ -12,6 +12,52 @@ static PORT::Port8Bits p8b_timer_drv;
 
 extern void install_handler_irq(int irq, regs_func handler);
 
+
+/* This will continuously loop until the given time has
+*  been reached */
+void timer_wait(int ticks)
+{
+    unsigned long eticks;
+
+    eticks = timer_ticks + ticks;
+    while((unsigned)timer_ticks < eticks);
+}
+
+
+ //Play sound using built in speaker
+ static void play_sound(uint32_t nFrequence) {
+    uint32_t Div;
+    uint8_t tmp;
+ 
+ 
+        //Set the PIT to the desired frequency
+    Div = 1193180 / nFrequence;
+    p8b_timer_drv.out(0xb6,0x43);
+    p8b_timer_drv.out((uint8_t) (Div),0x42 );
+    p8b_timer_drv.out((uint8_t) (Div >> 8),0x42);
+ 
+        //And play the sound using the PC speaker
+    tmp = p8b_timer_drv.in(0x61);
+    if (tmp != (tmp | 3)) {
+        p8b_timer_drv.out(tmp | 3,0x61);
+    }
+ }
+ 
+ //make it shutup
+ static void nosound() {
+    uint8_t tmp = p8b_timer_drv.in(0x61) & 0xFC;
+ 
+    p8b_timer_drv.out(tmp,0x61);
+ }
+ 
+ //Make a beep`
+ void beep() {
+     play_sound(1000);
+     timer_wait(10);
+     nosound();
+          //set_PIT_2(old_frequency);
+ }
+
  void timer_phase(int hz)
 {
     int divisor = 1193180 / hz;       /* Calculate our divisor */
@@ -35,22 +81,15 @@ void timer_handler_driver(struct regs *r)
     if (timer_ticks % 19 == 0)
     {
         update_clock_time_taken(timer_ticks/18);
+       // beep();
     }
 }
+
 
 Timer::Timer()
 {
 }
 
-/* This will continuously loop until the given time has
-*  been reached */
-void Timer::timer_wait(int ticks)
-{
-    unsigned long eticks;
-
-    eticks = timer_ticks + ticks;
-    while((unsigned)timer_ticks < eticks);
-}
 
 void Timer::install_timer()
 {

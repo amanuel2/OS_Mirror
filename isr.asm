@@ -25,6 +25,7 @@ section .text
             pusha
             push ds
             push esp
+
        ; call C++ Handler
             call common_interrupt_exception_handler
             add esp,4
