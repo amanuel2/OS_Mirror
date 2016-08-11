@@ -8,6 +8,8 @@ static bool shift = false;
 
 extern void install_handler_irq(int irq, regs_func handler);
 
+bool enter_presed;
+
 /* KBDUS means US Keyboard Layout. This is a scancode table
 *  used to layout a standard US keyboard. I have left some
 *  comments in to give you an idea of what key is what, even
@@ -52,6 +54,24 @@ unsigned char kbdus[183] =
     0,	/* F12 Key */
     0,	/* All other keys are undefined */
 };
+
+  namespace enter_press_np
+  {
+    struct enter_pressed_structure
+    {
+      int bit;
+      char* value;
+    };
+
+    struct val_e
+    {
+      char* val_e;
+      int index_val_e = 0;
+    };
+
+    struct enter_pressed_structure kbd_str_e;
+    struct val_e val_e_inst;
+  };
 
 void kbd_init()
 {
@@ -116,6 +136,9 @@ void keyboard_handler(struct regs *r)
 	        default:
 	       		if( ((int)kbdus[scancode]) >= 97 && ((int)kbdus[scancode]) <= 122)
 	       		{
+                    enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char)kbdus[scancode];
+                    enter_press_np::val_e_inst.index_val_e++;
+
 	    			if(shift == false)
 	        			printf("%c" , kbdus[scancode]);
 	        		else
@@ -125,7 +148,53 @@ void keyboard_handler(struct regs *r)
 	       		}
 	        	break;	
         }
+
+
+        switch((int)scancode)
+        {
+           case 28:
+                enter_presed = true;
+                break;
+        }
     }
+}
+
+enter_press_np::enter_pressed_structure enter_pressed_func()
+{
+    if(enter_presed == true)
+    {
+        enter_press_np::kbd_str_e.bit = 0;
+        //Bug Fix
+        if(enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] == 'P')
+        {
+            enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char) 0;
+            enter_press_np::val_e_inst.index_val_e--;
+        }
+
+        if(Lib::str::strlen(enter_press_np::val_e_inst.val_e) > (unsigned)enter_press_np::val_e_inst.index_val_e)
+        {
+            // for(int i=Lib::str::strlen(enter_press_np::val_e_inst.val_e)+1; i<=enter_press_np::val_e_inst.index_val_e; i++)
+            // {
+            //     enter_press_np::val_e_inst.val_e[i] = (char) 0;
+            //     enter_press_np::val_e_inst.index_val_e--;
+            // }
+
+            printf(" \t OK srsly man... \t ");
+        }
+
+        enter_press_np::kbd_str_e.value = enter_press_np::val_e_inst.val_e;
+        enter_press_np::val_e_inst.val_e = "";
+    }
+    else
+    {
+        enter_press_np::kbd_str_e.bit = 1;
+        enter_press_np::kbd_str_e.value = enter_press_np::val_e_inst.val_e;
+        enter_press_np::val_e_inst.val_e= "";
+    }
+
+    enter_presed = false;
+    //enter_press_np::val_e_inst.index_val_e = 0;
+    return enter_press_np::kbd_str_e;
 }
 
 

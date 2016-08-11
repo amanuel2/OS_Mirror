@@ -6,7 +6,9 @@
 #include <stdint.h>
 #include <stdarg.h>
 #include "math.h"
+#include "kbd.h"
 #include "serial.h"
+#include "port.h"
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
@@ -29,4 +31,6 @@ void cls();
 void update_clock_time_taken(int sec);
 void mouse_move_print(int x, int y);
 void mouse_clear_print(int x, int y);
+int scanf_terminal();
+char* wait_enter();
 #endif

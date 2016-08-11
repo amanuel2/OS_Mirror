@@ -3,8 +3,15 @@
 
 #include "stdio.h"
 #include "port.h"
+#include "string.h"
 
 
+
+ struct enter_pressed_structure
+ {
+      int bit;
+      char* value;
+ };
 
 class KBD
 {
@@ -12,5 +19,6 @@ private:
 public:
 	void install_kbd_driver();
 };
+
 
 #endif

@@ -6,7 +6,27 @@ static size_t terminal_column = 0;
 static  uint16_t* VideoMemory =((uint16_t*)0xb8000);
 static bool continue_ex = false;
 
+static PORT::Port8Bits p8b_stdio_drv;
+
 //static char* mouse_prev_chr;
+
+ namespace enter_press_np
+  {
+    struct enter_pressed_structure
+    {
+      int bit;
+      char* value;
+    };
+
+    struct val_e
+    {
+      char* val_e;
+      int index_val_e = 0;
+    };
+  };
+
+extern enter_press_np::enter_pressed_structure enter_pressed_func();
+struct enter_press_np::enter_pressed_structure enter_term;
 	
 SerialPort sp_std_io;
 //80 * 25
@@ -21,6 +41,19 @@ char toUpper(char sv)
 	}
 
 	return sv_ret;
+}
+
+char* wait_enter()
+{
+	while(true)
+	{
+		enter_term = enter_pressed_func();
+		if(!enter_term.bit)
+			goto enter_done_while;
+	}
+	enter_done_while:
+
+	return enter_term.value;
 }
 
 void cls()		
