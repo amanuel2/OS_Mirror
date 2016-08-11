@@ -11,4 +11,4 @@ section .text
         mov ss,ax
         jmp 0x08:flush2
     flush2:
-        ret 
+        ret
