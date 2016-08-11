@@ -6,6 +6,10 @@ BoneOS.bin
 #Eclipse Rememnants
 .project/
 .settings/
+.cproject
+
+#Swap files
+*.swp
 
 #Log File
 qemu.log
