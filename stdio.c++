@@ -67,17 +67,17 @@ SerialPort sp_std_io;
 //80 * 25
 
 
-void terminal_initialize()
+void terminal_initialize(size_t width, size_t height, int bg, int fg)
 {
 	terminal_row = 0;
 	terminal_column = 0;
 	terminal_color = Vga::make_color(COLOR_MAGENTA, COLOR_LIGHT_RED);
 	terminal_buffer = (uint16_t*) 0xB8000;
-	for (size_t y = 0; y < VGA_HEIGHT; y++)
+	for (size_t y = 0; y < height; y++)
     {
-		for (size_t x = 0; x < VGA_WIDTH; x++)
+		for (size_t x = 0; x < width; x++)
         {
-			const size_t index = y * VGA_WIDTH + x;
+			const size_t index = y * width + x;
 			terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
 		}
 	}

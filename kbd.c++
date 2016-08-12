@@ -183,16 +183,40 @@ void keyboard_handler(struct regs *r)
            case 28:
                 enter_presed = true;
                 break;
+           case 12:
+        	   total_typed++;
+        	   if(shift==false)
+        	   {
+        	       enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = '-';
+        	       enter_press_np::val_e_inst.index_val_e++;
+        	       printf("%c" , '-');
+        	   }
+        	   else
+        	    {
+        	       enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = '_';
+        	       enter_press_np::val_e_inst.index_val_e++;
+        	       printf("%c" , '_');
+        	    }
+        	   break;
         }
 
-      //  printf("[%d]" , (int)scancode);
+        //printf("[%d]" , (int)scancode);
 
         if((int) scancode == 41)
         {
+   			total_typed++;
         	if(shift==false)
+        	{
+        		enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = '`';
+        		enter_press_np::val_e_inst.index_val_e++;
         		printf("%c" , '`');
+        	}
         	else
+        	{
+        		enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = '~';
+        		enter_press_np::val_e_inst.index_val_e++;
         		printf("%c" , '~');
+        	}
         }
         if(((int)scancode)>=2 && ((int)scancode) <=11)
         {

@@ -45,10 +45,18 @@ void Terminal::char_handler(char* val)
 	{
 			printf(" \n ----Help---- \n");
 			printf("Commands : %founder% \n");
+			printf("Commands : ccolor , type ccolor --help for More Help\n");
 	}
 	else if(Lib::str::strcmp(val,"%founder%")==0)
 	{
 		printf("\n Founder of BoneOS : Amanuel Bogale \n ");
+	}
+	else if(Lib::str::strcmp(val,"ccolor --help")==0)
+	{
+		printf(" \n--- CColor (Change Color) --- \n");
+		printf("Syntax : ccolor fg bg \n");
+		printf("Type in the foreground and background \n");
+		printf("Both Are Numbers Ranging From 0 - 15");
 	}
 }
 void Terminal::terminal_initalize()
@@ -73,7 +81,6 @@ void Terminal::terminal_initalize()
 	while(true)
 	{		
 		printf(" \n<\\User>");
-		terminal_initialize();
 
 //		check_color("Hello World" , 0xFF3);
 		val_now = wait_enter();	
