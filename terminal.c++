@@ -39,7 +39,7 @@ void Terminal::char_handler(char* val)
 	if(Lib::str::strcmp(val,"help")==0)
 	{
 			printf(" \n ----Help---- \n");
-			printf("Help Under Construction\n");
+			printf("Commands : founder \n");
 	}
 }
 void Terminal::terminal_initalize()
@@ -48,13 +48,13 @@ void Terminal::terminal_initalize()
 		char* val_now;
 
 		printf(" ************     **********       **       * 	 ********		\n");
-		printf(" *		  *     *	    *       * *      *      *		\n");
-		printf(" *		  *     *	    *       *  *     *      *		\n");
-		printf(" *	  	*     *	    *       *   *    *      *		\n");
-		printf(" *   ********     *	    *       *    *   *      *****		\n");
-		printf(" *	  	*     *	    *       *     *  *      *		\n");
-		printf(" *	  	*     *	    *       *      * *      *		\n");
-		printf(" *	  	*     *	    *       *       **      *		\n");
+		printf(" *		  *     *	    *       * *      *      *				\n");
+		printf(" *		  *     *	    *       *  *     *      *				\n");
+		printf(" *	  	*     *	    *       *   *    *      *					\n");
+		printf(" *   ********     *	    *       *    *   *      *****		    \n");
+		printf(" *	  	*     *	    *       *     *  *      *					\n");
+		printf(" *	  	*     *	    *       *      * *      *					\n");
+		printf(" *	  	*     *	    *       *       **      *					\n");
 		printf(" ************     **********       *        *      ******** 	\n");
 
 

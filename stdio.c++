@@ -296,7 +296,6 @@ void putchar(char str,char next_str, va_list &arg)
 		        			put_char_helper_neg('-');
 		        		}
 		        		str_use = itoa(ch_per);
-		     		    terminal_column++;
 
 		     		   for(int32_t i=0;str_use[i]!='\0'; ++i)
 		     		   {

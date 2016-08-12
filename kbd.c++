@@ -7,6 +7,7 @@ static PORT::Port8Bits p8b_kbd_drv;
 static bool shift = false;
 
 extern void install_handler_irq(int irq, regs_func handler);
+extern char *itoa(int val);
 
 bool enter_presed;
 
@@ -83,6 +84,15 @@ void kbd_init()
 	kbdus[182] = 109;
 	kbdus[170] = 110;
 }
+
+int intLength(int i) {
+    int l=0;
+    for(;i;i/=10) l++;
+    return l==0 ? 1 : l;
+}
+
+
+
 /* Handles the keyboard interrupt */
 void keyboard_handler(struct regs *r)
 {
@@ -168,13 +178,61 @@ void keyboard_handler(struct regs *r)
 	        	break;	
         }
 
-
         switch((int)scancode)
         {
            case 28:
                 enter_presed = true;
                 break;
         }
+
+      //  printf("[%d]" , (int)scancode);
+
+        if((int) scancode == 41)
+        {
+        	if(shift==false)
+        		printf("%c" , '`');
+        	else
+        		printf("%c" , '~');
+        }
+        if(((int)scancode)>=2 && ((int)scancode) <=11)
+        {
+        	if(shift == false)
+        	{
+            	int scancode_int;
+
+            	if((int)scancode == 11)
+            		scancode_int=0;
+            	else
+            		scancode_int=((int)scancode)-1;
+
+       			total_typed++;
+       			printf("%d" , scancode_int);
+       			char* to_str = itoa(scancode_int);
+       	        enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = to_str[0];
+                enter_press_np::val_e_inst.index_val_e++;
+        	}
+
+        	else
+        	{
+        		int scancode_int;
+        		char chr_symb[10] = {
+        				'!','@','#','$',
+						'%','^','&','*','(',')'
+        		};
+
+        		if((int)scancode == 11)
+        		    scancode_int=10;
+        		else
+        		    scancode_int=((int)scancode)-1;
+
+        		total_typed++;
+        		printf("%c" , chr_symb[scancode_int-1]);
+        	    enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = chr_symb[scancode_int-1];
+        		enter_press_np::val_e_inst.index_val_e++;
+        	}
+        }
+
+
     }
 }
 
