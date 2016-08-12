@@ -34,12 +34,18 @@ void Terminal::recieve_input()
 
 void Terminal::char_handler(char* val)
 {
-	printf("\t %s " , val);
+    #ifdef DEBUG_MODE
+		printf("\t %s " , val);
+	#endif
 	//printf("%d" , Lib::str::strcmp(val,"help")==0);
 	if(Lib::str::strcmp(val,"help")==0)
 	{
 			printf(" \n ----Help---- \n");
-			printf("Commands : founder \n");
+			printf("Commands : %founder% \n");
+	}
+	else if(Lib::str::strcmp(val,"%founder%")==0)
+	{
+		printf("\n Founder of BoneOS : Amanuel Bogale \n ");
 	}
 }
 void Terminal::terminal_initalize()
