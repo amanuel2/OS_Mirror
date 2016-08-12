@@ -1,8 +1,8 @@
 #include "stdio.h"
 
 
-static size_t terminal_row = 0;
-static size_t terminal_column = 0;
+size_t terminal_row = 0;
+size_t terminal_column = 0;
 static  uint16_t* VideoMemory =((uint16_t*)0xb8000);
 static bool continue_ex = false;
 
@@ -23,13 +23,33 @@ static PORT::Port8Bits p8b_stdio_drv;
       char* val_e;
       int index_val_e = 0;
     };
+
+    extern struct val_e val_e_inst;
   };
 
 extern enter_press_np::enter_pressed_structure enter_pressed_func();
 struct enter_press_np::enter_pressed_structure enter_term;
+
+extern void emptyString(char* str);
 	
 SerialPort sp_std_io;
 //80 * 25
+
+
+/* void update_cursor(int row, int col)
+ * by Dark Fiber
+ */
+void update_cursor(int row, int col)
+{
+   unsigned short position=(row*80) + col;
+
+   // cursor LOW port to vga INDEX register
+   p8b_stdio_drv.out(0x0F,0x3D4);
+   p8b_stdio_drv.out((unsigned char)(position&0xFF),0x3D5);
+   // cursor HIGH port to vga INDEX register
+   p8b_stdio_drv.out(0x0E,0x3D4);
+   p8b_stdio_drv.out((unsigned char )((position>>8)&0xFF),0x3D5);
+}
 
 char toUpper(char sv)
 {
@@ -53,6 +73,7 @@ char* wait_enter()
 	}
 	enter_done_while:
 
+	//emptyString(enter_press_np::val_e_inst.val_e);
 	return enter_term.value;
 }
 

@@ -33,4 +33,5 @@ void mouse_move_print(int x, int y);
 void mouse_clear_print(int x, int y);
 int scanf_terminal();
 char* wait_enter();
+void update_cursor(int row, int col);
 #endif

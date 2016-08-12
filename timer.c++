@@ -5,12 +5,18 @@
 
 typedef void(*regs_func)(struct regs *r);
 
+extern size_t terminal_row;
+extern size_t terminal_column;
+
 
 static int32_t timer_ticks = 0;
 
 static PORT::Port8Bits p8b_timer_drv;
 
+
+
 extern void install_handler_irq(int irq, regs_func handler);
+
 
 
 /* This will continuously loop until the given time has
@@ -83,6 +89,9 @@ void timer_handler_driver(struct regs *r)
         update_clock_time_taken(timer_ticks/18);
        // beep();
     }
+
+    update_cursor(terminal_row,terminal_column);
+
 }
 
 

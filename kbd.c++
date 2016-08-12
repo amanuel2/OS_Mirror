@@ -10,6 +10,10 @@ extern void install_handler_irq(int irq, regs_func handler);
 
 bool enter_presed;
 
+static int total_typed=0;
+
+SerialPort sp_kbd;
+
 /* KBDUS means US Keyboard Layout. This is a scancode table
 *  used to layout a standard US keyboard. I have left some
 *  comments in to give you an idea of what key is what, even
@@ -116,7 +120,7 @@ void keyboard_handler(struct regs *r)
 
         /* Just to show you how this works, we simply translate
         *  the keyboard scancode into an ASCII value, and then
-        *  display it to the screen. You can get creative and
+        *  display it to the screen. You can get creative andlos
         *  use some flags to see if a shift is pressed and use a
         *  different layout, or you can add another 128 entries
         *  to the above layout to correspond to 'shift' being
@@ -127,8 +131,22 @@ void keyboard_handler(struct regs *r)
         {
         	case '\b':
 	        	//Use Build in Printf Backspace
-	        	printf("\b");
+        		total_typed--;
+        		sp_kbd.write_number_serial(total_typed);
+
+        		if(!(total_typed<0))
+        		{
+        			printf("\b");
+        			enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char) 0;
+        			enter_press_np::val_e_inst.index_val_e--;
+        		}
 	        	break;
+        	case ' ':
+        		total_typed++;
+        		enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char)kbdus[scancode];
+        		enter_press_np::val_e_inst.index_val_e++;
+        		printf(" ");
+        		break;
 	        case 1:
 	        case 2:
 	        	shift = true;
@@ -136,6 +154,7 @@ void keyboard_handler(struct regs *r)
 	        default:
 	       		if( ((int)kbdus[scancode]) >= 97 && ((int)kbdus[scancode]) <= 122)
 	       		{
+	       			total_typed++;
                     enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char)kbdus[scancode];
                     enter_press_np::val_e_inst.index_val_e++;
 
@@ -159,6 +178,13 @@ void keyboard_handler(struct regs *r)
     }
 }
 
+void emptyString(char* str)
+{
+	for(int i=0; str[i]!='\0'; i++)
+	{
+		str[i] = (char) 0;
+	}
+}
 enter_press_np::enter_pressed_structure enter_pressed_func()
 {
     if(enter_presed == true)
@@ -173,17 +199,19 @@ enter_press_np::enter_pressed_structure enter_pressed_func()
 
         if(Lib::str::strlen(enter_press_np::val_e_inst.val_e) > (unsigned)enter_press_np::val_e_inst.index_val_e)
         {
-            // for(int i=Lib::str::strlen(enter_press_np::val_e_inst.val_e)+1; i<=enter_press_np::val_e_inst.index_val_e; i++)
-            // {
-            //     enter_press_np::val_e_inst.val_e[i] = (char) 0;
-            //     enter_press_np::val_e_inst.index_val_e--;
-            // }
-
-            printf(" \t OK srsly man... \t ");
+        	int index_start = (unsigned)enter_press_np::val_e_inst.index_val_e;
+        	int index_stop = Lib::str::strlen(enter_press_np::val_e_inst.val_e);
+             for(int i=index_start; i<=index_stop; i++)
+             {
+                 enter_press_np::val_e_inst.val_e[i] = (char) 0;
+             }
         }
 
-        enter_press_np::kbd_str_e.value = enter_press_np::val_e_inst.val_e;
-        enter_press_np::val_e_inst.val_e = "";
+        /*
+         * Reset Total Typed
+         */
+        total_typed=0;
+
     }
     else
     {

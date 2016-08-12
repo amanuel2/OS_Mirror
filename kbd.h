@@ -3,6 +3,7 @@
 
 #include "stdio.h"
 #include "port.h"
+#include "serial.h"
 #include "string.h"
 
 

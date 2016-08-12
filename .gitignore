@@ -15,7 +15,7 @@ BoneOS.bin
 #Log File
 qemu.log
 
-
+#VBox Rememnants
 VBox-*.*
 
 #Ignored Folders
