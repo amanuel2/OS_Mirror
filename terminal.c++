@@ -47,15 +47,15 @@ void Terminal::terminal_initalize()
 		cls();
 		char* val_now;
 
-		printf(" ************  *********** \n");
-		printf(" *		  	*  * 		 * \n");
-		printf(" *		  	*  * 		 * \n");
-		printf(" *		  	*  * 		 * \n");
-		printf(" *   ********  * 		 * \n");
-		printf(" *		  	*  * 		 * \n");
-		printf(" *		  	*  * 		 * \n");
-		printf(" *		  	*  * 		 * \n");
-		printf(" ************  *********** \n");
+		printf(" ************     **********       **       * 	 ********		\n");
+		printf(" *		  *     *	    *       * *      *      *		\n");
+		printf(" *		  *     *	    *       *  *     *      *		\n");
+		printf(" *	  	*     *	    *       *   *    *      *		\n");
+		printf(" *   ********     *	    *       *    *   *      *****		\n");
+		printf(" *	  	*     *	    *       *     *  *      *		\n");
+		printf(" *	  	*     *	    *       *      * *      *		\n");
+		printf(" *	  	*     *	    *       *       **      *		\n");
+		printf(" ************     **********       *        *      ******** 	\n");
 
 
 
