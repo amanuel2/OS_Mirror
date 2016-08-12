@@ -11,7 +11,7 @@ const size_t VGA_HEIGHT = 25;
 
 
 /* Hardware text mode color constants. */
-enum vga_color {
+enum vga_color{
 	COLOR_BLACK = 0,
 	COLOR_BLUE = 1,
 	COLOR_GREEN = 2,
@@ -30,13 +30,12 @@ enum vga_color {
 	COLOR_WHITE = 15,
 };
 
-class Vga
+vga_color VGA_COLOR;
+
+namespace Vga
 {
-public:
-	Vga();
-	~Vga();
-	inline uint8_t make_color(enum vga_color fg, enum vga_color bg);
-	inline uint16_t make_vgaentry(char c, uint8_t color);
+	uint8_t make_color(enum vga_color fg, enum vga_color bg);
+	uint16_t make_vgaentry(char c, uint8_t color);
 };
 
 #endif

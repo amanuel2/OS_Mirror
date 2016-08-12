@@ -4,9 +4,12 @@
 size_t terminal_row = 0;
 size_t terminal_column = 0;
 extern uint16_t* VideoMemory;
+extern const size_t VGA_WIDTH = 80;
+extern const size_t VGA_HEIGHT = 25;
 static bool continue_ex = false;
 
 uint8_t terminal_color;
+uint16_t* terminal_buffer;
 
 static PORT::Port8Bits p8b_stdio_drv;
 
@@ -29,6 +32,32 @@ static PORT::Port8Bits p8b_stdio_drv;
     extern struct val_e val_e_inst;
   };
 
+ enum vga_color{
+ 	COLOR_BLACK = 0,
+ 	COLOR_BLUE = 1,
+ 	COLOR_GREEN = 2,
+ 	COLOR_CYAN = 3,
+ 	COLOR_RED = 4,
+ 	COLOR_MAGENTA = 5,
+ 	COLOR_BROWN = 6,
+ 	COLOR_LIGHT_GREY = 7,
+ 	COLOR_DARK_GREY = 8,
+ 	COLOR_LIGHT_BLUE = 9,
+ 	COLOR_LIGHT_GREEN = 10,
+ 	COLOR_LIGHT_CYAN = 11,
+ 	COLOR_LIGHT_RED = 12,
+ 	COLOR_LIGHT_MAGENTA = 13,
+ 	COLOR_LIGHT_BROWN = 14,
+ 	COLOR_WHITE = 15,
+ };
+
+ namespace Vga
+ {
+ 	extern uint8_t make_color(enum vga_color fg, enum vga_color bg);
+ 	extern uint16_t make_vgaentry(char c, uint8_t color);
+ };
+
+
 extern enter_press_np::enter_pressed_structure enter_pressed_func();
 struct enter_press_np::enter_pressed_structure enter_term;
 
@@ -38,9 +67,23 @@ SerialPort sp_std_io;
 //80 * 25
 
 
-/* void update_cursor(int row, int col)
- * by Dark Fiber
- */
+void terminal_initialize()
+{
+	terminal_row = 0;
+	terminal_column = 0;
+	terminal_color = Vga::make_color(COLOR_MAGENTA, COLOR_LIGHT_RED);
+	terminal_buffer = (uint16_t*) 0xB8000;
+	for (size_t y = 0; y < VGA_HEIGHT; y++)
+    {
+		for (size_t x = 0; x < VGA_WIDTH; x++)
+        {
+			const size_t index = y * VGA_WIDTH + x;
+			terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
+		}
+	}
+}
+
+
 void update_cursor(int row, int col)
 {
    unsigned short position=(row*80) + col;

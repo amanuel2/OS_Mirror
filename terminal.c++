@@ -1,23 +1,26 @@
 #include "terminal.h"
 
- namespace enter_press_np
-  {
-    struct enter_pressed_structure
-    {
-      int bit;
-      char* value;
-    };
-
-    struct val_e
-    {
-      char* val_e;
-      int index_val_e = 0;
-    };
-
-    extern struct val_e val_e_inst;
-  };
 
 extern void emptyString(char* str);
+extern void terminal_initialize();
+
+namespace enter_press_np
+{
+   struct enter_pressed_structure
+   {
+     int bit;
+     char* value;
+   };
+
+   struct val_e
+   {
+     char* val_e;
+     int index_val_e = 0;
+   };
+
+   extern struct val_e val_e_inst;
+};
+
 
 Terminal::Terminal()
 {
@@ -70,6 +73,7 @@ void Terminal::terminal_initalize()
 	while(true)
 	{		
 		printf(" \n<\\User>");
+		terminal_initialize();
 
 //		check_color("Hello World" , 0xFF3);
 		val_now = wait_enter();	

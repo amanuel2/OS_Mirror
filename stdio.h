@@ -10,8 +10,7 @@
 #include "serial.h"
 #include "port.h"
 
-static const size_t VGA_WIDTH = 80;
-static const size_t VGA_HEIGHT = 25;
+
 
 
 
@@ -35,4 +34,5 @@ int scanf_terminal();
 char* wait_enter();
 void update_cursor(int row, int col);
 void check_color(char* str, uint8_t color);
+void terminal_initialize();
 #endif
