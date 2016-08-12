@@ -70,6 +70,8 @@ void Terminal::terminal_initalize()
 	while(true)
 	{		
 		printf(" \n<\\User>");
+
+//		check_color("Hello World" , 0xFF3);
 		val_now = wait_enter();	
 
 		this->char_handler(val_now);

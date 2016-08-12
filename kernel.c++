@@ -12,7 +12,6 @@
 #include "terminal.h"
 #include "paging.h"
 
-#define DEBUG_MODE 1
 
 
 

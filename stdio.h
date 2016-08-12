@@ -34,4 +34,5 @@ void mouse_clear_print(int x, int y);
 int scanf_terminal();
 char* wait_enter();
 void update_cursor(int row, int col);
+void check_color(char* str, uint8_t color);
 #endif

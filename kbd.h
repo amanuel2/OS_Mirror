@@ -8,11 +8,11 @@
 
 
 
- struct enter_pressed_structure
- {
-      int bit;
-      char* value;
- };
+struct enter_pressed_structure
+{
+     int bit;
+     char* value;
+};
 
 class KBD
 {

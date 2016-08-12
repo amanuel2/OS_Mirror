@@ -3,8 +3,10 @@
 
 size_t terminal_row = 0;
 size_t terminal_column = 0;
-static  uint16_t* VideoMemory =((uint16_t*)0xb8000);
+extern uint16_t* VideoMemory;
 static bool continue_ex = false;
+
+uint8_t terminal_color;
 
 static PORT::Port8Bits p8b_stdio_drv;
 
@@ -254,6 +256,19 @@ void update_clock_time_taken(int sec)
 	
     terminal_column = terminal_column_res;
 	terminal_row = terminal_row_res;
+}
+
+void check_color(char* str, uint8_t color)
+{
+	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
+
+	for(int i=0; str!='\0';i++)
+	{
+		VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str[i];
+		VideoMemory[index]= (VideoMemory[index] & 0xFF00)|color;
+	}
+
+	terminal_column+=2;
 }
 
 void putchar(char str,char next_str, va_list &arg)
