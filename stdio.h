@@ -35,4 +35,5 @@ char* wait_enter();
 void update_cursor(int row, int col);
 void check_color(char* str, uint8_t color);
 void terminal_bg_fg_ccolor(int width, int height);
+void pong_color(int pong_ping);
 #endif

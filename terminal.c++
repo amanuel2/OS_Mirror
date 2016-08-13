@@ -47,8 +47,10 @@ void Terminal::char_handler(char* val)
 	if(Lib::str::strcmp(val,"help")==0)
 	{
 			printf(" \n ----Help---- \n");
-			printf("Commands : %founder% \n");
+			printf("Commands : %founder% , Responds back Founder of BoneOS\n");
 			printf("Commands : ccolor , type ccolor --help for More Help\n");
+			printf("Commands : clear , as the name suggests clears the screen ;)\n");
+			printf("Commands : pong/pong , gets a response pong/ping in reverse :) \n");
 	}
 	else if(Lib::str::strcmp(val,"%founder%")==0)
 	{
@@ -62,6 +64,27 @@ void Terminal::char_handler(char* val)
 		printf("Both Are Numbers Ranging From 0 - 15");
 	}
 
+	else if(Lib::str::strcmp(val,"clear --help")==0)
+	{
+		printf("\n clear command \n");
+		printf("- Syntax #1 : clear . Clears with normal colors\n");
+	}
+
+	else if(Lib::str::startswith(val,"clear")==0)
+	{
+		cls();
+	}
+	else if(Lib::str::strcmp(val,"ping")==0)
+	{
+		printf("\n");
+		pong_color(0);
+	}
+
+	else if(Lib::str::strcmp(val,"pong")==0)
+	{
+		printf("\n");
+		pong_color(1);
+	}
 	else if(Lib::str::startswith("ccolor",val)==0)
 	{
 		//ccolor  0   3
@@ -99,6 +122,11 @@ void Terminal::char_handler(char* val)
 		}
 		done:
 			printf("");
+	}
+
+	else
+	{
+		printf("\n Wrong Command Written");
 	}
 }
 void Terminal::terminal_initalize()

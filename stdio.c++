@@ -73,16 +73,29 @@ void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg)
 	terminal_color = Vga::make_color(bg, fg);
 	terminal_buffer = (uint16_t*) 0xB8000;
 
-	    for(int y=0; y<=(80*20); y++)
+	    for(int y=0; y<=(signed)(VGA_WIDTH*VGA_HEIGHT); y++)
 		{
 	    	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column)+y;
 			terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
 		}
 }
 
-void pong_color()
+void pong_color(int pong_ping)
 {
+	char* chr_p;
+	if(pong_ping==0)
+		chr_p = " pong";
+	else
+		chr_p = " ping";
+	terminal_color = Vga::make_color(0, 15);
+	terminal_buffer = (uint16_t*) 0xB8000;
 
+	for(int y=0; y<=(signed)(4); y++)
+	{
+	  	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column)+y;
+	  	terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
+	  	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|chr_p[y];
+	}
 }
 
 
