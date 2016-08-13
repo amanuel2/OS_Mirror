@@ -2,7 +2,7 @@
 
 
 
-uint8_t Vga::make_color(enum vga_color fg, enum vga_color bg)
+uint8_t Vga::make_color(int fg, int bg)
 {
 	return fg | bg << 4;
 }

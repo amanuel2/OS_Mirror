@@ -51,9 +51,10 @@ static PORT::Port8Bits p8b_stdio_drv;
  	COLOR_WHITE = 15,
  };
 
+
  namespace Vga
  {
- 	extern uint8_t make_color(enum vga_color fg, enum vga_color bg);
+ 	extern uint8_t make_color(int fg, int bg);
  	extern uint16_t make_vgaentry(char c, uint8_t color);
  };
 
@@ -67,18 +68,24 @@ SerialPort sp_std_io;
 //80 * 25
 
 
-void terminal_initialize(size_t width, size_t height, int bg, int fg)
+void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg)
 {
-	terminal_row = 0;
-	terminal_column = 0;
-	terminal_color = Vga::make_color(COLOR_MAGENTA, COLOR_LIGHT_RED);
+	terminal_color = Vga::make_color(bg, fg);
 	terminal_buffer = (uint16_t*) 0xB8000;
 	for (size_t y = 0; y < height; y++)
     {
-		for (size_t x = 0; x < width; x++)
+		for (size_t i = 0; i < width; i++)
         {
-			const size_t index = y * width + x;
-			terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
+
+			//const size_t index = y * width + x;
+			for(int x=0; x<=(signed)VGA_HEIGHT; x++)
+			{
+				for(int y=0; y<=(80*2); y++)
+				{
+					const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column)+y;
+					terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
+				}
+			}
 		}
 	}
 }

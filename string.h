@@ -16,6 +16,7 @@ namespace Lib
 			int  strcmp(const char *str1, const char *str2);
 			int  strncmp(const char *str1, const char *str2, size_t n);
 			char*strchr(const char *str, int c, size_t n);
+			int startswith(char* P, char* T);
 			int toLower(int chr);
 
 	}

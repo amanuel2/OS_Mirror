@@ -65,3 +65,18 @@ int Lib::str::strncmp(const char *str1, const char *str2, size_t n)
         str1++,str2++;
     return *(const unsigned char*)str1-*(const unsigned char*)str2;
 }
+
+int Lib::str::startswith(char* P, char* T){
+	    int n = Lib::str::strlen(T);
+	    int m = Lib::str::strlen(P);
+	    for (int i = 0; i <= n-m; ++i) {
+	        int j = 0;
+	        while (j < m && T[i+j] == P[j]) {
+	            ++j;
+	        }
+	        if (j == m) { // match found
+	            return i;
+	        }
+	    }
+	    return -1;
+}
