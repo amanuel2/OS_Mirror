@@ -76,8 +76,6 @@ void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg)
     {
 		for (size_t i = 0; i < width; i++)
         {
-
-			//const size_t index = y * width + x;
 			for(int x=0; x<=(signed)VGA_HEIGHT; x++)
 			{
 				for(int y=0; y<=(80*2); y++)
@@ -88,6 +86,11 @@ void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg)
 			}
 		}
 	}
+}
+
+void pong_color()
+{
+
 }
 
 
