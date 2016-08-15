@@ -25,9 +25,8 @@ extern "C" constructor end_ctors;
 extern "C" void callConstructors()
 {
     for(constructor* i = &start_ctors; i != &end_ctors; i++)
-        (*i)();
+       (*i)();
 }
-
 
 
 extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
@@ -50,6 +49,7 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
    	MOUSE mouse;
    	mouse.install_mouse_driver();
    	__asm__ __volatile__ ("sti");
+
 
     Terminal terminal;
     terminal.terminal_initalize();

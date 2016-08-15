@@ -14,7 +14,7 @@ extern "C" void pages_init()
 	    //   Supervisor: Only kernel-mode can access them
 	    //   Write Enabled: It can be both read from and written to
 	    //   Not Present: The page table is not present
-	    page_directory[i] = 0x00000002;
+	    page_directory[i] = 0x00000003 | 3;
 	}
 
 
