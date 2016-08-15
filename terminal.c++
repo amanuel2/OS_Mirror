@@ -2,7 +2,7 @@
 
 
 extern void emptyString(char* str);
-
+extern uint16_t* VideoMemory;
 extern size_t terminal_row;
 extern size_t terminal_column;
 extern void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg);
@@ -129,6 +129,15 @@ void Terminal::char_handler(char* val)
 		printf("\n Wrong Command Written");
 	}
 }
+
+//void test_print()
+//{
+//	printf("\n");
+//	for(int i=terminal_column; i<=(i+85); i++)
+//	{
+//		printf("%c" , VideoMemory[i]);
+//	}
+//}
 void Terminal::terminal_initalize()
 {
 		cls();
@@ -152,7 +161,6 @@ void Terminal::terminal_initalize()
 	{		
 		printf(" \n<\\User>");
 
-//		check_color("Hello World" , 0xFF3);
 		val_now = wait_enter();	
 
 		this->char_handler(val_now);

@@ -2,52 +2,40 @@
 
 
 
-static uint32_t* page_directory = 0;
-static uint32_t page_dir_loc = 0;
-static uint32_t* last_page = 0;
+uint32_t page_directory[1024] __attribute__((aligned(4096)));
 
-/* Paging now will be really simple
- * we reserve 0-8MB for kernel stuff
- * heap will be from approx 1mb to 4mb
- * and paging stuff will be from 4mb
- */
+uint32_t page_table[1024] __attribute__((aligned(4096)));
 
-
-void Paging::paging_map_virtual_to_phys(uint32_t virt, uint32_t phys)
+extern "C" void pages_init()
 {
-	uint16_t id = virt >> 22;
 	for(int i = 0; i < 1024; i++)
 	{
-		last_page[i] = phys | 3;
-		phys += 4096;
+	    // This sets the following flags to the pages:
+	    //   Supervisor: Only kernel-mode can access them
+	    //   Write Enabled: It can be both read from and written to
+	    //   Not Present: The page table is not present
+	    page_directory[i] = 0x00000002;
 	}
-	page_directory[id] = ((uint32_t)last_page) | 3;
-	last_page = (uint32_t *)(((uint32_t)last_page) + 4096);
-	//mprint("Mapping 0x%x (%d) to 0x%x\n", virt, id, phys);
 
-	printf("Mapping 0x%x (%d) , to 0x%x \n" , virt, id ,phys);
-}
 
-void Paging::paging_enable()
-{
-	asm volatile("mov %%eax, %%cr3": :"a"(page_dir_loc));	
-	asm volatile("mov %cr0, %eax");
-	asm volatile("orl $0x80000000, %eax");
-	asm volatile("mov %eax, %cr0");
-}
-
-void Paging::paging_init()
-{
-	printf("\nSetting up paging\n");
-	page_directory = (uint32_t*)0x400000;
-	page_dir_loc = (uint32_t)page_directory;
-	last_page = (uint32_t *)0x404000;
-	for(int i = 0; i < 1024; i++)
+	//we will fill all 1024 entries in the table, mapping 4 megabytes
+	for(unsigned int i = 0; i < 1024; i++)
 	{
-		page_directory[i] = 0 | 2;
+	    // As the address is page aligned, it will always leave 12 bits zeroed.
+	    // Those bits are used by the attributes ;)
+		page_table[i] = (i * 0x1000) | 3; // attributes: supervisor level, read/write, present.
 	}
-	paging_map_virtual_to_phys(0, 0);
-	paging_map_virtual_to_phys(0x400000, 0x400000);
-	paging_enable();
-	printf("Paging was successfully enabled!");
+
+	// attributes: supervisor level, read/write, present
+	page_directory[0] = ((unsigned int)page_table) | 3;
+}
+
+Paging::Paging()
+{
+
+}
+
+Paging::~Paging()
+{
+
 }

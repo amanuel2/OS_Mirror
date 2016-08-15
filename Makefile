@@ -1,8 +1,8 @@
 GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall -Werror
 LDPARAMS =  -melf_i386
-objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o timer.o gdt.o port.o paging.o gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o mouse.o terminal.o vga.o
+objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o timer.o gdt.o port.o paging.o gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o mouse.o terminal.o vga.o 
 i686 = i686-elf-
-Asm_files =  idt boot isr port gdt_flush irq
+Asm_files =  idt boot isr port gdt_flush irq paging_a
 C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq timer kbd mouse paging terminal vga
 ASPARAMS = 	
 VB=virtualbox
@@ -71,7 +71,7 @@ BoneOS.iso: BoneOS.bin
 #	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
 #	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
 #	echo ''                                  >> iso/boot/grub/grub.cfg
-	echo 'menuentry "My Operating System" {' >> iso/boot/grub/grub.cfg
+	echo 'menuentry "BoneOS x86 " {' >> iso/boot/grub/grub.cfg
 	echo '  multiboot /boot/BoneOS.bin'    >> iso/boot/grub/grub.cfg
 #	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg

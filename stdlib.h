@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include "stdio.h"
 
-
 		void panic(const char* exception);
 
 #endif
