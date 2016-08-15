@@ -18,25 +18,27 @@ section .text
     extern page_directory
 	extern pages_init
     global loader
-    global enable_paging
-
-		enable_paging:
-			call pages_init
-			mov eax, page_directory
-
-
-			mov cr3, eax ; Load Page Directory to the cr3 Register
-
-			;TODO SET UP PSE (4MB Page Frame)
-
-			;Enable Paging
-			mov ebx, cr0
-			or ebx, 0x80000000 ; Set 31'th bit to 1
-			mov cr0, ebx ; Update the cr0 register
 
         loader:
                 mov esp,kernel_stack
                 call callConstructors
+
+                ;Enable Paging START
+
+	                call pages_init
+					mov eax, page_directory
+
+
+					mov cr3, eax ; Load Page Directory to the cr3 Register
+
+					;TODO SET UP PSE (4MB Page Frame)
+
+					;Enable Paging
+					mov ebx, cr0
+					or ebx, 0x80000000 ; Set 31'th bit to 1
+					mov cr0, ebx ; Update the cr0 register
+
+                ;Enable Paging END
                 push eax
                 push ebx
                 call kernelMain
