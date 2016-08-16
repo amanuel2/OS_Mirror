@@ -48,22 +48,22 @@ section .text
         _loader:
                 ;Enable Paging START
 
-	                call pages_init
+				    ; NOTE: Until paging is set up, the code must be position-independent and use physical
+				    ; addresses, not virtual ones!
+				    mov ecx, (BootPageDirectory - KERNEL_VIRTUAL_BASE)
+				    mov cr3, ecx                                        ; Load Page Directory Base Register.
+
+				    mov ecx, cr4
+				    or ecx, 0x00000010                          ; Set PSE bit in CR4 to enable 4MB pages.
+				    mov cr4, ecx
+
+				    mov ecx, cr0
+				    or ecx, 0x80000000                          ; Set PG bit in CR0 to enable paging.
+				    mov cr0, ecx
 
 
-					mov eax, (BootPageDirectory - KERNEL_VIRTUAL_BASE)
-					mov cr3, eax ; Load Page Directory to the cr3 Register
-
-					;TODO SET UP PSE (4MB Page Frame)
-
-					;Enable Paging
-					mov ebx, cr0
-					or ebx, 0x80000000 ; Set 31'th bit to 1
-					mov cr0, ebx ; Update the cr0 register
-
-                 ;Enable Paging END
-				lea ebx, [higherhalf]
-				jmp ebx
+					lea ecx, [higherhalf]
+				    jmp ecx
 
 		higherhalf:
 		   		; Unmap the identity-mapped first 4MB of physical address space. It should not be needed
