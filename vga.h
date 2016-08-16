@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-uint16_t* VideoMemory =((uint16_t*)0xb8000);
+uint16_t* VideoMemory =((uint16_t*)0xc00b8000);
 
 const size_t VGA_WIDTH = 80;
 const size_t VGA_HEIGHT = 25;

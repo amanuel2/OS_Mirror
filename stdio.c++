@@ -71,7 +71,7 @@ SerialPort sp_std_io;
 void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg)
 {
 	terminal_color = Vga::make_color(bg, fg);
-	terminal_buffer = (uint16_t*) 0xB8000;
+	terminal_buffer = (uint16_t*) 0xc00b8000;
 
 	    for(int y=0; y<=(signed)(VGA_WIDTH*VGA_HEIGHT); y++)
 		{

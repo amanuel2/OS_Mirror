@@ -105,6 +105,7 @@ void Terminal::char_handler(char* val)
 			}
 		}
 
+
 		out:
 			for(int i=0; i<2; i++)
 			{
@@ -117,7 +118,6 @@ void Terminal::char_handler(char* val)
 			}
 		if(valid==true)
 		{
-			//printf("%d %d " , terminal_row, terminal_column);
 			terminal_bg_fg_ccolor(terminal_row*2,terminal_column*2,fg_bg[1], fg_bg[0]);
 		}
 		done:

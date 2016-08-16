@@ -74,6 +74,7 @@ section .text
                 push eax
                 push ebx
                 call kernelMain
+                jmp _eof
                 
         _eof:
              cli

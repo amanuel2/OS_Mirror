@@ -31,29 +31,28 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 {
-   cls();
-   gdt gt;
-   IDT idt;
-   ISR isr;
-   IRQ irq;
-   SerialPort sp;
-   isr.install_isrs();
-   irq.install_irqs();
-   	Timer timer;
-   	timer.install_timer();	
-   	KBD kbd;
-   	kbd.install_kbd_driver();
+	   cls();
+	   gdt gt;
+	   IDT idt;
+	   ISR isr;
+	   IRQ irq;
+	   SerialPort sp;
+	   isr.install_isrs();
+	   irq.install_irqs();
+	   	Timer timer;
+	   	timer.install_timer();
+	   	KBD kbd;
+	   	kbd.install_kbd_driver();
 
-    Paging paging;
+	    Paging paging;
 
-   	MOUSE mouse;
-   	mouse.install_mouse_driver();
-   	__asm__ __volatile__ ("sti");
+	   	MOUSE mouse;
+	   	mouse.install_mouse_driver();
+	   	__asm__ __volatile__ ("sti");
 
 
-    Terminal terminal;
-    terminal.terminal_initalize();
-
+	    Terminal terminal;
+	    terminal.terminal_initalize();
 
 //  int x = 5/0;
    while(1);	
