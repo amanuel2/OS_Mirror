@@ -53,9 +53,9 @@ section .text
 				    mov ecx, (BootPageDirectory - KERNEL_VIRTUAL_BASE)
 				    mov cr3, ecx                                        ; Load Page Directory Base Register.
 
-				    mov ecx, cr4
-				    or ecx, 0x00000010                          ; Set PSE bit in CR4 to enable 4MB pages.
-				    mov cr4, ecx
+				  ;  mov ecx, cr4
+				  ;  or ecx, 0x00000010                          ; Set PSE bit in CR4 to enable 4MB pages.
+				  ;  mov cr4, ecx
 
 				    mov ecx, cr0
 				    or ecx, 0x80000000                          ; Set PG bit in CR0 to enable paging.
