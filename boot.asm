@@ -38,11 +38,9 @@ section .text
 	extern pages_init
 	; reserve initial kernel stack space -- that's 16k.
 	STACKSIZE equ 0x4000
-	; setting up entry point for linker
-	loader equ (_loader - 0xC0000000)
 	global loader
 
-        _loader:
+        loader:
                 	;Enable Paging START
 
 				    ; NOTE: Until paging is set up, the code must be position-independent and use physical
@@ -60,7 +58,7 @@ section .text
 
 
 					lea ebx, [higherhalf]
-				    jmp ebx
+				    jmp ebx ; Absolute Jump
 
 		higherhalf:
 		   		; Unmap the identity-mapped first 4MB of physical address space. It should not be needed
