@@ -10,9 +10,6 @@ section .multiboot
 	dd FLAGS
 	dd CHECKSUM
 
-
-
-
 section .data
 
 KERNEL_VIRTUAL_BASE equ 0xC0000000                  ; 3GB
@@ -46,16 +43,16 @@ section .text
 	global loader
 
         _loader:
-                ;Enable Paging START
+                	;Enable Paging START
 
 				    ; NOTE: Until paging is set up, the code must be position-independent and use physical
 				    ; addresses, not virtual ones!
 				    mov ecx, (BootPageDirectory - KERNEL_VIRTUAL_BASE)
 				    mov cr3, ecx                                        ; Load Page Directory Base Register.
 
-				  ;  mov ecx, cr4
-				  ;  or ecx, 0x00000010                          ; Set PSE bit in CR4 to enable 4MB pages.
-				  ;  mov cr4, ecx
+				    mov ecx, cr4
+				    or ecx, 0x00000010                          ; Set PSE bit in CR4 to enable 4MB pages.
+				    mov cr4, ecx
 
 				    mov ecx, cr0
 				    or ecx, 0x80000000                          ; Set PG bit in CR0 to enable paging.
@@ -71,7 +68,7 @@ section .text
 			    mov dword [BootPageDirectory], 0
 			    invlpg [0]
 
-		       	mov esp, stack           ; set up the stack
+		       	mov esp, stack + STACKSIZE           ; set up the stack
                 call callConstructors
 
                 push eax
