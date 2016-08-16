@@ -59,8 +59,8 @@ section .text
 				    mov cr0, ecx
 
 
-					lea ecx, [higherhalf]
-				    jmp ecx
+					lea ebx, [higherhalf]
+				    jmp ebx
 
 		higherhalf:
 		   		; Unmap the identity-mapped first 4MB of physical address space. It should not be needed
@@ -68,7 +68,7 @@ section .text
 			    mov dword [BootPageDirectory], 0
 			    invlpg [0]
 
-		       	mov esp, stack + STACKSIZE           ; set up the stack
+		       	mov esp, stack            ; set up the stack
                 call callConstructors
 
                 push eax

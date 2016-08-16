@@ -50,11 +50,14 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 	   	mouse.install_mouse_driver();
 	   	__asm__ __volatile__ ("sti");
 
-
+		//int x = 5/0;
 	    Terminal terminal;
 	    terminal.terminal_initalize();
 
-//  int x = 5/0;
+	    /*
+	     * While Loop In terminal.initalize() .. Never ending
+	     * */
+
    while(1);	
    err:
    	   while(1);

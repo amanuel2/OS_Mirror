@@ -88,7 +88,7 @@ void pong_color(int pong_ping)
 	else
 		chr_p = " ping";
 	terminal_color = Vga::make_color(0, 15);
-	terminal_buffer = (uint16_t*) 0xB8000;
+	terminal_buffer = (uint16_t*) 0xc00b8000;
 
 	for(int y=0; y<=(signed)(4); y++)
 	{
@@ -98,6 +98,20 @@ void pong_color(int pong_ping)
 	}
 }
 
+void put_char_helper_neg(char str);
+
+void printf_color(int color, char* str)
+{
+	terminal_color = Vga::make_color(color, 0);
+	terminal_buffer = (uint16_t*) 0xc00b8000;
+	for(int y=0; str[y]!='\0'; y++)
+    {
+	  	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column)+y;
+	  	terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
+	  	terminal_buffer[index+1] = Vga::make_vgaentry(' ', terminal_color);
+	  	put_char_helper_neg(str[y]);
+	}
+}
 
 void update_cursor(int row, int col)
 {
@@ -221,8 +235,16 @@ void strcat(char *destination, const char *source)
 void put_char_helper_neg(char chr)
 {
 	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
-    terminal_column++;
-    VideoMemory[index]= (VideoMemory[index] & 0xFF00)|chr;
+	if(chr == '\n')
+	{
+		terminal_row++;
+	    terminal_column = 0;
+	}
+	else
+	{
+	    terminal_column++;
+	    VideoMemory[index]= (VideoMemory[index] & 0xFF00)|chr;
+	}
 }
 
 

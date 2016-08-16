@@ -8,6 +8,7 @@ SECTIONS {
       physical address space. */
    . = 0xC0100000;
 
+			
    .text ALIGN (0x1000) : AT(ADDR(.text) - 0xC0000000) {
        *(.multiboot)
        *(.text)

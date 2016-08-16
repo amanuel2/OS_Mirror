@@ -155,8 +155,8 @@ void Terminal::terminal_initalize()
 
 
 
-		printf("BoneOS Non-Profit Organization \n");
-		printf("For Help type in help, on the Boner \n");
+		printf_color(6, "BoneOS Non-Profit Organization \n");
+		printf_color(6, "For Help type in help, on the Boner \n");
 	while(true)
 	{		
 		printf(" \n<\\User>");

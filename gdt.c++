@@ -79,4 +79,3 @@ void gdt::gdt_set_gate(uint8_t num, uint64_t base, uint64_t limit, uint8_t acces
     gdt_ent[num].granularity |= (gran & 0xF0);
     gdt_ent[num].access = access;
 }
-
