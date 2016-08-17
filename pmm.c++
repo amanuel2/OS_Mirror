@@ -1,6 +1,6 @@
 #include "pmm.h"
 
-PhyiscalMemoryManager::PhyiscalMemoryManager(void)
+PhyiscalMemoryManager::PhyiscalMemoryManager(uint32_t adress_p , MemoryPart part)
 {
 
 }
