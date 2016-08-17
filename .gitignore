@@ -1,0 +1,27 @@
+#Commonly Ignored Files
+*.o
+*.out
+BoneOS.bin
+
+#Eclipse Rememnants
+.project/
+.settings/
+.cproject
+.project
+
+#Swap files
+*.swp
+
+#Log File
+qemu.log
+
+#VBox Rememnants
+VBox-*.*
+
+#Ignored Folders
+cross/
+
+#Bochs src & remmenantsTi
+bochslog.txt	
+bochsrc.txt	
+bx_enh_dbg.ini
