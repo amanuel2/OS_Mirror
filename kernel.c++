@@ -10,7 +10,6 @@
 #include "mouse.h"
 #include "irq.h"
 #include "terminal.h"
-#include "paging.h"
 
 
 
@@ -29,9 +28,13 @@ extern "C" void callConstructors()
 }
 
 
-extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
+extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber,uint32_t kernel_start_virtual,
+							uint32_t kernel_start_physical , uint32_t kernel_end_virtual ,
+							uint32_t kernel_end_physical)
 {
 	   cls();
+	   //printf("KEN_ST_V %x \n KEN_ST_P %x \n KEN_EN_V %x \n KEN_EN_P %x" , kernel_start_virtual,kernel_start_physical,
+	   //		   kernel_end_virtual , kernel_end_physical );
 	   gdt gt;
 	   IDT idt;
 	   ISR isr;
@@ -44,13 +47,12 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber)
 	   	KBD kbd;
 	   	kbd.install_kbd_driver();
 
-	    Paging paging;
 
 	   	MOUSE mouse;
 	   	mouse.install_mouse_driver();
 	   	__asm__ __volatile__ ("sti");
 
-		//int x = 5/0;
+	   	//int x = 5/0;
 	    Terminal terminal;
 	    terminal.terminal_initalize();
 

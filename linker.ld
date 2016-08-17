@@ -8,6 +8,9 @@ SECTIONS {
       address space, which will be mapped to 1MB in the
       physical address space. */
    . = 0xC0100000;
+   
+   kernel_start_virtual = .;
+   kernel_start_physical =  . - 0xC0000000;
 
 			
    .text ALIGN (0x1000) : AT(ADDR(.text) - 0xC0000000) {
@@ -30,4 +33,7 @@ SECTIONS {
        *(.bss)
        _ebss = .;
    }
+   
+   kernel_end_virtual = .;
+   kernel_end_physical =  . - 0xC0000000;
 }

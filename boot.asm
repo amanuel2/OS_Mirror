@@ -36,6 +36,10 @@ section .text
     extern callConstructors
     extern page_directory
 	extern pages_init
+	extern kernel_start_virtual
+	extern kernel_start_physical
+	extern kernel_end_virtual
+	extern kernel_end_physical
 	; reserve initial kernel stack space -- that's 16k.
 	STACKSIZE equ 0x4000
 	global loader
@@ -69,8 +73,14 @@ section .text
 		       	mov esp, stack            ; set up the stack
                 call callConstructors
 
-                push eax
-                push ebx
+				mov edi, kernel_end_physical
+
+                push eax ;1st
+                push ebx ;2nd
+                push kernel_start_physical
+                push kernel_start_virtual
+				push kernel_end_virtual
+				push kernel_end_physical
                 call kernelMain
                 jmp _eof
                 

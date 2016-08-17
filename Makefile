@@ -1,9 +1,9 @@
-GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall
+GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall -Werror
 LDPARAMS =  -melf_i386
-objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o timer.o gdt.o port.o paging.o gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o mouse.o terminal.o vga.o 
+objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o timer.o gdt.o port.o  gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o mouse.o terminal.o vga.o 
 i686 = i686-elf-
-Asm_files =  idt boot isr port gdt_flush irq paging_a
-C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq timer kbd mouse paging terminal vga
+Asm_files =  idt boot isr port gdt_flush irq
+C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq timer kbd mouse terminal vga
 ASPARAMS = 	
 VB=virtualbox
 VBM=VBoxManage
@@ -26,7 +26,6 @@ compile:
 	$(i686)g++ $(GPPARAMS) -o timer.o -c timer.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o kbd.o -c kbd.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o mouse.o -c mouse.c++ -ffreestanding
-	$(i686)g++ $(GPPARAMS) -o paging.o -c paging.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o terminal.o -c terminal.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o vga.o -c vga.c++ -ffreestanding
 	nasm -f elf32 boot.asm -o boot.o
@@ -53,6 +52,7 @@ clean:
 	  rm $(objects)
 	  rm -rf iso
 	  rm BoneOS.*
+	  rm *.pcap
 
 qemu_compile: compile BoneOS.bin qemu
 	
