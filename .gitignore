@@ -21,7 +21,7 @@ VBox-*.*
 #Ignored Folders
 cross/
 
-#Bochs src & remmenants
+#Bochs src & remmenantsTi
 bochslog.txt	
 bochsrc.txt	
 bx_enh_dbg.ini
