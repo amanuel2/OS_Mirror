@@ -2,7 +2,8 @@
 
 PhyiscalMemoryManager::PhyiscalMemoryManager(uint32_t adress_p , MemoryPart part)
 {
-
+	this->bit.set_adress(adress_p);
+	this->bit.set_max_bit();
 }
 
 

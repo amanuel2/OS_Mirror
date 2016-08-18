@@ -10,7 +10,7 @@
 #include "mouse.h"
 #include "irq.h"
 #include "terminal.h"
-
+#include "multiboot.h"
 
 
 
@@ -28,7 +28,7 @@ extern "C" void callConstructors()
 }
 
 
-extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber,uint32_t kernel_start_virtual,
+extern "C" void kernelMain(multiboot_info_t* multiboot_structure,uint32_t magicnumber,uint32_t kernel_start_virtual,
 							uint32_t kernel_start_physical , uint32_t kernel_end_virtual ,
 							uint32_t kernel_end_physical)
 {
@@ -53,8 +53,12 @@ extern "C" void kernelMain(void* multiboot_structure,uint32_t magicnumber,uint32
 	   	__asm__ __volatile__ ("sti");
 
 	   	//int x = 5/0;
-	    Terminal terminal;
-	    terminal.terminal_initalize();
+	   // Terminal terminal;
+	   // terminal.terminal_initalize();
+	   	//cls();
+
+
+	   	printf("\n %x" , multiboot_structure);
 
 	    /*
 	     * While Loop In terminal.initalize() .. Never ending
