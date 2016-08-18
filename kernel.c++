@@ -28,7 +28,7 @@ extern "C" void callConstructors()
 }
 
 
-extern "C" void kernelMain(multiboot_info_t* multiboot_structure,uint32_t magicnumber,uint32_t kernel_start_virtual,
+extern "C" void kernelMain(multiboot_info_t multiboot_structure,uint32_t magicnumber,uint32_t kernel_start_virtual,
 							uint32_t kernel_start_physical , uint32_t kernel_end_virtual ,
 							uint32_t kernel_end_physical)
 {
@@ -52,13 +52,9 @@ extern "C" void kernelMain(multiboot_info_t* multiboot_structure,uint32_t magicn
 	   	mouse.install_mouse_driver();
 	   	__asm__ __volatile__ ("sti");
 
-	   	//int x = 5/0;
-	   // Terminal terminal;
-	   // terminal.terminal_initalize();
-	   	//cls();
-
-
-	   	printf("\n %x" , multiboot_structure);
+	   	unsigned long total_mem_lo = ((unsigned long)multiboot_structure.mem_lower + (unsigned long)multiboot_structure.mem_upper);
+	   	printf("\n MemLower : 0x%x \n Upper Memory: 0x%x \n \n TOTAL MEMORY %d" , multiboot_structure.mem_lower,
+	   			multiboot_structure.mem_upper,total_mem_lo);
 
 	    /*
 	     * While Loop In terminal.initalize() .. Never ending
