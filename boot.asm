@@ -32,13 +32,10 @@ BootPageDirectory:
 
 
 section .text
-    extern kernelMain
-    extern callConstructors
-    extern page_directory
-	extern pages_init
 	; reserve initial kernel stack space -- that's 16k.
 	STACKSIZE equ 0x4000
 	global loader
+	global BootPageDirectory
 
         loader:
                 	;Enable Paging START
@@ -61,10 +58,12 @@ section .text
 				    jmp ebx ; Absolute Jump
 
 		higherhalf:
+		    extern kernelMain
+   		    extern callConstructors
 			extern kernel_start_virtual
-	extern kernel_start_physical
-	extern kernel_end_virtual
-	extern kernel_end_physical
+			extern kernel_start_physical
+			extern kernel_end_virtual
+			extern kernel_end_physical
 		   		; Unmap the identity-mapped first 4MB of physical address space. It should not be needed
 			    ; anymore.
 			    mov dword [BootPageDirectory], 0

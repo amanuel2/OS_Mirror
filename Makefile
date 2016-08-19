@@ -1,6 +1,6 @@
 GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall -Werror
 LDPARAMS =  -melf_i386
-objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o timer.o pmm.o gdt.o port.o bitset.o gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o mouse.o terminal.o vga.o 
+objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o mem.o string.o serial.o timer.o pmm.o gdt.o  heap.o port.o bitset.o gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o mouse.o terminal.o vga.o 
 i686 = i686-elf-
 Asm_files =  idt boot isr port gdt_flush irq
 C++_FILES = stdio kernel gdt port serial mem string isr idt stdlib irq timer kbd mouse terminal vga bitset
@@ -30,6 +30,7 @@ compile:
 	$(i686)g++ $(GPPARAMS) -o vga.o -c vga.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o bitset.o -c bitset.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o pmm.o -c pmm.c++ -ffreestanding
+	$(i686)g++ $(GPPARAMS) -o heap.o -c heap.c++ -ffreestanding
 	nasm -f elf32 boot.asm -o boot.o
 	nasm -f elf32 isr.asm -o isr_a.o
 	nasm -f elf32 port.asm -o port_a.o
