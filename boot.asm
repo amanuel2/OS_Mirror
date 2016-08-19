@@ -62,9 +62,9 @@ section .text
 
 		higherhalf:
 			extern kernel_start_virtual
-			extern kernel_start_physical
-			extern kernel_end_virtual
-			extern kernel_end_physical
+	extern kernel_start_physical
+	extern kernel_end_virtual
+	extern kernel_end_physical
 		   		; Unmap the identity-mapped first 4MB of physical address space. It should not be needed
 			    ; anymore.
 			    mov dword [BootPageDirectory], 0
@@ -82,9 +82,12 @@ section .text
 				push kernel_end_virtual
 				push kernel_end_physical
                 call kernelMain
+                pop kernel_end_physical
+                pop kernel_end_virtual
+                pop kernel_start_virtual
+				pop kernel_start_physical
 				pop eax
 				pop ebx
-				pop kernel_end_physical
                 jmp _eof
                 
         _eof:
