@@ -75,19 +75,26 @@ section .text
 
 				mov edi, kernel_end_physical
 
-                push eax ;1st
-                push ebx ;2nd
-                push kernel_start_physical
-                push kernel_start_virtual
-				push kernel_end_virtual
-				push kernel_end_physical
+
+                push kernel_start_physical ;1
+                push kernel_start_virtual ;1
+				push kernel_end_virtual ;3
+				push kernel_end_physical ;4
+				push eax ; 5
+				push ebx ; 6
                 call kernelMain
-                pop kernel_end_physical
-                pop kernel_end_virtual
-                pop kernel_start_virtual
-				pop kernel_start_physical
-				pop eax
-				pop ebx
+                pop ebx
+                pop eax
+                mov eax, kernel_end_physical
+                pop eax
+                mov eax, kernel_end_virtual
+                pop eax
+                mov eax, kernel_start_virtual
+                pop eax
+                mov eax, kernel_start_physical
+                pop eax
+
+
                 jmp _eof
                 
         _eof:

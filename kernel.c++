@@ -44,13 +44,18 @@ void hextodec(uint32_t hex)
 }
 
 
-extern "C" void kernelMain(multiboot_info_t multiboot_structure,uint32_t magicnumber,
-		uint32_t kernel_start_virtual,
-							uint32_t kernel_start_physical , uint32_t kernel_end_virtual ,
-							uint32_t kernel_end_physical)
+extern "C" void kernelMain(uint32_t kernel_start_virtual,
+		uint32_t kernel_start_physical , uint32_t kernel_end_virtual ,
+		uint32_t kernel_end_physical,	multiboot_info_t multiboot_structure,uint32_t magicnumber
+		)
 {
 	   cls();
-	   printf(" KERNEL START %d" , kernel_end_physical);
+	   printf("******KERNEL INFO********\n");
+	   printf("KERNEL START VIRTUAL 0x%x\n " , kernel_start_virtual);
+	   printf("KERNEL START PHYSICAL 0x%x\n" , kernel_start_physical);
+	   printf("KERNEL END VIRTUAL 0x%x\n" , kernel_end_virtual);
+	   printf("KERNEL END PHYSICAL 0x%x\n" , kernel_end_physical);
+	   printf("*************************\n");
 	   gdt gt;
 	   IDT idt;
 	   ISR isr;
