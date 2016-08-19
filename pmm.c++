@@ -1,9 +1,40 @@
 #include "pmm.h"
 
-PhyiscalMemoryManager::PhyiscalMemoryManager(uint32_t adress_p , MemoryPart part)
+
+static const uint32_t TOTAL_RAM_BYTES = 3586139904;
+static const uint32_t TOTAL_RAM_GB = 3.586139904;
+
+MemoryPart** mempat;
+
+PhyiscalMemoryManager::PhyiscalMemoryManager()
 {
-	this->bit.set_adress(adress_p);
-	this->bit.set_max_bit();
+	/*
+	 * 0xC0100000  -  0xFFFFFFFF
+	 */
+
+
+}
+
+void PhyiscalMemoryManager::allocate(MemoryPart vas)
+{
+	if(vas.status != FREE)
+	{
+		//Not Suppose to Reach here.
+	 //	panic("NOT FREE VIRTUAL ADRESS SPACE");
+	}
+
+	else
+	{
+
+
+
+	}
+}
+
+void PhyiscalMemoryManager::generate_pas()
+{
+
+
 }
 
 

@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include "bitset.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 
 typedef uint32_t paddr_t;
@@ -16,17 +18,19 @@ enum status_mem
 typedef struct
 {
 	uint32_t start_adress;
-	uint32_t length;
+	uint32_t size;
+	uint32_t end_adress;
 	enum status_mem status;
 }MemoryPart;
 
 class PhyiscalMemoryManager
 {
 public:
-	PhyiscalMemoryManager(uint32_t adress_p , MemoryPart part);
+	PhyiscalMemoryManager();
 	~PhyiscalMemoryManager();
-
+	void allocate(MemoryPart vas);
 private:
+	void generate_pas();
 	Bit bit;
 };
 

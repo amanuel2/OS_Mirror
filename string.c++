@@ -80,3 +80,8 @@ int Lib::str::startswith(char* P, char* T){
 	    }
 	    return -1;
 }
+
+uint32_t Lib::str::hex2dec(char* hex)
+{
+	return -1;
+}

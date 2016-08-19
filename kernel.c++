@@ -9,9 +9,10 @@
 #include "kbd.h"
 #include "mouse.h"
 #include "irq.h"
+#include "string.h"
 #include "terminal.h"
 #include "multiboot.h"
-
+#include "pmm.h"
 
 
 
@@ -28,13 +29,28 @@ extern "C" void callConstructors()
 }
 
 
-extern "C" void kernelMain(multiboot_info_t multiboot_structure,uint32_t magicnumber,uint32_t kernel_start_virtual,
+
+
+void hextodec(uint32_t hex)
+{
+	 uint32_t digit;
+	    if (hex < 0) hex = -hex;
+
+	    do
+	    {
+	      digit = hex % 10;
+	      printf("%d" , digit);
+	    } while ((hex/=10) > 0);
+}
+
+
+extern "C" void kernelMain(multiboot_info_t multiboot_structure,uint32_t magicnumber,
+		uint32_t kernel_start_virtual,
 							uint32_t kernel_start_physical , uint32_t kernel_end_virtual ,
 							uint32_t kernel_end_physical)
 {
 	   cls();
-	   //printf("KEN_ST_V %x \n KEN_ST_P %x \n KEN_EN_V %x \n KEN_EN_P %x" , kernel_start_virtual,kernel_start_physical,
-	   //		   kernel_end_virtual , kernel_end_physical );
+	   printf(" KERNEL START %d" , kernel_end_physical);
 	   gdt gt;
 	   IDT idt;
 	   ISR isr;
@@ -52,9 +68,13 @@ extern "C" void kernelMain(multiboot_info_t multiboot_structure,uint32_t magicnu
 	   	mouse.install_mouse_driver();
 	   	__asm__ __volatile__ ("sti");
 
-	   	unsigned long total_mem_lo = ((unsigned long)multiboot_structure.mem_lower + (unsigned long)multiboot_structure.mem_upper);
-	   	printf("\n MemLower : 0x%x \n Upper Memory: 0x%x \n \n TOTAL MEMORY %d" , multiboot_structure.mem_lower,
-	   			multiboot_structure.mem_upper,total_mem_lo);
+	   uint32_t total_mem_lo = ((uint32_t)multiboot_structure.mem_lower + (uint32_t)multiboot_structure.mem_upper);
+	   	printf("\n MemLower : %d \n Upper Memory: %d \n \n TOTAL MEMORY : %d" , multiboot_structure.mem_lower,
+	   			multiboot_structure.mem_upper,(total_mem_lo));
+
+
+	   	PhyiscalMemoryManager pmm;
+
 
 	    /*
 	     * While Loop In terminal.initalize() .. Never ending
