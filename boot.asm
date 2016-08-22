@@ -43,6 +43,7 @@ section .text
 	global BootPageDirectory
 
         loader:
+
                 	;Enable Paging START
 
 				    ; NOTE: Until paging is set up, the code must be position-independent and use physical

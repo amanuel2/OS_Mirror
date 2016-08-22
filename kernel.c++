@@ -45,15 +45,26 @@ void hextodec(uint32_t hex)
 	    } while ((hex/=10) > 0);
 }
 
+uint32_t check(uint32_t address, uint32_t bit_to_check)
+{
+	return ((address>>bit_to_check)&1);
+}
+
+extern "C" void memory(multiboot_info_t multiboot_structure)
+{
+	printf("Memory Upper : %d \n \n", multiboot_structure.mem_upper);
+}
+
 
 extern "C" void kernelMain(uint32_t kernel_virtual_end,
-		uint32_t placeholder,
 	    uint32_t  kernel_physical_end,
+		uint32_t placeholder,
 		uint32_t kernel_physical_start, uint32_t  kernel_virtual_start,
 		multiboot_info_t multiboot_structure,uint32_t magicnumber
 		)
-{
 
+
+{
 
 	   cls();
 	   printf("******KERNEL INFO********\n");
@@ -63,8 +74,11 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   printf("KERNEL END PHYSICAL 0x%x\n" , kernel_physical_end);
 	   printf("*************************\n\n");
 	   printf("********RAM INFO*********\n");
-	   printf("LOWER MEMORY : %x \n" , (uint32_t)multiboot_structure.mem_lower);
-	   printf("UPPER MEMORY : %x \n" , (uint32_t)multiboot_structure.mem_upper);
+
+
+	   printf("Memory Upper : %d \n", multiboot_structure.mem_upper);
+	   printf("Memory Lower : %d \n", multiboot_structure.mem_lower);
+
 	   printf("*************************\n");
 	   gdt gt;
 	   IDT idt;
@@ -86,7 +100,8 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
 
-   while(1);	
+
+   while(1);
    err:
    	   while(1);
 }

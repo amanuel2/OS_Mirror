@@ -34,6 +34,6 @@ SECTIONS {
        *(.bss)
        _ebss = .;
    }
-  kernel_virtual_end = .;
+   kernel_virtual_end = .;
   kernel_physical_end = . - 0xC0000000;  
 }
