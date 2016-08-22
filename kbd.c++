@@ -4,7 +4,7 @@ typedef void(*regs_func)(struct regs *r);
 
 static PORT::Port8Bits p8b_kbd_drv;
 
-static bool shift = false;
+//static bool shift = false;
 
 extern void install_handler_irq(int irq, regs_func handler);
 extern char *itoa(int val);
@@ -60,23 +60,51 @@ unsigned char kbdus[183] =
     0,	/* All other keys are undefined */
 };
 
-  namespace enter_press_np
+
+static uint8_t alphabet[26] = {
+		'q','w','e','r','t','y',
+		'u','i','o','p','a','s',
+		'd','f','g','h','j','k'
+		,'l','z','x','c','v','b',
+		'n','m'
+};
+
+char return_pressed_letter(int scancode)
+{
+	uint8_t to_return;
+	if(scancode>=16 && scancode <=25)
+	{
+		to_return = alphabet[scancode-16];
+	}
+	if(scancode>=30 && scancode <=38)
+	{
+		to_return = alphabet[scancode-20];
+	}
+	if(scancode>=44 && scancode <=50)
+	{
+		to_return = alphabet[scancode-25];
+	}
+
+	return to_return;
+}
+
+namespace enter_press_np
+{
+  struct enter_pressed_structure
   {
-    struct enter_pressed_structure
-    {
-      int bit;
-      char* value;
-    };
-
-    struct val_e
-    {
-      char* val_e;
-      int index_val_e = 0;
-    };
-
-    struct enter_pressed_structure kbd_str_e;
-    struct val_e val_e_inst;
+    int bit;
+    char* value;
   };
+
+  struct val_e
+  {
+    char* val_e = "";
+    int index_val_e = 0;
+  };
+
+  struct enter_pressed_structure kbd_str_e;
+  struct val_e val_e_inst;
+};
 
 void kbd_init()
 {
@@ -106,159 +134,17 @@ void keyboard_handler(struct regs *r)
     *  set, that means that a key has just been released */
     if (scancode & 0x80)
     {
-        printf("HERE");
-        /* You can use this one to see if the user released the
-        *  shift, alt, or control keys... */
-        switch(scancode)
-        {
-        	case 170:
-        	case 182:
-        		shift = false;
-        		break;
-        	case 186:
-        		if(shift == false)
-        			shift = true;
-        		else
-        			shift = false;
-        		break;
-		}
+
+
     }
     else
     {
-        /* Here, a key was just pressed. Please note that if you
-        *  hold a key down, you will get repeated key press
-        *  interrupts. */
-
-        /* Just to show you how this works, we simply translate
-        *  the keyboard scancode into an ASCII value, and then
-        *  display it to the screen. You can get creative andlos
-        *  use some flags to see if a shift is pressed and use a
-        *  different layout, or you can add another 128 entries
-        *  to the above layout to correspond to 'shift' being
-        *  held. If shift is held using the larger lookup table,
-        *  you would add 128 to the scancode when you look for it */
-
-        switch(kbdus[scancode])
-        {
-        	case '\b':
-	        	//Use Build in Printf Backspace
-        		total_typed--;
-        		sp_kbd.write_number_serial(total_typed);
-
-        		if(!(total_typed<0))
-        		{
-        			printf("\b");
-        			enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char) 0;
-        			enter_press_np::val_e_inst.index_val_e--;
-        		}
-	        	break;
-        	case ' ':
-        		total_typed++;
-        		enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char)kbdus[scancode];
-        		enter_press_np::val_e_inst.index_val_e++;
-        		printf(" ");
-        		break;
-	        case 1:
-	        case 2:
-	        	shift = true;
-	        	break;	
-	        default:
-	       		if( ((int)kbdus[scancode]) >= 97 && ((int)kbdus[scancode]) <= 122)
-	       		{
-	       			total_typed++;
-                    enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char)kbdus[scancode];
-                    enter_press_np::val_e_inst.index_val_e++;
-
-	    			if(shift == false)
-	        			printf("%c" , kbdus[scancode]);
-	        		else
-	        		{
-	        			printf("%c" ,toUpper(kbdus[scancode]));
-	        		}
-	       		}
-	        	break;	
-        }
-
-        switch((int)scancode)
-        {
-           case 28:
-                enter_presed = true;
-                break;
-           case 12:
-        	   total_typed++;
-        	   if(shift==false)
-        	   {
-        	       enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = '-';
-        	       enter_press_np::val_e_inst.index_val_e++;
-        	       printf("%c" , '-');
-        	   }
-        	   else
-        	    {
-        	       enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = '_';
-        	       enter_press_np::val_e_inst.index_val_e++;
-        	       printf("%c" , '_');
-        	    }
-        	   break;
-        }
-
-        printf("[%d]" , (int)scancode);
-
-        if((int) scancode == 41)
-        {
-   			total_typed++;
-        	if(shift==false)
-        	{
-        		enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = '`';
-        		enter_press_np::val_e_inst.index_val_e++;
-        		printf("%c" , '`');
-        	}
-        	else
-        	{
-        		enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = '~';
-        		enter_press_np::val_e_inst.index_val_e++;
-        		printf("%c" , '~');
-        	}
-        }
-        if(((int)scancode)>=2 && ((int)scancode) <=11)
-        {
-        	if(shift == false)
-        	{
-            	int scancode_int;
-
-            	if((int)scancode == 11)
-            		scancode_int=0;
-            	else
-            		scancode_int=((int)scancode)-1;
-
-       			total_typed++;
-       			printf("%d" , scancode_int);
-       			char* to_str = itoa(scancode_int);
-       	        enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = to_str[0];
-                enter_press_np::val_e_inst.index_val_e++;
-        	}
-
-        	else
-        	{
-        		int scancode_int;
-        		char chr_symb[10] = {
-        				'!','@','#','$',
-						'%','^','&','*','(',')'
-        		};
-
-        		if((int)scancode == 11)
-        		    scancode_int=10;
-        		else
-        		    scancode_int=((int)scancode)-1;
-
-        		total_typed++;
-        		printf("%c" , chr_symb[scancode_int-1]);
-        	    enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = chr_symb[scancode_int-1];
-        		enter_press_np::val_e_inst.index_val_e++;
-        	}
-        }
-
-
+    	uint8_t letter_key_press = return_pressed_letter(scancode);
+    	if(letter_key_press)
+    		printf("%c" , letter_key_press);
     }
+  //  printf("%d" , scancode);
+    return;
 }
 
 void emptyString(char* str)
