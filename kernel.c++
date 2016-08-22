@@ -65,8 +65,8 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
 {
-
-		multiboot_mmap_entry* mmap = (multiboot_mmap_entry*) multiboot_structure->mmap_addr + 0xC0000000;
+	multiboot_structure->mmap_addr += 0xC0000000;
+		multiboot_mmap_entry* mmap = (multiboot_mmap_entry*) multiboot_structure->mmap_addr ;
 		for(size_t i=0 ;
 				i<multiboot_structure->mmap_length/(sizeof(multiboot_mmap_entry));
 				++i)
