@@ -65,6 +65,21 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
 {
+		multiboot_mmap_entry* mmap = (multiboot_mmap_entry*) multiboot_structure->mmap_addr;
+		for(size_t i=0 ; i<multiboot_structure->mmap_length/(sizeof(multiboot_mmap_entry)); ++i)
+		{
+			if(mmap[i].type == MULTIBOOT_MEMORY_AVAILABLE)
+			{
+
+				 uintptr_t addr_low = (uintptr_t)mmap[i].addr;
+				 uintptr_t length_low = (uintptr_t)mmap[i].len;
+				 if(addr_low && length_low);
+					 printf("size %x len %x type %x\n", addr_low, length_low,
+					                    mmap[i].type);
+			}
+		}
+
+		printf("%d \n\n" , mmap);
 
 	   cls();
 	   printf("******KERNEL INFO********\n");
