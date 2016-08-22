@@ -65,24 +65,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
 {
-	multiboot_structure->mmap_addr += 0xC0000000;
-		multiboot_mmap_entry* mmap = (multiboot_mmap_entry*) multiboot_structure->mmap_addr ;
-		for(size_t i=0 ;
-				i<multiboot_structure->mmap_length/(sizeof(multiboot_mmap_entry));
-				++i)
-		{
-			if(mmap[i].type == MULTIBOOT_MEMORY_AVAILABLE)
-			{
 
-				uintptr_t addr_low = ((uintptr_t)mmap[i].addr);
-				uintptr_t length_low=((uintptr_t)mmap[i].len);
-
-				 printf("Adderess : %x , Length : %x" , addr_low,length_low);
-
-			}
-		}
-
-		printf("%d \n\n" , mmap);
 
 	   cls();
 	   printf("******KERNEL INFO********\n");
@@ -99,6 +82,28 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   printf("Memory Lower : %d \n", multiboot_structure->mem_lower);
 
 	   printf("*************************\n");
+
+	   multiboot_structure->mmap_addr += 0xC0000000;
+	   		multiboot_mmap_entry* mmap = (multiboot_mmap_entry*) multiboot_structure->mmap_addr ;
+	   		printf("********RAM INFO*********\n");
+	   		for(size_t i=0 ;
+	   				i<multiboot_structure->mmap_length/(sizeof(multiboot_mmap_entry));
+	   				i++)
+	   		{
+	   			if(mmap[i].type == MULTIBOOT_MEMORY_AVAILABLE)
+	   			{
+
+	   				uintptr_t addr_low = ((uintptr_t)mmap[i].addr);
+	   				uintptr_t length_low=((uintptr_t)mmap[i].len);
+
+	   				 printf("Entry #%d \n" , i);
+	   				 printf("ADDRESS : 0x%x \n" , addr_low);
+	   				 printf("LENGTH  : %d \n" , length_low);
+	   			}
+	   		}
+	   		printf("**************************");
+
+
 	   gdt gt;
 	   IDT idt;
 	   ISR isr;
