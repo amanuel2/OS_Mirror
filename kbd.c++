@@ -4,7 +4,7 @@ typedef void(*regs_func)(struct regs *r);
 
 static PORT::Port8Bits p8b_kbd_drv;
 
-//static bool shift = false;
+static bool shift = false;
 
 extern void install_handler_irq(int irq, regs_func handler);
 extern char *itoa(int val);
@@ -15,12 +15,25 @@ static int total_typed=0;
 
 SerialPort sp_kbd;
 
-/* KBDUS means US Keyboard Layout. This is a scancode table
-*  used to layout a standard US keyboard. I have left some
-*  comments in to give you an idea of what key is what, even
-*  though I set it's array index to 0. You can change that to
-*  whatever you want using a macro, if you wish! */
-unsigned char kbdus[183] =
+namespace enter_press_np
+{
+  struct enter_pressed_structure
+  {
+    int bit;
+    char* value;
+  };
+
+  struct val_e
+  {
+    char* val_e = "";
+    int index_val_e = 0;
+  };
+
+  struct enter_pressed_structure kbd_str_e;
+  struct val_e val_e_inst;
+};
+
+static uint8_t kbdus[183] =
 {
     0,  27, '1', '2', '3', '4', '5', '6', '7', '8',	/* 9 */
   '9', '0', '-', '=', '\b',	/* Backspace */
@@ -61,7 +74,8 @@ unsigned char kbdus[183] =
 };
 
 
-static uint8_t alphabet[26] = {
+static uint8_t alphabet[26] =
+{
 		'q','w','e','r','t','y',
 		'u','i','o','p','a','s',
 		'd','f','g','h','j','k'
@@ -72,39 +86,36 @@ static uint8_t alphabet[26] = {
 char return_pressed_letter(int scancode)
 {
 	uint8_t to_return;
+
 	if(scancode>=16 && scancode <=25)
 	{
-		to_return = alphabet[scancode-16];
+		total_typed++;
+		if(shift==false)
+			to_return = alphabet[scancode-16];
+		else
+			to_return = toUpper(alphabet[scancode-16]);
 	}
 	if(scancode>=30 && scancode <=38)
 	{
-		to_return = alphabet[scancode-20];
+		total_typed++;
+		if(shift==false)
+			to_return = alphabet[scancode-20];
+		else
+			to_return = toUpper(alphabet[scancode-20]);
 	}
 	if(scancode>=44 && scancode <=50)
 	{
-		to_return = alphabet[scancode-25];
+		total_typed++;
+		if(shift==false)
+			to_return = alphabet[scancode-25];
+		else
+			to_return = toUpper(alphabet[scancode-25]);
 	}
 
 	return to_return;
 }
 
-namespace enter_press_np
-{
-  struct enter_pressed_structure
-  {
-    int bit;
-    char* value;
-  };
 
-  struct val_e
-  {
-    char* val_e = "";
-    int index_val_e = 0;
-  };
-
-  struct enter_pressed_structure kbd_str_e;
-  struct val_e val_e_inst;
-};
 
 void kbd_init()
 {
@@ -135,15 +146,34 @@ void keyboard_handler(struct regs *r)
     if (scancode & 0x80)
     {
 
+    	 switch(scancode)
+    	        {
+    	       	case 170:
+    	       	case 182:
+    	       		shift = false;
+    	       		break;
+    	       	case 186:
+    	       		if(shift == false)
+    	       			shift = true;
+    	     		else
+    	     			shift = false;
+    	      		break;
+    	}
 
     }
     else
     {
-    	uint8_t letter_key_press = return_pressed_letter(scancode);
-    	if(letter_key_press)
+    	if((int) scancode == 42)
+    		shift = true;
+
+
+    	else if((int) scancode>=16 && (int) scancode <= 50)
+    	{
+        	uint8_t letter_key_press = return_pressed_letter(scancode);
     		printf("%c" , letter_key_press);
+    	}
+
     }
-  //  printf("%d" , scancode);
     return;
 }
 
