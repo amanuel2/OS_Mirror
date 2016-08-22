@@ -96,6 +96,7 @@ int intLength(int i) {
 /* Handles the keyboard interrupt */
 void keyboard_handler(struct regs *r)
 {
+
     unsigned char scancode;
 
     /* Read from the keyboard's data buffer */
@@ -105,9 +106,9 @@ void keyboard_handler(struct regs *r)
     *  set, that means that a key has just been released */
     if (scancode & 0x80)
     {
+        printf("HERE");
         /* You can use this one to see if the user released the
         *  shift, alt, or control keys... */
-
         switch(scancode)
         {
         	case 170:
@@ -200,7 +201,7 @@ void keyboard_handler(struct regs *r)
         	   break;
         }
 
-        //printf("[%d]" , (int)scancode);
+        printf("[%d]" , (int)scancode);
 
         if((int) scancode == 41)
         {

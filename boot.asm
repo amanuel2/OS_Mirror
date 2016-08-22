@@ -60,8 +60,8 @@ section .text
 				    mov cr0, ecx
 
 
-					lea ebx, [higherhalf]
-				    jmp ebx ; Absolute Jump
+					lea ecx, [higherhalf]
+				    jmp ecx ; Absolute Jump
 
 		higherhalf:
 		    extern kernelMain
@@ -72,9 +72,11 @@ section .text
 			    mov dword [BootPageDirectory], 0
 			    invlpg [0]
 
-		       	mov esp, stack            ; set up the stack
+		       	mov esp, stack+STACKSIZE            ; set up the stack
+                add ebx, 0xC0000000
+                push eax
                 call callConstructors
-
+                pop eax
 
 
               extern kernel_virtual_start
@@ -83,24 +85,24 @@ section .text
 		      extern kernel_physical_end
 
 
-	    		push kernel_virtual_end ; 2
-	    		push 5
-	    		push kernel_virtual_start ; 1
-	    		push kernel_physical_start ; 3
-	    		push kernel_physical_end ; 4
 				push eax ; 5
 				push ebx ; 6
+	    		push kernel_virtual_start ; 1
+	    		push kernel_physical_start ; 3
+	    		push 5
+	    		push kernel_physical_end ; 4
+	    		push kernel_virtual_end ; 2
                 call kernelMain
 
 
                 jmp _eof
-                
+
         _eof:
              cli
-             hlt 
+             hlt
              jmp _eof
-                
-                
+
+
 section .bss
 align 32
 stack:
