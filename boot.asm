@@ -1,11 +1,16 @@
-;Global MultiBoot Kernel Recongnzation
-MAGIC equ 0x1badb002
-FLAGS equ (1<<0 | 1<<1)
-CHECKSUM equ -(MAGIC + FLAGS)
+;Global MultiBoot Kernel Recongnzatio
+
+; setting up the Multiboot header - see GRUB docs for details
+MODULEALIGN equ  1<<0             ; align loaded modules on page boundaries
+MEMINFO     equ  1<<1             ; provide memory map
+FLAGS       equ  MODULEALIGN | MEMINFO  ; this is the Multiboot 'flag' field
+MAGIC       equ    0x1BADB002     ; 'magic number' lets bootloader find the header
+CHECKSUM    equ -(MAGIC + FLAGS)  ; checksum required
 
 
 ;Putting in object file
 section .multiboot
+
 	dd MAGIC
 	dd FLAGS
 	dd CHECKSUM
@@ -60,10 +65,7 @@ section .text
 		higherhalf:
 		    extern kernelMain
    		    extern callConstructors
-			extern kernel_start_virtual
-			extern kernel_start_physical
-			extern kernel_end_virtual
-			extern kernel_end_physical
+
 		   		; Unmap the identity-mapped first 4MB of physical address space. It should not be needed
 			    ; anymore.
 			    mov dword [BootPageDirectory], 0
@@ -72,26 +74,22 @@ section .text
 		       	mov esp, stack            ; set up the stack
                 call callConstructors
 
-				mov edi, kernel_end_physical
 
 
-                push kernel_start_physical ;1
-                push kernel_start_virtual ;1
-				push kernel_end_virtual ;3
-				push kernel_end_physical ;4
+              extern kernel_virtual_start
+    		  extern kernel_virtual_end
+    		  extern kernel_physical_start
+		      extern kernel_physical_end
+
+
+	    		push kernel_virtual_end ; 2
+	    		push 5
+	    		push kernel_virtual_start ; 1
+	    		push kernel_physical_start ; 3
+	    		push kernel_physical_end ; 4
 				push eax ; 5
 				push ebx ; 6
                 call kernelMain
-                pop ebx
-                pop eax
-                mov eax, kernel_end_physical
-                pop eax
-                mov eax, kernel_end_virtual
-                pop eax
-                mov eax, kernel_start_virtual
-                pop eax
-                mov eax, kernel_start_physical
-                pop eax
 
 
                 jmp _eof

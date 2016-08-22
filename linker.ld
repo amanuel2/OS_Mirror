@@ -9,8 +9,9 @@ SECTIONS {
       physical address space. */
    . = 0xC0100000;
    
-   kernel_start_virtual = .;
-   kernel_start_physical =  . - 0xC0000000;
+     /* these labels get exported to the code files */
+    kernel_virtual_start = .;
+    kernel_physical_start = . - 0xC0000000;
 
 			
    .text ALIGN (0x1000) : AT(ADDR(.text) - 0xC0000000) {
@@ -33,7 +34,6 @@ SECTIONS {
        *(.bss)
        _ebss = .;
    }
-   
-   kernel_end_virtual = .;
-   kernel_end_physical =  . - 0xC0000000;
+  kernel_virtual_end = .;
+  kernel_physical_end = . - 0xC0000000;  
 }

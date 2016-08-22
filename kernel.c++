@@ -46,17 +46,21 @@ void hextodec(uint32_t hex)
 }
 
 
-extern "C" void kernelMain(uint32_t kernel_start_virtual,
-		uint32_t kernel_start_physical , uint32_t kernel_end_physical,
-		uint32_t kernel_end_virtual,	multiboot_info_t multiboot_structure,uint32_t magicnumber
+extern "C" void kernelMain(uint32_t kernel_virtual_end,
+		uint32_t placeholder,
+	    uint32_t  kernel_virtual_start,
+		uint32_t kernel_physical_start, uint32_t kernel_physical_end,
+		multiboot_info_t multiboot_structure,uint32_t magicnumber
 		)
 {
+
+
 	   cls();
 	   printf("******KERNEL INFO********\n");
-	   printf("KERNEL START VIRTUAL 0x%x\n" , kernel_start_virtual);
-	   printf("KERNEL START PHYSICAL 0x%x\n" , kernel_start_physical);
-	   printf("KERNEL END VIRTUAL 0x%x\n" , kernel_end_virtual);
-	   printf("KERNEL END PHYSICAL 0x%x\n" , kernel_end_physical);
+	   printf("KERNEL START VIRTUAL 0x%x\n" , kernel_virtual_start);
+	   printf("KERNEL START PHYSICAL 0x%x\n" , kernel_physical_start);
+	   printf("KERNEL END VIRTUAL 0x%x\n" , kernel_virtual_end);
+	   printf("KERNEL END PHYSICAL 0x%x\n" , kernel_physical_end);
 	   printf("*************************\n");
 	   gdt gt;
 	   IDT idt;
@@ -75,19 +79,8 @@ extern "C" void kernelMain(uint32_t kernel_start_virtual,
 	   	mouse.install_mouse_driver();
 	   	__asm__ __volatile__ ("sti");
 
-	   uint32_t total_mem_lo = ((uint32_t)multiboot_structure.mem_lower + (uint32_t)multiboot_structure.mem_upper);
-	   	printf("\n MemLower : %d \n Upper Memory: %d \n \n TOTAL MEMORY : %d" , multiboot_structure.mem_lower,
-	   			multiboot_structure.mem_upper,(total_mem_lo));
 
 
-	   	PhyiscalMemoryManager pmm;
-	   	Heap heap;
-	   	heap.init();
-
-
-	    /*
-	     * While Loop In terminal.initalize() .. Never ending
-	     * */
 
    while(1);	
    err:

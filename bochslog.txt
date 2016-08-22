@@ -32,7 +32,7 @@
 00000000000i[      ]   SB16 support: no
 00000000000i[      ]   USB support: yes
 00000000000i[      ]   VGA extension support: vbe
-00000000000i[MEM0  ] allocated memory at 0x7f2973a96010. after alignment, vector=0x7f2973a97000
+00000000000i[MEM0  ] allocated memory at 0x7fb2f1837010. after alignment, vector=0x7fb2f1838000
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -42,7 +42,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Tue Aug 16 18:04:28 2016 (time0=1471385068)
+00000000000i[CMOS  ] Setting initial clock to: Sun Aug 21 16:53:50 2016 (time0=1471812830)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -71,7 +71,7 @@
 00000000000i[CD1   ] load cdrom with path='BoneOS.iso'
 00000000000i[CD1   ] Opening image file as a cd.
 00000000000i[HD    ] Media present in CD-ROM drive
-00000000000i[HD    ] Capacity is 9846 sectors (19.23 MB)
+00000000000i[HD    ] Capacity is 9847 sectors (19.23 MB)
 00000000000i[HD    ] Using boot sequence cdrom, none, none
 00000000000i[HD    ] Floppy boot signature check is enabled
 00000000000i[PLUGIN] init_dev of 'pci_ide' plugin device by virtual method
@@ -184,7 +184,27 @@
 00001501138i[BXVGA ] VBE known Display Interface b0c0
 00001501170i[BXVGA ] VBE known Display Interface b0c5
 00001504095i[VBIOS ] VBE Bios $Id: vbe.c,v 1.65 2014/07/08 18:02:25 vruppert Exp $
-00001886885i[XGUI  ] charmap update. Font Height is 16
-00005715990i[BIOS  ] IDE time out
-00458167293i[BIOS  ] Booting from 07c0:0000
-00530109742i[SER   ] com1: FIFO enabled
+00001773110i[XGUI  ] charmap update. Font Height is 16
+00005716542i[BIOS  ] IDE time out
+00104437283i[BIOS  ] Booting from 07c0:0000
+00169400643i[SER   ] com1: FIFO enabled
+00204658997i[CPU0  ] CPU is in protected mode (active)
+00204658997i[CPU0  ] CS.mode = 32 bit
+00204658997i[CPU0  ] SS.mode = 32 bit
+00204658997i[CPU0  ] EFER   = 0x00000000
+00204658997i[CPU0  ] | EAX=00000000  EBX=c01025a5  ECX=c01079e0  EDX=00000003
+00204658997i[CPU0  ] | ESP=c0107a08  EBP=c0107a20  ESI=00000000  EDI=0010ba68
+00204658997i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf SF zf af pf cf
+00204658997i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+00204658997i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+00204658997i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00204658997i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00204658997i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00204658997i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00204658997i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00204658997i[CPU0  ] | EIP=c010101f (c010101f)
+00204658997i[CPU0  ] | CR0=0xe0000011 CR2=0x00000000
+00204658997i[CPU0  ] | CR3=0x00106000 CR4=0x00000010
+00204658997i[CMOS  ] Last time is 1471813034 (Sun Aug 21 16:57:14 2016)
+00204658997i[XGUI  ] Exit
+00204658997i[SIM   ] quit_sim called with exit code 0

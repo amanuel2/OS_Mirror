@@ -1,6 +1,7 @@
 #include "heap.h"
 
 extern "C" uint64_t BootPageDirectory[4] __attribute__((aligned(0x1000)));
+extern "C" void change_pd(uint32_t pd);
 
 void Heap::map_page(void* physaddr, void* virtualaddr, uint32_t flags)
 {
@@ -28,8 +29,6 @@ void Heap::map_page(void* physaddr, void* virtualaddr, uint32_t flags)
 
 void Heap::init()
 {
-	printf("\n");
-
 
 	// 512 entries
 	uint64_t page_dir[512] __attribute__((aligned(0x1000)));  // must be aligned to page boundary
