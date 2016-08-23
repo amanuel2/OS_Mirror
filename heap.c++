@@ -1,74 +1,207 @@
 #include "heap.h"
 
-extern "C" uint64_t BootPageDirectory[4] __attribute__((aligned(0x1000)));
-extern "C" void change_pd(uint32_t pd);
 
-void Heap::map_page(void* physaddr, void* virtualaddr, uint32_t flags)
+int Heap::k_addBlock(KHEAPLCAB *heap, uintptr_t addr, uint32_t size)
 {
-	// Make sure that both addresses are page-aligned.
+		KHEAPBLOCKLCAB			*hb;
+		KHEAPHDRLCAB			*hdr;
 
-	//    uint32_t pdindex = (uint32_t)virtualaddr >> 22;
-	    uint32_t ptindex = (uint32_t)virtualaddr >> 12 & 0x03FF;
+		hb = (KHEAPBLOCKLCAB*)addr;
+		hb->size = size;
+		hb->used = 0;
+		hb->next = heap->fblock;
+		heap->fblock = hb;
 
+		hdr = (KHEAPHDRLCAB*)&hb[1];
+		hdr->flagsize = hb->size - (sizeof(KHEAPBLOCKLCAB) + 32);
 
-	    //uint32_t * pd = (uint32_t *)0xFFFFF000;
-	    // Here you need to check whether the PD entry is present.
-	    // When it is not present, you need to create a new empty PT and
-	    // adjust the PDE accordingly.
+		++heap->bcnt;
 
-	    //uint32_t * pt = ((uint32_t *)0xFFC00000) + (0x400 * ptindex);
-	    // Here you need to check whether the PT entry is present.
-	    // When it is, then there is already a mapping present. What do you do now?
+		hb->lastdsize = 0;
+		hb->lastdhdr = 0;
 
-	    BootPageDirectory[ptindex] = ((uint32_t)physaddr) | (flags & 0xFFF) | 0x01; // Present
-
-	    // Now you need to flush the entry in the TLB
-	    // or you might not notice the change.
+		return 1;
 }
 
-
-void Heap::init()
+/*
+	Look behind and forward to see if we can merge back into some chunks.
+*/
+void Heap::k_free(KHEAPLCAB *heap, void *ptr)
 {
-
-	// 512 entries
-	uint64_t page_dir[512] __attribute__((aligned(0x1000)));  // must be aligned to page boundary
-	uint64_t page_tab[512] __attribute__((aligned(0x1000)));
-
-	BootPageDirectory[0] = (uint64_t)&page_dir | 1; // set the page directory into the PDPT and mark it present
-	page_dir[0] = (uint64_t)&page_tab | 3; //set the page table into the PD and mark it present/writable
+	KHEAPHDRLCAB				*hdr, *phdr, *nhdr;
+	KHEAPBLOCKLCAB				*hb;
+	uint32_t						sz;
+	uint8_t						fg;
 
 
-	unsigned int i, address = 0;
-	for(i = 0; i < 512; i++)
+	hdr = (KHEAPHDRLCAB*)ptr;
+	hdr[-1].flagsize &= ~0x80000000;
+
+
+	phdr = 0;
+	/* find the block we are located in */
+	for (hb = heap->fblock; hb; hb = hb->next)
 	{
-	    page_tab[i] = address | 3; // map address and mark it present/writable
-	    address = address + 0x1000;
+		if (((uintptr_t)ptr > (uintptr_t)hb) && ((uintptr_t)ptr < (uintptr_t)hb + hb->size))
+		{
+
+			hdr = (KHEAPHDRLCAB*)((uintptr_t)ptr - sizeof(KHEAPHDRLCAB));
+
+
+			hdr->flagsize &= ~0x80000000;
+
+			hb->used -= hdr->flagsize;
+
+
+			if (hdr->prevsize)
+			{
+				phdr = (KHEAPHDRLCAB*)((uintptr_t)&hdr - (sizeof(KHEAPHDRLCAB) + hdr->prevsize));
+			}
+			else
+			{
+				phdr = 0;
+			}
+
+			/* get next header */
+			nhdr = (KHEAPHDRLCAB*)((uintptr_t)&hdr[1] + hdr->flagsize);
+			if ((uintptr_t)nhdr >= ((uintptr_t)hb + hb->size))
+			{
+				nhdr = 0;
+			}
+
+			if (nhdr)
+			{
+				if (!(nhdr->flagsize & 0x80000000))
+				{
+					/* combine with it */
+					hdr->flagsize += sizeof(KHEAPHDRLCAB) + nhdr->flagsize;
+					hb->used -= sizeof(KHEAPHDRLCAB);
+					/* set next header prevsize */
+					nhdr = (KHEAPHDRLCAB*)((uintptr_t)&hdr[1] + hdr->flagsize);
+					nhdr->prevsize = hdr->flagsize;
+				}
+			}
+
+
+			if (phdr)
+			{
+				if (!(phdr->flagsize & 0x80000000))
+				{
+					phdr->flagsize += sizeof(KHEAPHDRLCAB) + hdr->flagsize;
+					hb->used -= sizeof(KHEAPHDRLCAB);
+					hdr = phdr;
+					nhdr = (KHEAPHDRLCAB*)((uintptr_t)&hdr[1] + hdr->flagsize);
+					if ((uintptr_t)nhdr < (uintptr_t)hb + sizeof(KHEAPBLOCKLCAB) + hb->size)
+					{
+						nhdr->prevsize = hdr->flagsize;
+					}
+				}
+			}
+
+			/* optimization */
+			if (hdr->flagsize > hb->lastdsize)
+			{
+				hb->lastdsize = hdr->flagsize;
+				hb->lastdhdr = hdr;
+			}
+
+			return;
+		}
 	}
 
-	uint64_t * page_dir_l = (uint64_t*)BootPageDirectory[3]; // get the page directory (you should 'and' the flags away)
-	page_dir_l[511] = (uint64_t)page_dir_l; // map pd to itself
-	page_dir_l[510] = BootPageDirectory[2]; // map pd3 to it
-	page_dir_l[509] = BootPageDirectory[1]; // map pd2 to it
-	page_dir_l[508] = BootPageDirectory[0]; // map pd1 to it
-	page_dir_l[507] = (uint64_t)&BootPageDirectory; /* map the PDPT to the directory*/
+	printf("uhoh ptr:%p\n", ptr);
+	for (hb = heap->fblock; hb; hb = hb->next) {
+		printf("lcab free looking at block:%p next:%p ptr:%p end:%p\n", hb, hb->next, ptr, (uintptr_t)hb + hb->size);
+		if (((uintptr_t)ptr > (uintptr_t)hb)) {
+			printf("above\n");
+			if (((uintptr_t)ptr < ((uintptr_t)hb + hb->size))) {
+				printf("found\n");
+			}
+		}
+	}
+	for (;;);
+	/* uhoh.. this should not happen.. */
+	return;
+}
 
+/*
+	This will allocate a chunk of memory by the specified size, and if
+	no memory chunk can be found it will return zero.
+*/
+void* Heap::k_malloc(KHEAPLCAB *heap, uint32_t size)
+{
+	KHEAPBLOCKLCAB		*hb;
+	KHEAPHDRLCAB		*hdr, *_hdr, *phdr;
+	uint32_t				sz;
+	uint8_t				fg;
+	uint32_t				checks;
+	uint32_t				bc;
+
+	checks = 0;
+	bc =0;
+
+
+	for (hb = heap->fblock; hb; hb = hb->next) {
+		if ((hb->size - hb->used) >= (size + sizeof(KHEAPHDRLCAB))) {
+			++bc;
+
+			hdr = (KHEAPHDRLCAB*)&hb[1];
+
+
+			phdr = 0;
+			while ((uintptr_t)hdr < ((uintptr_t)hb + hb->size)) {
+				++checks;
+
+				fg = hdr->flagsize >> 31;
+				sz = hdr->flagsize & 0x7fffffff;
+
+				if (!fg)
+				{
+
+					if (sz >= size)
+					{
+
+						if (sz > (size + sizeof(KHEAPHDRLCAB) + 16))
+						{
+
+							_hdr = (KHEAPHDRLCAB*)((uintptr_t)&hdr[1] + size);
+							_hdr->flagsize = sz - (size + sizeof(KHEAPHDRLCAB));
+							_hdr->prevsize = size;
+							hdr->flagsize = 0x80000000 | size;
+							hb->used += sizeof(KHEAPHDRLCAB);
+
+						}
+						else
+						{
+							hdr->flagsize |= 0x80000000;
+						}
+						hb->used += size;
+
+
+						return &hdr[1];
+					}
+				}
+				phdr = hdr;
+				hdr = (KHEAPHDRLCAB*)((uintptr_t)&hdr[1] + sz);
+			}
+
+		}
+	}
+
+	return 0;
 }
 
 
-void* Heap::get_physaddr(void * virtualaddr)
+Heap::Heap(KHEAPLCAB *heap)
+{
+	heap->fblock = 0;
+	heap->bcnt = 0;
+}
+
+Heap::~Heap()
 {
 
-    //uint32_t pdindex = (uint32_t)virtualaddr >> 22;
-    uint32_t ptindex = (uint32_t)virtualaddr >> 12 & 0x03FF;
-
-
-    //uint32_t * pd = (uint32_t *)0xFFFFF000;
-    // Here you need to check whether the PD entry is present.
-
-
-    //uint32_t * pt = ((uint32_t *)0xFFC00000) + (0x400 * pdindex);
-    // Here you need to check whether the PT entry is present.
-
-    return (void *)((BootPageDirectory[ptindex] & ~0xFFF) + ((uint32_t)virtualaddr & 0xFFF));
-
 }
+
+
+

@@ -106,7 +106,13 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
+	    KHEAP       kheap;
+	    char        *ptr;
 
+	    Heap heap((&kheap));
+	    heap.k_addBlock(&kheap, 0xC0300000, 0xC0500000);
+	    ptr = (char*)heap.k_malloc(&kheap, 256);
+	    heap.k_free(&kheap, ptr);
 
    while(1);
    err:
