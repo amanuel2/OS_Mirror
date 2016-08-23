@@ -48,13 +48,6 @@ PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structu
 
 void PhyiscalMemoryManager::allocate(size_t bytes_to_allocate)
 {
-	//First Find Bytes
-	for(int i=0; i<=bytes_usable; i++)
-	{
-
-
-
-	}
 }
 
 void PhyiscalMemoryManager::generate_pas()

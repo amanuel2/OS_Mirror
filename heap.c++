@@ -30,8 +30,8 @@ void Heap::k_free(KHEAPLCAB *heap, void *ptr)
 {
 	KHEAPHDRLCAB				*hdr, *phdr, *nhdr;
 	KHEAPBLOCKLCAB				*hb;
-	uint32_t						sz;
-	uint8_t						fg;
+	//uint32_t						sz;
+	//uint8_t						fg;
 
 
 	hdr = (KHEAPHDRLCAB*)ptr;
@@ -128,6 +128,8 @@ void Heap::k_free(KHEAPLCAB *heap, void *ptr)
 	This will allocate a chunk of memory by the specified size, and if
 	no memory chunk can be found it will return zero.
 */
+
+
 void* Heap::k_malloc(KHEAPLCAB *heap, uint32_t size)
 {
 	KHEAPBLOCKLCAB		*hb;
@@ -190,6 +192,8 @@ void* Heap::k_malloc(KHEAPLCAB *heap, uint32_t size)
 
 	return 0;
 }
+
+
 
 
 Heap::Heap(KHEAPLCAB *heap)

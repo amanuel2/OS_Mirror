@@ -86,9 +86,9 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	    char        *ptr;
 
 	    Heap heap((&kheap));
-	    heap.k_addBlock(&kheap, (0x100000+0xC0000000), (0x100000+0xC0000000));
-	    //ptr = (char*)heap.k_malloc(&kheap, 256);
-	    //heap.k_free(&kheap, ptr);
+	    heap.k_addBlock(&kheap, (0x0 + 0xC0000000), (0x300000+0xC0000000));
+	    ptr = (char*)heap.k_malloc(&kheap, 256);
+	    heap.k_free(&kheap, ptr);
 
    while(1);
    err:
