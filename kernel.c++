@@ -74,21 +74,15 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 	   	kbd.install_kbd_driver();
 
-
-	   	MOUSE mouse;
-	   	mouse.install_mouse_driver();
-	   	__asm__ __volatile__ ("sti");
-
-
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
 	    KHEAP       kheap;
-	    char        *ptr;
+	 //   char        *ptr;
 
 	    Heap heap((&kheap));
-	    heap.k_addBlock(&kheap, (0x0 + 0xC0000000), (0x300000+0xC0000000));
-	    ptr = (char*)heap.k_malloc(&kheap, 256);
-	    heap.k_free(&kheap, ptr);
+	    heap.k_addBlock(&kheap, (0x0 + 0xC010CB00), (0x300000+0xC010CB00));
+	  //  ptr = (char*)heap.k_malloc(&kheap, 256);
+	  //  heap.k_free(&kheap, ptr);
 
    while(1);
    err:
