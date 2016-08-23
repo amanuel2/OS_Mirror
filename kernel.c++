@@ -32,30 +32,6 @@ extern "C" void callConstructors()
 
 
 
-
-void hextodec(uint32_t hex)
-{
-	 uint32_t digit;
-	    if (hex < 0) hex = -hex;
-
-	    do
-	    {
-	      digit = hex % 10;
-	      printf("%d" , digit);
-	    } while ((hex/=10) > 0);
-}
-
-uint32_t check(uint32_t address, uint32_t bit_to_check)
-{
-	return ((address>>bit_to_check)&1);
-}
-
-extern "C" void memory(multiboot_info_t multiboot_structure)
-{
-	printf("Memory Upper : %d \n \n", multiboot_structure.mem_upper);
-}
-
-
 extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	    uint32_t  kernel_physical_end,
 		uint32_t placeholder,
@@ -110,9 +86,9 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	    char        *ptr;
 
 	    Heap heap((&kheap));
-	    heap.k_addBlock(&kheap, 0xC0300000, 0xC0500000);
-	    ptr = (char*)heap.k_malloc(&kheap, 256);
-	    heap.k_free(&kheap, ptr);
+	    heap.k_addBlock(&kheap, (0x100000+0xC0000000), (0x100000+0xC0000000));
+	    //ptr = (char*)heap.k_malloc(&kheap, 256);
+	    //heap.k_free(&kheap, ptr);
 
    while(1);
    err:

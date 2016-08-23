@@ -132,10 +132,10 @@ void* Heap::k_malloc(KHEAPLCAB *heap, uint32_t size)
 {
 	KHEAPBLOCKLCAB		*hb;
 	KHEAPHDRLCAB		*hdr, *_hdr, *phdr;
-	uint32_t				sz;
+	uint32_t			sz;
 	uint8_t				fg;
-	uint32_t				checks;
-	uint32_t				bc;
+	uint32_t			checks;
+	uint32_t			bc;
 
 	checks = 0;
 	bc =0;
