@@ -37,21 +37,19 @@ PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structu
 		   			}
 		   		}
 		   		printf("**************************\n");
+
+
 		   		printf("%d MB Of Usable RAM" , bytes_usable/1000000);
+
 
 
 
 }
 
-void PhyiscalMemoryManager::allocate(MemoryPart vas)
+void PhyiscalMemoryManager::allocate(size_t bytes_to_allocate)
 {
-	if(vas.status != FREE)
-	{
-		//Not Suppose to Reach here.
-	 //	panic("NOT FREE VIRTUAL ADRESS SPACE");
-	}
-
-	else
+	//First Find Bytes
+	for(int i=0; i<=bytes_usable; i++)
 	{
 
 

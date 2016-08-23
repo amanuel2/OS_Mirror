@@ -1,4 +1,4 @@
-GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -o3 -nostdlib -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall -Werror
+GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -o3 -nostdlib -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings -Wno-unused-label -ffreestanding -Wall 
 LDPARAMS =  -melf_i386
 objects = stdlib.o stdio.o kernel.o isr.o irq.o idt.o  mem.o string.o serial.o timer.o pmm.o gdt.o  heap.o port.o bitset.o gdt_flush.o port_a.o boot.o idt_a.o isr_a.o  irq_a.o kbd.o mouse.o terminal.o vga.o 
 i686 = i686-elf-

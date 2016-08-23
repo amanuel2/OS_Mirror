@@ -18,9 +18,9 @@ enum status_mem
 
 typedef struct
 {
-	uint32_t start_adress;
+	uint32_t start_byte;
 	uint32_t size;
-	uint32_t end_adress;
+	uint32_t end_byte;
 	enum status_mem status;
 }MemoryPart;
 
@@ -29,7 +29,7 @@ class PhyiscalMemoryManager
 public:
 	PhyiscalMemoryManager(multiboot_info_t *multiboot_structure);
 	~PhyiscalMemoryManager();
-	void allocate(MemoryPart vas);
+	void allocate(size_t bytes_to_allocate);
 private:
 	void generate_pas();
 	Bit bit;
