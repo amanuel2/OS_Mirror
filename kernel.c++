@@ -74,34 +74,15 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   printf("KERNEL END VIRTUAL 0x%x\n" , kernel_virtual_end);
 	   printf("KERNEL END PHYSICAL 0x%x\n" , kernel_physical_end);
 	   printf("MAGIC 0x%x\n" , magicnumber);
-	   printf("*************************\n\n");
-	   printf("********RAM INFO*********\n");
+	   printf("*************************");
+//	   printf("********RAM INFO*********\n");
+//
+//
+//	   printf("Memory Upper : %d \n", multiboot_structure->mem_upper);
+//	   printf("Memory Lower : %d \n", multiboot_structure->mem_lower);
+//
+//	   printf("*************************\n");
 
-
-	   printf("Memory Upper : %d \n", multiboot_structure->mem_upper);
-	   printf("Memory Lower : %d \n", multiboot_structure->mem_lower);
-
-	   printf("*************************\n");
-
-	   multiboot_structure->mmap_addr += 0xC0000000;
-	   		multiboot_mmap_entry* mmap = (multiboot_mmap_entry*) multiboot_structure->mmap_addr ;
-	   		printf("********RAM INFO*********\n");
-	   		for(size_t i=0 ;
-	   				i<multiboot_structure->mmap_length/(sizeof(multiboot_mmap_entry));
-	   				i++)
-	   		{
-	   			if(mmap[i].type == MULTIBOOT_MEMORY_AVAILABLE)
-	   			{
-
-	   				uintptr_t addr_low = ((uintptr_t)mmap[i].addr);
-	   				uintptr_t length_low=((uintptr_t)mmap[i].len);
-
-	   				 printf("Entry #%d \n" , i);
-	   				 printf("ADDRESS : 0x%x \n" , addr_low);
-	   				 printf("LENGTH  : %d \n" , length_low);
-	   			}
-	   		}
-	   		printf("**************************");
 
 
 	   gdt gt;
@@ -123,6 +104,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   	__asm__ __volatile__ ("sti");
 
 
+	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
 
 

@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "bitset.h"
 #include "stdio.h"
+#include "multiboot.h"
 #include "stdlib.h"
 
 
@@ -26,12 +27,13 @@ typedef struct
 class PhyiscalMemoryManager
 {
 public:
-	PhyiscalMemoryManager();
+	PhyiscalMemoryManager(multiboot_info_t *multiboot_structure);
 	~PhyiscalMemoryManager();
 	void allocate(MemoryPart vas);
 private:
 	void generate_pas();
 	Bit bit;
+	uint32_t bytes_usable;
 };
 
 #endif
