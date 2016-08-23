@@ -77,12 +77,12 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
 	    KHEAP       kheap;
-	 //   char        *ptr;
+	    char        *ptr;
 
 	    Heap heap((&kheap));
-	    heap.k_addBlock(&kheap, (0x0 + 0xC010CB00), (0x300000+0xC010CB00));
-	  //  ptr = (char*)heap.k_malloc(&kheap, 256);
-	  //  heap.k_free(&kheap, ptr);
+	    heap.k_addBlock(&kheap, (0x0 + 0xC010CB00),260);
+	    ptr = (char*)heap.k_malloc(&kheap, 256);
+	    heap.k_free(&kheap, ptr);
 
    while(1);
    err:
