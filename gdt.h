@@ -5,6 +5,8 @@
 #include "stdio.h"
 #include "mem.h"
 
+extern "C" void invalidate_page_vm (void *virt_addr);
+
 class gdt
 {
 public:

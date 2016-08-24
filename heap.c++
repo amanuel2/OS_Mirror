@@ -1,5 +1,6 @@
 #include "heap.h"
 
+extern "C" uint32_t BootPageDirectory[1024];
 
 int Heap::k_addBlock(KHEAPLCAB *heap, uintptr_t addr, uint32_t size)
 {
@@ -22,6 +23,7 @@ int Heap::k_addBlock(KHEAPLCAB *heap, uintptr_t addr, uint32_t size)
 
 		return 1;
 }
+
 
 /*
 	Look behind and forward to see if we can merge back into some chunks.
@@ -200,6 +202,8 @@ Heap::Heap(KHEAPLCAB *heap)
 {
 	heap->fblock = 0;
 	heap->bcnt = 0;
+
+	printf("%d" , BootPageDirectory[768]);
 }
 
 Heap::~Heap()

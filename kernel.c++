@@ -22,6 +22,7 @@
 //for global objects before
 //calling the kernel
 typedef void (*constructor)();
+extern "C" uint32_t BootPageDirectory[1024];
 extern "C" constructor start_ctors;
 extern "C" constructor end_ctors;
 extern "C" void callConstructors()
@@ -51,13 +52,6 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   printf("KERNEL END PHYSICAL 0x%x\n" , kernel_physical_end);
 	   printf("MAGIC 0x%x\n" , magicnumber);
 	   printf("*************************");
-//	   printf("********RAM INFO*********\n");
-//
-//
-//	   printf("Memory Upper : %d \n", multiboot_structure->mem_upper);
-//	   printf("Memory Lower : %d \n", multiboot_structure->mem_lower);
-//
-//	   printf("*************************\n");
 
 
 
@@ -79,10 +73,42 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	    KHEAP       kheap;
 	    char        *ptr;
 
-	    Heap heap((&kheap));
-	    heap.k_addBlock(&kheap, (0x0 + 0xC010CB00),260);
-	    ptr = (char*)heap.k_malloc(&kheap, 256);
-	    heap.k_free(&kheap, ptr);
+        /* Map 4MB page frame at physical address 0x400000
+           to 0xC0400000. In order for the change to be seen
+           invalidate the page which flushes the associated
+           TLB entry(ies)
+        */
+        BootPageDirectory[769]=0x400083;
+        invalidate_page_vm((void *)0xC0400000);
+
+        /* At this point 0xC0000000 to 0xC0800000 have been
+           added to paging tables and associated with physical
+           memory pages */
+
+        Heap heap((&kheap));
+
+        /* The heap can be placed anywhere starting in virtual
+           memory between 0xC0000000 to 0xC0800000 which aren't
+           already used by the kernel for other code and data.
+           Whatever starting memory address is used in this
+           region the base address of the heap + length can't
+           be >= 0xC0800000 unless other pages are added to the
+           page tables */
+
+        /* This heap runs from 0xC0200000 to C04FFFFF - 3MB */
+        heap.k_addBlock(&kheap, 0xC0200000, 0x300000);
+
+        /* This heap runs from the 4KB aligned memory boundary after
+           the end of the kernel for a length of 3MB */
+        //heap.k_addBlock(&kheap, (kernel_virtual_end+4095)&0xFFFFF000, 0x300000);
+
+        /* This example heap runs from 0xC0400000 to 0xC07FFFFF - 4MB */
+        //heap.k_addBlock(&kheap, 0xC0400000,0x400000);
+
+        /* Now call k_malloc to allocate memory from our heap area */
+        ptr = (char*)heap.k_malloc(&kheap, 256);
+        printf("\nk_malloc returned: %x", ptr);
+        heap.k_free(&kheap, ptr);
 
    while(1);
    err:

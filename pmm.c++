@@ -1,10 +1,7 @@
 #include "pmm.h"
 
 
-static const uint32_t TOTAL_RAM_BYTES = 3586139904;
-static const uint32_t TOTAL_RAM_GB = 3.586139904;
 
-MemoryPart** mempat;
 
 PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structure)
 {

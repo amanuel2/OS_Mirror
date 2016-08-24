@@ -355,7 +355,7 @@ void putchar(char str,char next_str, va_list &arg)
 {
 	if(!continue_ex)
 	{
-	  uint32_t ch_per;
+	  int32_t ch_per;  // MDP modified to fix bug
 	  char* str_use;
 	  const char per = '%';
 		 if(str == '\b')
@@ -367,7 +367,7 @@ void putchar(char str,char next_str, va_list &arg)
 		    int ch_per_chr;
 		    char *c_per_str;
 		    int ch_x;
-		    char str_x[32];
+		    char str_x[32]={0}; // MDP modified to fix bug
 		    switch(str)
 		    {
 		        case '\n':
@@ -418,7 +418,7 @@ void putchar(char str,char next_str, va_list &arg)
 		        		break;
 		        	case 'x':
 		        		ch_x = va_arg(arg, int);
-		        		str_x[32]= {0};
+//MDP		       		str_x[32]= {0};
 		        		__itoa(ch_x, 16, str_x);
 		        		for(int32_t i=0;str_x[i]!='\0'; ++i)
 		        		{
@@ -485,6 +485,5 @@ char *itoa(int val)
     }
     return((char*)ptr);
 }
-
 
 
