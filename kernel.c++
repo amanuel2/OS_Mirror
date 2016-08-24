@@ -55,6 +55,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
 
+
 	   gdt gt;
 	   IDT idt;
 	   ISR isr;
