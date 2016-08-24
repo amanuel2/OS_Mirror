@@ -102,7 +102,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
            page tables */
 
         /* This heap runs from 0xC0200000 to C04FFFFF - 3MB */
-        heap.k_addBlock(&kheap, 0xC0200000, 0x600000);
+        heap.k_addBlock(&kheap, 0xC0200000, 0x300000);
 
         /* This heap runs from the 4KB aligned memory boundary after
            the end of the kernel for a length of 3MB */
