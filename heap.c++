@@ -1,6 +1,7 @@
 #include "heap.h"
 
 extern "C" uint32_t BootPageDirectory[1024];
+extern "C" void invalidate_page_vm (void *virt_addr);
 
 int Heap::k_addBlock(KHEAPLCAB *heap, uintptr_t addr, uint32_t size)
 {
@@ -213,7 +214,21 @@ Heap::Heap(KHEAPLCAB *heap)
 	heap->fblock = 0;
 	heap->bcnt = 0;
 
-	printf("%d" , BootPageDirectory[768]);
+   /*
+	* RESERVE 4MB TO THE HEAP
+	* Map 4MB page frame at physical address 0x400000
+	* to 0xC0400000. In order for the change to be seen
+	* invalidate the page which flushes the associated
+	* TLB entry(ies)
+   */
+
+	BootPageDirectory[769]=0x400083;
+	invalidate_page_vm((void *)0xC0400000);
+
+	/* At this point 0xC0000000 to 0xC0800000 have been
+	 *  added to paging tables and associated with physical
+	 *  memory pages
+	 */
 }
 
 Heap::~Heap()

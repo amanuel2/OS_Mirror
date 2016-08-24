@@ -63,6 +63,7 @@ extern enter_press_np::enter_pressed_structure enter_pressed_func();
 struct enter_press_np::enter_pressed_structure enter_term;
 
 extern void emptyString(char* str);
+char *convert(unsigned int num, int base);
 	
 SerialPort sp_std_io;
 //80 * 25
@@ -365,7 +366,9 @@ void putchar(char str,char next_str, va_list &arg)
 		    const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
 		    char space = ' ';
 		    int ch_per_chr;
+		    unsigned int uint_chr;
 		    char *c_per_str;
+		    char * uint_chr_use;
 		    int ch_x;
 		    char str_x[32]={0}; // MDP modified to fix bug
 		    switch(str)
@@ -407,6 +410,17 @@ void putchar(char str,char next_str, va_list &arg)
 		        		continue_ex = true;
 		        		break;
 
+		        	case 'u':
+		        		uint_chr=va_arg(arg,unsigned int);
+		        		uint_chr_use = convert(uint_chr,10);
+		        		for(int32_t i=0;uint_chr_use[i]!='\0'; ++i)
+		        		{
+
+		        				sp_std_io.write_serial(uint_chr_use[i]);
+		        			putchr_t(uint_chr_use[i]);
+		        		}
+		        		continue_ex = true;
+		        		break;
 
 		        	case 's':
 		        		c_per_str = va_arg(arg,char *);
@@ -484,6 +498,20 @@ char *itoa(int val)
     	val = val / 10;
     }
     return((char*)ptr);
+}
+
+char *convert(unsigned int num, int base)
+{
+	static char buff[33];
+	char *ptr;
+	ptr=&buff[sizeof(buff)-1];
+	*ptr='\0';
+	do
+	{
+		*--ptr="0123456789abcdef"[num%base];
+		num/=base;
+	}while(num!=0);
+	return(ptr);
 }
 
 
