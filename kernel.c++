@@ -102,7 +102,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
            page tables */
 
         /* This heap runs from 0xC0200000 to C04FFFFF - 3MB */
-        heap.k_addBlock(&kheap, 0xC0200000, 0x300000);
+        heap.k_addBlock(&kheap, 0xC0200000, 0x600000);
 
         /* This heap runs from the 4KB aligned memory boundary after
            the end of the kernel for a length of 3MB */
@@ -114,13 +114,13 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         /* Now call k_malloc to allocate memory from our heap area */
         ptr = (char*)heap.k_malloc(&kheap, 256);
         printf("\nk_malloc returned: %x", ptr);
-        heap.k_free(&kheap, ptr);
+
 
         int_ptr = (int*)heap.k_malloc(&kheap,100);
         printf("\nk_malloc returned: %x", int_ptr);
         heap.k_free(&kheap, int_ptr);
 
-
+        heap.k_free(&kheap, ptr);
 
    while(1);
    err:
