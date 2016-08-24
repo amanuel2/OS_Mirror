@@ -39,6 +39,8 @@ public:
 			return (heap_obj.k_malloc(heap,size));
 		}
 private:
+		void get_page_index(uint32_t virt_address);
+		void* get_base_address(uint32_t index_page);
 
 };
 

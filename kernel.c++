@@ -69,10 +69,15 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 	   	kbd.install_kbd_driver();
 
+	   	MOUSE mouse;
+	   	mouse.install_mouse_driver();
+
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
+	   	cls();
 	    KHEAP       kheap;
 	    char        *ptr;
+	    int 		*int_ptr;
 
         /* Map 4MB page frame at physical address 0x400000
            to 0xC0400000. In order for the change to be seen
@@ -110,6 +115,12 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         ptr = (char*)heap.k_malloc(&kheap, 256);
         printf("\nk_malloc returned: %x", ptr);
         heap.k_free(&kheap, ptr);
+
+        int_ptr = (int*)heap.k_malloc(&kheap,100);
+        printf("\nk_malloc returned: %x", int_ptr);
+        heap.k_free(&kheap, int_ptr);
+
+
 
    while(1);
    err:

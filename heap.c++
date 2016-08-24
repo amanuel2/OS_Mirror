@@ -4,6 +4,7 @@ extern "C" uint32_t BootPageDirectory[1024];
 
 int Heap::k_addBlock(KHEAPLCAB *heap, uintptr_t addr, uint32_t size)
 {
+	 this->get_page_index(0xC0400000);
 		KHEAPBLOCKLCAB			*hb;
 		KHEAPHDRLCAB			*hdr;
 
@@ -195,6 +196,15 @@ void* Heap::k_malloc(KHEAPLCAB *heap, uint32_t size)
 	return 0;
 }
 
+
+void Heap::get_page_index(uint32_t virt_address)
+{
+//TODO
+}
+void* Heap::get_base_address(uint32_t index_page)
+{
+	return((void*)(index_page << 22));
+}
 
 
 

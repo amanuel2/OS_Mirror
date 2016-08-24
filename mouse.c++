@@ -116,5 +116,4 @@ void MOUSE::install_mouse_driver()
 
   install_handler_irq(12, mouse_ps2_handler);
 
-  printf("\nInitalized PS2/MOUSE");
 }
