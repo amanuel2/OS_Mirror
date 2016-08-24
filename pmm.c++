@@ -29,7 +29,7 @@ PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structu
 
 		   				 printf("#%d" , i);
 		   				 printf("\t\t0x%x",addr);
-		   				 printf("\t\t%d"  ,length);
+		   				 printf("\t\t%x"  ,length);
 		   				 printf("\t\t\t\t\t\t%d\n"  ,size);
 		   				// printf("\t\t\t\t\t\t\t\t%d\n"  ,type);
 		   				 bytes_usable+=length;
