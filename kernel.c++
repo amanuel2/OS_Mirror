@@ -72,6 +72,8 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   	MOUSE mouse;
 	   	mouse.install_mouse_driver();
 
+	   	__asm__ __volatile__ ("sti");
+
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
 	   	cls();
