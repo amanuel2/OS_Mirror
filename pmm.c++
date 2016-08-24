@@ -7,12 +7,14 @@ PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structu
 {
 	/*
 	 * 0xC0100000  -  0xFFFFFFFF
+	 * NO.	ADDRESS	 LENGTH	 SIZE  TYPE
 	 */
 	bytes_usable = 0;
 
 	 multiboot_structure->mmap_addr += 0xC0000000;
 		   		multiboot_mmap_entry* mmap = (multiboot_mmap_entry*) multiboot_structure->mmap_addr ;
-		   		printf("\n********RAM INFO*********\n");
+		   		printf("********RAM INFO*********\n");
+		   		printf("No.\t\tADDRESS\t\tLENGTH\t\t\t\tSIZE\t\tTYPE\n");
 		   		for(size_t i=0 ;
 		   				i<multiboot_structure->mmap_length/(sizeof(multiboot_mmap_entry));
 		   				i++)
@@ -23,13 +25,13 @@ PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structu
 		   				uintptr_t addr = ((uintptr_t)mmap[i].addr);
 		   				uintptr_t length=((uintptr_t)mmap[i].len);
 		   				uintptr_t size=((uintptr_t)mmap[i].size);
-		   				uintptr_t type=((uintptr_t)mmap[i].type);
+		   				//uintptr_t type=((uintptr_t)mmap[i].type);
 
-		   				 printf("Entry #%d \n" , i);
-		   				 printf("ADDRESS : 0x%x \n",addr);
-		   				 printf("LENGTH  : %d \n"  ,length);
-		   				 printf("SIZE	 : %d \n"  ,size);
-		   				 printf("TYPE 	 : %d \n"  ,type);
+		   				 printf("#%d" , i);
+		   				 printf("\t\t0x%x",addr);
+		   				 printf("\t\t%d"  ,length);
+		   				 printf("\t\t\t\t\t\t%d\n"  ,size);
+		   				// printf("\t\t\t\t\t\t\t\t%d\n"  ,type);
 		   				 bytes_usable+=length;
 		   			}
 		   		}
