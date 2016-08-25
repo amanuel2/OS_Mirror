@@ -21,6 +21,16 @@ void Bit::set_adress(uint32_t address)
 	this->bitset.address = address;
 }
 
+uint32_t Bit::get_address()
+{
+	return (this->bitset.address);
+}
+
+uint32_t Bit::get_maxbit()
+{
+	return (this->bitset.max_bit);
+}
+
 void Bit::set_max_bit(uint32_t max_bit)
 {
 	this->bitset.max_bit = max_bit;

@@ -82,42 +82,32 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	    int 		*int_ptr;
 
 
-
-
-
-
         Heap heap((&kheap));
         printf("\n %u \n" , 0x9D248000);
 
-        /* The heap can be placed anywhere starting in virtual
-           memory between 0xC0000000 to 0xC0800000 which aren't
-           already used by the kernel for other code and data.
-           Whatever starting memory address is used in this
-           region the base address of the heap + length can't
-           be >= 0xC0800000 unless other pages are added to the
-           page tables */
-
-        /* This heap runs from 0xC0200000 to C04FFFFF - 3MB */
-        //heap.k_addBlock(&kheap, 0xC0200000, 0x300000);
 
         /* This heap runs from the 4KB aligned memory boundary after
          *  the end of the kernel for a length of 3MB
         */
         heap.k_addBlock(&kheap, (kernel_virtual_end+4095)&0xFFFFF000, 0x300000);
 
-        /* This example heap runs from 0xC0400000 to 0xC07FFFFF - 4MB */
-        //heap.k_addBlock(&kheap, 0xC0400000,0x400000);
 
         /* Now call k_malloc to allocate memory from our heap area */
         ptr = (char*)heap.k_malloc(&kheap, 256);
         printf("\nk_malloc returned: %x", ptr);
 
 
-        int_ptr = (int*)heap.k_malloc(&kheap,100);
+        int_ptr = (int*)heap.k_malloc(&kheap,2);
+        *int_ptr = 2;
         printf("\nk_malloc returned: %x", int_ptr);
         heap.k_free(&kheap, int_ptr);
 
         heap.k_free(&kheap, ptr);
+
+        /*
+         * TODO:
+         * Make Organized
+         */
 
    while(1);
    err:

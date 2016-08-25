@@ -1,7 +1,6 @@
 #include "heap.h"
 
-extern "C" uint32_t BootPageDirectory[1024];
-extern "C" void invalidate_page_vm (void *virt_addr);
+
 
 int Heap::k_addBlock(KHEAPLCAB *heap, uintptr_t addr, uint32_t size)
 {
@@ -36,6 +35,7 @@ void Heap::k_free(KHEAPLCAB *heap, void *ptr)
 	KHEAPBLOCKLCAB				*hb;
 	//uint32_t						sz;
 	//uint8_t						fg;
+	malloc_cnt--;
 
 
 	hdr = (KHEAPHDRLCAB*)ptr;
@@ -147,6 +147,7 @@ void* Heap::k_malloc(KHEAPLCAB *heap, uint32_t size)
 	bc =0;
 
 
+	malloc_cnt++;
 	for (hb = heap->fblock; hb; hb = hb->next) {
 		if ((hb->size - hb->used) >= (size + sizeof(KHEAPHDRLCAB))) {
 			++bc;
@@ -213,7 +214,7 @@ Heap::Heap(KHEAPLCAB *heap)
 {
 	heap->fblock = 0;
 	heap->bcnt = 0;
-
+	malloc_cnt=0;
    /*
 	* RESERVE 4MB TO THE HEAP
 	* Map 4MB page frame at physical address 0x400000
@@ -222,8 +223,7 @@ Heap::Heap(KHEAPLCAB *heap)
 	* TLB entry(ies)
    */
 
-	BootPageDirectory[769]=0x400083;
-	invalidate_page_vm((void *)0xC0400000);
+	pmm.map_physical_virtual(0x400083,0xC0400000,769);
 
 	/* At this point 0xC0000000 to 0xC0800000 have been
 	 *  added to paging tables and associated with physical
@@ -233,7 +233,6 @@ Heap::Heap(KHEAPLCAB *heap)
 
 Heap::~Heap()
 {
-
 }
 
 

@@ -1,7 +1,12 @@
 #include "pmm.h"
 
+extern "C" uint32_t BootPageDirectory[1024];
+extern "C" void invalidate_page_vm (void *virt_addr);
 
+PhyiscalMemoryManager::PhyiscalMemoryManager():bytes_usable(0)
+{
 
+}
 
 PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structure)
 {
@@ -44,9 +49,17 @@ PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structu
 
 
 }
+extern "C" uint32_t BootPageDirectory[1024];
+extern "C" void invalidate_page_vm (void *virt_addr);
 
-void PhyiscalMemoryManager::allocate(size_t bytes_to_allocate)
+void PhyiscalMemoryManager::map_physical_virtual(uint32_t physical_address,uint32_t virtual_address,uint32_t index_page)
 {
+	bit.set_adress(physical_address);
+	bit.setbit(7);
+	bit.setbit(1);
+	bit.setbit(0);
+	BootPageDirectory[index_page]=bit.get_address();
+	invalidate_page_vm((void *)virtual_address);
 }
 
 void PhyiscalMemoryManager::generate_pas()

@@ -28,8 +28,9 @@ class PhyiscalMemoryManager
 {
 public:
 	PhyiscalMemoryManager(multiboot_info_t *multiboot_structure);
+	PhyiscalMemoryManager();
 	~PhyiscalMemoryManager();
-	void allocate(size_t bytes_to_allocate);
+	void map_physical_virtual(uint32_t physical_address,uint32_t virtual_address,uint32_t index_page);
 private:
 	void generate_pas();
 	Bit bit;

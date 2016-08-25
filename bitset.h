@@ -22,6 +22,8 @@ public:
 	void set_max_bit(uint32_t max_bit);
 	void clearbit(int bit_to_clear);
 	uint32_t checkbit(int bit_to_check);
+	uint32_t get_address();
+	uint32_t get_maxbit();
 	~Bit();
 private:
 	bitset_t bitset;

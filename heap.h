@@ -2,6 +2,7 @@
 #define _HEAP_H_ 1
 #include "stdio.h"
 #include <stdint.h>
+#include "pmm.h"
 
 #define KHEAPFLAG_USED			0x80000000
 
@@ -41,6 +42,8 @@ public:
 private:
 		void get_page_index(uint32_t virt_address);
 		void* get_base_address(uint32_t index_page);
+		uint32_t malloc_cnt;
+		PhyiscalMemoryManager pmm;
 
 };
 
