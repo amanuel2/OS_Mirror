@@ -85,8 +85,6 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
         Heap heap((&kheap));
-        printf("\n %u \n" , 0x9D248000);
-
 
         /* This heap runs from the 4KB aligned memory boundary after
          *  the end of the kernel for a length of 3MB
