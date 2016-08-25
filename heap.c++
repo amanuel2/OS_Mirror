@@ -224,6 +224,7 @@ Heap::Heap(KHEAPLCAB *heap)
    */
 
 	pmm.map_physical_virtual(0x400083,0xC0400000,769);
+	pmm.map_physical_virtual(0x400083,0xC0400000,770);
 
 	/* At this point 0xC0000000 to 0xC0800000 have been
 	 *  added to paging tables and associated with physical
