@@ -84,13 +84,13 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	    int 		*int_ptr;
 
 
-        Heap heap;
+        Heap heap(kernel_virtual_end);
 
         /* This heap runs from the 4KB aligned memory boundary after
          *  the end of the kernel for a length of 3MB
         */
 
-        heap.k_addBlock((kernel_virtual_end), 0x300000);
+
         //heap.k_addBlock(&kheap, 0xC0200000, 0x300000);
 
         /* Now call k_malloc to allocate memory from our heap area */
@@ -104,11 +104,6 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         heap.k_free(int_ptr);
 
         heap.k_free(ptr);
-
-        /*
-         * TODO:
-         * Make Organized
-         */
 
    while(1);
    err:

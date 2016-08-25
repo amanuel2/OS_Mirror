@@ -31,7 +31,7 @@ typedef KHEAPLCAB KHEAP;
 class Heap
 {
 public:
-		Heap();
+		Heap(uint32_t kernel_virtual_end);
 		~Heap();
 		int k_addBlock(uintptr_t addr, uint32_t size);
 		void* k_malloc(uint32_t size);

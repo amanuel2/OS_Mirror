@@ -1,8 +1,12 @@
 #include "heap.h"
+
+
 extern "C" uint32_t BootPageDirectory[1024];
 extern "C" void invalidate_page_vm (void *virt_addr);
 
+
 static _KHEAPLCAB kheap;
+
 int Heap::k_addBlock(uintptr_t addr, uint32_t size)
 {
 		_KHEAPLCAB *heap = &kheap;
@@ -213,7 +217,7 @@ void* Heap::get_base_address(uint32_t index_page)
 
 
 
-Heap::Heap()
+Heap::Heap(uint32_t kernel_virtual_end)
 {
 	kheap.fblock = 0;
 	kheap.bcnt = 0;
@@ -229,6 +233,10 @@ Heap::Heap()
    */
 
 	pmm.map_physical_virtual(0x400000,0xC0400000);
+
+
+
+	this->k_addBlock((kernel_virtual_end), 0x300000);
 
 
 	/* At this point 0xC0000000 to 0xC0800000 have been
