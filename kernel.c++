@@ -74,6 +74,8 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 	   	__asm__ __volatile__ ("sti");
 
+	   	cls();
+
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
 
