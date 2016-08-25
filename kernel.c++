@@ -79,31 +79,31 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
 
-	    KHEAP       kheap;
+
 	    char        *ptr;
 	    int 		*int_ptr;
 
 
-        Heap heap((&kheap));
+        Heap heap;
 
         /* This heap runs from the 4KB aligned memory boundary after
          *  the end of the kernel for a length of 3MB
         */
 
-        heap.k_addBlock(&kheap, (kernel_virtual_end), 0x300000);
+        heap.k_addBlock((kernel_virtual_end), 0x300000);
         //heap.k_addBlock(&kheap, 0xC0200000, 0x300000);
 
         /* Now call k_malloc to allocate memory from our heap area */
-        ptr = (char*)heap.k_malloc(&kheap, 256);
+        ptr = (char*)heap.k_malloc(256);
         printf("\nk_malloc returned: %x", ptr);
 
 
-        int_ptr = (int*)heap.k_malloc(&kheap,2);
+        int_ptr = (int*)heap.k_malloc(2);
         *int_ptr = 2;
         printf("\nk_malloc returned: %x", int_ptr);
-        heap.k_free(&kheap, int_ptr);
+        heap.k_free(int_ptr);
 
-        heap.k_free(&kheap, ptr);
+        heap.k_free(ptr);
 
         /*
          * TODO:

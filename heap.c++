@@ -2,10 +2,10 @@
 extern "C" uint32_t BootPageDirectory[1024];
 extern "C" void invalidate_page_vm (void *virt_addr);
 
-
-int Heap::k_addBlock(KHEAPLCAB *heap, uintptr_t addr, uint32_t size)
+static _KHEAPLCAB kheap;
+int Heap::k_addBlock(uintptr_t addr, uint32_t size)
 {
-	 this->get_page_index(0xC0400000);
+		_KHEAPLCAB *heap = &kheap;
 		KHEAPBLOCKLCAB			*hb;
 		KHEAPHDRLCAB			*hdr;
 
@@ -30,10 +30,11 @@ int Heap::k_addBlock(KHEAPLCAB *heap, uintptr_t addr, uint32_t size)
 /*
 	Look behind and forward to see if we can merge back into some chunks.
 */
-void Heap::k_free(KHEAPLCAB *heap, void *ptr)
+void Heap::k_free(void *ptr)
 {
 	KHEAPHDRLCAB				*hdr, *phdr, *nhdr;
 	KHEAPBLOCKLCAB				*hb;
+	_KHEAPLCAB *heap = &kheap;
 	//uint32_t						sz;
 	//uint8_t						fg;
 	malloc_cnt--;
@@ -135,8 +136,9 @@ void Heap::k_free(KHEAPLCAB *heap, void *ptr)
 */
 
 
-void* Heap::k_malloc(KHEAPLCAB *heap, uint32_t size)
+void* Heap::k_malloc(uint32_t size)
 {
+	_KHEAPLCAB *heap = &kheap;
 	KHEAPBLOCKLCAB		*hb;
 	KHEAPHDRLCAB		*hdr, *_hdr, *phdr;
 	uint32_t			sz;
@@ -211,10 +213,12 @@ void* Heap::get_base_address(uint32_t index_page)
 
 
 
-Heap::Heap(KHEAPLCAB *heap)
+Heap::Heap()
 {
-	heap->fblock = 0;
-	heap->bcnt = 0;
+	kheap.fblock = 0;
+	kheap.bcnt = 0;
+//	Heap::heap->fblock = 0;
+//	*heap->bcnt = 0;
 	malloc_cnt=0;
    /*
 	* RESERVE 4MB TO THE HEAP
