@@ -3,6 +3,7 @@
 extern "C" uint32_t BootPageDirectory[1024];
 extern "C" void invalidate_page_vm (void *virt_addr);
 
+
 PhyiscalMemoryManager::PhyiscalMemoryManager():bytes_usable(0)
 {
 
@@ -43,22 +44,31 @@ PhyiscalMemoryManager::PhyiscalMemoryManager(multiboot_info_t *multiboot_structu
 		   		printf("**************************\n");
 
 
-		   		printf("%d MB Of Usable RAM" , bytes_usable/1048676);
+		   		printf("%d MB Of Usable RAM" , bytes_usable/(1024*1024));
 
 
 
 
 }
-extern "C" uint32_t BootPageDirectory[1024];
-extern "C" void invalidate_page_vm (void *virt_addr);
 
-void PhyiscalMemoryManager::map_physical_virtual(uint32_t physical_address,uint32_t virtual_address,uint32_t index_page)
+
+static inline uint32_t get_base_address(uint32_t index_page)
+{
+	return((uint32_t)(index_page << 22));
+}
+
+static inline uint32_t get_page_index(uint32_t virtual_address)
+{
+	return((uint32_t)(virtual_address >> 22));
+}
+
+void PhyiscalMemoryManager::map_physical_virtual(uint32_t physical_address,uint32_t virtual_address)
 {
 	bit.set_adress(physical_address);
 	bit.setbit(7);
 	bit.setbit(1);
 	bit.setbit(0);
-	BootPageDirectory[index_page]=bit.get_address();
+	BootPageDirectory[get_page_index(virtual_address)]=bit.get_address();
 	invalidate_page_vm((void *)virtual_address);
 }
 

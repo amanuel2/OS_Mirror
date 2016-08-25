@@ -30,7 +30,7 @@ public:
 	PhyiscalMemoryManager(multiboot_info_t *multiboot_structure);
 	PhyiscalMemoryManager();
 	~PhyiscalMemoryManager();
-	void map_physical_virtual(uint32_t physical_address,uint32_t virtual_address,uint32_t index_page);
+	void map_physical_virtual(uint32_t physical_address,uint32_t virtual_address);
 private:
 	void generate_pas();
 	Bit bit;
