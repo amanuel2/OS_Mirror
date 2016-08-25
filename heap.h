@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include <stdint.h>
 #include "pmm.h"
+#include "mem.h"
 
 #define KHEAPFLAG_USED			0x80000000
 

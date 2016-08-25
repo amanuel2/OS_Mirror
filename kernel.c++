@@ -73,7 +73,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   	mouse.install_mouse_driver();
 
 	   	__asm__ __volatile__ ("sti");
-	   	cls();
+
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
 
@@ -89,6 +89,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         /* This heap runs from the 4KB aligned memory boundary after
          *  the end of the kernel for a length of 3MB
         */
+
         heap.k_addBlock(&kheap, (kernel_virtual_end), 0x300000);
         //heap.k_addBlock(&kheap, 0xC0200000, 0x300000);
 
