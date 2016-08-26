@@ -79,6 +79,7 @@ PCI_DESCRIPTOR PCI_CONTROLLER::GetDeviceDescriptor(uint16_t bus, uint16_t device
 void PCI_CONTROLLER::printDrivers()
 {
 	printf("\t\t\t\t\t\t********PCI*********\n");
+	printf("BUS\t\tDEVICE\t\tFUNCTION\t\t\tVENDOR\t\tDEVICE\n");
 	  for(int bus = 0; bus < 8; bus++)
 	    {
 	        for(int device = 0; device < 32; device++)
@@ -91,31 +92,32 @@ void PCI_CONTROLLER::printDrivers()
 	                if(dev.vendor_id == 0x0000 || dev.vendor_id == 0xFFFF)
 	                    break;
 
-	                printf("PCI BUS ");
+	                //printf("PCI BUS ");
 	                printf("%x",bus & 0xFF);
 
-	                printf(", DEVICE ");
-	                printf("%x",device & 0xFF);
+	                //printf(", DEVICE ");
+	                printf("\t\t\t\b%x",device & 0xFF);
 
-	                printf(", FUNCTION ");
-	                printf("%x", function & 0xFF);
+	                //printf(", FUNCTION ");
+	                printf("\t\t\t\t\b\b\b\b%x", function & 0xFF);
 
-	                printf(" , VENDOR ");
+	                //printf(" , VENDOR ");
 	                uint32_t vendor_id = (dev.vendor_id & 0xFF00) | (dev.vendor_id & 0xFF);
+	                printf("\t\t\t\t\t\b");
 	                if(vendor_id == 0x8086)
 	                	printf("INTEL");
 	                else if(vendor_id == 0x80EE)
 	                	printf("Oracle");
-	                else if(vendor_id == 0x1002 || vendor_id == 1022)
+	                else if(vendor_id == 0x1002 || vendor_id == 0x1022)
 	                	printf("AMD");
 	                else if(vendor_id == 0x1234)
 	                	printf("Technical");
 	                else
 	                	printf("0x%x",vendor_id);
 
-	                printf(", DEVICE ");
-	                printf("%x",(dev.device_id & 0xFF00) >> 8);
-	                printf("%x",dev.device_id & 0xFF);
+	                //printf("= DEVICE ");
+	                uint32_t vendor_device_id = (dev.device_id & 0xFF00) | (dev.device_id & 0xFF);
+	                printf("\t\t\t\b\b%x",vendor_device_id);
 	                printf("\n");
 	            }
 	        }
