@@ -14,6 +14,7 @@
 #include "multiboot.h"
 #include "pmm.h"
 #include "heap.h"
+#include "pci.h"
 
 
 
@@ -86,17 +87,14 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
 
-
-        int *int_ptr = (int*)heap.k_malloc(0);
-
-        for(int i=0; i<=100; i++)
-        {
-        	*int_ptr = i+1;
-
-        }
+        int *int_ptr = (int*)heap.k_malloc(4);
+        int_ptr[2] = 2;
         printf("\nk_malloc returned %x \n" , int_ptr);
         heap.k_free(int_ptr);
 
+
+        PCI_CONTROLLER pci;
+        pci.printDrivers();
 
    while(1);
    err:
