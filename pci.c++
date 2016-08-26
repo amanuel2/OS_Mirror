@@ -78,7 +78,7 @@ PCI_DESCRIPTOR PCI_CONTROLLER::GetDeviceDescriptor(uint16_t bus, uint16_t device
 
 void PCI_CONTROLLER::printDrivers()
 {
-	printf("********PCI*********\n");
+	printf("\t\t\t\t\t\t********PCI*********\n");
 	  for(int bus = 0; bus < 8; bus++)
 	    {
 	        for(int device = 0; device < 32; device++)
@@ -108,6 +108,8 @@ void PCI_CONTROLLER::printDrivers()
 	                	printf("Oracle");
 	                else if(vendor_id == 0x1002 || vendor_id == 1022)
 	                	printf("AMD");
+	                else if(vendor_id == 0x1234)
+	                	printf("Technical");
 	                else
 	                	printf("0x%x",vendor_id);
 
@@ -118,5 +120,5 @@ void PCI_CONTROLLER::printDrivers()
 	            }
 	        }
 	    }
-	printf("********************");
+	printf("\t\t\t\t\t\t********************");
 }
