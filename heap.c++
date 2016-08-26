@@ -236,13 +236,19 @@ Heap::Heap(uint32_t kernel_virtual_end)
 
 
 
-	this->k_addBlock((kernel_virtual_end), 0x300000);
-
 
 	/* At this point 0xC0000000 to 0xC0800000 have been
 	 *  added to paging tables and associated with physical
 	 *  memory pages
 	 */
+
+
+	this->k_addBlock((kernel_virtual_end), 0x300000);
+
+	/* This heap runs from the 4KB aligned memory boundary after
+	 *  the end of the kernel for a length of 3MB
+	 */
+
 }
 
 Heap::~Heap()
