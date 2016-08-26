@@ -15,6 +15,7 @@
 #include "pmm.h"
 #include "heap.h"
 #include "pci.h"
+#include "vga.h"
 
 
 
@@ -96,6 +97,8 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         cls();
         PCI_CONTROLLER pci;
         pci.printDrivers();
+
+        VideoGraphicsArray vga;
 
    while(1);
    err:

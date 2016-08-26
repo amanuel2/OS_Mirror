@@ -8,6 +8,10 @@ extern const size_t VGA_WIDTH = 80;
 extern const size_t VGA_HEIGHT = 25;
 static bool continue_ex = false;
 
+extern uint8_t make_color(int fg, int bg);
+extern uint16_t make_vgaentry(char c, uint8_t color);
+
+
 uint8_t terminal_color;
 uint16_t* terminal_buffer;
 
@@ -52,11 +56,6 @@ static PORT::Port8Bits p8b_stdio_drv;
  };
 
 
- namespace Vga
- {
- 	extern uint8_t make_color(int fg, int bg);
- 	extern uint16_t make_vgaentry(char c, uint8_t color);
- };
 
 
 extern enter_press_np::enter_pressed_structure enter_pressed_func();
@@ -71,13 +70,13 @@ SerialPort sp_std_io;
 
 void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg)
 {
-	terminal_color = Vga::make_color(bg, fg);
+	terminal_color = make_color(bg, fg);
 	terminal_buffer = (uint16_t*) 0xc00b8000;
 
 	    for(int y=0; y<=(signed)(VGA_WIDTH*VGA_HEIGHT); y++)
 		{
 	    	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column)+y;
-			terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
+			terminal_buffer[index] = make_vgaentry(' ', terminal_color);
 		}
 }
 
@@ -88,13 +87,13 @@ void pong_color(int pong_ping)
 		chr_p = " pong";
 	else
 		chr_p = " ping";
-	terminal_color = Vga::make_color(0, 15);
+	terminal_color = make_color(0, 15);
 	terminal_buffer = (uint16_t*) 0xc00b8000;
 
 	for(int y=0; y<=(signed)(4); y++)
 	{
 	  	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column)+y;
-	  	terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
+	  	terminal_buffer[index] = make_vgaentry(' ', terminal_color);
 	  	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|chr_p[y];
 	}
 }
@@ -103,13 +102,13 @@ void put_char_helper_neg(char str);
 
 void printf_color(int color, char* str)
 {
-	terminal_color = Vga::make_color(color, 0);
+	terminal_color = make_color(color, 0);
 	terminal_buffer = (uint16_t*) 0xc00b8000;
 	for(int y=0; str[y]!='\0'; y++)
     {
 	  	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column)+y;
-	  	terminal_buffer[index] = Vga::make_vgaentry(' ', terminal_color);
-	  	terminal_buffer[index+1] = Vga::make_vgaentry(' ', terminal_color);
+	  	terminal_buffer[index] = make_vgaentry(' ', terminal_color);
+	  	terminal_buffer[index+1] = make_vgaentry(' ', terminal_color);
 	  	put_char_helper_neg(str[y]);
 	}
 }
