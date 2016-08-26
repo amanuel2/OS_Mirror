@@ -100,9 +100,17 @@ void PCI_CONTROLLER::printDrivers()
 	                printf(", FUNCTION ");
 	                printf("%x", function & 0xFF);
 
-	                printf(" =  VENDOR ");
-	                printf("%x",(dev.vendor_id & 0xFF00) >> 8);
-	                printf("%x",dev.vendor_id & 0xFF);
+	                printf(" , VENDOR ");
+	                uint32_t vendor_id = (dev.vendor_id & 0xFF00) | (dev.vendor_id & 0xFF);
+	                if(vendor_id == 0x8086)
+	                	printf("INTEL");
+	                else if(vendor_id == 0x80EE)
+	                	printf("Oracle");
+	                else if(vendor_id == 0x1002 || vendor_id == 1022)
+	                	printf("AMD");
+	                else
+	                	printf("0x%x",vendor_id);
+
 	                printf(", DEVICE ");
 	                printf("%x",(dev.device_id & 0xFF00) >> 8);
 	                printf("%x",dev.device_id & 0xFF);

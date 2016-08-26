@@ -93,6 +93,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         heap.k_free(int_ptr);
 
 
+        cls();
         PCI_CONTROLLER pci;
         pci.printDrivers();
 
