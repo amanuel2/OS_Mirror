@@ -1,7 +1,7 @@
 GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -o3 -nostdlib \
 		    -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore \
-		    -Wno-write-strings -Wno-unused-function -Wno-unused-label -Wno-unused-but-set-variable \
-		    -ffreestanding -Wall -Werror
+		    -Wno-write-strings -Wno-unused-function -Wno-unused-label \
+		     -Wno-unused-but-set-variable -ffreestanding -Wall -Werror 
 		    
 LDPARAMS =  -melf_i386
 objects = stdlib.o stdio.o kernel.o isr.o \
@@ -83,12 +83,12 @@ BoneOS.iso: BoneOS.bin
 	mkdir iso/boot
 	mkdir iso/boot/grub
 	cp BoneOS.bin iso/boot/BoneOS.bin
-#	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
-#	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
-#	echo ''                                  >> iso/boot/grub/grub.cfg
+	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
+	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
+	echo ''                                  >> iso/boot/grub/grub.cfg
 	echo 'menuentry "BoneOS x86 " {' >> iso/boot/grub/grub.cfg
 	echo '  multiboot /boot/BoneOS.bin'    >> iso/boot/grub/grub.cfg
-#	echo '  boot'                            >> iso/boot/grub/grub.cfg
+	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=BoneOS.iso iso
 	rm -rf iso

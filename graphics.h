@@ -19,6 +19,7 @@ class VideoGraphicsArray
             void PutPixel(int32_t x, int32_t y, uint8_t colorIndex);
 
             void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h,   uint8_t r, uint8_t g, uint8_t b);
+            void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
 
             /* only valid for 800x600x32bpp */
         private:

@@ -100,9 +100,14 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         VideoGraphicsArray vga;
 
         vga.SetMode(320,200,8);
-        for(int32_t y = 0; y < 200; y++)
-                for(int32_t x = 0; x < 320; x++)
-                    vga.PutPixel(x, y, 0x00, 0x00, 0xA8);
+        for(int y=0; y<=270; y++)
+        	for(int x=0; x<=320; x++)
+        		vga.PutPixel(x,y,0x23);
+
+        vga.FillRectangle(0,0,50,50,30,50,15);
+        vga.FillRectangle(50,50,50,50,244,67,54);
+        vga.FillRectangle(100,100,50,50,255,87,34);
+        vga.FillRectangle(150,150,50,50,0x23);
 
 
    while(1);
