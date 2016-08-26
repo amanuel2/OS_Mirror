@@ -1,6 +1,5 @@
 #include "types.h"
 #include "gdt.h"
-#include "stdio.h"
 #include "serial.h"
 #include "mem.h"
 #include "idt.h"
@@ -15,8 +14,7 @@
 #include "pmm.h"
 #include "heap.h"
 #include "pci.h"
-#include "vga.h"
-
+#include "graphics.h"
 
 
 
@@ -33,6 +31,7 @@ extern "C" void callConstructors()
        (*i)();
 }
 
+extern void printf(char *str, ...);
 
 
 extern "C" void kernelMain(uint32_t kernel_virtual_end,
@@ -99,6 +98,12 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         pci.printDrivers();
 
         VideoGraphicsArray vga;
+
+        vga.SetMode(320,200,8);
+        for(int32_t y = 0; y < 200; y++)
+                for(int32_t x = 0; x < 320; x++)
+                    vga.PutPixel(x, y, 0x00, 0x00, 0xA8);
+
 
    while(1);
    err:
