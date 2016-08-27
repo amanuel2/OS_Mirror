@@ -56,6 +56,13 @@ class VideoGraphicsArray
              *	@example:
              *		<VideoGraphicsArrayInstance>.FillRectangle(150,150,50,50,0x23);
              *
+             *	@function DrawMouse
+             *
+             *		Self Explanatory Draws Mouse on the screen
+             *
+             *		@params uint8_t colorHex:
+             *
+             *			What Hex Color To Draw the Mouse
              *
              */
             bool SupportsMode(uint32_t width, uint32_t height, uint32_t colordepth);
@@ -65,6 +72,8 @@ class VideoGraphicsArray
 
             void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t r, uint8_t g, uint8_t b);
             void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
+
+            void DrawMouse(uint8_t colorHex);
 
      	   /*
      		* @class Resolutions
