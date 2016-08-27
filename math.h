@@ -37,6 +37,11 @@ namespace math
 	    }
 	    return val;
 	}
+
+	inline double fabs(double i)
+	{
+	   return (i < 0 ? -i : i);
+	}
 }
 
 #endif

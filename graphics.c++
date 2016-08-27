@@ -124,39 +124,125 @@ void VideoGraphicsArray::PutPixel(int32_t x, int32_t y,  uint8_t r, uint8_t g, u
 void VideoGraphicsArray::DrawMouse(uint8_t colorHex)
 {
 	 for(int y=20; y<=25; y++)
-	                	for(int x=19; x<=21; x++)
-	                		this->PutPixel(x,y,colorHex);
+	      for(int x=19; x<=21; x++)
+	    	  this->PutPixel(x,y,colorHex);
 
-	        this->PutPixel(20.9,15,colorHex); //top
-	        this->PutPixel(24.9,20.5,colorHex); //right
-	        this->PutPixel(16.9,20.5,colorHex); //left
+	 for(int32_t i = 16.9; i<=24.9; i++)
+		 this->PutPixel(i,20.5,colorHex);
 
-	        for(int32_t i = 16.9; i<=24.9; i++)
-	        	this->PutPixel(i,20.5,colorHex);
+	 this->PutPixel(20.9,15,colorHex); //top
+	 this->PutPixel(24.9,20.5,colorHex); //right
+	 this->DrawLine(24.9,20.5,20.9,15,colorHex);
+	 this->PutPixel(16.9,20.5,colorHex); //left
+	 this->DrawLine(16.9,20.5,20.9,15,colorHex);
 
 
-	        this->PutPixel(23.9,19.5,colorHex); //right
-	        /**/this->PutPixel(23.4,19.0,colorHex); //right
-	        this->PutPixel(22.9,18.5,colorHex); //right
-	        /**/this->PutPixel(22.4,18.0,colorHex); //right
-	        this->PutPixel(21.9,17.5,colorHex); //right
-	        /**/this->PutPixel(21.4,17.0,colorHex); //right
-	        this->PutPixel(20.9,16.5,colorHex); //top
-	        /**/this->PutPixel(20.4,16.0,colorHex); //right
 
-	        this->PutPixel(17.9,19.5,colorHex);
-	        /**/this->PutPixel(17.6,19.2,colorHex);
-	        /**/this->PutPixel(17.4,19.0,colorHex);
-	        /**/this->PutPixel(17.0,18.6,colorHex);
-	        this->PutPixel(18.9,18.5,colorHex);
-	        /**/this->PutPixel(18.4,18.0,colorHex);
-	        /**/this->PutPixel(18.0,17.6,colorHex);
-	        this->PutPixel(19.9,17.5,colorHex);
-	        /**/this->PutPixel(19.4,17.0,colorHex);
-	        /**/this->PutPixel(19.0,16.6,colorHex);
-	        this->PutPixel(20.9,16.5,colorHex);
-	        /**/this->PutPixel(20.4,16.0,colorHex);
-	        /**/this->PutPixel(20.0,15.6,colorHex);
+
+}
+
+void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint8_t colorHex)
+{
+
+  int32_t x,y,dx,dy,dx1,dy1,px,py,xe,ye,i;
+
+  dx=x2-x1;
+  dy=y2-y1;
+  dx1=math::fabs(dx);
+  dy1=math::fabs(dy);
+  px=2*dy1-dx1;
+  py=2*dx1-dy1;
+
+  if(dy1<=dx1)
+  {
+
+	  if(dx>=0)
+	  {
+
+	    x=x1;
+	    y=y1;
+	    xe=x2;
+
+	   }
+
+	   else
+	   {
+	     x=x2;
+	     y=y2;
+	     xe=x1;
+	   }
+
+
+	  this->PutPixel(x,y,colorHex);
+
+	  for(i=0;x<xe;i++)
+	  {
+	     x=x+1;
+	      if(px<0)
+	      {
+	    	  px=px+2*dy1;
+	      }
+	      else
+	      {
+	    	  if((dx<0 && dy<0) || (dx>0 && dy>0))
+	    	  {
+	    		  y=y+1;
+	    	  }
+	    	  else
+	    	  {
+	    		  y=y-1;
+	    	  }
+	    	px=px+2*(dy1-dx1);
+	      }
+	    PutPixel(x,y,colorHex);
+	  }
+
+	 }
+
+	 else
+	 {
+		 if(dy>=0)
+		 {
+			 x=x1;
+			 y=y1;
+			 ye=y2;
+		 }
+		 else
+		 {
+			 x=x2;
+			 y=y2;
+			 ye=y1;
+		 }
+
+		 PutPixel(x,y,colorHex);
+
+		 for(i=0;y<ye;i++)
+		 {
+			 y=y+1;
+			 	 if(py<=0)
+			 	 {
+			 		 py=py+2*dx1;
+			 	 }
+			 	 else
+			 	 {
+			 		 if((dx<0 && dy<0) || (dx>0 && dy>0))
+			 		 {
+			 			 x=x+1;
+			 		 }
+			 		 else
+			 		 {
+			 			 x=x-1;
+			 		 }
+
+			 	  py=py+2*(dx1-dy1);
+
+			 	 }
+
+			  PutPixel(x,y,colorHex);
+
+		 }
+
+	 }
 }
 
 void VideoGraphicsArray::FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h,   uint8_t r, uint8_t g, uint8_t b)

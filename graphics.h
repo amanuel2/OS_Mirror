@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include "port.h"
 #include "stdio.h"
+#include "math.h"
 
 
 /*
@@ -64,6 +65,12 @@ class VideoGraphicsArray
              *
              *			What Hex Color To Draw the Mouse
              *
+             *	@function DrawLine
+             *
+             *		Draws Line Given Endpoints x1,y1 being the beggining
+             *		coordinates and x2,y2 being the end coordinates. Ofcourse
+             *		With color of your choice by changing colorHex
+             *
              */
             bool SupportsMode(uint32_t width, uint32_t height, uint32_t colordepth);
             bool SetMode(uint32_t width, uint32_t height, uint32_t colordepth);
@@ -74,6 +81,8 @@ class VideoGraphicsArray
             void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
 
             void DrawMouse(uint8_t colorHex);
+
+            void DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint8_t colorHex);
 
      	   /*
      		* @class Resolutions

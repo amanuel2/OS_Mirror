@@ -108,6 +108,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         vga.DrawMouse(0x3F);
 
 
+
 //        vga.FillRectangle(0,0,50,50,30,50,15);
 //        vga.FillRectangle(50,50,50,50,244,67,54);
 //        vga.FillRectangle(100,100,50,50,255,87,34);
