@@ -64,10 +64,13 @@ install: BoneOS.bin
 	sudo cp $< /boot/BoneOS.bin
 
 clean:
-	  rm $(objects)
-	  rm -rf iso
-	  rm BoneOS.*
-	  rm *.pcap
+	  rm -f $(objects)
+	  rm -f -rf iso
+	  rm -f BoneOS.*
+	  rm -f *.pcap
+	  rm -f *.ini
+	  rm -f qemu.log
+	  rm -f bochslog.txt
 
 qemu_compile: compile BoneOS.bin qemu
 	

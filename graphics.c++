@@ -9,18 +9,29 @@ VideoGraphicsArray::~VideoGraphicsArray()
 {
 }
 
+/* Writing to Ports
+ *
+ * Write Registers Function Serves to write register
+ * data identified in some form of struct or array,
+ * to the ports identified. For Example the Miscellaneous
+ * Port, Sequencer Ports, etc . . .
+ *
+ * @param
+ *
+ */
 
-
-void VideoGraphicsArray::WriteRegisters(uint8_t* registers)
+void VideoGraphicsArray::WriteRegisters(uint8_t* register_)
 {
+
     //  misc
-    miscPort.out(*(registers++),0x3c2);
+    miscPort.out(*(register_++),0x3c2);
+
 
     // sequencer
     for(uint8_t i = 0; i < 5; i++)
     {
         sequencerIndexPort.out(i,0x3c4);
-        sequencerDataPort.out(*(registers++),0x3c5);
+        sequencerDataPort.out(*(register_++),0x3c5);
     }
 
     // cathode ray tube controller
@@ -29,20 +40,20 @@ void VideoGraphicsArray::WriteRegisters(uint8_t* registers)
     crtcIndexPort.out(0x11,0x3d4);
     crtcDataPort.out(crtcDataPort.in(0x3d5) & ~0x80,0x3d5);
 
-    registers[0x03] = registers[0x03] | 0x80;
-    registers[0x11] = registers[0x11] & ~0x80;
+    register_[0x03] = register_[0x03] | 0x80;
+    register_[0x11] = register_[0x11] & ~0x80;
 
     for(uint8_t i = 0; i < 25; i++)
     {
         crtcIndexPort.out(i,0x3d4);
-        crtcDataPort.out(*(registers++),0x3d5);
+        crtcDataPort.out(*(register_++),0x3d5);
     }
 
     // graphics controller
     for(uint8_t i = 0; i < 9; i++)
     {
         graphicsControllerIndexPort.out(i,0x3ce);
-        graphicsControllerDataPort.out(*(registers++),0x3cf);
+        graphicsControllerDataPort.out(*(register_++),0x3cf);
     }
 
     // attribute controller
@@ -50,7 +61,7 @@ void VideoGraphicsArray::WriteRegisters(uint8_t* registers)
     {
         attributeControllerResetPort.in(0x3da);
         attributeControllerIndexPort.out(i,0x3c0);
-        attributeControllerWritePort.out(*(registers++),0x3c0);
+        attributeControllerWritePort.out(*(register_++),0x3c0);
     }
 
     attributeControllerResetPort.in(0x3da);
@@ -68,29 +79,11 @@ bool VideoGraphicsArray::SetMode(uint32_t width, uint32_t height, uint32_t color
     if(!SupportsMode(width, height, colordepth))
         return false;
 
-    unsigned char g_320x200x256[] =
-    {
-        /* MISC */
-            0x63,
-        /* SEQ */
-            0x03, 0x01, 0x0F, 0x00, 0x0E,
-        /* CRTC */
-            0x5F, 0x4F, 0x50, 0x82, 0x54, 0x80, 0xBF, 0x1F,
-            0x00, 0x41, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x9C, 0x0E, 0x8F, 0x28, 0x40, 0x96, 0xB9, 0xA3,
-            0xFF,
-        /* GC */
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x05, 0x0F,
-            0xFF,
-        /* AC */
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-            0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
-            0x41, 0x00, 0x0F, 0x00, 0x00
-    };
 
-    WriteRegisters(g_320x200x256);
+    WriteRegisters(res.g_320x200x256);
     return true;
 }
+
 
 
 uint8_t* VideoGraphicsArray::GetFrameBufferSegment()

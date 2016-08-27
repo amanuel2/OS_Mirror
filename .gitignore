@@ -15,6 +15,10 @@ BoneOS.bin
 #Log File
 qemu.log
 
+#Bochs Remenants
+*.ini
+bochslog.txt
+
 #VBox Rememnants
 VBox-*.*
 
