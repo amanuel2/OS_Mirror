@@ -9,16 +9,7 @@ VideoGraphicsArray::~VideoGraphicsArray()
 {
 }
 
-/* Writing to Ports
- *
- * Write Registers Function Serves to write register
- * data identified in some form of struct or array,
- * to the ports identified. For Example the Miscellaneous
- * Port, Sequencer Ports, etc . . .
- *
- * @param
- *
- */
+
 
 void VideoGraphicsArray::WriteRegisters(uint8_t* register_)
 {
