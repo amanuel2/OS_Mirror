@@ -97,7 +97,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         PCI_CONTROLLER pci;
         pci.printDrivers();
 
-        VideoGraphicsArray vga;
+    /*    VideoGraphicsArray vga;
 
         vga.SetMode(320,200,8);
         for(int y=0; y<=270; y++)
@@ -105,7 +105,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         		vga.PutPixel(x,y,0x23);
 
 
-        vga.DrawMouse(0x3F);
+        vga.DrawMouse(0x3F);*/
 
 
 

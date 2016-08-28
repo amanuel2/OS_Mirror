@@ -1,6 +1,6 @@
 #include "kbd.h"
 
-typedef void(*regs_func)(struct regs *r);
+
 
 static PORT::Port8Bits p8b_kbd_drv;
 
@@ -83,6 +83,12 @@ static uint8_t alphabet[26] =
 		'n','m'
 };
 
+void kbd_test()
+{
+	alphabet[222] = 'A';
+	kbdus[2222] = 'C';
+}
+
 char return_pressed_letter(int scancode)
 {
 	uint8_t to_return;
@@ -117,26 +123,17 @@ char return_pressed_letter(int scancode)
 
 
 
-void kbd_init()
-{
-	//
-	kbdus[182] = 109;
-	kbdus[170] = 110;
-}
-
 int intLength(int i) {
     int l=0;
     for(;i;i/=10) l++;
     return l==0 ? 1 : l;
 }
 
-
-
 /* Handles the keyboard interrupt */
-void keyboard_handler(struct regs *r)
+void KBD_NAME::keyboard_handler(struct regs *r)
 {
 
-    unsigned char scancode;
+    uint8_t scancode;
 
     /* Read from the keyboard's data buffer */
     scancode = p8b_kbd_drv.in(0x60);
@@ -144,38 +141,44 @@ void keyboard_handler(struct regs *r)
     /* If the top bit of the byte we read from the keyboard is
     *  set, that means that a key has just been released */
     if (scancode & 0x80)
-    {
-
-    	 switch(scancode)
-    	        {
-    	       	case 170:
-    	       	case 182:
-    	       		shift = false;
-    	       		break;
-    	       	case 186:
-    	       		if(shift == false)
-    	       			shift = true;
-    	     		else
-    	     			shift = false;
-    	      		break;
-    	}
-
-    }
+    	OnKeyUp(scancode);
     else
-    {
-    	if((int) scancode == 42)
-    		shift = true;
+    	OnKeyDown(scancode);
 
-
-    	else if((int) scancode>=16 && (int) scancode <= 50)
-    	{
-        	uint8_t letter_key_press = return_pressed_letter(scancode);
-    		printf("%c" , letter_key_press);
-    	}
-
-    }
     return;
 }
+
+
+void KBD_NAME::OnKeyDown(uint8_t scancode)
+{
+	if((int) scancode == 42)
+	   shift = true;
+
+	else if((int) scancode>=16 && (int) scancode <= 50)
+	{
+		uint8_t letter_key_press = return_pressed_letter(scancode);
+	    printf("%c" , letter_key_press);
+	}
+}
+
+void KBD_NAME::OnKeyUp(uint8_t scancode)
+{
+	switch(scancode)
+	{
+	 	 case 170:
+	 	 case 182:
+	 		 shift = false;
+	    	 break;
+	 	 case 186:
+	 		 if(shift == false)
+	 			 shift = true;
+	    	 else
+	    		 shift = false;
+	    	     break;
+	}
+}
+
+
 
 void emptyString(char* str)
 {
@@ -227,5 +230,5 @@ enter_press_np::enter_pressed_structure enter_pressed_func()
 
 void KBD::install_kbd_driver()
 {
-    install_handler_irq(1, keyboard_handler);
+    install_handler_irq(1,KBD_NAME::keyboard_handler);
 }
