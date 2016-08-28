@@ -131,13 +131,10 @@ void VideoGraphicsArray::DrawMouse(uint8_t colorHex)
 		 this->PutPixel(i,20.5,colorHex);
 
 	 this->PutPixel(20.9,15,colorHex); //top
-	 this->PutPixel(24.9,20.5,colorHex); //right
-	 this->DrawLine(24.9,20.5,20.9,15,colorHex);
-	 this->PutPixel(16.9,20.5,colorHex); //left
-	 this->DrawLine(16.9,20.5,20.9,15,colorHex);
-
-
-
+	 this->PutPixel(25.1,20.5,colorHex); //right
+	 this->DrawLine(25.1,20.5,20.9,15,colorHex);
+	 this->PutPixel(15.9,20.5,colorHex); //left
+	 this->DrawLine(15.9,20.5,20.9,15,colorHex);
 
 }
 
