@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include "port.h"
 #include "stdio.h"
+#include "color.h"
 #include "math.h"
 
 
@@ -74,10 +75,10 @@ class VideoGraphicsArray
              */
             bool SupportsMode(uint32_t width, uint32_t height, uint32_t colordepth);
             bool SetMode(uint32_t width, uint32_t height, uint32_t colordepth);
-            void PutPixel(int32_t x, int32_t y,  uint8_t r, uint8_t g, uint8_t b);
+            void PutPixel(int32_t x, int32_t y,  RGB rgb);
             void PutPixel(int32_t x, int32_t y, uint8_t colorIndex);
 
-            void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t r, uint8_t g, uint8_t b);
+            void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, RGB rgb);
             void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
 
             void DrawMouse(uint8_t colorHex);
@@ -173,7 +174,7 @@ class VideoGraphicsArray
              * @param uint8_t g : Green Buffer
              * @param uint8_t b : Blue Buffer
              */
-            uint8_t GetColorIndex(uint8_t r, uint8_t g, uint8_t b);
+            uint8_t GetColorIndex(RGB rgb);
 
 };
 

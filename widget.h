@@ -49,5 +49,4 @@ protected:
 	uint8_t b;
 	bool Focusable;
 };
-
 #endif

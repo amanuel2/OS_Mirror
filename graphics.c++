@@ -105,19 +105,19 @@ void VideoGraphicsArray::PutPixel(int32_t x, int32_t y,  uint8_t colorIndex)
     *pixelAddress = colorIndex;
 }
 
-uint8_t VideoGraphicsArray::GetColorIndex(uint8_t r, uint8_t g, uint8_t b)
+uint8_t VideoGraphicsArray::GetColorIndex(RGB rgb)
 {
-    if(r == 0x00 && g == 0x00 && b == 0x00) return 0x00; // black
-    if(r == 0x00 && g == 0x00 && b == 0xA8) return 0x01; // blue
-    if(r == 0x00 && g == 0xA8 && b == 0x00) return 0x02; // green
-    if(r == 0xA8 && g == 0x00 && b == 0x00) return 0x04; // red
-    if(r == 0xFF && g == 0xFF && b == 0xFF) return 0x3F; // white
-	return ((r<<16) | (g<<8) | b);
+    if(rgb.r == 0x00 && rgb.g == 0x00 && rgb.b == 0x00) return 0x00; // black
+    if(rgb.r == 0x00 && rgb.g == 0x00 && rgb.b == 0xA8) return 0x01; // blue
+    if(rgb.r == 0x00 && rgb.g == 0xA8 && rgb.b == 0x00) return 0x02; // green
+    if(rgb.r == 0xA8 && rgb.g == 0x00 && rgb.b == 0x00) return 0x04; // red
+    if(rgb.r == 0xFF && rgb.g == 0xFF && rgb.b == 0xFF) return 0x3F; // white
+	return ((rgb.r<<16) | (rgb.g<<8) | rgb.b);
 }
 
-void VideoGraphicsArray::PutPixel(int32_t x, int32_t y,  uint8_t r, uint8_t g, uint8_t b)
+void VideoGraphicsArray::PutPixel(int32_t x, int32_t y,RGB rgb)
 {
-    PutPixel(x,y, GetColorIndex(r,g,b));
+    PutPixel(x,y, GetColorIndex(rgb));
 
 }
 
@@ -242,11 +242,11 @@ void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2
 	 }
 }
 
-void VideoGraphicsArray::FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h,   uint8_t r, uint8_t g, uint8_t b)
+void VideoGraphicsArray::FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h,  RGB rgb)
 {
     for(uint32_t Y = y; Y < y+h; Y++)
         for(uint32_t X = x; X < x+w; X++)
-            PutPixel(X, Y, r, g, b);
+            PutPixel(X, Y, rgb);
 }
 
 void VideoGraphicsArray::FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex)
