@@ -1,7 +1,7 @@
 #ifndef _GRAPHICSCTX_H_
 #define _GRAPHICSCTX_H_ 1
 
-#include "vga.h"
+#include "graphics.h"
 
 typedef VideoGraphicsArray GraphicsContext;
 

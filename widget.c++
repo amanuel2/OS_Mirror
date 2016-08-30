@@ -13,6 +13,34 @@ Widget::Widget(Widget *parent ,int32_t x,int32_t y,int32_t w,int32_t h,uint8_t r
 	this->Focusable = true;
 }
 
+
+void Widget::Draw(GraphicsContext gtx, uint32_t x, uint32_t y, uint32_t width, uint32_t height,
+			  uint8_t colorHex)
+{
+	//TODO MODEL TO SCREEN
+	gtx.FillRectangle(x,y,width,height,colorHex);
+}
+
+void Widget::Draw(GraphicsContext gtx, uint32_t x, uint32_t y, uint32_t width, uint32_t height,
+			  RGB rgb)
+{
+	this->Draw(gtx,x,y,width,height,gtx.GetColorIndex(rgb));
+}
+
+void Widget::ModelToScreen(uint8_t &x, uint8_t &y)
+{
+	if(this->parent != 0)
+		this->parent->ModelToScreen(x,y);
+	x+=this->x;
+	x-=this->y;
+}
+
+void Widget::GetFocus(Widget *widget)
+{
+	if(this->parent != 0)
+		this->parent->GetFocus(widget);
+}
+
 Widget::~Widget(void)
 {
 	this->parent = nullptr;

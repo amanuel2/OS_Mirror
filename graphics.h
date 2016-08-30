@@ -70,7 +70,18 @@ class VideoGraphicsArray
              *
              *		Draws Line Given Endpoints x1,y1 being the beggining
              *		coordinates and x2,y2 being the end coordinates. Ofcourse
-             *		With color of your choice by changing colorHex
+             *		With color of your choice by changing colorHex. Based of
+             *		Bresenham algorithm.
+             *
+             * @function GetColorIndex : Get Hex
+             *
+             * 	function that gives the color index
+             * 	or Hex from a RGB Formatted Color.
+             * 	Usefull to graphics mode programming.
+             *
+             * 		@param uint8_t r : Red Buffer
+             * 		@param uint8_t g : Green Buffer
+             * 		@param uint8_t b : Blue Buffer
              *
              */
             bool SupportsMode(uint32_t width, uint32_t height, uint32_t colordepth);
@@ -84,6 +95,10 @@ class VideoGraphicsArray
             void DrawMouse(uint8_t colorHex);
 
             void DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint8_t colorHex);
+
+
+            uint8_t GetColorIndex(RGB rgb);
+
 
      	   /*
      		* @class Resolutions
@@ -164,17 +179,6 @@ class VideoGraphicsArray
             void WriteRegisters(uint8_t* register_);
             uint8_t* GetFrameBufferSegment();
 
-            /* @function GetColorIndex : Get Hex
-             *
-             * 	function that gives the color index
-             * 	or Hex from a RGB Formatted Color.
-             * 	Usefull to graphics mode programming.
-             *
-             * @param uint8_t r : Red Buffer
-             * @param uint8_t g : Green Buffer
-             * @param uint8_t b : Blue Buffer
-             */
-            uint8_t GetColorIndex(RGB rgb);
 
 };
 
