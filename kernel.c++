@@ -109,7 +109,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
         vga.DrawMouse(0x3F);
 
-        Widget widget_f(20,30,50,50,0x00);
+        Widget widget_f(20,30,80,80,0x00,0x1);
 
 #endif
 

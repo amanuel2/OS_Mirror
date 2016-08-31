@@ -21,13 +21,14 @@ public:
 	 * 	 Sets Protected Members
 	 * 	 	@member x,y,w,h
 	 * 	 	@member backgroud
-	 * 	 	@member Focusable
 	 */
 	Widget(int32_t x,int32_t y,int32_t w,
-		   int32_t h,uint8_t colorBackground);
+		   int32_t h,uint8_t colorBackground
+		   ,uint32_t FLAGS);
 
 	Widget(int32_t x,int32_t y,int32_t w,
-			   int32_t h,RGB rgb_back);
+		   int32_t h,RGB rgb_back
+		   ,uint32_t FLAGS);
 
 	/*
 	 * @deconstructor
@@ -35,17 +36,34 @@ public:
 	 * 	to NULLPTR
 	 * 		@member x,y,w,h
 	 * 	 	@member r,g,b
-	 * 	 	@member Focusable
 	 */
 	~Widget();
 
 private:
 
+	/*
+	 * @function __constructor__
+	 *
+	 * 	Gets Treated as constructor.
+	 * 	All Contrcturors Call this
+	 * 	function
+	 *
+	 *
+	 * 	@param SAME AS ORIGINAL CONTRUCTOR
+	 *
+	 *
+	 *
+	 * @function 	DRAW_ORIGINAL_WIDGET
+	 *
+	 *	Draw Original WIDGET
+	 */
 	void __constructor__(int32_t x,int32_t y,int32_t w,
-			   int32_t h,uint8_t colorBackground);
+			   int32_t h,uint8_t colorBackground,
+			   uint32_t FLAGS);
 
-	void DRAW_ORIGINAL_WIDGET(int32_t x,int32_t y,int32_t w,
-			   int32_t h,uint8_t colorBackground);
+	void DRAW_ORIGINAL_WIDGET();
+
+	void DRAW_ORIGINAL_TOOLWINDOW();
 
 	int32_t x;
 	int32_t y;
@@ -54,5 +72,6 @@ private:
 
 	GraphicsContext *gr;
 	uint8_t colorBack;
+	uint32_t GIVEN_FLAGS;
 };
 #endif
