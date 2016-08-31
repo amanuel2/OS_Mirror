@@ -67,6 +67,20 @@ public:
 	 * 		Adjusts the focus
 	 * 		for the widget
 	 *
+	 * 	@function ContainsCoordinates
+	 *
+	 * 		Checks if the current x and
+	 * 		y coordinates contains the
+	 * 		coordinate of the parameters.
+	 *
+	 * 			@param uint32_t x : X Compare Value
+	 * 			@param uint32_t y : Y Compare Value
+	 *
+	 * 			@return
+	 *
+	 * 				Returns True if it does contain the coordinate
+	 * 				false if otherwise
+	 *
 	 */
 	void Draw(GraphicsContext gtx, uint32_t x, uint32_t y, uint32_t width, uint32_t height,
 			  uint8_t colorHex);
@@ -77,6 +91,8 @@ public:
 	void ModelToScreen(uint32_t &x, uint32_t &y);
 
 	void GetFocus(Widget *widget);
+
+	bool ContainsCoordinates(int32_t x, int32_t y);
 
 protected:
 	Widget *parent;
