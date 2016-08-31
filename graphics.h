@@ -62,9 +62,17 @@ class VideoGraphicsArray
              *
              *		Self Explanatory Draws Mouse on the screen
              *
-             *		@params uint8_t colorHex:
+             *		@polymorph
              *
-             *			What Hex Color To Draw the Mouse
+             *			1) @param uint8_t colorHex:
+             *
+             *					What Hex Color To Draw the Mouse
+             *
+             *			2) @param RGB rgb
+             *
+             *					Color in RGB Format that autmatically
+             *					gets converted to hex, and draws the
+             *					mouse.
              *
              *	@function DrawLine
              *
@@ -93,6 +101,7 @@ class VideoGraphicsArray
             void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
 
             void DrawMouse(uint8_t colorHex);
+            void DrawMouse(RGB rgb);
 
             void DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint8_t colorHex);
 
@@ -139,16 +148,17 @@ class VideoGraphicsArray
             /*
              * @instance Port8Bits : Ports
              *
-             * 	Ports that aid to switching
-             * 	to VGA Mode. The Alternative
-             * 	from int 0x13; and going to
-             * 	Real Mode or Virtual 8086 Mode
+             * 		Ports that aid to switching
+             * 		to VGA Mode. The Alternative
+             * 		from int 0x13; and going to
+             * 		Real Mode or Virtual 8086 Mode
              *
              *	@instance Resolutions res
              *
-             *	 instance used in the class
-             *	 to give info about all the
-             *	 resolutions available!
+             *	 	instance used in the class
+             *	 	to give info about all the
+             *	 	resolutions available!
+             *
              */
             PORT::Port8Bits miscPort;
             PORT::Port8Bits crtcIndexPort;
@@ -177,6 +187,7 @@ class VideoGraphicsArray
              *
              */
             void WriteRegisters(uint8_t* register_);
+            //uint8_t rgbColor(uint8_t r, uint8_t g, uint8_t b);
             uint8_t* GetFrameBufferSegment();
 
 

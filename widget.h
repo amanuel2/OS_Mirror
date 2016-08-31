@@ -74,7 +74,7 @@ public:
 	void Draw(GraphicsContext gtx, uint32_t x, uint32_t y, uint32_t width, uint32_t height,
 				  RGB rgb);
 
-	void ModelToScreen(uint8_t &x, uint8_t &y);
+	void ModelToScreen(uint32_t &x, uint32_t &y);
 
 	void GetFocus(Widget *widget);
 

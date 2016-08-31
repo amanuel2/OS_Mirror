@@ -17,7 +17,7 @@ Widget::Widget(Widget *parent ,int32_t x,int32_t y,int32_t w,int32_t h,uint8_t r
 void Widget::Draw(GraphicsContext gtx, uint32_t x, uint32_t y, uint32_t width, uint32_t height,
 			  uint8_t colorHex)
 {
-	//TODO MODEL TO SCREEN
+	this->ModelToScreen(x,y);
 	gtx.FillRectangle(x,y,width,height,colorHex);
 }
 
@@ -27,7 +27,7 @@ void Widget::Draw(GraphicsContext gtx, uint32_t x, uint32_t y, uint32_t width, u
 	this->Draw(gtx,x,y,width,height,gtx.GetColorIndex(rgb));
 }
 
-void Widget::ModelToScreen(uint8_t &x, uint8_t &y)
+void Widget::ModelToScreen(uint32_t &x, uint32_t &y)
 {
 	if(this->parent != 0)
 		this->parent->ModelToScreen(x,y);

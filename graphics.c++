@@ -138,6 +138,12 @@ void VideoGraphicsArray::DrawMouse(uint8_t colorHex)
 
 }
 
+void VideoGraphicsArray::DrawMouse(RGB rgb)
+{
+	this->DrawMouse(this->GetColorIndex(rgb));
+}
+
+
 void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint8_t colorHex)
 {
 

@@ -107,8 +107,6 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
 
-
-
    while(1);
    err:
    	   while(1);
