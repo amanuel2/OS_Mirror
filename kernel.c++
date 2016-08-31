@@ -15,6 +15,9 @@
 #include "heap.h"
 #include "pci.h"
 #include "graphics.h"
+#include "widget.h"
+
+#define GRAPHICS_MODE 1
 
 
 
@@ -97,6 +100,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         PCI_CONTROLLER pci;
         pci.printDrivers();
 
+#ifdef GRAPHICS_MODE
         VideoGraphicsArray vga;
 
         vga.SetMode(320,200,8);
@@ -104,6 +108,10 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
 
         vga.DrawMouse(0x3F);
+
+        Widget widget_f(20,30,50,50,0x00);
+
+#endif
 
 
 
