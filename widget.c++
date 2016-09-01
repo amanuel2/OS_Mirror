@@ -38,16 +38,27 @@ void Widget::DRAW_ORIGINAL_WIDGET()
 }
 
 void Widget::DRAW_ORIGINAL_TOOLS()
-{
-	this->Draw_Minimize_Tool(0x15,0x11);
+{//0x2C
+	this->Draw_Minimize_Tool(0x15,0x29);
+	this->Draw_Exit_Tool(0x15,0x2C);
 }
 
 void Widget::Draw_Minimize_Tool(uint8_t background_color,uint8_t foreground_color)
 {
 	this->gr->FillRectangle(((this->w+this->x)-(this->w/7)),this->y,(this->w/7),(this->h/6),background_color);
 	//Drawing Minimize Button
-	this->gr->FillRectangle(((this->w+this->x)-(this->w/7)),(this->y+(this->h/16)),(this->w/7),(this->h/12),foreground_color);
+	this->gr->FillRectangle(((this->w+this->x)-(this->w/7)),(this->y+(this->h/16)),(this->w/7),
+			(this->h/12),foreground_color);
 }
+void Widget::Draw_Exit_Tool(uint8_t background_color,uint8_t foreground_color)
+{
+	this->gr->FillRectangle(((this->x)),this->y,(this->w/7),(this->h/6),background_color);
+	//start from bottom
+	this->gr->DrawLine( (this->x + (this->w/7)),(this->y),(this->x),((this->y)+(this->h/6)),foreground_color);
+	//start from top
+	this->gr->DrawLine( (this->x + (this->w/7)),(this->y+(this->h/6)),(this->x),((this->y)),foreground_color);
+}
+
 
 void Widget::DRAW_ORIGINAL_TOOLWINDOW()
 {

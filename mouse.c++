@@ -8,8 +8,8 @@ extern void install_handler_irq(int irq, regs_func handler);
 static PORT::Port8Bits p8b_mouse_drv;
 static byte mouse_cycle=0;     //unsigned char
 static sbyte mouse_byte[3];    //signed char
-static sbyte mouse_x=0;         //signed char
-static sbyte mouse_y=0;         //signed char
+static int32_t mouse_x=0;         //signed char
+static int32_t mouse_y=0;         //signed char
 
 
 
@@ -70,10 +70,12 @@ void mouse_ps2_handler(struct regs *r)
   {
     case 0:
       mouse_byte[0]=p8b_mouse_drv.in(0x60);
+
       mouse_cycle++;
       break;
     case 1:
       mouse_byte[1]=p8b_mouse_drv.in(0x60);
+
       mouse_cycle++;
       break;
     case 2:
@@ -83,7 +85,8 @@ void mouse_ps2_handler(struct regs *r)
       mouse_cycle=0;
       break;
   }
-  mouse_move_print(mouse_x,mouse_y);
+ mouse_move_print(mouse_x,mouse_y);
+ //   printf("X:%d,Y:%d",mouse_x,mouse_y);
 }
 
 

@@ -1,4 +1,4 @@
-#define GRAPHICS_MODE 1
+//#define GRAPHICS_MODE 1
 #include "types.h"
 #include "gdt.h"
 #include "serial.h"
