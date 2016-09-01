@@ -30,39 +30,6 @@ void timer_wait(int ticks)
 }
 
 
- //Play sound using built in speaker
- static void play_sound(uint32_t nFrequence) {
-    uint32_t Div;
-    uint8_t tmp;
- 
- 
-        //Set the PIT to the desired frequency
-    Div = 1193180 / nFrequence;
-    p8b_timer_drv.out(0xb6,0x43);
-    p8b_timer_drv.out((uint8_t) (Div),0x42 );
-    p8b_timer_drv.out((uint8_t) (Div >> 8),0x42);
- 
-        //And play the sound using the PC speaker
-    tmp = p8b_timer_drv.in(0x61);
-    if (tmp != (tmp | 3)) {
-        p8b_timer_drv.out(tmp | 3,0x61);
-    }
- }
- 
- //make it shutup
- static void nosound() {
-    uint8_t tmp = p8b_timer_drv.in(0x61) & 0xFC;
- 
-    p8b_timer_drv.out(tmp,0x61);
- }
- 
- //Make a beep`
- void beep() {
-     play_sound(1000);
-     timer_wait(10);
-     nosound();
-          //set_PIT_2(old_frequency);
- }
 
  void timer_phase(int hz)
 {
@@ -71,6 +38,8 @@ void timer_wait(int ticks)
     p8b_timer_drv.out(divisor & 0xFF,0x40);   /* Set low byte of divisor */
     p8b_timer_drv.out(divisor >> 8,0x40);     /* Set high byte of divisor */
 }
+
+
 
 /* Handles the timer. In this case, it's very simple: We
 *  increment the 'Timer::timer_ticks' variable every time the
@@ -93,6 +62,7 @@ void timer_handler_driver(struct regs *r)
     update_cursor(terminal_row,terminal_column);
 
 }
+
 
 
 Timer::Timer()
