@@ -1,3 +1,4 @@
+#define GRAPHICS_MODE 1
 #include "types.h"
 #include "gdt.h"
 #include "serial.h"
@@ -14,10 +15,11 @@
 #include "pmm.h"
 #include "heap.h"
 #include "pci.h"
-#include "graphics.h"
-#include "widget.h"
+#ifdef GRAPHICS_MODE
+	#include "graphics.h"
+	#include "widget.h"
+#endif
 
-#define GRAPHICS_MODE 1
 
 
 
@@ -109,8 +111,8 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 
         vga.DrawMouse(0x3F);
 
-        Widget widget_f(20,30,80,80,0x00,0x1);
-
+        Widget widget_f(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
+        Widget widget_s(60,70,80,80,0x00,0x0);
 #endif
 
 

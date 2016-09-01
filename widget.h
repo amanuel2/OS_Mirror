@@ -6,6 +6,8 @@
 #include "graphicsctx.h"
 #include "color.h"
 
+#define TOOL_WINDOW_ORIGNAL 0x1 << 0
+
 /*
  * @class Widget
  *
@@ -65,6 +67,9 @@ private:
 
 	void DRAW_ORIGINAL_TOOLWINDOW();
 
+	void Draw_Minimize_Tool(uint8_t background_color,uint8_t foreground_color);
+
+	void DRAW_ORIGINAL_TOOLS();
 	int32_t x;
 	int32_t y;
 	int32_t w;
