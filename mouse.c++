@@ -61,17 +61,65 @@ byte mouse_read()
 
 
 
-static int count = 0;
-static byte mouse_cycle=0;     //unsigned char
-//static sbyte mouse_byte[3];    //signed char
-static int32_t mouse_x=0;         //signed char
-static int32_t mouse_y=0;         //signed char
+//static int count = 0;
+//static byte mouse_cycle=0;     //unsigned char
+////static sbyte mouse_byte[3];    //signed char
+//static int32_t mouse_x=0;         //signed char
+//static int32_t mouse_y=0;         //signed char
 
+
+static uint8_t buffer[3];
+static uint8_t offset;
+//static uint8_t buttons;
+static int8_t x, y;
 
 //Mouse functions
 void mouse_ps2_handler(struct regs *a_r) //struct regs *a_r (not used but just there)
 {
-  mouse_read();
+
+    uint8_t status = p8b_mouse_drv.in(0x64);
+    	if (!(status & 0x20))
+    		goto end;
+
+    	 buffer[offset] = p8b_mouse_drv.in(0x60);
+    	 offset = (offset + 1) % 3;
+
+    	 if(offset == 0)
+    	 {
+
+    		 if(buffer[1] != 0 || buffer[2] != 0)
+    		 {
+
+//    			 static uint16_t* VideoMemoryMouse = (uint16_t*)0xc00b8000;
+//    			 	 	 	 VideoMemoryMouse[80*y+x] = (VideoMemoryMouse[80*y+x] & 0x0F00) << 4
+//    			                                     | (VideoMemoryMouse[80*y+x] & 0xF000) >> 4
+//    			                                     | (VideoMemoryMouse[80*y+x] & 0x00FF);
+
+    			 gtx.PutPixel(x,y,0xFF);
+
+    			                 x += buffer[1];
+    			                 if(x >= 80) x = 79;
+    			                 if(x < 0) x = 0;
+    			                 y -= buffer[2];
+    			                 if(y >= 25) y = 24;
+    			                 if(y < 0) y = 0;
+
+//    			                 VideoMemoryMouse[80*y+x] = (VideoMemoryMouse[80*y+x] & 0x0F00) << 4
+//    			                                     | (VideoMemoryMouse[80*y+x] & 0xF000) >> 4
+//    			                                     | (VideoMemoryMouse[80*y+x] & 0x00FF);
+
+
+    		 }
+
+    	 }
+
+
+  end:;
+}
+
+
+/*
+ *  mouse_read();
   mouse_clear_print(mouse_x,mouse_y);
   if(count==10);
 
@@ -100,9 +148,7 @@ void mouse_ps2_handler(struct regs *a_r) //struct regs *a_r (not used but just t
 
   }
   count++;
-  gtx.PutPixel(mouse_x,mouse_y,0xFF);
-}
-
+  gtx.PutPixel(mouse_x,mouse_y,0xFF);*/
 
 
 void MOUSE::install_mouse_driver()
