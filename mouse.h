@@ -1,7 +1,7 @@
 #ifndef _MOUSE_H_
 #define _MOUSE_H_ 1
 
-//#define GRAPHICS_MODE 1
+#define GRAPHICS_MODE 1
 #include "stdio.h"
 #include "port.h"
 #include "stdint.h"

@@ -6,10 +6,6 @@ typedef void(*regs_func)(struct regs *r);
 extern void install_handler_irq(int irq, regs_func handler);
 
 static PORT::Port8Bits p8b_mouse_drv;
-static byte mouse_cycle=0;     //unsigned char
-static sbyte mouse_byte[3];    //signed char
-static int32_t mouse_x=0;         //signed char
-static int32_t mouse_y=0;         //signed char
 
 #ifdef GRAPHICS_MODE
 	GraphicsContext gtx;
@@ -18,7 +14,7 @@ static int32_t mouse_y=0;         //signed char
 
 inline void mouse_wait(byte a_type) //unsigned char
 {
- dword _time_out=100000; //unsigned int
+	 dword _time_out=100000; //unsigned int
 	  if(a_type==0)
 	  {
 	    while(_time_out--) //Data
@@ -65,33 +61,46 @@ byte mouse_read()
 
 
 
+static int count = 0;
+static byte mouse_cycle=0;     //unsigned char
+//static sbyte mouse_byte[3];    //signed char
+static int32_t mouse_x=0;         //signed char
+static int32_t mouse_y=0;         //signed char
+
 
 //Mouse functions
 void mouse_ps2_handler(struct regs *a_r) //struct regs *a_r (not used but just there)
 {
   mouse_read();
   mouse_clear_print(mouse_x,mouse_y);
+  if(count==10);
+
   switch(mouse_cycle)
   {
-    case 0:
-      mouse_byte[0]=p8b_mouse_drv.in(0x60);
-      mouse_cycle++;
-      break;
-    case 1:
-      mouse_byte[1]=p8b_mouse_drv.in(0x60);
-      mouse_cycle++;
-      break;
-    case 2:
-      mouse_byte[2]=p8b_mouse_drv.in(0x60);
-      mouse_x=/*mouse_x  + */mouse_byte[1];
-      mouse_y=/*mouse_y */+ mouse_byte[2];
-      mouse_cycle=0;
-      break;
+  	  //MOUSE CYCLE BYTE
+  	  case 0:
+  		  printf("Packet Byte 1 : 0x%x\n",p8b_mouse_drv.in(0x60));
+  		  mouse_cycle++;
+  		  break;
+  	  case 1:
+  		printf("Packet Byte 2 : 0x%x\n",p8b_mouse_drv.in(0x60));
+  		  mouse_x += (p8b_mouse_drv.in(0x60)/100);
+  		  mouse_cycle++;
+  		  break;
+  	  case 2:
+  		printf("Packet Byte 3 : 0x%x\n",p8b_mouse_drv.in(0x60));
+  		 // if(mouse_y +(p8b_mouse_drv.in(0x60)/100) >= 200 ) goto end;
+  		//mouse_byte[2]=(p8b_mouse_drv.in(0x60)/20);
+		  mouse_y += (p8b_mouse_drv.in(0x60)/100);
+  		 //mouse_x=mouse_byte[1];
+  		// mouse_y=mouse_byte[2];
+  		  mouse_cycle=0;
+  		  end:;
+  		  break;
+
   }
-	 mouse_move_print(mouse_x,mouse_y);
-#ifdef GRAPHICS_MODE
-  	 gtx.PutPixel(mouse_x,mouse_y,0xFF);
-#endif
+  count++;
+  gtx.PutPixel(mouse_x,mouse_y,0xFF);
 }
 
 
