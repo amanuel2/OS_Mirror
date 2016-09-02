@@ -75,27 +75,24 @@ static int8_t x, y;
 //Mouse functions
 void mouse_ps2_handler(struct regs *a_r)
 {
-
     uint8_t status = p8b_mouse_drv.in(0x64);
     	if (!(status & 0x20))
-    		goto end;
+    		goto end; // IF NO DATA RECIEVE
 
-    	// buffer[offset] = p8b_mouse_drv.in(0x60);
-    	buffer[offset]=p8b_mouse_drv.in(0x60);
-    	 offset = (offset + 1) % 3;
 
-    	 if(offset == 0)
+    	buffer[offset]=p8b_mouse_drv.in(0x60); // Get Data TO Packet Buffer with Specified Offset
+    	offset = (offset + 1) % 3; // Move Offset
+
+
+    	 if(offset == 0) // Transmition Complete. All Packet Buffer Have Been Written To
     	 {
 
     		 if(buffer[1] != 0 || buffer[2] != 0)
     		 {
 
-
-    			                 x += buffer[1];
-    			                 y -= buffer[2];
-    			                 gtx.PutPixel(x,y,0xFF);
-
-
+    			 	 x += buffer[1];
+    			     y -= buffer[2];
+    			     gtx.PutPixel(x,y,0xFF);
 
     		 }
 
@@ -104,39 +101,6 @@ void mouse_ps2_handler(struct regs *a_r)
 
   end:;
 }
-
-
-/*
- *  mouse_read();
-  mouse_clear_print(mouse_x,mouse_y);
-  if(count==10);
-
-  switch(mouse_cycle)
-  {
-  	  //MOUSE CYCLE BYTE
-  	  case 0:
-  		  printf("Packet Byte 1 : 0x%x\n",p8b_mouse_drv.in(0x60));
-  		  mouse_cycle++;
-  		  break;
-  	  case 1:
-  		printf("Packet Byte 2 : 0x%x\n",p8b_mouse_drv.in(0x60));
-  		  mouse_x += (p8b_mouse_drv.in(0x60)/100);
-  		  mouse_cycle++;
-  		  break;
-  	  case 2:
-  		printf("Packet Byte 3 : 0x%x\n",p8b_mouse_drv.in(0x60));
-  		 // if(mouse_y +(p8b_mouse_drv.in(0x60)/100) >= 200 ) goto end;
-  		//mouse_byte[2]=(p8b_mouse_drv.in(0x60)/20);
-		  mouse_y += (p8b_mouse_drv.in(0x60)/100);
-  		 //mouse_x=mouse_byte[1];
-  		// mouse_y=mouse_byte[2];
-  		  mouse_cycle=0;
-  		  end:;
-  		  break;
-
-  }
-  count++;
-  gtx.PutPixel(mouse_x,mouse_y,0xFF);*/
 
 
 void MOUSE::install_mouse_driver()
