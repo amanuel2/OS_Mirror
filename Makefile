@@ -1,7 +1,8 @@
 GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -o3 -nostdlib \
 		    -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore \
 		    -Wno-write-strings -Wno-unused-function -Wno-unused-label \
-		     -Wno-unused-but-set-variable -ffreestanding -Wall -Werror 
+		     -Wno-unused-but-set-variable -ffreestanding -Wall -Werror \
+		     -Wno-unused-variable
 		    
 LDPARAMS =  -melf_i386
 objects = stdlib.o stdio.o kernel.o isr.o \

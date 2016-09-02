@@ -61,19 +61,14 @@ byte mouse_read()
 
 
 
-//static int count = 0;
-//static byte mouse_cycle=0;     //unsigned char
-//static sbyte mouse_byte[3];    //signed char
-//static int32_t mouse_x=0;         //signed char
-//static int32_t mouse_y=0;         //signed char
-
 
 static uint8_t buffer[3]={0};
 static uint8_t offset=0;
-static int8_t x, y;
+static int32_t x, y;
+static uint8_t x_vga,y_vga = 0;
 
 //Mouse functions
-void mouse_ps2_handler(struct regs *a_r) //struct regs *a_r (not used but just there)
+void mouse_ps2_handler(struct regs *a_r)
 {
 
     uint8_t status = p8b_mouse_drv.in(0x64);
@@ -87,14 +82,51 @@ void mouse_ps2_handler(struct regs *a_r) //struct regs *a_r (not used but just t
         {
             if(buffer[1] != 0 || buffer[2] != 0)
             {
-                x = x + buffer[1];
-                y = y - buffer[2];
+                /* Convert 8 bit integer and 1-bit sign flag representing 
+                   9-bit 2's complement value to a 32-bit signed integer */
+                int32_t int_x, int_y;
+
+                /* Bit 4 of buffer[0] is X's sign bit
+                   Bit 5 of buffer[0] is Y's sign bit */
+                int_x = buffer[1] - (0x100 & (buffer[0] << (8-4)));
+                int_y = buffer[2] - (0x100 & (buffer[0] << (8-5)));
+
+#ifdef GRAPHICS_MODE
+                x += int_x;
+                y -= int_y;
+
+
+
+                if (x<=0) x=0;
+                if (y<=0) y=0;
+                if (x>=319) x=319;
+                if (y>=199) y=199;
                 gtx.PutPixel(x,y,0xFF);
+#else
+
+                static uint16_t* VideoMemoryMouse = (uint16_t*)0xc00b8000;
+                               VideoMemoryMouse[80*y_vga + x_vga] = (VideoMemoryMouse[80*y_vga + x_vga] & 0x0F00) << 4
+                                                   | (VideoMemoryMouse[80*y_vga + x_vga] & 0xF000) >> 4
+                                                   | (VideoMemoryMouse[80*y_vga + x_vga] & 0x00FF);
+
+                               x_vga += buffer[1];
+                               if(x_vga >= 80) x_vga = 79;
+                               if(x_vga < 0) x_vga = 0;
+                               y_vga -= buffer[2];
+                               if(y_vga >= 25) y_vga = 24;
+                               if(y_vga < 0) y_vga = 0;
+
+                               VideoMemoryMouse[80*y_vga + x_vga] = (VideoMemoryMouse[80*y_vga + x_vga] & 0x0F00) << 4
+                                                   | (VideoMemoryMouse[80*y_vga + x_vga] & 0xF000) >> 4
+                                                   | (VideoMemoryMouse[80*y_vga + x_vga] & 0x00FF);
+#endif
             }
         }
 
   end:;
 }
+
+
 
 
 void MOUSE::install_mouse_driver()
