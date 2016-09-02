@@ -21,8 +21,6 @@
 #endif
 
 
-
-
 //Call all class constructor
 //for global objects before
 //calling the kernel

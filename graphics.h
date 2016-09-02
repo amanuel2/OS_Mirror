@@ -144,6 +144,51 @@ class VideoGraphicsArray
 		       	 };
             };
 
+
+
+            class MOUSE_DIMENSIONS_DRAW
+            {
+				public:
+					/* Square Details */
+					int y_square = 20;
+					int y_square_limit=25;
+					int x_square=19;
+					int x_square_limit=21;
+					uint8_t hex_square=0xFF;
+
+					int square_ident[2] = {
+							20,19
+					};
+
+					/* Line Below Above Square */
+					int32_t i_a_s=16.9;
+					int32_t i_a_s_limit=24.9;
+					int32_t y_a_s=20.5;
+					uint8_t hex_a_s=0xFF;
+
+					/* Triangle */
+
+					//Top
+					int32_t top_x=20.9;
+					int32_t top_y=15;
+					int32_t top_hex=0xFF;
+
+					//Right
+					int32_t right_x1=25.1;
+					int32_t right_x2=20.9;
+					int32_t right_y1=20.5;
+					int32_t right_y2=15;
+					int32_t right_hex=0xFF;
+
+					//Left
+					int32_t left_x1=15.9;
+					int32_t left_x2=20.9;
+					int32_t left_y1=20.5;
+					int32_t left_y2=15;
+					int32_t left_hex=0xFF;
+            };
+
+
         private:
             /*
              * @instance Port8Bits : Ports
@@ -172,6 +217,7 @@ class VideoGraphicsArray
             PORT::Port8Bits attributeControllerWritePort;
             PORT::Port8Bits attributeControllerResetPort;
             Resolutions res;
+            MOUSE_DIMENSIONS_DRAW MDD;
 
             /* @function WriteRegisters : Writing to Ports
              *

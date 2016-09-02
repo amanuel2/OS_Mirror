@@ -4,6 +4,7 @@
 #define RES_1_HEIGHT 200
 #define RES_1_COLORDEPTH 8
 
+
 VideoGraphicsArray::VideoGraphicsArray()
 {
 }
@@ -123,20 +124,27 @@ void VideoGraphicsArray::PutPixel(int32_t x, int32_t y,RGB rgb)
 
 void VideoGraphicsArray::DrawMouse(uint8_t colorHex)
 {
-	 for(int y=20; y<=25; y++)
-	      for(int x=19; x<=21; x++)
-	    	  this->PutPixel(x,y,colorHex);
+	MDD.hex_square = colorHex;
+	MDD.hex_a_s = colorHex;
+	MDD.top_hex = colorHex;
+	MDD.right_hex = colorHex;
+	MDD.left_hex = colorHex;
 
-	 for(int32_t i = 16.9; i<=24.9; i++)
-		 this->PutPixel(i,20.5,colorHex);
+	for(MDD.y_square =  MDD.square_ident[0]; MDD.y_square<=MDD.y_square_limit; MDD.y_square++)
+	      for(MDD.x_square = MDD.square_ident[1]; MDD.x_square<=MDD.x_square_limit; MDD.x_square++)
+	    	  this->PutPixel(MDD.x_square,MDD.y_square,MDD.hex_square);
 
-	 this->PutPixel(20.9,15,colorHex); //top
-	 this->PutPixel(25.1,20.5,colorHex); //right
-	 this->DrawLine(25.1,20.5,20.9,15,colorHex);
-	 this->PutPixel(15.9,20.5,colorHex); //left
-	 this->DrawLine(15.9,20.5,20.9,15,colorHex);
+
+	 for( ;MDD.i_a_s<=MDD.i_a_s_limit; MDD.i_a_s++)
+		 this->PutPixel(MDD.i_a_s,MDD.y_a_s,MDD.hex_a_s);
+
+
+	 this->PutPixel(MDD.top_x,MDD.top_y,MDD.top_hex); //top
+	 this->DrawLine(MDD.right_x1,MDD.right_y1,MDD.right_x2, MDD.right_y2 ,MDD.right_hex); //right
+	 this->DrawLine(MDD.left_x1,MDD.left_y1,MDD.left_x2, MDD.left_y2 ,MDD.left_hex); //left
 
 }
+
 
 void VideoGraphicsArray::DrawMouse(RGB rgb)
 {
