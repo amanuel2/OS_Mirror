@@ -85,8 +85,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
 	   	PhyiscalMemoryManager pmm(multiboot_structure);
 
 
-
-
+	   
         Heap heap(kernel_virtual_end);
 
 

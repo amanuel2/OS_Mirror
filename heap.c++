@@ -235,6 +235,8 @@ Heap::Heap(uint32_t kernel_virtual_end)
 	pmm.map_physical_virtual(0x400000,0xC0400000);
 
 
+	Lib::Mem::memset((void*) kernel_virtual_end, 0, 0x300000);
+
 
 
 	/* At this point 0xC0000000 to 0xC0800000 have been

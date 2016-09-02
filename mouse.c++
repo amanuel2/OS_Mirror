@@ -68,36 +68,30 @@ byte mouse_read()
 //static int32_t mouse_y=0;         //signed char
 
 
-static sbyte buffer[3]={0};
-static sbyte offset=0;
+static uint8_t buffer[3]={0};
+static uint8_t offset=0;
 static int8_t x, y;
 
 //Mouse functions
-void mouse_ps2_handler(struct regs *a_r)
+void mouse_ps2_handler(struct regs *a_r) //struct regs *a_r (not used but just there)
 {
+
     uint8_t status = p8b_mouse_drv.in(0x64);
     	if (!(status & 0x20))
-    		goto end; // IF NO DATA RECIEVE
+    		goto end;
 
+    	 buffer[offset] = p8b_mouse_drv.in(0x60);
+    	 offset = (offset + 1) % 3;
 
-    	buffer[offset]=p8b_mouse_drv.in(0x60); // Get Data TO Packet Buffer with Specified Offset
-    	offset = (offset + 1) % 3; // Move Offset
-
-
-    	 if(offset == 0) // Transmition Complete. All Packet Buffer Have Been Written To
-    	 {
-
-    		 if(buffer[1] != 0 || buffer[2] != 0)
-    		 {
-
-    			 	 x += buffer[1];
-    			     y -= buffer[2];
-    			     gtx.PutPixel(x,y,0xFF);
-
-    		 }
-
-    	 }
-
+        if(offset == 0)
+        {
+            if(buffer[1] != 0 || buffer[2] != 0)
+            {
+                x = x + buffer[1];
+                y = y - buffer[2];
+                gtx.PutPixel(x,y,0xFF);
+            }
+        }
 
   end:;
 }

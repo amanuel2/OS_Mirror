@@ -3,6 +3,10 @@
 
 #include "graphics.h"
 
+#ifndef GRAPHICS_MODE
+	#define GRAPHICS_MODE 1
+#endif
+	
 typedef VideoGraphicsArray GraphicsContext;
 
 #endif
