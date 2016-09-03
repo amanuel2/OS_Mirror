@@ -7,6 +7,8 @@
 
 MOUSE_DIMENSIONS_DRAW MDD;
 
+static SerialPort sp;
+
 
 VideoGraphicsArray::VideoGraphicsArray()
 {
@@ -107,6 +109,24 @@ void VideoGraphicsArray::PutPixel(int32_t x, int32_t y,  uint8_t colorIndex)
 
     uint8_t* pixelAddress = GetFrameBufferSegment() + RES_1_WIDTH*y + x;
     *pixelAddress = colorIndex;
+}
+
+void VideoGraphicsArray::PutPixelE(int32_t x, int32_t y,  uint8_t colorIndex)
+{
+    if(x < 0 || RES_1_WIDTH <= x
+    || y < 0 || RES_1_HEIGHT<= y)
+        return;
+
+    uint8_t* pixelAddress = GetFrameBufferSegment() + RES_1_WIDTH*y + x;
+
+ //   sp.write_hex_serial(*pixelAddress);
+
+	    if(!(*pixelAddress == 0x00 ) && !(*pixelAddress == 0x3F) && !(*pixelAddress == 0x29 ) && !(*pixelAddress == 0x2C) && !(*pixelAddress == 0x15))
+	    	*pixelAddress = colorIndex;;
+
+	   // *pixelAddress = colorIndex;
+
+
 }
 
 uint8_t VideoGraphicsArray::GetColorIndex(RGB rgb)
@@ -271,4 +291,18 @@ void VideoGraphicsArray::FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint3
     for(uint32_t Y = y; Y < y+h; Y++)
         for(uint32_t X = x; X < x+w; X++)
             PutPixel(X, Y, colorHex);
+}
+
+void VideoGraphicsArray::FillRectangleE(uint32_t x, uint32_t y, uint32_t w, uint32_t h,  RGB rgb)
+{
+    for(uint32_t Y = y; Y < y+h; Y++)
+        for(uint32_t X = x; X < x+w; X++)
+        	PutPixelE(X, Y, GetColorIndex(rgb));
+}
+
+void VideoGraphicsArray::FillRectangleE(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex)
+{
+    for(uint32_t Y = y; Y < y+h; Y++)
+        for(uint32_t X = x; X < x+w; X++)
+            PutPixelE(X, Y, colorHex);
 }

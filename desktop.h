@@ -2,6 +2,7 @@
 #define _DESKTOP_H_ 1
 
 #include "widget.h"
+#include "serial.h"
 #include "graphicsctx.h"
 
 #ifndef GRAPHICS_MODE

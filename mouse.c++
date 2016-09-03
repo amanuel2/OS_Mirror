@@ -113,7 +113,7 @@ void mouse_ps2_handler(struct regs *a_r)
                 if (x>=299) x=299;
                 if (y>=179) y=179;
 
-                redraw_desktop(x,y,10,10);
+                redraw_desktop(x,y,5,5);
 #else
 
                 static uint16_t* VideoMemoryMouse = (uint16_t*)0xc00b8000;

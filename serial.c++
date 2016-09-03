@@ -56,6 +56,18 @@ void SerialPort::write_number_serial(int32_t num)
 		p8b.out(str_conv[i],(uint16_t)PORT);
 	}
 }
+char* printfHex(uint8_t key)
+{
+    char* foo = "00";
+    char* hex = "0123456789ABCDEF";
+    foo[0] = hex[(key >> 4) & 0xF];
+    foo[1] = hex[key & 0xF];
+    return foo;
+}
+void SerialPort::write_hex_serial(uint8_t num)
+{
+ this->write_string_serial(printfHex(num));
+}
 
 SerialPort::~SerialPort()
 {}

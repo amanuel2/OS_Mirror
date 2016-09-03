@@ -1,6 +1,7 @@
 #include "desktop.h"
 
 VideoGraphicsArray vga_desktopD;
+static SerialPort sp;
 //void redraw_desktop();
 Desktop::Desktop(uint8_t background)
 {
@@ -13,6 +14,8 @@ Desktop::Desktop(uint8_t background)
 	//vga_desktop.DrawMouse(0x3F);
 
 	this->background_desktop = background;
+
+	vga_desktop.PutPixelE(50,100,0x32);
 }
 
 Desktop::~Desktop()
@@ -27,8 +30,8 @@ static int old_h = 0;
 
 void redraw_desktop(int x, int y, int w, int h)
 {
-	vga_desktopD.FillRectangle(old_x,old_y,old_w,old_h,0x23);
-	vga_desktopD.FillRectangle(x,y,w,h,0x10);
+	vga_desktopD.FillRectangleE(old_x,old_y,old_w,old_h,0x23);
+	vga_desktopD.FillRectangleE(x,y,w,h,0x10);
 
 	//Widget widget_f(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
 		old_x = x;
