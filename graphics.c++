@@ -5,6 +5,9 @@
 #define RES_1_COLORDEPTH 8
 
 
+MOUSE_DIMENSIONS_DRAW MDD;
+
+
 VideoGraphicsArray::VideoGraphicsArray()
 {
 }
