@@ -18,6 +18,7 @@
 #ifdef GRAPHICS_MODE
 	#include "graphics.h"
 	#include "widget.h"
+	#include "desktop.h"
 #endif
 
 
@@ -100,21 +101,7 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         pci.printDrivers();
 
 #ifdef GRAPHICS_MODE
-        VideoGraphicsArray vga;
-
-        vga.SetMode(320,200,8);
-        vga.FillRectangle(0,0,320,200,0x23);
-
-        Widget widget_f(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
-
-
-        	vga.DrawMouse(0x3F);
-
-
-
-        	//vga.FillRectangle(0,0,320,200,0x23);
-
-
+        Desktop desktop(0x23);
 #endif
 
 

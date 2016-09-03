@@ -11,6 +11,8 @@ typedef void(*regs_func)(struct regs *r);
 
 extern void install_handler_irq(int irq, regs_func handler);
 
+extern void redraw_desktop(int x, int y);
+
 extern MOUSE_DIMENSIONS_DRAW MDD;
 
 static PORT::Port8Bits p8b_mouse_drv;
@@ -72,8 +74,8 @@ byte mouse_read()
 
 static uint8_t buffer[3]={0};
 static uint8_t offset=0;
-static int32_t x, y;
-static uint8_t x_vga,y_vga = 0;
+int32_t x, y;
+uint8_t x_vga,y_vga = 0;
 
 //Mouse functions
 void mouse_ps2_handler(struct regs *a_r)
@@ -100,7 +102,7 @@ void mouse_ps2_handler(struct regs *a_r)
                 int_y = buffer[2] - (0x100 & (buffer[0] << (8-5)));
 
 #ifdef GRAPHICS_MODE
-                vga.FillRectangle(0,0,320,200,0x23);
+
                 x += int_x;
                 y -= int_y;
 
@@ -110,13 +112,8 @@ void mouse_ps2_handler(struct regs *a_r)
                 if (y<=0) y=0;
                 if (x>=299) x=299;
                 if (y>=179) y=179;
-                gtx.PutPixel(x,y,0xFF);
-//                MDD.x_square_limit = ((x + 5) - x);
-//                MDD.square_ident[0] = x;
-//                MDD.y_square_limit = ((y + 5) - y);
-//                MDD.square_ident[1] = y;
-                gtx.FillRectangle(x,y,20,20,0x1D);
-                Widget widget_f(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
+
+                redraw_desktop(x,y);
 #else
 
                 static uint16_t* VideoMemoryMouse = (uint16_t*)0xc00b8000;
