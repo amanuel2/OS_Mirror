@@ -41,6 +41,8 @@ public:
 	 */
 	~Widget();
 
+	void DrawForMouse();
+
 private:
 
 	/*

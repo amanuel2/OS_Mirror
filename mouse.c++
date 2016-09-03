@@ -1,6 +1,7 @@
 #include "mouse.h"
 #ifdef GRAPHICS_MODE
 	#include "graphics.h"
+	#include "widget.h"
 
 	static VideoGraphicsArray vga;
 #endif
@@ -107,14 +108,15 @@ void mouse_ps2_handler(struct regs *a_r)
 
                 if (x<=0) x=0;
                 if (y<=0) y=0;
-                if (x>=319) x=319;
-                if (y>=199) y=199;
+                if (x>=299) x=299;
+                if (y>=179) y=179;
                 gtx.PutPixel(x,y,0xFF);
 //                MDD.x_square_limit = ((x + 5) - x);
 //                MDD.square_ident[0] = x;
 //                MDD.y_square_limit = ((y + 5) - y);
 //                MDD.square_ident[1] = y;
                 gtx.FillRectangle(x,y,20,20,0x1D);
+                Widget widget_f(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
 #else
 
                 static uint16_t* VideoMemoryMouse = (uint16_t*)0xc00b8000;

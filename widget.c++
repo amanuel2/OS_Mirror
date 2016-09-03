@@ -28,6 +28,11 @@ Widget::Widget(int32_t x,int32_t y,int32_t w,
 
 }
 
+void Widget::DrawForMouse()
+{
+	this->__constructor__(this->x,this->y,this->w,this->h,this->colorBack,this->GIVEN_FLAGS);
+}
+
 void Widget::DRAW_ORIGINAL_WIDGET()
 {
 	this->gr->FillRectangle(this->x,this->y,this->w,this->h,this->colorBack);
