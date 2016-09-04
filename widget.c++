@@ -42,7 +42,6 @@ void Widget::DrawForMouse()
 
 bool Widget::ContainsCoordinate(int x, int y)
 {
-	sp.write_number_serial(x);
 	return ( x >= this->x && x<= this->w + this->x && y>= this->y && y<= this->h + this->y);
 
 }
@@ -80,6 +79,11 @@ void Widget::Draw_Minimize_Tool(uint8_t background_color,uint8_t foreground_colo
 	//Drawing Minimize Button
 	this->gr->FillRectangle(((this->w+this->x)-(this->w/7)),(this->y+(this->h/16)),(this->w/7),
 			(this->h/12),foreground_color);
+}
+
+bool Widget::Exit_Clicked(int x, int y)
+{
+	return ( x >= ((this->x)) && x<= (this->w/7) + this->x && y>= this->y && y<= (this->h/6) + this->y);
 }
 void Widget::Draw_Exit_Tool(uint8_t background_color,uint8_t foreground_color)
 {

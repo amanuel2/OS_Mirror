@@ -48,6 +48,7 @@ public:
 
 	void DrawForMouse();
 	bool ContainsCoordinate(int x, int y);
+	bool Exit_Clicked(int x, int y);
 
 	void ReDraw(int x, int y);
 	void __constructor__();

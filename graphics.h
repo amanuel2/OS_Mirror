@@ -106,12 +106,15 @@ class VideoGraphicsArray
             void FillRectangleE(uint32_t x, uint32_t y, uint32_t w, uint32_t h, RGB rgb);
             void FillRectangleE(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
 
+
             void DrawMouse(uint8_t colorHex);
             void DrawMouse(RGB rgb);
 
             void DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint8_t colorHex,bool e);
 
-            void DrawMouseCross(uint32_t x, uint32_t y, uint32_t w, uint32_t h , uint8_t colorHex);
+            void DrawMouseCross(uint32_t x, uint32_t y, uint32_t w, uint32_t h , uint8_t colorHex, bool e);
+            void DrawMouseCrossOLD(uint32_t x, uint32_t y, uint32_t w, uint32_t h);
+            uint8_t GetPixel(int32_t x, int32_t y);
 
             uint8_t GetColorIndex(RGB rgb);
 
