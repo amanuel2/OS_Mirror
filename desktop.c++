@@ -67,6 +67,12 @@ void redraw_desktop_button_click(int x , int y, bool up)
 					widget_s.DeletePrevious();
 			}
 
+			else if(widget_s.Add_Clicked(x,y))
+			{
+				if(widget_s.CheckFlags(TOOL_WINDOW_ORIGNAL))
+					widget_s.DeletePrevious();
+			}
+
 			else
 				HOLD_WIDGET = true;
 		}

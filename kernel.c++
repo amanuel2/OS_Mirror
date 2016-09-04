@@ -15,6 +15,7 @@
 #include "pmm.h"
 #include "heap.h"
 #include "pci.h"
+#include "rand.h"
 #ifdef GRAPHICS_MODE
 	#include "graphics.h"
 	#include "widget.h"
@@ -99,6 +100,8 @@ extern "C" void kernelMain(uint32_t kernel_virtual_end,
         cls();
         PCI_CONTROLLER pci;
         pci.printDrivers();
+
+    //   randomnumberc();
 
 #ifdef GRAPHICS_MODE
         Desktop desktop(0x23);
