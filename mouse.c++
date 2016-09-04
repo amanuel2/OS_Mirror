@@ -74,6 +74,7 @@ byte mouse_read()
 
 static uint8_t buffer[3]={0};
 static uint8_t offset=0;
+static uint8_t buttons;
 int32_t x, y;
 uint8_t x_vga,y_vga = 0;
 
@@ -131,9 +132,35 @@ void mouse_ps2_handler(struct regs *a_r)
                                VideoMemoryMouse[80*y_vga + x_vga] = (VideoMemoryMouse[80*y_vga + x_vga] & 0x0F00) << 4
                                                    | (VideoMemoryMouse[80*y_vga + x_vga] & 0xF000) >> 4
                                                    | (VideoMemoryMouse[80*y_vga + x_vga] & 0x00FF);
+
+
+
+
+
+
 #endif
             }
-        }
+
+
+            for(uint8_t i = 0; i < 3; i++)
+            {
+            	if((buffer[0] & (0x1<<i)) != (buttons & (0x1<<i)))
+            	{
+#ifdef GRAPHICS_MODE
+
+#else
+
+
+            		if(buttons & (0x1<<i))
+            			printf("Mouse UP");
+                    else
+                    	printf("Mouse DOWN");
+#endif
+        	}
+     	 }
+
+    buttons = buffer[0];
+ }
 
   end:;
 }
