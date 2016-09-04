@@ -42,6 +42,10 @@ public:
 	 */
 	~Widget();
 
+	void __constructor__(int32_t x,int32_t y,int32_t w,
+				   int32_t h,uint8_t colorBackground,
+				   uint32_t FLAGS);
+
 	void DrawForMouse();
 	bool ContainsCoordinate(int x, int y);
 
@@ -67,9 +71,7 @@ private:
 	 *
 	 *	Draw Original WIDGET
 	 */
-	void __constructor__(int32_t x,int32_t y,int32_t w,
-			   int32_t h,uint8_t colorBackground,
-			   uint32_t FLAGS);
+
 
 
 	void DRAW_ORIGINAL_WIDGET();

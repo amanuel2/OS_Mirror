@@ -2,7 +2,6 @@
 #ifdef GRAPHICS_MODE
 	#include "graphics.h"
 	#include "widget.h"
-
 	static VideoGraphicsArray vga;
 #endif
 

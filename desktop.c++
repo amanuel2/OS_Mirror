@@ -4,6 +4,7 @@ VideoGraphicsArray vga_desktopD;
 static SerialPort sp;
 //void redraw_desktop();
 
+Widget widget_s(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
 
 Desktop::Desktop(uint8_t background)
 {
@@ -42,17 +43,24 @@ static bool HOLD_WIDGET = false;
 static int old_x_widget_button = 0;
 static int old_y_widget_button = 0;
 
+static bool constructor_called_widget_s = false;
+
+void call_widget_constructor()
+{
+	if(constructor_called_widget_s == false)
+	{
+		widget_s.__constructor__(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
+		constructor_called_widget_s = true;
+	}
+}
+
 void redraw_desktop_button_click(int x , int y, bool up)
 {
-	Widget widget_s(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
-	widget_s.DeletePrevious();
-
+	call_widget_constructor();
 	if(widget_s.ContainsCoordinate(x,y))
 	{
 		if(up!=true)
 		{
-
-
 
 			HOLD_WIDGET = true;
 		}
