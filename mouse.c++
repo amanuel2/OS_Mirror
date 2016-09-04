@@ -13,6 +13,8 @@ extern void install_handler_irq(int irq, regs_func handler);
 
 extern void redraw_desktop(int x, int y, int w, int h);
 
+extern void redraw_desktop_button_click(int x , int y, bool up);
+
 extern MOUSE_DIMENSIONS_DRAW MDD;
 
 static PORT::Port8Bits p8b_mouse_drv;
@@ -147,7 +149,10 @@ void mouse_ps2_handler(struct regs *a_r)
             	if((buffer[0] & (0x1<<i)) != (buttons & (0x1<<i)))
             	{
 #ifdef GRAPHICS_MODE
-
+            		if(buttons & (0x1<<i))
+            			redraw_desktop_button_click(x,y,true);
+            		else
+            			redraw_desktop_button_click(x,y,false);
 #else
 
 

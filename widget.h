@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include "graphicsctx.h"
 #include "color.h"
+#include "serial.h"
 
 #define TOOL_WINDOW_ORIGNAL 0x1 << 0
 
@@ -42,6 +43,11 @@ public:
 	~Widget();
 
 	void DrawForMouse();
+	bool ContainsCoordinate(int x, int y);
+
+	void ReDraw(int x, int y);
+	void __constructor__();
+	void DeletePrevious();
 
 private:
 
@@ -65,6 +71,7 @@ private:
 			   int32_t h,uint8_t colorBackground,
 			   uint32_t FLAGS);
 
+
 	void DRAW_ORIGINAL_WIDGET();
 
 	void DRAW_ORIGINAL_TOOLWINDOW();
@@ -73,6 +80,8 @@ private:
 	void Draw_Exit_Tool(uint8_t background_color,uint8_t foreground_color);
 
 	void DRAW_ORIGINAL_TOOLS();
+
+
 	int32_t x;
 	int32_t y;
 	int32_t w;
