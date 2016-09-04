@@ -54,6 +54,9 @@ public:
 	void __constructor__();
 	void DeletePrevious();
 
+	bool CheckFlags(uint8_t FlagCheck);
+	void Draw_Add_Tool(uint8_t background_color,uint8_t foreground_color);
+
 private:
 
 	/*

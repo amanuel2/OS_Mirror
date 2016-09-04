@@ -32,10 +32,8 @@ static int old_h = 0;
 
 void redraw_desktop(int x, int y, int w, int h)
 {
-	vga_desktopD.DrawMouseCross(old_x,old_y,old_w,old_h,vga_desktopD.GetPixel(x,y),true);
+	vga_desktopD.DrawMouseCross(old_x,old_y,old_w,old_h,0x23,true);
 	vga_desktopD.DrawMouseCross(x,y,w,h,0x10,true);
-//	vga_desktopD.FillRectangleE(old_x,old_y,old_w,old_h,0x23);
-//	vga_desktopD.FillRectangleE(x,y,w,h,0x10);
 
 	old_x = x;old_y = y;old_h = h;old_w = w;
 }
@@ -64,7 +62,11 @@ void redraw_desktop_button_click(int x , int y, bool up)
 		if(up!=true)
 		{
 			if(widget_s.Exit_Clicked(x,y))
-				widget_s.DeletePrevious();
+			{
+				if(widget_s.CheckFlags(TOOL_WINDOW_ORIGNAL))
+					widget_s.DeletePrevious();
+			}
+
 			else
 				HOLD_WIDGET = true;
 		}

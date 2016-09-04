@@ -55,6 +55,11 @@ void Widget::DRAW_ORIGINAL_WIDGET()
 
 }
 
+bool Widget::CheckFlags(uint8_t FlagCheck)
+{
+	return (this->GIVEN_FLAGS & FlagCheck);
+}
+
 void Widget::DeletePrevious()
 {
 	this->gr->FillRectangle(this->x,this->y,this->w,this->h,0x23);
@@ -71,6 +76,12 @@ void Widget::DRAW_ORIGINAL_TOOLS()
 {//0x2C
 	this->Draw_Minimize_Tool(0x15,0x29);
 	this->Draw_Exit_Tool(0x15,0x2C);
+	this->Draw_Add_Tool(0x15,0x05);
+}
+
+void Widget::Draw_Add_Tool(uint8_t background_color,uint8_t foreground_color)
+{
+	this->gr->FillRectangle(((this->w+this->x)-(this->w/5)),this->y,(this->w/7),(this->h/6),background_color);
 }
 
 void Widget::Draw_Minimize_Tool(uint8_t background_color,uint8_t foreground_color)
