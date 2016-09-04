@@ -292,7 +292,7 @@ void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2
 void VideoGraphicsArray::DrawMouseCross(uint32_t x, uint32_t y, uint32_t w, uint32_t h , uint8_t colorHex)
 {
 	this->DrawLine(x,y,x,y+h,colorHex,true);
-	this->DrawLine(x-(w/2),y-(w/2),(x-(w/2))+w,y-(w/2),colorHex,true);
+	this->DrawLine((x-(w/1.9)),(y+(w/2)),((x-(w/1.9))+w),(y+(w/2)), colorHex,true);
 }
 void VideoGraphicsArray::FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h,  RGB rgb)
 {

@@ -43,7 +43,8 @@ void Widget::DrawForMouse()
 bool Widget::ContainsCoordinate(int x, int y)
 {
 	sp.write_number_serial(x);
-	return ( x >= this->x && x<= this->w && y>= this->y && y<= this->h);
+	return ( x >= this->x && x<= this->w + this->x && y>= this->y && y<= this->h + this->y);
+
 }
 
 void Widget::DRAW_ORIGINAL_WIDGET()

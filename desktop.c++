@@ -32,8 +32,10 @@ static int old_h = 0;
 
 void redraw_desktop(int x, int y, int w, int h)
 {
-	vga_desktopD.FillRectangleE(old_x,old_y,old_w,old_h,0x23);
-	vga_desktopD.FillRectangleE(x,y,w,h,0x10);
+	vga_desktopD.DrawMouseCross(old_x,old_y,old_w,old_h,0x23);
+	vga_desktopD.DrawMouseCross(x,y,w,h,0x10);
+//	vga_desktopD.FillRectangleE(old_x,old_y,old_w,old_h,0x23);
+//	vga_desktopD.FillRectangleE(x,y,w,h,0x10);
 
 	old_x = x;old_y = y;old_h = h;old_w = w;
 }
@@ -57,24 +59,6 @@ void call_widget_constructor()
 void redraw_desktop_button_click(int x , int y, bool up)
 {
 	call_widget_constructor();
-	if(up!=true)
-	{
-		if(old_x_widget_button != -1 && old_y_widget_button != -1)
-		{
-			sp.write_string_serial("WIDGET X:");
-								sp.write_number_serial(old_x_widget_button);
-								sp.write_string_serial("MOUSE X:");
-															sp.write_number_serial(x);
-								sp.write_string_serial("DONE!");
-			if(x >= old_x_widget_button && x<= 120 + old_x_widget_button && y >= old_y_widget_button &&
-					y <= 100 + old_y_widget_button)
-			{
-
-					HOLD_WIDGET = true;
-
-			}
-		}
-	}
 	if(widget_s.ContainsCoordinate(x,y))
 	{
 		if(up!=true)
