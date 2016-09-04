@@ -163,8 +163,8 @@ void VideoGraphicsArray::DrawMouse(uint8_t colorHex)
 
 
 	 this->PutPixel(MDD.top_x,MDD.top_y,MDD.top_hex); //top
-	 this->DrawLine(MDD.right_x1,MDD.right_y1,MDD.right_x2, MDD.right_y2 ,MDD.right_hex); //right
-	 this->DrawLine(MDD.left_x1,MDD.left_y1,MDD.left_x2, MDD.left_y2 ,MDD.left_hex); //left
+	 this->DrawLine(MDD.right_x1,MDD.right_y1,MDD.right_x2, MDD.right_y2 ,MDD.right_hex,false); //right
+	 this->DrawLine(MDD.left_x1,MDD.left_y1,MDD.left_x2, MDD.left_y2 ,MDD.left_hex,false); //left
 
 }
 
@@ -175,7 +175,7 @@ void VideoGraphicsArray::DrawMouse(RGB rgb)
 }
 
 
-void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint8_t colorHex)
+void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint8_t colorHex,bool e)
 {
 
   int32_t x,y,dx,dy,dx1,dy1,px,py,xe,ye,i;
@@ -206,8 +206,10 @@ void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2
 	     xe=x1;
 	   }
 
-
-	  this->PutPixel(x,y,colorHex);
+	  if(e)
+	  this->PutPixelE(x,y,colorHex);
+	  else
+		  this->PutPixel(x,y,colorHex);
 
 	  for(i=0;x<xe;i++)
 	  {
@@ -228,7 +230,10 @@ void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2
 	    	  }
 	    	px=px+2*(dy1-dx1);
 	      }
-	    PutPixel(x,y,colorHex);
+	    if(e)
+	    PutPixelE(x,y,colorHex);
+	    else
+	    	PutPixel(x,y,colorHex);
 	  }
 
 	 }
@@ -247,8 +252,10 @@ void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2
 			 y=y2;
 			 ye=y1;
 		 }
-
-		 PutPixel(x,y,colorHex);
+		 if(e)
+		 PutPixelE(x,y,colorHex);
+		 else
+			 PutPixel(x,y,colorHex);
 
 		 for(i=0;y<ye;i++)
 		 {
@@ -271,14 +278,22 @@ void VideoGraphicsArray::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2
 			 	  py=py+2*(dx1-dy1);
 
 			 	 }
-
-			  PutPixel(x,y,colorHex);
+			 if(e)
+			  PutPixelE(x,y,colorHex);
+			 else
+				 PutPixel(x,y,colorHex);
 
 		 }
 
 	 }
 }
 
+
+void VideoGraphicsArray::DrawMouseCross(uint32_t x, uint32_t y, uint32_t w, uint32_t h , uint8_t colorHex)
+{
+	this->DrawLine(x,y,x,y+h,colorHex,true);
+	this->DrawLine(x-(w/2),y-(w/2),(x-(w/2))+w,y-(w/2),colorHex,true);
+}
 void VideoGraphicsArray::FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h,  RGB rgb)
 {
     for(uint32_t Y = y; Y < y+h; Y++)

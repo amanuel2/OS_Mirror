@@ -84,9 +84,9 @@ void Widget::Draw_Exit_Tool(uint8_t background_color,uint8_t foreground_color)
 {
 	this->gr->FillRectangle(((this->x)),this->y,(this->w/7),(this->h/6),background_color);
 	//start from bottom
-	this->gr->DrawLine( (this->x + (this->w/7)),(this->y),(this->x),((this->y)+(this->h/6)),foreground_color);
+	this->gr->DrawLine( (this->x + (this->w/7)),(this->y),(this->x),((this->y)+(this->h/6)),foreground_color,false);
 	//start from top
-	this->gr->DrawLine( (this->x + (this->w/7)),(this->y+(this->h/6)),(this->x),((this->y)),foreground_color);
+	this->gr->DrawLine( (this->x + (this->w/7)),(this->y+(this->h/6)),(this->x),((this->y)),foreground_color,false);
 }
 
 

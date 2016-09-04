@@ -40,8 +40,8 @@ void redraw_desktop(int x, int y, int w, int h)
 
 static bool HOLD_WIDGET = false;
 
-static int old_x_widget_button = 0;
-static int old_y_widget_button = 0;
+static int old_x_widget_button = -1;
+static int old_y_widget_button = -1;
 
 static bool constructor_called_widget_s = false;
 
@@ -57,14 +57,32 @@ void call_widget_constructor()
 void redraw_desktop_button_click(int x , int y, bool up)
 {
 	call_widget_constructor();
+	if(up!=true)
+	{
+		if(old_x_widget_button != -1 && old_y_widget_button != -1)
+		{
+			sp.write_string_serial("WIDGET X:");
+								sp.write_number_serial(old_x_widget_button);
+								sp.write_string_serial("MOUSE X:");
+															sp.write_number_serial(x);
+								sp.write_string_serial("DONE!");
+			if(x >= old_x_widget_button && x<= 120 + old_x_widget_button && y >= old_y_widget_button &&
+					y <= 100 + old_y_widget_button)
+			{
+
+					HOLD_WIDGET = true;
+
+			}
+		}
+	}
 	if(widget_s.ContainsCoordinate(x,y))
 	{
 		if(up!=true)
 		{
-
 			HOLD_WIDGET = true;
 		}
 	}
+
 	if(up==true)
 	{
 		if(HOLD_WIDGET == true)
@@ -75,8 +93,10 @@ void redraw_desktop_button_click(int x , int y, bool up)
 			widget_s.ReDraw(x,y);
 			old_x_widget_button = x;
 			old_y_widget_button = y;
-
+			HOLD_WIDGET = false;
 		}
+
+
 
 	}
 }
