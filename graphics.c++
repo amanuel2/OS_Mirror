@@ -302,6 +302,7 @@ void VideoGraphicsArray::DrawMouseCrossOLD(uint32_t x, uint32_t y, uint32_t w, u
 	this->DrawLine((x-(w/1.9)),(y+(w/2)),((x-(w/1.9))+w),(y+(w/2)), this->GetPixel(x,y),true);
 }
 
+
 void VideoGraphicsArray::DrawMouseCross(uint32_t x, uint32_t y, uint32_t w, uint32_t h , uint8_t colorHex, bool e)
 {
 	this->DrawLine(x,y,x,y+h,colorHex,e);

@@ -32,7 +32,7 @@ static int old_h = 0;
 
 void redraw_desktop(int x, int y, int w, int h)
 {
-	vga_desktopD.DrawMouseCrossOLD(old_x,old_y,old_w,old_h);
+	vga_desktopD.DrawMouseCross(old_x,old_y,old_w,old_h,vga_desktopD.GetPixel(x,y),true);
 	vga_desktopD.DrawMouseCross(x,y,w,h,0x10,true);
 //	vga_desktopD.FillRectangleE(old_x,old_y,old_w,old_h,0x23);
 //	vga_desktopD.FillRectangleE(x,y,w,h,0x10);
