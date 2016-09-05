@@ -18,6 +18,7 @@
  */
 class Widget
 {
+	friend class Desktop;
 public:
 	/*
 	 * @constructor Widget
@@ -32,6 +33,8 @@ public:
 	Widget(int32_t x,int32_t y,int32_t w,
 		   int32_t h,RGB rgb_back
 		   ,uint32_t FLAGS);
+
+	Widget();
 
 	/*
 	 * @deconstructor
@@ -57,6 +60,15 @@ public:
 	bool CheckFlags(uint8_t FlagCheck);
 	void Draw_Add_Tool(uint8_t background_color,uint8_t foreground_color);
 	bool Add_Clicked(int x, int y);
+
+	/*Getters*/
+	int32_t getX();
+	int32_t getY();
+	int32_t getW();
+	int32_t getH();
+	uint8_t getColorBack();
+	uint32_t getGIVEN_FLAGS();
+
 private:
 
 	/*

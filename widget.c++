@@ -27,6 +27,7 @@ Widget::Widget(int32_t x,int32_t y,int32_t w,
 {
 		this->__constructor__(x,y,w,h,colorBackground,FLAGS);
 }
+Widget::Widget(){}
 
 Widget::Widget(int32_t x,int32_t y,int32_t w,
 			   int32_t h,RGB rgb_back,uint32_t FLAGS)
@@ -87,6 +88,13 @@ void Widget::Draw_Minimize_Tool(uint8_t background_color,uint8_t foreground_colo
 	this->gr->FillRectangle(((this->w+this->x)-(this->w/7)),(this->y+(this->h/16)),(this->w/7),
 			(this->h/12),foreground_color);
 }
+
+int32_t Widget::getX(){return this->x;}
+int32_t Widget::getY(){return this->y;}
+int32_t Widget::getW(){return this->w;}
+int32_t Widget::getH(){return this->h;}
+uint8_t Widget::getColorBack(){return this->colorBack;}
+uint32_t Widget::getGIVEN_FLAGS(){return this->GIVEN_FLAGS;}
 
 bool Widget::Exit_Clicked(int x, int y)
 {

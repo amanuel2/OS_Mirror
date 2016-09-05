@@ -4,7 +4,7 @@ VideoGraphicsArray vga_desktopD;
 static SerialPort sp;
 //void redraw_desktop();
 
-Widget widget_s(20,30,120,100,0x00,TOOL_WINDOW_ORIGNAL);
+Widget widget_s;
 
 Desktop::Desktop(uint8_t background)
 {
@@ -12,7 +12,6 @@ Desktop::Desktop(uint8_t background)
 	vga_desktop.FillRectangle(0,0,320,200,background);
 
 	widget_s.__constructor__(20,30,30,30,0x00,TOOL_WINDOW_ORIGNAL);
-	//vga_desktop.DrawMouse(0x3F);
 
 	this->background_desktop = background;
 
@@ -73,7 +72,6 @@ void redraw_desktop_button_click(int x , int y, bool up)
 	if(up==true)
 	{
 		DRAW_REPEATEDLY_WIDGET_MOVED = false;
-
 	}
 
 }
