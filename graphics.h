@@ -99,12 +99,14 @@ class VideoGraphicsArray
             void PutPixel(int32_t x, int32_t y, uint8_t colorIndex);
 
             void PutPixelE(int32_t x, int32_t y,  uint8_t colorIndex);
+            void PutPixelRestrictBackground(int32_t x, int32_t y,  uint8_t colorIndex);
 
             void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, RGB rgb);
             void FillRectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
-
             void FillRectangleE(uint32_t x, uint32_t y, uint32_t w, uint32_t h, RGB rgb);
             void FillRectangleE(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
+            void FillRectangleRestrictBackgroud(uint32_t x, uint32_t y, uint32_t w, uint32_t h, RGB rgb);
+            void FillRectangleRestrictBackgroud(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t colorHex);
 
 
             void DrawMouse(uint8_t colorHex);

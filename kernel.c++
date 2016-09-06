@@ -39,11 +39,15 @@ extern "C" void callConstructors()
 extern void printf(char *str, ...);
 
 
-extern "C" void kernelMain(uint32_t kernel_virtual_end,
-	    uint32_t  kernel_physical_end,
-		uint32_t placeholder,
-		uint32_t kernel_physical_start, uint32_t  kernel_virtual_start,
-		multiboot_info_t *multiboot_structure,uint32_t magicnumber
+extern "C" void kernelMain
+		(
+			uint32_t kernel_virtual_end,
+			uint32_t  kernel_physical_end,
+			uint32_t placeholder,
+			uint32_t kernel_physical_start,
+			uint32_t  kernel_virtual_start,
+			multiboot_info_t *multiboot_structure,
+			uint32_t magicnumber
 		)
 
 

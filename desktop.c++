@@ -2,9 +2,21 @@
 
 VideoGraphicsArray vga_desktopD;
 static SerialPort sp;
-//void redraw_desktop();
 
 Widget widget_s;
+
+
+
+int32_t x_containers[2] = {20,70};
+int32_t y_containers[2] = {50,100};
+int32_t w_containers[2] = {70,70};
+int32_t h_containers[2] = {40,30};
+uint8_t color_back_containers[2] = {0x21,0x13};
+uint32_t flags_containers[2] = {TOOL_WINDOW_ORIGNAL , TOOL_WINDOW_ORIGNAL};
+
+static uint32_t default_num_widget=2;
+
+Widget widgets[2];
 
 Desktop::Desktop(uint8_t background)
 {
@@ -12,6 +24,15 @@ Desktop::Desktop(uint8_t background)
 	vga_desktop.FillRectangle(0,0,320,200,background);
 
 	widget_s.__constructor__(20,30,30,30,0x00,TOOL_WINDOW_ORIGNAL);
+	for(uint32_t i=0; i<=default_num_widget-1; i++)
+	{
+		widgets[i].__constructor__(
+										x_containers[i],y_containers[i],
+										w_containers[i], h_containers[i],
+										color_back_containers[i],
+										flags_containers[i]
+									);
+	}
 
 	this->background_desktop = background;
 
