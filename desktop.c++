@@ -20,6 +20,7 @@ Widget widgets[default_num_widget];
 
 Desktop::Desktop(uint8_t background)
 {
+
 	vga_desktop.SetMode(320,200,8);
 	vga_desktop.FillRectangle(0,0,320,200,background);
 
@@ -35,6 +36,7 @@ Desktop::Desktop(uint8_t background)
 	}
 
 	this->background_desktop = background;
+	gui_letter.Draw_Letter('a',20,30,2,0x16,true);
 
 }
 
