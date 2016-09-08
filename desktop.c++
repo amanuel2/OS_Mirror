@@ -37,7 +37,7 @@ Desktop::Desktop(uint8_t background)
 
 	this->background_desktop = background;
 
-	gui_letter.Draw_Letter('m',100,160,15,15,0x16,false);
+	gui_letter.Draw_Letter('r',100,160,5,5,0x16,false);
 
 }
 
