@@ -119,10 +119,9 @@ void VideoGraphicsArray::PutPixelE(int32_t x, int32_t y,  uint8_t colorIndex)
 
     uint8_t* pixelAddress = GetFrameBufferSegment() + RES_1_WIDTH*y + x;
 
- //   sp.write_hex_serial(*pixelAddress);
 
-	    if(!(
-	    		*pixelAddress == 0x00 ) && !(*pixelAddress == 0x3F) && !(*pixelAddress == 0x29)
+	    if(
+	    		!(*pixelAddress == 0x00 ) && !(*pixelAddress == 0x3F) && !(*pixelAddress == 0x29)
 	    		&& !(*pixelAddress == 0x2C) && !(*pixelAddress == 0x15)
 				&& !(*pixelAddress == 0x21) && !(*pixelAddress == 0x13)
 			 )

@@ -51,14 +51,32 @@ void GUI_Letter::GUI_Letter::Draw_Letter(uint8_t letter,uint32_t x , uint32_t y,
 		this->gtx.DrawLine(x,y+height,x+width,y+height,colorHex,e);
 		break;
 	case 'f':
+		this->gtx.DrawLine(x,y,x+(width/2),y,colorHex,e);
+		this->gtx.DrawLine(x,y,x,y+height,colorHex,e);
+		this->gtx.DrawLine(x-(width/3),y+(height/3),x+(width/3),y+(height/3),colorHex,e);
 		break;
 	case 'g':
+		this->gtx.DrawLine(x,y,x+width,y,colorHex,e);
+		this->gtx.DrawLine(x,y,x,y+(height/1.5),colorHex,e);
+		this->gtx.DrawLine(x,y+(height/1.5),x+width,y+(height/1.5),colorHex,e);
+		this->gtx.DrawLine(x+width,y,x+width,y+(height/1.5),colorHex,e);
+		this->gtx.DrawLine(x+width,y,x+width,y+width,colorHex,e);
+		this->gtx.DrawLine(x+width,y+height,x,y+height,colorHex,e);
 		break;
 	case 'h':
+		this->gtx.DrawLine(x,y,x,y+(height/1.5),colorHex,e);
+		this->gtx.DrawLine(x,y+(height/1.5),x+width/1.5,y+(height/1.5),colorHex,e);
+		this->gtx.DrawLine(x+width/1.5,y+(height/1.5),x+width/1.5,y+height,colorHex,e);
+		this->gtx.DrawLine(x,y,x,y+height,colorHex,e);
 		break;
 	case 'i':
+		this->gtx.PutPixel(x,y,colorHex);
+		this->gtx.DrawLine(x,y+height/2,x,y+height,colorHex,e);
 		break;
 	case 'j':
+		this->gtx.PutPixel(x+width/2,y,colorHex);
+		this->gtx.DrawLine(x+width/2,y+height/2,x+width/2,y+height,colorHex,e);
+		this->gtx.DrawLine(x+width/2,y+height,x,y+height,colorHex,e);
 		break;
 	case 'k':
 		break;

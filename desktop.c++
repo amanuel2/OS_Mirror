@@ -37,7 +37,7 @@ Desktop::Desktop(uint8_t background)
 
 	this->background_desktop = background;
 
-	gui_letter.Draw_Letter('e',100,160,15,15,0x16,false);
+	gui_letter.Draw_Letter('j',100,160,15,15,0x16,false);
 
 }
 
@@ -56,12 +56,13 @@ static uint32_t index_widget_selected = -1;
 void redraw_desktop(int x, int y, int w, int h)
 {
 	vga_desktopD.DrawMouseCross(old_x,old_y,old_w,old_h,0x23,true);
-	vga_desktopD.DrawMouseCross(x,y,w,h,0x10,true);
+		vga_desktopD.DrawMouseCross(x,y,w,h,0x10,true);
 
 	if(DRAW_REPEATEDLY_WIDGET_MOVED == true)
 	{
 		widgets[index_widget_selected].ReDraw(x,y);
 	}
+
 
 	old_x = x;old_y = y;old_h = h;old_w = w;
 }
