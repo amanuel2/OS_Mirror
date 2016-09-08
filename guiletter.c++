@@ -79,10 +79,19 @@ void GUI_Letter::GUI_Letter::Draw_Letter(uint8_t letter,uint32_t x , uint32_t y,
 		this->gtx.DrawLine(x+width/2,y+height,x,y+height,colorHex,e);
 		break;
 	case 'k':
+		this->gtx.DrawLine(x,y,x,y+height,colorHex,e);
+		this->gtx.DrawLine(x+width,y,x,y+height/2,colorHex,e);
+		this->gtx.DrawLine(x,y+height/2,x+width,y+height,colorHex,e);
 		break;
 	case 'l':
+		this->gtx.DrawLine(x,y,x,y+height,colorHex,e);
 		break;
 	case 'm':
+		this->gtx.DrawLine(x,y,x,y+height,colorHex,e);
+		this->gtx.DrawLine(x,y,x+width/2,y,colorHex,e);
+		this->gtx.DrawLine(x+width/2,y,x+width/2,y+height,colorHex,e);
+		this->gtx.DrawLine(x+width/2,y,x+width,y,colorHex,e);
+		this->gtx.DrawLine(x+width,y,x+width,y+height,colorHex,e);
 		break;
 	case 'n':
 		break;
