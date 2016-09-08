@@ -21,6 +21,7 @@
 	#include "widget.h"
 	#include "desktop.h"
 #endif
+#include "task.h"
 
 
 //Call all class constructor
@@ -38,6 +39,9 @@ extern "C" void callConstructors()
 
 extern void printf(char *str, ...);
 
+
+void taskA();
+void taskB();
 
 extern "C" void kernelMain
 		(
@@ -67,6 +71,14 @@ extern "C" void kernelMain
 
 
 	   gdt gt;
+
+	   TaskManager taskManager;
+	   Task task1(&gdt , taskA);
+	   Task task2(&gdt , taskB);
+	   taskManager.AddTask(&task1);
+	   taskManager.AddTask(&task2);
+
+
 	   IDT idt;
 	   ISR isr;
 	   IRQ irq;
@@ -117,3 +129,17 @@ extern "C" void kernelMain
    err:
    	   while(1);
 }
+
+void taskA()
+{
+    while(true)
+        printf("A");
+}
+
+
+void taskB()
+{
+    while(true)
+        printf("B");
+}
+

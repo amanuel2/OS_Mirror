@@ -56,6 +56,16 @@ gdt::gdt()
         gdt_flush(gp);
 }
 
+uint16_t gdt::DataSegmentSelector()
+{
+    return (uint8_t*)&gdt_ent[2] - (uint8_t*)gdt_ent;
+}
+
+uint16_t gdt::CodeSegmentSelector()
+{
+    return (uint8_t*)&gdt_ent[1] - (uint8_t*)gdt_ent;
+}
+
 gdt::~gdt()
 {
     
