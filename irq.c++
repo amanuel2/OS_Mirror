@@ -8,6 +8,7 @@
 
 typedef void(*regs_func)(struct regs *r);
 
+static TaskManager *irq_taskmanager;
 
 /*Get all irq's*/
 extern "C" void irq0(void);
@@ -61,7 +62,10 @@ static inline void idt_set_gate(uint8_t num, void(*handler)(void), uint16_t sel,
     idt[num].flags = flags;
 }
 
-IRQ::IRQ(){}; 
+IRQ::IRQ(TaskManager *tmgr)
+{
+	irq_taskmanager = tmgr;
+};
 IRQ::~IRQ(){};
 
 /* Normally, IRQs 0 to 7 are mapped to entries 8 to 15. This
@@ -157,6 +161,8 @@ extern "C" void irq_handler(struct regs *r)
     {
         handler(r);
     }
+
+    irq_taskmanager->Schedule((CPUState*)r);
 
     /* If the IDT entry that was invoked was greater than 40
     *  (meaning IRQ8 - 15), then we need to send an EOI to

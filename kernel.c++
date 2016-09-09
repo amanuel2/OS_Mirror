@@ -73,15 +73,15 @@ extern "C" void kernelMain
 	   gdt gt;
 
 	   TaskManager taskManager;
-	   Task task1(&gdt , taskA);
-	   Task task2(&gdt , taskB);
+	   Task task1(&gt, taskA);
+	   Task task2(&gt , taskB);
 	   taskManager.AddTask(&task1);
 	   taskManager.AddTask(&task2);
 
 
 	   IDT idt;
 	   ISR isr;
-	   IRQ irq;
+	   IRQ irq(&taskManager);
 	   SerialPort sp;
 	   isr.install_isrs();
 	   irq.install_irqs();

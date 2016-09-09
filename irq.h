@@ -6,6 +6,7 @@
 #include "serial.h"
 #include "timer.h"
 #include "stdlib.h"
+#include "task.h"
 	/* The state of the CPU when an interrupt is triggered. */
 struct regs {
      uint32_t ds; /* pushed the segs last */
@@ -19,14 +20,16 @@ class IRQ
 {
 
 public:
-	IRQ();
+	IRQ(TaskManager *tmgr);
 	~IRQ();
 	void install_irqs();
 private:
 		void irq_remap();
+
 };
 	void install_handler_irq(int irq, void (*handler)(struct regs *r));	
 	void uninstall_handler_irq(int irq);	
+
 
 
 #endif
