@@ -1,68 +1,71 @@
 #include "task.h"
 
-Task::Task(gdt *GlobalDescriptorTable, void entrypoint())
+
+
+static task_q *runningTask;
+static task_q mainTask;
+static task_q otherTask;
+static PhyiscalMemoryManager *pmm_task;
+static 	Heap *heap_task;
+
+
+
+extern void switch_task_a();
+
+TaskManager::TaskManager(Heap *heap)
 {
-    cpustate = (CPUState*)(stack + 4096 - sizeof(CPUState));
-
-    cpustate -> eax = 0;
-    cpustate -> ebx = 0;
-    cpustate -> ecx = 0;
-    cpustate -> edx = 0;
-
-    cpustate -> esi = 0;
-    cpustate -> edi = 0;
-    cpustate -> ebp = 0;
-
-    /*
-    cpustate -> gs = 0;
-    cpustate -> fs = 0;
-    cpustate -> es = 0;
-    cpustate -> ds = 0;
-    */
-
-    // cpustate -> error = 0;
-
-    // cpustate -> esp = ;
-    cpustate -> eip = (uint32_t)entrypoint;
-    cpustate -> cs = GlobalDescriptorTable->CodeSegmentSelector();
-    // cpustate -> ss = ;
-    cpustate -> eflags = 0x202;
-
+ heap_task = heap;
 }
+TaskManager::~TaskManager()
+{}
+
+Task::Task()
+{}
 
 Task::~Task()
+{}
+void TaskManager::otherMain()
 {
+	    printf("Hello multitasking world!"); // Not implemented here...
+	    preempt();
 }
 
 
-TaskManager::TaskManager()
+void TaskManager::createTask(task_q* task, void(*task_main)(), uint32_t flags, uint32_t* pageDir)
 {
-    num_task = 0;
-    current_task = -1;
+	    task->regs.ebx = 0;
+	    task->regs.ecx = 0;
+	    task->regs.edx = 0;
+	    task->regs.esi = 0;
+	    task->regs.edi = 0;
+	    task->regs.eflags = flags;
+	    task->regs.eip = (uint32_t) task_main;
+	    task->regs.cr3 = (uint32_t) pageDir;
+	    task->regs.esp = (uint32_t) (heap_task->k_malloc(TASK_STACK_SIZE)) + 0x1000; // Not implemented here
+	    task->next = 0;
 }
 
-TaskManager::~TaskManager()
+void TaskManager::init_tasking()
 {
+	 // Get EFLAGS and CR3
+	    __asm __volatile("movl %%cr3, %%eax; movl %%eax, %0;":"=m"(mainTask.regs.cr3)::"%eax");
+	    __asm __volatile("pushfl; movl (%%esp), %%eax; movl %%eax, %0; popfl;":"=m"(mainTask.regs.eflags)::"%eax");
+
+	    this->createTask(&otherTask, this->otherMain, mainTask.regs.eflags, (uint32_t*)mainTask.regs.cr3);
+	    mainTask.next = &otherTask;
+	    otherTask.next = &mainTask;
+
+	    runningTask = &mainTask;
 }
 
-bool TaskManager::AddTask(Task* task)
+void TaskManager::switchTask(Registers *old, Registers *new_)
 {
-    if(num_task >= 256)
-        return false;
-    tasks[num_task++] = task;
-    return true;
+	switch_task_a();
 }
 
-CPUState* TaskManager::Schedule(CPUState* cpustate)
+void TaskManager::preempt()
 {
-    if(num_task <= 0)
-        return cpustate;
-
-    if(current_task >= 0)
-        tasks[current_task]->cpustate = cpustate;
-
-    if(++current_task >= num_task)
-    	current_task %= num_task;
-    return tasks[current_task]->cpustate;
+	task_q *last = runningTask;
+	runningTask = runningTask->next;
+    switchTask(&last->regs, &runningTask->regs);
 }
-

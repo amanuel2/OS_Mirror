@@ -14,30 +14,14 @@ extern irq_handler
 common_handler_irq:
     ; save registers
             pusha
-           ; push ds
-            push ebp
-		     push edi
-		     push esi
-
-		     push edx
-		     push ecx
-		     push ebx
-		     push eax
+            push ds
             push esp
     ; call C++ Handler
            call irq_handler
            add esp,4
     ; restore registers
-           ; pop ds
-           pop eax
- 		   pop ebx
-     	   pop ecx
-           pop edx
-
-           pop esi
-           pop edi
-           pop ebp
-            ;popa
+            pop ds
+            popa
             add esp,8
             iret
 

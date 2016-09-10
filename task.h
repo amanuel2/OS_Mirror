@@ -4,57 +4,42 @@
 #include <stdarg.h>
 #include <stdint.h>
 #include "gdt.h"
+#include "stdio.h"
+#include "heap.h"
+#include "pmm.h"
 
-struct CPUState
-{
-   uint32_t eax;
-   uint32_t ebx;
-   uint32_t ecx;
-   uint32_t edx;
+#define TASK_STACK_SIZE 0x2000
 
-   uint32_t esi;
-   uint32_t edi;
-   uint32_t ebp;
+typedef struct {
+	    uint32_t eax, ebx, ecx, edx, esi, edi,
+				 esp, ebp, eip, eflags, cr3;
+} Registers;
 
-   /*
-	uint32_t gs;
-	uint32_t fs;
-    uint32_t es;
-    uint32_t ds;
-    */
-    uint32_t error;
-
-    uint32_t eip;
-    uint32_t cs;
-    uint32_t eflags;
-    uint32_t esp;
-    uint32_t ss;
-} __attribute__((packed));
-
+typedef struct task_q {
+		    Registers regs;
+		    struct task_q *next;
+} task_q;
 
 class Task
 {
-  friend class TaskManager;
-  	  private:
-  	  	  uint8_t stack[4096]; // 4 KiB
-  	  	  CPUState* cpustate;
-  	  public:
-  	  	  Task(gdt *GlobalDescriptorTable, void entrypoint());
-  	  	  ~Task();
+	friend class TaskManager;
+public:
+	Task();
+	~Task();
+private:
 };
-
 
 class TaskManager
 {
-    	private:
-        	Task* tasks[256];
-        	uint32_t num_task;
-        	uint32_t current_task;
-    	public:
-        	TaskManager();
-        	~TaskManager();
-        	bool AddTask(Task* task);
-        	CPUState* Schedule(CPUState* cpustate);
+public:
+	TaskManager(Heap *heap);
+	~TaskManager();
+	void init_tasking();
+	static void createTask(task_q* task, void(*task_main)(), uint32_t flags, uint32_t* pageDir);
+	void preempt();
+private:
+	void switchTask(Registers *old, Registers *new_);
+	void otherMain();
 };
 
 #endif

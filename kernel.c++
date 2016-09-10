@@ -68,20 +68,22 @@ extern "C" void kernelMain
 	   printf("*************************");
 
 
+	   PhyiscalMemoryManager pmm(multiboot_structure);
+
+
+
+	   Heap heap(kernel_virtual_end);
 
 
 	   gdt gt;
 
-	   TaskManager taskManager;
-	   Task task1(&gt, taskA);
-	   Task task2(&gt , taskB);
-	   taskManager.AddTask(&task1);
-	   taskManager.AddTask(&task2);
+	   TaskManager taskManager(&heap);
+
 
 
 	   IDT idt;
 	   ISR isr;
-	   IRQ irq(&taskManager);
+	   IRQ irq;
 	   SerialPort sp;
 	   isr.install_isrs();
 	   irq.install_irqs();
@@ -98,11 +100,6 @@ extern "C" void kernelMain
 
 	   	cls();
 
-	   	PhyiscalMemoryManager pmm(multiboot_structure);
-
-
-	   
-        Heap heap(kernel_virtual_end);
 
 
 

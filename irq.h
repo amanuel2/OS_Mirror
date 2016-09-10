@@ -20,7 +20,7 @@ class IRQ
 {
 
 public:
-	IRQ(TaskManager *tmgr);
+	IRQ();
 	~IRQ();
 	void install_irqs();
 private:
