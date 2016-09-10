@@ -9,19 +9,19 @@
  */
 
 template <class T>
-static struct Node
+struct Node
 {
 	T info;
-	T *next;
+	Node *next;
 };
 
-enum
+enum SortingMethod
 {
 	I_GTL, //Integer Greatest To Least
 	I_LTG, //Integer Least to Greatest
 	S_GTL, //String Greatest to least
 	S_LTG  //String Least to greatest
-} SortingMethod;
+};
 
 template <class T>
 class LinkedList
@@ -45,6 +45,7 @@ public:
 	T get_val(uint32_t index);
 private:
 	uint32_t current_index=0;
+	Node** nodes;
 
 };
 

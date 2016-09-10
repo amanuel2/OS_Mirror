@@ -76,10 +76,10 @@ void LinkedList<T>::reverse()
 template <class T>
 uint32_t LinkedList<T>::get_index(T val)
 {
-
+	return 0;
 }
 template <class T>
 T LinkedList<T>::get_val(uint32_t index)
 {
-
+	return 0;
 }
