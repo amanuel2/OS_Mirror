@@ -74,10 +74,10 @@ extern "C" void kernelMain
 
 	   Heap heap(kernel_virtual_end);
 
+	   init_tasking(&heap);
 
 	   gdt gt;
 
-	   TaskManager taskManager(&heap);
 
 
 

@@ -2,36 +2,35 @@
 
 
 
+void preempt();
+
+typedef struct {
+	    uint32_t eax, ebx, ecx, edx, esi, edi,
+				 esp, ebp, eip, eflags, cr3;
+} Registers;
+
+typedef struct task_q {
+		    Registers regs;
+		    struct task_q *next;
+} task_q;
+
+
 static task_q *runningTask;
 static task_q mainTask;
 static task_q otherTask;
-static PhyiscalMemoryManager *pmm_task;
-static 	Heap *heap_task;
 
 
+extern void switch_task_a(Registers *old, Registers *new_);
 
-extern void switch_task_a();
 
-TaskManager::TaskManager(Heap *heap)
-{
- heap_task = heap;
-}
-TaskManager::~TaskManager()
-{}
-
-Task::Task()
-{}
-
-Task::~Task()
-{}
-void TaskManager::otherMain()
+void otherMain()
 {
 	    printf("Hello multitasking world!"); // Not implemented here...
 	    preempt();
 }
 
 
-void TaskManager::createTask(task_q* task, void(*task_main)(), uint32_t flags, uint32_t* pageDir)
+void createTask(task_q* task, void(*task_main)(), uint32_t flags, uint32_t* pageDir, Heap *heap_task)
 {
 	    task->regs.ebx = 0;
 	    task->regs.ecx = 0;
@@ -45,25 +44,25 @@ void TaskManager::createTask(task_q* task, void(*task_main)(), uint32_t flags, u
 	    task->next = 0;
 }
 
-void TaskManager::init_tasking()
+void init_tasking(Heap *heap_task)
 {
 	 // Get EFLAGS and CR3
 	    __asm __volatile("movl %%cr3, %%eax; movl %%eax, %0;":"=m"(mainTask.regs.cr3)::"%eax");
 	    __asm __volatile("pushfl; movl (%%esp), %%eax; movl %%eax, %0; popfl;":"=m"(mainTask.regs.eflags)::"%eax");
 
-	    this->createTask(&otherTask, this->otherMain, mainTask.regs.eflags, (uint32_t*)mainTask.regs.cr3);
+	    createTask(&otherTask, otherMain, mainTask.regs.eflags, (uint32_t*)mainTask.regs.cr3,heap_task);
 	    mainTask.next = &otherTask;
 	    otherTask.next = &mainTask;
 
 	    runningTask = &mainTask;
 }
 
-void TaskManager::switchTask(Registers *old, Registers *new_)
+void switchTask(Registers *old, Registers *new_)
 {
-	switch_task_a();
+	switch_task_a(old,new_);
 }
 
-void TaskManager::preempt()
+void preempt()
 {
 	task_q *last = runningTask;
 	runningTask = runningTask->next;
