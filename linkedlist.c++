@@ -14,6 +14,7 @@ LinkedList<T>::~LinkedList()
 {
 
 }
+
 template <class T>
 void LinkedList<T>::insert_begin(T val)
 {

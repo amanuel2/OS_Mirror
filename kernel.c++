@@ -46,12 +46,12 @@ extern void printf(char *str, ...);
 void taskA();
 void taskB();
 
-template <typename T>
+template <class T>
 class TestList
 {
 public:
-	TestList();
-	~TestList();
+	TestList(){}
+	~TestList(){};
 };
 
 extern "C" void kernelMain
@@ -135,8 +135,8 @@ extern "C" void kernelMain
 #endif
 
 #ifdef DEBUG_MODE
-        TestList<int> tl;
         LinkedList<int> ls;
+        ls.insert_begin(3);
 #endif
 
 
