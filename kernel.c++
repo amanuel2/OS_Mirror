@@ -115,6 +115,8 @@ extern "C" void kernelMain
         PCI_CONTROLLER pci;
         pci.printDrivers();
 
+        cls();
+
  	   doIt();
 
 #ifdef GRAPHICS_MODE
