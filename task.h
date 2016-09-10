@@ -11,6 +11,7 @@
 #define TASK_STACK_SIZE 0x2000
 
 extern void init_tasking(Heap *heap_task);
+extern void doIt();
 
 //class Task
 //{

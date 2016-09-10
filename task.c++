@@ -20,13 +20,19 @@ static task_q mainTask;
 static task_q otherTask;
 
 
-extern void switch_task_a(Registers *old, Registers *new_);
+extern "C" void switch_task_a(Registers *old, Registers *new_);
 
 
 void otherMain()
 {
 	    printf("Hello multitasking world!"); // Not implemented here...
 	    preempt();
+}
+
+void doIt() {
+    printf("\nSwitching to otherTask... \n");
+	    preempt();
+	    printf("\nReturned to mainTask!\n");
 }
 
 

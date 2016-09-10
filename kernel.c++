@@ -76,6 +76,7 @@ extern "C" void kernelMain
 
 	   init_tasking(&heap);
 
+
 	   gdt gt;
 
 
@@ -114,7 +115,7 @@ extern "C" void kernelMain
         PCI_CONTROLLER pci;
         pci.printDrivers();
 
-    //   randomnumberc();
+ 	   doIt();
 
 #ifdef GRAPHICS_MODE
         Desktop desktop(0x23);

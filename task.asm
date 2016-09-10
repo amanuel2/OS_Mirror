@@ -44,6 +44,6 @@ switch_task_a:
     pop eax
     push eax
     mov eax, [eax+32] ;EIP
-    xchg eax,[esp] ;We do not have any more registers to use as tmp storage
+    xchg eax,[esp] ; Use Exchange Instruction When No Registers Left
     mov eax, [eax] ;EAX
     ret ;This ends all!
