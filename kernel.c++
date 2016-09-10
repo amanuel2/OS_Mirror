@@ -1,4 +1,5 @@
 //#define GRAPHICS_MODE 1
+#define DEBUG_MODE 1
 #include "types.h"
 #include "gdt.h"
 #include "serial.h"
@@ -22,7 +23,9 @@
 	#include "desktop.h"
 #endif
 #include "task.h"
-
+#ifdef DEBUG_MODE
+	#include "linkedlist.h"
+#endif
 
 //Call all class constructor
 //for global objects before
@@ -42,6 +45,14 @@ extern void printf(char *str, ...);
 
 void taskA();
 void taskB();
+
+template <typename T>
+class TestList
+{
+public:
+	TestList();
+	~TestList();
+};
 
 extern "C" void kernelMain
 		(
@@ -123,6 +134,10 @@ extern "C" void kernelMain
         Desktop desktop(0x23);
 #endif
 
+#ifdef DEBUG_MODE
+        TestList<int> tl;
+        LinkedList<int> ls;
+#endif
 
 
    while(1);
