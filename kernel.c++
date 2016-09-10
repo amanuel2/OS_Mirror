@@ -74,7 +74,7 @@ extern "C" void kernelMain
 
 	   Heap heap(kernel_virtual_end);
 
-	   init_tasking(&heap);
+
 
 
 	   gdt gt;
@@ -116,8 +116,8 @@ extern "C" void kernelMain
         pci.printDrivers();
 
         cls();
-
- 	   doIt();
+ 	   init_tasking(&heap);
+ 	  // doIt();
 
 #ifdef GRAPHICS_MODE
         Desktop desktop(0x23);

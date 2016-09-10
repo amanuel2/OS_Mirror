@@ -21,18 +21,20 @@ static task_q otherTask;
 
 
 extern "C" void switch_task_a(Registers *old, Registers *new_);
+extern "C" void get_cr3(uint32_t cr3);
+extern "C" void get_eflags(uint32_t flags);
 
 
 void otherMain()
 {
 	    printf("Hello multitasking world!"); // Not implemented here...
+	    while(true)
+	    	printf("A");
 	    preempt();
 }
 
 void doIt() {
-    printf("\nSwitching to otherTask... \n");
 	    preempt();
-	    printf("\nReturned to mainTask!\n");
 }
 
 

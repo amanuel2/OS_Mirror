@@ -47,3 +47,18 @@ switch_task_a:
     xchg eax,[esp] ; Use Exchange Instruction When No Registers Left
     mov eax, [eax] ;EAX
     ret ;This ends all!
+
+global get_cr3
+
+	get_cr3:
+		mov eax, cr3
+		mov [esp+4],eax
+
+global get_eflags
+
+	get_eflags:
+		pushf
+		mov ebx, [esp+4]
+		mov eax , [esp]
+		popf
+
