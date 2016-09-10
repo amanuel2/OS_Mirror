@@ -1,3 +1,4 @@
+
 //#define GRAPHICS_MODE 1
 #define DEBUG_MODE 1
 #include "types.h"
@@ -24,7 +25,7 @@
 #endif
 #include "task.h"
 #ifdef DEBUG_MODE
-	#include "linkedlist.h"
+	#include "vertex.h"
 #endif
 
 //Call all class constructor
@@ -127,7 +128,7 @@ extern "C" void kernelMain
         pci.printDrivers();
 
         cls();
- 	   init_tasking(&heap);
+ 	    init_tasking(&heap);
  	  // doIt();
 
 #ifdef GRAPHICS_MODE
@@ -135,8 +136,13 @@ extern "C" void kernelMain
 #endif
 
 #ifdef DEBUG_MODE
-        LinkedList<int> ls;
-        ls.insert_begin(3);
+        Vertex<int> vert;
+        vert.insert_begin(3);
+        vert.insert_begin(4);
+        vert.insert_begin(5);
+        vert.insert_end(20);
+         for(uint32_t i=0; i<vert.get_amount(); i++)
+       		 printf("%d : %d \n" ,i, vert.get_val(i));
 #endif
 
 
