@@ -4,6 +4,10 @@
 #include <stdarg.h>
 #include <stdint.h>
 
+#ifndef NULL
+	#define NULL 0
+#endif
+
 /*
  * @class LinkedList : IN PROGRESS
  */
@@ -13,6 +17,7 @@ struct Node
 {
 	T info;
 	Node *next;
+	Node *prev;
 };
 
 enum SortingMethod
@@ -29,8 +34,8 @@ class LinkedList
 public:
 	LinkedList();
 	~LinkedList();
-	void insert_begin();
-	void insert_end();
+	void insert_begin(T val);
+	void insert_end(T val);
 	void insert_index(uint32_t index);
 	void insert_after_val(T val);
 	void insert_before_val(T val);
@@ -45,7 +50,8 @@ public:
 	T get_val(uint32_t index);
 private:
 	uint32_t current_index=0;
-	Node** nodes;
+	uint32_t num_list=0;
+	Node<T>** nodes;
 
 };
 
