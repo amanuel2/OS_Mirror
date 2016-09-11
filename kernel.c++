@@ -152,6 +152,15 @@ extern "C" void kernelMain
        		 printf("%d : %d \n" ,i, vert.get_val(i));
 
 
+printf("***********\n");
+	Vertex<char*> vert_check;
+	vert_check.insert_begin("a");
+	vert_check.insert_end("b");
+	vert_check.sort(REVERSE);
+ for(uint32_t i=0; i<vert_check.get_amount(); i++)
+       		 printf("%d : %s \n" ,i, vert_check.get_val(i));
+
+
 
        	//vert.insert_index(5);	
 #endif

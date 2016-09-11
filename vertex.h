@@ -1,5 +1,5 @@
-#ifndef _LINKEDLIST_H_
-#define _LINKEDLIST_H_ 1
+#ifndef _VERTEX_H_
+#define _VERTEX_H_ 1
 
 #include <stdarg.h>
 #include <stdint.h>
@@ -212,6 +212,11 @@ void Vertex<T>::sort(SortingMethod sm)
 {
 	if(sm == REVERSE)
 		this->reverse();
+	else
+	{
+		printf("Other Implementations other than Reverse() Not Implemented!");
+		while(true);
+	}
 }
 template <class T>
 void Vertex<T>::reverse()
