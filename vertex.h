@@ -29,7 +29,8 @@ enum SortingMethod
 	I_GTL, //Integer Greatest To Least
 	I_LTG, //Integer Least to Greatest
 	S_GTL, //String Greatest to least
-	S_LTG  //String Least to greatest
+	S_LTG,  //String Least to greatest
+	REVERSE
 };
 
 template <typename T>
@@ -41,15 +42,14 @@ public:
 	void insert_begin(T val);
 	void insert_end(T val);
 	void insert_index(uint32_t index, T val);
-	void insert_after_val(T val);
-	void insert_before_val(T val);
+	void insert_after_val(T val_after, T val);
+	void insert_before_val(T val_before, T val);
 	void remove_begin();
 	void remove_end();
 	void remove_index(uint32_t index);
-	void remove_after_val(T val);
-	void remove_before_val(T val);
+	void remove_after_val(T after_val);
+	void remove_before_val(T before_val);
 	void sort(SortingMethod sm);
-	void reverse();
 	uint32_t get_index(T val);
 	T get_val(uint32_t index);
 	uint32_t get_amount();
@@ -57,6 +57,7 @@ private:
 	uint32_t current_index=0;
 	uint32_t num_list=0;
 	T contents[];
+	void reverse();
 };
 
 template <typename T>
@@ -140,39 +141,72 @@ void Vertex<T>::insert_index(uint32_t index, T val)
 }
 
 template <class T>
-void Vertex<T>::insert_after_val(T val)
+void Vertex<T>::insert_after_val(T val_after, T val)
 {
-
+	this->insert_index(this->get_index(val_after)+1,val);
 }
 template <class T>
-void Vertex<T>::insert_before_val(T val)
+void Vertex<T>::insert_before_val(T val_before, T val)
 {
-
+  if((this->get_index(val_before)-1)>0)	
+ 	this->insert_index(this->get_index(val_before),val);
+  else
+  {
+  	printf("insert_before_val() less than 0");			
+	while(true);
+  }
 }
 template <class T>
 void Vertex<T>::remove_begin()
 {
+	for(uint32_t i=1; i<num_list; i++)
+		contents[i-1] = contents[i];
 
+	contents[num_list-1]=0;
+	num_list--;
+	current_index--;
 }
 template <class T>
 void Vertex<T>::remove_end()
 {
-
+	contents[num_list-1]=0;
+	num_list--;
+	current_index--;
 }
 template <class T>
 void Vertex<T>::remove_index(uint32_t index)
 {
-
+	for(uint32_t i=(index+1); i<num_list; i++)
+		contents[i-1] = contents[i];
+	
+	contents[num_list-1]=0;
+	num_list--;
+	current_index--;
 }
 template <class T>
-void Vertex<T>::remove_after_val(T val)
+void Vertex<T>::remove_after_val(T after_val)
 {
-
+	uint32_t counter=0;
+	for(uint32_t i=get_index(after_val)+1; i<num_list ; i++)
+	{
+		contents[i]=0;
+		counter++;
+	}
+	num_list-=counter;
+	current_index-=counter;
 }
+/*Annoying Function in Progress*/
 template <class T>
-void Vertex<T>::remove_before_val(T val)
+void Vertex<T>::remove_before_val(T before_val)
 {
-
+	uint32_t counter=0;
+	for(uint32_t i=0; i<=2 ; i++)
+	{
+		contents[i]=contents[2+i+1];
+		counter++;
+	}
+	 //num_list-=counter;
+	 //current_index-=counter;
 }
 
 template <class T>
@@ -188,7 +222,11 @@ void Vertex<T>::reverse()
 template <class T>
 uint32_t Vertex<T>::get_index(T val)
 {
-	return 0;
+	for(uint32_t i=0; i<num_list; i++)
+		if(contents[i] == val)
+			return i;
+	printf("getIndex() Not Found");			
+	while(true);
 }
 template <class T>
 T Vertex<T>::get_val(uint32_t index)
