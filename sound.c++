@@ -16,7 +16,7 @@ void Sound::beep(uint32_t seconds)
 {
 
         //Set the PIT to the desired frequency
-	uint32_t nFrequence = 1000;
+	uint32_t nFrequence = 500;
  	uint32_t Div = 1193180 / nFrequence;
  	p8b.out(0xb6,0x43);
  	p8b.out((uint8_t) (Div),0x42 );
