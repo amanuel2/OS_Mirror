@@ -28,7 +28,7 @@
 	#include "vertex.h"
 #endif
 #include "time.h"
-#include "beep.h"
+#include "sound.h"
 
 //Call all class constructor
 //for global objects before
@@ -177,7 +177,8 @@ printf("***********\n");
       // delay(2); 
       // printf("Delay Finished!");
 
-      beep();
+     Sound sound;
+     sound.beep(2);
 
 
    while(1);
