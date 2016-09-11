@@ -6,6 +6,6 @@
 #include "stdio.h"
 
 
-extern void delay(uint32_t seconds);
+extern "C" void delay(uint32_t seconds);
 
 #endif

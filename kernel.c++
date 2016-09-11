@@ -28,6 +28,7 @@
 	#include "vertex.h"
 #endif
 #include "time.h"
+#include "beep.h"
 
 //Call all class constructor
 //for global objects before
@@ -168,13 +169,15 @@ printf("***********\n");
 
        cls();
 
-       printf("Delay 5 Seconds\n");
-      delay(5); 
-      printf("Delay Finished!");
+      //  printf("Delay 5 Seconds\n");
+      // delay(5); 
+      // printf("Delay Finished!");
 
-      printf("Delay 2Seconds\n");
-      delay(2); 
-      printf("Delay Finished!");
+      // printf("Delay 2Seconds\n");
+      // delay(2); 
+      // printf("Delay Finished!");
+
+      beep();
 
 
    while(1);
