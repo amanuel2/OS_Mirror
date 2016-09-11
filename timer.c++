@@ -9,7 +9,7 @@ extern size_t terminal_row;
 extern size_t terminal_column;
 
 
-static int32_t timer_ticks = 0;
+int32_t timer_ticks = 0;
 
 static PORT::Port8Bits p8b_timer_drv;
 
@@ -39,7 +39,17 @@ void timer_wait(int ticks)
     p8b_timer_drv.out(divisor >> 8,0x40);     /* Set high byte of divisor */
 }
 
+int second_passed()
+{
+    ret:;
+    timer_ticks=0;
 
+    printf("%d",timer_ticks);
+    if (timer_ticks % 19 == 0)
+        return 1;
+    else
+        goto ret;
+}
 
 /* Handles the timer. In this case, it's very simple: We
 *  increment the 'Timer::timer_ticks' variable every time the
@@ -56,7 +66,7 @@ void timer_handler_driver(struct regs *r)
     if (timer_ticks % 19 == 0)
     {
         update_clock_time_taken(timer_ticks/18);
-       // beep();
+        
     }
 
     update_cursor(terminal_row,terminal_column);

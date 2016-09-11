@@ -27,6 +27,7 @@
 #ifdef DEBUG_MODE
 	#include "vertex.h"
 #endif
+#include "time.h"
 
 //Call all class constructor
 //for global objects before
@@ -164,6 +165,12 @@ printf("***********\n");
 
        	//vert.insert_index(5);	
 #endif
+
+       cls();
+
+       printf("Delay 2 Seconds\n");
+      delay(2); 
+      printf("Delay Finished!");
 
 
    while(1);
