@@ -210,13 +210,36 @@ void Vertex<T>::remove_before_val(T before_val)
 template <class T>
 void Vertex<T>::sort(SortingMethod sm)
 {
-
+	if(sm == REVERSE)
+		this->reverse();
 }
 template <class T>
 void Vertex<T>::reverse()
 {
-
+	if(num_list%2==0)
+	{
+		uint32_t counter_reverse=1;
+		for(uint32_t i=num_list/2 ; i<num_list; i++)
+		{
+			T temp_reverse = contents[i-counter_reverse];
+			contents[i-counter_reverse] = contents[i];
+			contents[i] = temp_reverse;
+			counter_reverse+=2;
+		}
+	}
+	else
+	{
+		uint32_t counter_reverse=2;
+		for(uint32_t i=((num_list+1)/2) ; i<num_list; i++)
+		{
+			T temp_reverse = contents[i-counter_reverse];
+			contents[i-counter_reverse] = contents[i];
+			contents[i] = temp_reverse;
+			counter_reverse+=2;
+		}
+	}
 }
+
 template <class T>
 uint32_t Vertex<T>::get_index(T val)
 {
