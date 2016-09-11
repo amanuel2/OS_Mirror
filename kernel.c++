@@ -141,8 +141,12 @@ extern "C" void kernelMain
         vert.insert_begin(4);
         vert.insert_begin(5);
         vert.insert_end(20);
+        vert.insert_end(70);
+        vert.insert_index(3,1000);
          for(uint32_t i=0; i<vert.get_amount(); i++)
        		 printf("%d : %d \n" ,i, vert.get_val(i));
+
+       	//vert.insert_index(5);	
 #endif
 
 

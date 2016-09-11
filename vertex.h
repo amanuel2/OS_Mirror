@@ -40,7 +40,7 @@ public:
 	~Vertex();
 	void insert_begin(T val);
 	void insert_end(T val);
-	void insert_index(uint32_t index);
+	void insert_index(uint32_t index, T val);
 	void insert_after_val(T val);
 	void insert_before_val(T val);
 	void remove_begin();
@@ -105,16 +105,40 @@ void Vertex<T>::insert_begin(T val)
 template <class T>
 void Vertex<T>::insert_end(T val)
 {
-	contents[current_index+1] = val;
-	current_index++;
+	contents[++current_index] = val;
 	num_list++;
 }
 
 template <class T>
-void Vertex<T>::insert_index(uint32_t index)
+void Vertex<T>::insert_index(uint32_t index, T val)
 {
+	if(index>=num_list)
+	{
+		contents[++current_index] = val;
+		num_list++;
+	}
+	else
+	{
+		T temp;
+		temp = contents[index];
+		contents[index] = val;
+		num_list++;
+		for(uint32_t i=index+1; i<num_list; i++)
+		{
+			if(i == (num_list-1))
+				contents[i] = temp;
+			else
+			{
+				T another_temp;
+				another_temp = contents[i];
+				contents[i] = temp;
+				temp = another_temp;
+			}
+		}
 
+	}
 }
+
 template <class T>
 void Vertex<T>::insert_after_val(T val)
 {
