@@ -168,7 +168,11 @@ printf("***********\n");
 
        cls();
 
-       printf("Delay 2 Seconds\n");
+       printf("Delay 5 Seconds\n");
+      delay(5); 
+      printf("Delay Finished!");
+
+      printf("Delay 2Seconds\n");
       delay(2); 
       printf("Delay Finished!");
 
