@@ -200,13 +200,11 @@ template <class T>
 void Vertex<T>::remove_before_val(T before_val)
 {
 	uint32_t counter=0;
-	for(uint32_t i=0; i<=2 ; i++)
-	{
-		contents[i]=contents[2+i+1];
-		counter++;
-	}
-	 //num_list-=counter;
-	 //current_index-=counter;
+	for(uint32_t i=0; i<=get_index(before_val) ; i++)
+	 {
+	 	this->remove_index(0);
+	 	counter++;
+	 }
 }
 
 template <class T>

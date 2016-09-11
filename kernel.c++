@@ -146,7 +146,7 @@ extern "C" void kernelMain
 
         vert.insert_before_val(70,342);
 
-     vert.remove_before_val(3);
+    vert.remove_before_val(20);
          for(uint32_t i=0; i<vert.get_amount(); i++)
        		 printf("%d : %d \n" ,i, vert.get_val(i));
 
