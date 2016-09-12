@@ -29,7 +29,5 @@ void Sound::beep(uint32_t seconds)
 
  	delay(seconds);
 
-	uint8_t tmp_non = p8b.in(0x61) & 0xFC;
- 
- 	p8b.out(tmp_non,0x61);
+ 	p8b.out((p8b.in(0x61) & 0xFC),0x61);
 }

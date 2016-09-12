@@ -29,6 +29,7 @@
 #endif
 #include "time.h"
 #include "sound.h"
+#include "ata.h"
 
 //Call all class constructor
 //for global objects before
@@ -180,6 +181,27 @@ printf("***********\n");
      Sound sound;
      sound.beep(2);
 
+     AdvancedTechnologyAttachment atapm(0x1F0,MASTER);
+     printf("PRIMARY MASTER ATA : ");
+     atapm.Identify();
+
+     AdvancedTechnologyAttachment ataps(0x1F0,SLAVE);
+     printf("\n PRIMARY SLAVE ATA : ");
+     ataps.Identify();
+     ataps.Write28(0, (char*)"http://www.AlgorithMan.de", 25);
+     ataps.Flush();
+     printf("\n\n\n Delay");
+     delay(5);
+     printf("\n\n Done \n\n");
+     ataps.Read28(0);
+
+	 AdvancedTechnologyAttachment atasm(0x170,MASTER);
+	 printf("\nSECONDARY MASTER ATA : ");
+	 atasm.Identify();
+
+     AdvancedTechnologyAttachment atasp(0x170,SLAVE);
+     printf("\nSECONDARY SLAVE ATA : ");
+     atasp.Identify();
 
    while(1);
    err:
