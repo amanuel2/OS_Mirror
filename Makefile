@@ -90,7 +90,7 @@ qemu_compile: compile BoneOS.bin qemu
 	
 
 qemu:
-	qemu-system-i386  -kernel  BoneOS.bin
+	qemu-system-i386  -kernel  BoneOS.bin -hdd BoneOSVirtualHardDisk.vdi
 
 qemu_debug:
 	qemu-system-i386 -kernel BoneOS.bin -s -d in_asm,cpu_reset,exec,int,guest_errors,pcall -no-reboot &>qemu.log

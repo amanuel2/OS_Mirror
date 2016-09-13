@@ -30,3 +30,6 @@ cross/
 bochslog.txt	
 bochsrc.txt	
 bx_enh_dbg.ini
+
+#Virtual Hard Disks
+*.vdi
