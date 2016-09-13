@@ -27,7 +27,7 @@ void AdvancedTechnologyAttachment::Identify()
 		p8b.out(0xB0,port_def + 0x6);
 
 	//Set Bit. Not important
-    p8b.out(0,port_def + 0x206);
+   // p8b.out(0,port_def + 0x206);
 
     //Begins to talk with master to get status
     p8b.out(0xA0,port_def + 0x6);
@@ -220,7 +220,7 @@ void AdvancedTechnologyAttachment::Flush()
         
     if(status & 0x01)
     {
-        printf("ERROR");
+        printf("ERROR FLUSH");
         return;
     }
 }
