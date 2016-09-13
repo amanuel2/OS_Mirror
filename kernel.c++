@@ -185,23 +185,48 @@ printf("***********\n");
      printf("PRIMARY MASTER ATA : ");
      atapm.Identify();
 
+     if(atapm.accesible)
+     {
+       printf("\nWritting Info In Primary Master\n");
+     	 atapm.Write28(0, (char*)"Info Written to Hard Drive", 26);
+    	 atapm.Flush();
+     	 atapm.Read28(0);
+     }
+
      AdvancedTechnologyAttachment ataps(0x1F0,SLAVE);
      printf("\n PRIMARY SLAVE ATA : ");
      ataps.Identify();
-     ataps.Write28(0, (char*)"http://www.AlgorithMan.de", 25);
-     ataps.Flush();
-     printf("\n\n\n Delay");
-     delay(5);
-     printf("\n\n Done \n\n");
-     ataps.Read28(0);
+     if(ataps.accesible)
+     {
+       printf("\nWritting Info In Primary Slave\n");
+     	 ataps.Write28(0, (char*)"Info Written to Hard Drive", 26);
+    	 ataps.Flush();
+     	 ataps.Read28(0);
+     }
+    
 
 	 AdvancedTechnologyAttachment atasm(0x170,MASTER);
 	 printf("\nSECONDARY MASTER ATA : ");
 	 atasm.Identify();
+     if(atasm.accesible)
+     {
+       printf("\nWritting Info In Secondary Master\n");
+       atasm.Write28(0, (char*)"Info Written to Hard Drive", 26);
+       atasm.Flush();
+       atasm.Read28(0);
+     }
 
-     AdvancedTechnologyAttachment atasp(0x170,SLAVE);
+
+     AdvancedTechnologyAttachment atass(0x170,SLAVE);
      printf("\nSECONDARY SLAVE ATA : ");
-     atasp.Identify();
+     atass.Identify();
+     if(atass.accesible)
+     {
+       printf("\nWritting Info In Secondary Slave\n");
+       atass.Write28(0, (char*)"Info Written to Hard Drive", 26);
+       atass.Flush();
+       atass.Read28(0);
+     }
 
    while(1);
    err:
@@ -220,4 +245,3 @@ void taskB()
     while(true)
         printf("B");
 }
-

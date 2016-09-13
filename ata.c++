@@ -34,7 +34,10 @@ void AdvancedTechnologyAttachment::Identify()
     uint8_t status = p8b.in(port_def + 0x7);
     //No device on Bus if
     if(status == 0xFF)
+    {
+    	this->accesible = false;
         return;
+    }
     
     
     if(this->type == MASTER)
@@ -53,7 +56,10 @@ void AdvancedTechnologyAttachment::Identify()
     status = p8b.in(port_def + 0x7);
     //No Device on BUS
     if(status == 0x00)
+    {
+    	this->accesible = false;
         return;
+    }
     
     //Wait Until Hard Drive
     //Gets Device anwser to IDENTIFY COMMAND
@@ -63,14 +69,14 @@ void AdvancedTechnologyAttachment::Identify()
      //No Device on Bus   
     if(status & 0x01)
     {
-        printf("ERROR");
+    	this->accesible = false;
         return;
     }
     
     //Finaly read data and print it
     for(int i = 0; i < 256; i++)
     {
-       uint16_t data = p16b.in(port_def);
+        uint16_t data = p16b.in(port_def);
 		char * text_data = "  \0";
 		text_data[0] = (data>>8) & 0xFF;
 		text_data[1] = data & 0xFF;
@@ -80,6 +86,11 @@ void AdvancedTechnologyAttachment::Identify()
 }
 void AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
 {
+	if(!(accesible))
+	{
+		printf("Failed : Not Accessible");
+		return;
+	}
 	if(sectorNum > 0x0FFFFFFF)
         return;
 	//Identify What 
@@ -134,6 +145,11 @@ void AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
 }
 void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32_t count)
 {
+	if(!(accesible))
+	{
+		printf("Failed : Not Accessible");
+		return;
+	}
 		//Larger Addressing Than 28
 	//check first 4 bits are 0
 	if(sectorNum > 0x0FFFFFFF)
@@ -159,7 +175,6 @@ void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32
 	p8b.out(0x30,port_def + 0x7); //WRITE COMMAND
 
     
-      printf("Writing to ATA Drive: \n");
 
  for(uint32_t i = 0; i < count; i += 2)
     {
@@ -171,7 +186,7 @@ void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32
         char *text = "  \0";
         text[0] = (wdata >> 8) & 0xFF;
         text[1] = wdata & 0xFF;
-        printf(text);
+ //       printf(text);
     }
     
     for(int i = count + (count%2); i < 512; i += 2)
@@ -182,6 +197,11 @@ void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32
 }
 void AdvancedTechnologyAttachment::Flush()
 {
+	if(!(accesible))
+	{
+		printf("Failed : Not Accessible");
+		return;
+	}
 	if(this->type == MASTER)
  		p8b.out(0xE0,port_def + 0x6);
 	else

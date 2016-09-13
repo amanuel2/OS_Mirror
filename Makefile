@@ -128,7 +128,7 @@ run_vb: compile BoneOS.bin BoneOS.iso
 	${VBM} modifyvm BoneOS --uart1 0x3F8 4
 	${VBM} storagectl BoneOS --name "IDE Controller" --add ide
 	${VBM} storageattach BoneOS --storagectl "IDE Controller" --port 0 \
-	--device 0 --type dvddrive --medium BoneOS.iso
+	--device 0 --type dvddrive --medium BoneOS.iso 
 	echo "Run VM"
 	${VB} --startvm BoneOS --dbg
 
