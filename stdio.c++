@@ -17,28 +17,7 @@ uint16_t* terminal_buffer;
 
 static PORT::Port8Bits p8b_stdio_drv;
 
-//static char* mouse_prev_chr;
 
- namespace enter_press_np
-  {
-    struct enter_pressed_structure
-    {
-      int bit;
-      char* value;
-    };
-
-    struct val_e
-    {
-      char* val_e;
-      int index_val_e = 0;
-    };
-
-    extern struct val_e val_e_inst;
-  };
-
-
-extern enter_press_np::enter_pressed_structure enter_pressed_func();
-struct enter_press_np::enter_pressed_structure enter_term;
 
 extern void emptyString(char* str);
 char *convert(unsigned int num, int base);
@@ -114,20 +93,6 @@ char toUpper(char sv)
 	}
 
 	return sv_ret;
-}
-
-char* wait_enter()
-{
-	while(true)
-	{
-		enter_term = enter_pressed_func();
-		if(!enter_term.bit)
-			goto enter_done_while;
-	}
-	enter_done_while:
-
-	//emptyString(enter_press_np::val_e_inst.val_e);
-	return enter_term.value;
 }
 
 void cls()		

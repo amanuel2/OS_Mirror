@@ -187,46 +187,6 @@ void emptyString(char* str)
 		str[i] = (char) 0;
 	}
 }
-enter_press_np::enter_pressed_structure enter_pressed_func()
-{
-    if(enter_presed == true)
-    {
-        enter_press_np::kbd_str_e.bit = 0;
-        //Bug Fix
-        if(enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] == 'P')
-        {
-            enter_press_np::val_e_inst.val_e[enter_press_np::val_e_inst.index_val_e] = (char) 0;
-            enter_press_np::val_e_inst.index_val_e--;
-        }
-
-        if(Lib::str::strlen(enter_press_np::val_e_inst.val_e) > (unsigned)enter_press_np::val_e_inst.index_val_e)
-        {
-        	int index_start = (unsigned)enter_press_np::val_e_inst.index_val_e;
-        	int index_stop = Lib::str::strlen(enter_press_np::val_e_inst.val_e);
-             for(int i=index_start; i<=index_stop; i++)
-             {
-                 enter_press_np::val_e_inst.val_e[i] = (char) 0;
-             }
-        }
-
-        /*
-         * Reset Total Typed
-         */
-        total_typed=0;
-
-    }
-    else
-    {
-        enter_press_np::kbd_str_e.bit = 1;
-        enter_press_np::kbd_str_e.value = enter_press_np::val_e_inst.val_e;
-        enter_press_np::val_e_inst.val_e= "";
-    }
-
-    enter_presed = false;
-    //enter_press_np::val_e_inst.index_val_e = 0;
-    return enter_press_np::kbd_str_e;
-}
-
 
 void KBD::install_kbd_driver()
 {

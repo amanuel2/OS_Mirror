@@ -80,7 +80,7 @@ void AdvancedTechnologyAttachment::Identify()
 		char * text_data = "  \0";
 		text_data[0] = (data>>8) & 0xFF;
 		text_data[1] = data & 0xFF;
-		printf(text_data);
+	//	printf(text_data);
     }	
 
 }
@@ -122,7 +122,7 @@ void AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
 
      printf("\nReading ATA Drive: ");
     
-    for(uint32_t i = 0; i < count; i += 2)
+    for(uint32_t i = 7; i < count; i += 2)
     {
         uint16_t wdata = p16b.in(port_def);
         
@@ -143,7 +143,7 @@ void AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
         p16b.in(port_def);
     printf("\n");
 }
-void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32_t count)
+void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32_t start, uint32_t count)
 {
 	if(!(accesible))
 	{
@@ -176,7 +176,7 @@ void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32
 
     
 
- for(uint32_t i = 0; i < count; i += 2)
+ for(uint32_t i = start; i < count; i += 2)
     {
         uint16_t wdata = data[i];
         if(i+1 < count)
@@ -192,7 +192,7 @@ void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32
     for(int i = count + (count%2); i < 512; i += 2)
     	p16b.out(0x0000,port_def);
 
-    printf("\n");
+ //   printf("\n");
         
 }
 void AdvancedTechnologyAttachment::Flush()
