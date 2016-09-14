@@ -3,8 +3,17 @@
 
 #include "stdio.h"
 #include "string.h"
+#include "time.h"
 
 class Terminal
-{};
+{
+public:
+	Terminal();
+	~Terminal();
+	void initalize(uint8_t FLAGS);
+private:
+	uint8_t FLAGS;
+	void print_logo();
+};
 
 #endif

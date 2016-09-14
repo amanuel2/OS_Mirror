@@ -56,20 +56,76 @@ void pong_color(int pong_ping)
 	}
 }
 
+
 void put_char_helper_neg(char str);
 
 void printf_color(int color, char* str)
 {
 	terminal_color = make_color(color, 0);
 	terminal_buffer = (uint16_t*) 0xc00b8000;
+
 	for(int y=0; str[y]!='\0'; y++)
-    {
-	  	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column)+y;
+	{
+	  	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
 	  	terminal_buffer[index] = make_vgaentry(' ', terminal_color);
 	  	terminal_buffer[index+1] = make_vgaentry(' ', terminal_color);
-	  	put_char_helper_neg(str[y]);
+	  	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str[y];
+	  	terminal_column++;
 	}
 }
+
+void clear_color()
+{
+	terminal_color = make_color(0x07, 0x10);
+	terminal_buffer = (uint16_t*) 0xc00b8000;
+	terminal_column=0;
+	terminal_row=0;
+	char space = ' ';
+	for(int i=0; i<=80; i++)
+	{
+		for(int y=0; y<=125; y++)
+		{
+
+	           const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column); 	
+	    	   terminal_column++;
+ 	terminal_buffer[index] = make_vgaentry(' ', terminal_color);
+	  	terminal_buffer[index+1] = make_vgaentry(' ', terminal_color);
+		   VideoMemory[index]= (VideoMemory[index] & 0xFF00)|space;
+		}
+	
+	}
+	for(int i=0; i<=80; i++)
+	{
+		for(int y=0; y<=125; y++)
+		{
+		  const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
+		  terminal_column--;
+		terminal_buffer[index] = make_vgaentry(' ', terminal_color);
+	  	terminal_buffer[index+1] = make_vgaentry(' ', terminal_color);
+		  VideoMemory[index]= (VideoMemory[index] & 0xFF00)|space;
+		}
+	}
+}
+/*
+void clear_color()
+{
+	terminal_color = make_color(0, 0);
+	terminal_buffer = (uint16_t*) 0xc00b8000;
+
+	for(int y=0; 25; y++)
+	{
+		for(int x = 80; x++)
+		{
+			const size_t index =  (x * VGA_WIDTH +  y)+y;
+		  	terminal_buffer[index] = make_vgaentry(' ', terminal_color);
+		  	terminal_buffer[index+1] = make_vgaentry(' ', terminal_color);
+		  	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|(char)0;
+		  	terminal_column++;
+		}
+	  	
+	}
+}
+*/
 
 void update_cursor(int row, int col)
 {

@@ -170,13 +170,13 @@ printf("***********\n");
 
        cls();
 
-      //  printf("Delay 5 Seconds\n");
-      // delay(5); 
-      // printf("Delay Finished!");
+       printf("Delay 5 Seconds\n");
+      delay(5); 
+      printf("Delay Finished!");
 
-      // printf("Delay 2Seconds\n");
-      // delay(2); 
-      // printf("Delay Finished!");
+      printf("Delay 2Seconds\n");
+      delay(2); 
+      printf("Delay Finished!");
 
      Sound sound;
      sound.beep(2);
@@ -219,10 +219,15 @@ printf("***********\n");
      if(atass.accesible)
      {
        printf("\nWritting Info In Secondary Slave\n");
-       atass.Write28(0, (char*)"Amanuel",7, 14);
+       atass.Write28(0, (char*)"Amanuel",0, 7);
        atass.Flush();
        atass.Read28(0);
      }
+
+     delay(2);
+
+     Terminal terminal;
+     terminal.initalize(0x00);
 
    while(1);
    err:
