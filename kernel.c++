@@ -170,61 +170,61 @@ printf("***********\n");
 
        cls();
 
-       printf("Delay 5 Seconds\n");
-      delay(5); 
-      printf("Delay Finished!");
+  //      printf("Delay 5 Seconds\n");
+  //     delay(5); 
+  //     printf("Delay Finished!");
 
-      printf("Delay 2Seconds\n");
-      delay(2); 
-      printf("Delay Finished!");
+  //     printf("Delay 2Seconds\n");
+  //     delay(2); 
+  //     printf("Delay Finished!");
 
-     Sound sound;
-     sound.beep(2);
+  //    Sound sound;
+  //    sound.beep(2);
 
-     AdvancedTechnologyAttachment atapm(0x1F0,MASTER);
-     atapm.Identify();
+  //    AdvancedTechnologyAttachment atapm(0x1F0,MASTER);
+  //    atapm.Identify();
 
-     if(atapm.accesible)
-     {
-       printf("\nWritting Info In Primary Master\n");
-     	 atapm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
-    	 atapm.Flush();
-     	 atapm.Read28(0);
-     }
+  //    if(atapm.accesible)
+  //    {
+  //      printf("\nWritting Info In Primary Master\n");
+  //    	 atapm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
+  //   	 atapm.Flush();
+  //    	 atapm.Read28(0);
+  //    }
 
-     AdvancedTechnologyAttachment ataps(0x1F0,SLAVE);
-     ataps.Identify();
-     if(ataps.accesible)
-     {
-       printf("\nWritting Info In Primary Slave\n");
-     	 ataps.Write28(0, (char*)"Info Written to Hard Drive",0, 26);
-    	 ataps.Flush();
-     	 ataps.Read28(0);
-     }
+  //    AdvancedTechnologyAttachment ataps(0x1F0,SLAVE);
+  //    ataps.Identify();
+  //    if(ataps.accesible)
+  //    {
+  //      printf("\nWritting Info In Primary Slave\n");
+  //    	 ataps.Write28(0, (char*)"Info Written to Hard Drive",0, 26);
+  //   	 ataps.Flush();
+  //    	 ataps.Read28(0);
+  //    }
     
 
-	 AdvancedTechnologyAttachment atasm(0x170,MASTER);
-	 atasm.Identify();
-     if(atasm.accesible)
-     {
-       printf("\nWritting Info In Secondary Master\n");
-       atasm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
-       atasm.Flush();
-       atasm.Read28(0);
-     }
+	 // AdvancedTechnologyAttachment atasm(0x170,MASTER);
+	 // atasm.Identify();
+  //    if(atasm.accesible)
+  //    {
+  //      printf("\nWritting Info In Secondary Master\n");
+  //      atasm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
+  //      atasm.Flush();
+  //      atasm.Read28(0);
+  //    }
 
 
-     AdvancedTechnologyAttachment atass(0x170,SLAVE);
-     atass.Identify();
-     if(atass.accesible)
-     {
-       printf("\nWritting Info In Secondary Slave\n");
-       atass.Write28(0, (char*)"Amanuel",0, 7);
-       atass.Flush();
-       atass.Read28(0);
-     }
+  //    AdvancedTechnologyAttachment atass(0x170,SLAVE);
+  //    atass.Identify();
+  //    if(atass.accesible)
+  //    {
+  //      printf("\nWritting Info In Secondary Slave\n");
+  //      atass.Write28(0, (char*)"Amanuel",0, 7);
+  //      atass.Flush();
+  //      atass.Read28(0);
+  //    }
 
-     delay(2);
+  //    delay(2);
 
      Terminal terminal;
      terminal.initalize(0x00);

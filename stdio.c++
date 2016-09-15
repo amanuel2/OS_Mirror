@@ -74,6 +74,26 @@ void printf_color(int color, char* str)
 	}
 }
 
+void printf_color_fg_bg(int fg,int bg, char* str)
+{//0x42
+	terminal_color = make_color(fg,bg);
+	terminal_buffer = (uint16_t*) 0xc00b8000;
+
+	for(int y=0; str[y]!='\0'; y++)
+	{
+	  	const size_t index =  (terminal_row * VGA_WIDTH +  terminal_column);
+	  	if((str[y+1]!='\0'))
+	  	{
+	  	terminal_buffer[index] = make_vgaentry(' ', terminal_color);
+	  	
+	  		terminal_buffer[index+1] = make_vgaentry(' ', terminal_color);
+	  	}
+	  	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|str[y];
+	  	terminal_column++;
+	}
+}
+
+
 void clear_color()
 {
 	terminal_color = make_color(0x07, 0x10);
