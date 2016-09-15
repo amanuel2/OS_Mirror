@@ -4,7 +4,7 @@
 
 static PORT::Port8Bits p8b_kbd_drv;
 
-static bool shift = false;
+bool shift = false;
 
 extern void install_handler_irq(int irq, regs_func handler);
 extern char *itoa(int val);
@@ -15,23 +15,9 @@ static int total_typed=0;
 
 SerialPort sp_kbd;
 
-namespace enter_press_np
-{
-  struct enter_pressed_structure
-  {
-    int bit;
-    char* value;
-  };
-
-  struct val_e
-  {
-    char* val_e = "";
-    int index_val_e = 0;
-  };
-
-  struct enter_pressed_structure kbd_str_e;
-  struct val_e val_e_inst;
-};
+uint8_t scancode;
+uint32_t data_key_press[2] = {5,0x00};
+bool key_pressed=false;
 
 static uint8_t kbdus[183] =
 {
@@ -83,6 +69,12 @@ static uint8_t alphabet[26] =
 		'n','m'
 };
 
+static uint8_t number_shift[10] = 
+{
+    '!','@','#','$','%','^',
+    '&','*','(',')'
+};
+
 void kbd_test()
 {
 	alphabet[222] = 'A';
@@ -92,9 +84,11 @@ void kbd_test()
 char return_pressed_letter(int scancode)
 {
 	uint8_t to_return;
+  bool valid_key=false;
 
 	if(scancode>=16 && scancode <=25)
 	{
+    valid_key=true;
 		total_typed++;
 		if(shift==false)
 			to_return = alphabet[scancode-16];
@@ -103,6 +97,7 @@ char return_pressed_letter(int scancode)
 	}
 	if(scancode>=30 && scancode <=38)
 	{
+    valid_key=true;
 		total_typed++;
 		if(shift==false)
 			to_return = alphabet[scancode-20];
@@ -111,6 +106,7 @@ char return_pressed_letter(int scancode)
 	}
 	if(scancode>=44 && scancode <=50)
 	{
+    valid_key=true;
 		total_typed++;
 		if(shift==false)
 			to_return = alphabet[scancode-25];
@@ -118,7 +114,69 @@ char return_pressed_letter(int scancode)
 			to_return = toUpper(alphabet[scancode-25]);
 	}
 
+  if(scancode == 39)
+  {
+    valid_key=true;
+    if(shift==false)
+      to_return = ';';
+    else
+      to_return = ':';
+  }
+
+  if(scancode == 40)
+  {
+    valid_key=true;
+    if(shift==false)
+      to_return = '\'';
+    else
+      to_return = '"';
+  }
+  if(scancode == 26)
+  {
+    valid_key=true;
+    if(shift==false)
+      to_return = '[';
+    else
+      to_return = '{';
+  }
+  if(scancode == 27)
+  {
+    valid_key=true;
+    if(shift==false)
+      to_return = ']';
+    else
+      to_return = '}';
+  }
+
+ if(scancode == 43)
+  {
+    valid_key=true;
+    if(shift==false)
+      to_return = '\\';
+    else
+      to_return = '|';
+  }
+
+if(valid_key==true)
 	return to_return;
+else
+  return '\0';
+}
+
+void control_char()
+{     
+    if(shift == true)
+    {
+      if(scancode != 11)
+        printf("%c" , (number_shift[(((int)scancode)-2)]));
+      else
+        printf("%c", number_shift[9]);
+    }
+    else
+    {
+      if(scancode != 11)
+        printf("%d" , (((int)scancode)-1));
+    }
 }
 
 
@@ -132,11 +190,9 @@ int intLength(int i) {
 /* Handles the keyboard interrupt */
 void KBD_NAME::keyboard_handler(struct regs *r)
 {
-
-    uint8_t scancode;
-
     /* Read from the keyboard's data buffer */
     scancode = p8b_kbd_drv.in(0x60);
+    key_pressed = true;
 
     /* If the top bit of the byte we read from the keyboard is
     *  set, that means that a key has just been released */
@@ -148,6 +204,19 @@ void KBD_NAME::keyboard_handler(struct regs *r)
     return;
 }
 
+uint8_t get_scan_code()
+{
+  if(key_pressed==true)
+  {
+    key_pressed = false;
+    return scancode;
+  }
+  else
+     return 0;
+  
+}
+
+
 
 void KBD_NAME::OnKeyDown(uint8_t scancode)
 {
@@ -157,7 +226,7 @@ void KBD_NAME::OnKeyDown(uint8_t scancode)
 	else if((int) scancode>=16 && (int) scancode <= 50)
 	{
 		uint8_t letter_key_press = return_pressed_letter(scancode);
-	    printf("%c" , letter_key_press);
+	 //   printf("%c" , letter_key_press);
 	}
 }
 

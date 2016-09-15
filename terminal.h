@@ -14,6 +14,7 @@ public:
 private:
 	uint8_t FLAGS;
 	void print_logo();
+	void handle_input();
 };
 
 #endif
