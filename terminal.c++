@@ -28,49 +28,16 @@ static uint8_t alphabet[26] =
 
 
 
+Terminal::Terminal()
+{
 
+}
+Terminal::~Terminal()
+{
 
-/*May Be Usefull Later. For Key Up Letter Operations*/
-// char return_pressed_letter_term(int scancode)
-// {
-// 	uint8_t to_return;
-// 	if(scancode>=158 && scancode <=167)
-// 	{
-// 		if(shift==false)
-// 		{
-// 			to_return = alphabet[scancode-148];
-// 		}
-// 		else
-// 			to_return = toUpper(alphabet[scancode-148]);
-// 	}
-// 	if(scancode>=172 && scancode <=180)
-// 	{
-// 		if(shift==false)
-// 			to_return = alphabet[scancode-153];
-// 		else
-// 			to_return = toUpper(alphabet[scancode-153]);
-// 	}
-// 	if(scancode>=144 && scancode <=153)
-// 	{
-// 		if(shift==false)
-// 			to_return = alphabet[scancode-144];
-// 		else
-// 			to_return = toUpper(alphabet[scancode-144]);
-// 	}
-
-// 	return to_return;
-// }
-
-	Terminal::Terminal()
-	{
-
-	}
-	Terminal::~Terminal()
-	{
-
-	}
-	void Terminal::print_logo()
-	{
+}
+void Terminal::print_logo()
+{
 		clear_color();
 		cls();
 		printf(" ************     **********       **       * 	 ********		");
@@ -91,16 +58,16 @@ static uint8_t alphabet[26] =
 		printf("\n");
 		printf(" ************     **********       *        *      ******** 	");
 		printf("\n");
-	}
+}
 
-	void Terminal::handle_input()
-	{
+void Terminal::handle_input()
+{
 		
 
-	}
+}
 
-	void Terminal::initalize(uint8_t FLAGS)
-	{
+void Terminal::initalize(uint8_t FLAGS)
+{
 		// printf_color_fg_bg(1,0,"[GDT LOADED]");
 		// printf("\n");
 		// delay(0.1);
@@ -145,9 +112,14 @@ static uint8_t alphabet[26] =
 		cls();
 		this->print_logo();
 		printf("\n\n\n");
-		printf_color_fg_bg(2,0,"root@boneos / ");
-		get_scan_code_terminal();
-	}
+		while(true)
+		{
+		   printf_color_fg_bg(2,0,"root@boneos / ");
+		   get_scan_code_terminal();
+		   enter_fini:
+		   printf("\nCommand Not Found\n");
+	    }
+}
 
 void OnKeyUp(uint8_t scancode)
 {
@@ -166,15 +138,36 @@ void OnKeyDown(uint8_t scancode)
 	{
 		control_key_handler();
 	}
+	if(scancode == 28)
+	{
+	
+	}
 	else if(scancode == 42)
 	{
-		int h; // Not Needed
+		int h; // Not Needed / Shi
 	}
-	else if((int) scancode>=16 && (int) scancode <= 50)
+	else if((int) scancode>=16 && (int) scancode <= 50 && (!( scancode > 27 && scancode <30 )) && (!(scancode>41 && scancode<43)))
 	{
 		pressed_recognize = true;
 		uint8_t letter_key_press = return_pressed_letter(scancode);
 	    printf("%c" , letter_key_press);
+	}
+	else if(scancode == 12)
+	{
+		pressed_recognize = true;
+		if(shift==false)
+			printf("-");
+		else
+			printf("_");
+
+	}
+	else if(scancode == 13)
+	{
+		pressed_recognize = true;
+		if(shift==false)
+			printf("=");
+		else
+			printf("+");
 	}
 	else if(scancode == 14)
 	{
@@ -182,10 +175,20 @@ void OnKeyDown(uint8_t scancode)
 		printf("\b");
 	}
 
+	else if(scancode == 15)
+	{
+		pressed_recognize = true;
+		printf("\t");
+	}
 	else if(scancode == 52)
 	{
 		pressed_recognize = true;
 		printf(".");
+	}
+
+	else if(scancode == 91)
+	{
+		//Windows Key :)
 	}
 
 	else if(scancode >= 1 && scancode <= 11)
@@ -216,7 +219,11 @@ void get_scan_code_terminal()
 			if (scancode_term & 0x80)
 		    	OnKeyUp(scancode_term);
 		    else
+		    {
+		    	if(scancode_term==28)
+		    		return;
 		    	OnKeyDown(scancode_term);
+		    }
 				
 		}
 	}

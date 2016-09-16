@@ -131,6 +131,14 @@ char return_pressed_letter(int scancode)
     else
       to_return = '"';
   }
+  if(scancode == 41)
+  {
+    valid_key=true;
+    if(shift==false)
+      to_return = '`';
+    else
+      to_return='~';
+  }
   if(scancode == 26)
   {
     valid_key=true;
