@@ -28,11 +28,13 @@ static uint8_t alphabet[26] =
 
 uint8_t val_total[999999] = "";
 int val_total_index=0;
+int backspace_offset=0;
 
 void add_char_val_term(uint8_t data)
 {
 	val_total[val_total_index] = data;
 	val_total_index++;
+	backspace_offset++;
 }
 
 Terminal::Terminal()
@@ -194,8 +196,16 @@ void OnKeyDown(uint8_t scancode)
 	}
 	else if(scancode == 14)
 	{
-		pressed_recognize = true;
-		printf("\b");
+		if(backspace_offset!=0)
+		{
+			pressed_recognize = true;
+		    printf("\b");
+		   // printf("%d",backspace_offset);
+		    val_total[val_total_index-1] = 0;
+			val_total_index--;
+			backspace_offset--;
+		}
+		
 	}
 
 	else if(scancode == 15)
