@@ -30,6 +30,7 @@
 #include "time.h"
 #include "sound.h"
 #include "ata.h"
+#include "flpdisk.h"
 
 //Call all class constructor
 //for global objects before
@@ -112,122 +113,126 @@ extern "C" void kernelMain
 	   	MOUSE mouse;
 	   	mouse.install_mouse_driver();
 
+      flpydsk_install(6);
+
 	   	__asm__ __volatile__ ("sti");
 
-	   	cls();
+      printf("\nHello :) \n");
+
+// 	   	cls();
 
 
 
 
 
-        int *int_ptr = (int*)heap.k_malloc(4);
-        int_ptr[2] = 2;
-        printf("\nk_malloc returned %x \n" , int_ptr);
-        heap.k_free(int_ptr);
+//         int *int_ptr = (int*)heap.k_malloc(4);
+//         int_ptr[2] = 2;
+//         printf("\nk_malloc returned %x \n" , int_ptr);
+//         heap.k_free(int_ptr);
 
 
-        cls();
-        PCI_CONTROLLER pci;
-        pci.printDrivers();
+//         cls();
+//         PCI_CONTROLLER pci;
+//         pci.printDrivers();
 
-        cls();
- 	    init_tasking(&heap);
- 	  // doIt();
+//         cls();
+//  	    init_tasking(&heap);
+//  	  // doIt();
 
-#ifdef GRAPHICS_MODE
-        Desktop desktop(0x23);
-#endif
+// #ifdef GRAPHICS_MODE
+//         Desktop desktop(0x23);
+// #endif
 
-#ifdef DEBUG_MODE
-        Vertex<int> vert;
-        vert.insert_begin(3);
-        vert.insert_begin(4);
-        vert.insert_begin(5);
-        vert.insert_end(20);
-        vert.insert_end(70);
-        vert.insert_index(3,1000);
+// #ifdef DEBUG_MODE
+//         Vertex<int> vert;
+//         vert.insert_begin(3);
+//         vert.insert_begin(4);
+//         vert.insert_begin(5);
+//         vert.insert_end(20);
+//         vert.insert_end(70);
+//         vert.insert_index(3,1000);
 
-        vert.insert_before_val(70,342);
+//         vert.insert_before_val(70,342);
 
    
-    vert.sort(REVERSE);
-         for(uint32_t i=0; i<vert.get_amount(); i++)
-       		 printf("%d : %d \n" ,i, vert.get_val(i));
+//     vert.sort(REVERSE);
+//          for(uint32_t i=0; i<vert.get_amount(); i++)
+//        		 printf("%d : %d \n" ,i, vert.get_val(i));
 
 
-printf("***********\n");
-	Vertex<char*> vert_check;
-	vert_check.insert_begin("a");
-	vert_check.insert_end("b");
-	vert_check.sort(REVERSE);
- for(uint32_t i=0; i<vert_check.get_amount(); i++)
-       		 printf("%d : %s \n" ,i, vert_check.get_val(i));
+// printf("***********\n");
+// 	Vertex<char*> vert_check;
+// 	vert_check.insert_begin("a");
+// 	vert_check.insert_end("b");
+// 	vert_check.sort(REVERSE);
+//  for(uint32_t i=0; i<vert_check.get_amount(); i++)
+//        		 printf("%d : %s \n" ,i, vert_check.get_val(i));
 
 
 
-       	//vert.insert_index(5);	
-#endif
+//        	//vert.insert_index(5);	
+// #endif
 
-       cls();
+//        cls();
 
-  //      printf("Delay 5 Seconds\n");
-  //     delay(5); 
-  //     printf("Delay Finished!");
+//   //      printf("Delay 5 Seconds\n");
+//   //     delay(5); 
+//   //     printf("Delay Finished!");
 
-  //     printf("Delay 2Seconds\n");
-  //     delay(2); 
-  //     printf("Delay Finished!");
+//   //     printf("Delay 2Seconds\n");
+//   //     delay(2); 
+//   //     printf("Delay Finished!");
 
-  //    Sound sound;
-  //    sound.beep(2);
+//   //    Sound sound;
+//   //    sound.beep(2);
 
-  //    AdvancedTechnologyAttachment atapm(0x1F0,MASTER);
-  //    atapm.Identify();
+//   //    AdvancedTechnologyAttachment atapm(0x1F0,MASTER);
+//   //    atapm.Identify();
 
-  //    if(atapm.accesible)
-  //    {
-  //      printf("\nWritting Info In Primary Master\n");
-  //    	 atapm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
-  //   	 atapm.Flush();
-  //    	 atapm.Read28(0);
-  //    }
+//   //    if(atapm.accesible)
+//   //    {
+//   //      printf("\nWritting Info In Primary Master\n");
+//   //    	 atapm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
+//   //   	 atapm.Flush();
+//   //    	 atapm.Read28(0);
+//   //    }
 
-  //    AdvancedTechnologyAttachment ataps(0x1F0,SLAVE);
-  //    ataps.Identify();
-  //    if(ataps.accesible)
-  //    {
-  //      printf("\nWritting Info In Primary Slave\n");
-  //    	 ataps.Write28(0, (char*)"Info Written to Hard Drive",0, 26);
-  //   	 ataps.Flush();
-  //    	 ataps.Read28(0);
-  //    }
+//   //    AdvancedTechnologyAttachment ataps(0x1F0,SLAVE);
+//   //    ataps.Identify();
+//   //    if(ataps.accesible)
+//   //    {
+//   //      printf("\nWritting Info In Primary Slave\n");
+//   //    	 ataps.Write28(0, (char*)"Info Written to Hard Drive",0, 26);
+//   //   	 ataps.Flush();
+//   //    	 ataps.Read28(0);
+//   //    }
     
 
-	 // AdvancedTechnologyAttachment atasm(0x170,MASTER);
-	 // atasm.Identify();
-  //    if(atasm.accesible)
-  //    {
-  //      printf("\nWritting Info In Secondary Master\n");
-  //      atasm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
-  //      atasm.Flush();
-  //      atasm.Read28(0);
-  //    }
+// 	 // AdvancedTechnologyAttachment atasm(0x170,MASTER);
+// 	 // atasm.Identify();
+//   //    if(atasm.accesible)
+//   //    {
+//   //      printf("\nWritting Info In Secondary Master\n");
+//   //      atasm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
+//   //      atasm.Flush();
+//   //      atasm.Read28(0);
+//   //    }
 
 
-  //    AdvancedTechnologyAttachment atass(0x170,SLAVE);
-  //    atass.Identify();
-  //    if(atass.accesible)
-  //    {
-  //      printf("\nWritting Info In Secondary Slave\n");
-  //      atass.Write28(0, (char*)"Amanuel",0, 7);
-  //      atass.Flush();
-  //      atass.Read28(0);
-  //    }
+//   //    AdvancedTechnologyAttachment atass(0x170,SLAVE);
+//   //    atass.Identify();
+//   //    if(atass.accesible)
+//   //    {
+//   //      printf("\nWritting Info In Secondary Slave\n");
+//   //      atass.Write28(0, (char*)"Amanuel",0, 7);
+//   //      atass.Flush();
+//   //      atass.Read28(0);
+//   //    }
 
-  //    delay(2);
+//   //    delay(2);
 
-     Terminal terminal;
-     terminal.initalize(0x00);
+//      Terminal terminal;
+//      terminal.initalize(0x00);
 
    while(1);
    err:

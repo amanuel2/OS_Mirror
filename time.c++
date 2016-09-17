@@ -4,7 +4,7 @@
 extern int32_t timer_ticks_delay;
 extern bool second_passed;
 
-extern "C" void delay(uint32_t seconds)
+extern "C" void sleep(uint32_t seconds)
 {
 	timer_ticks_delay = 0;
 	for(uint32_t i = 0 ; i<=seconds; i++)
@@ -19,5 +19,5 @@ extern "C" void delay(uint32_t seconds)
 
 extern "C" void delay_one()
 {
-	delay(0.15);	
+	sleep(0.15);	
 }

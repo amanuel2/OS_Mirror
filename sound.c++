@@ -27,7 +27,7 @@ void Sound::beep(uint32_t seconds)
   	if (tmp != (tmp | 3))
  		p8b.out(tmp | 3,0x61);
 
- 	delay(seconds);
+ 	sleep(seconds);
 
  	p8b.out((p8b.in(0x61) & 0xFC),0x61);
 }

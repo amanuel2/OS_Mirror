@@ -76,7 +76,7 @@ void Terminal::print_logo()
 }
 
 void Terminal::handle_input()
-{
+{//
 	if(Lib::str::strcmp(val_total,"help")==0)
 	{
 		if(terminal_scroll_ready==true)
