@@ -26,7 +26,7 @@ static uint8_t alphabet[26] =
 		'n','m'
 };
 
-uint8_t val_total[999999] = "";
+char val_total[999999] = "";
 int val_total_index=0;
 int backspace_offset=0;
 
@@ -71,7 +71,15 @@ void Terminal::print_logo()
 
 void Terminal::handle_input()
 {
-		
+	char *commands="help";
+	if(Lib::str::strcmp(val_total,"help")==0)
+	{
+		printf("\n**********HELP*********\n");
+
+		printf("\n***********************\n");
+	}		
+	else
+		printf("\n%s Command Not Found\n", val_total);
 
 }
 
@@ -126,7 +134,7 @@ void Terminal::initalize(uint8_t FLAGS)
 		   printf_color_fg_bg(2,0,"root@boneos / ");
 		   get_scan_code_terminal();
 		   enter_fini:
-		   printf("\n%s Command Not Found\n", val_total);
+		   this->handle_input();
 		   Lib::Mem::memset(val_total,0,sizeof(val_total));
 		   val_total_index = 0;
 	    }
