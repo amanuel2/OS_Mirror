@@ -38,6 +38,15 @@ void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg)
 		}
 }
 
+void terminal_scroll(int scroll_by){
+    for(int i = 0; i < 25; i++){
+        for (int m = 0; m < 80; m++){
+            VideoMemory[i * 80 + m] = VideoMemory[(i + scroll_by) * 80 + m];
+        }
+    }
+    terminal_row -=scroll_by;
+}
+
 void pong_color(int pong_ping)
 {
 	char* chr_p;

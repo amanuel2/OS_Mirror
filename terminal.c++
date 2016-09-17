@@ -13,6 +13,12 @@ extern uint8_t get_scan_code();
 extern bool shift;
 extern char return_pressed_letter(int scancode);
 extern void control_char();
+extern void terminal_scroll(int scroll_by);
+
+extern size_t terminal_row;
+extern size_t terminal_column;
+
+bool terminal_scroll_ready = false;
 
 
 void get_scan_code_terminal();
@@ -71,15 +77,91 @@ void Terminal::print_logo()
 
 void Terminal::handle_input()
 {
-	char *commands="help";
 	if(Lib::str::strcmp(val_total,"help")==0)
 	{
-		printf("\n**********HELP*********\n");
+		if(terminal_scroll_ready==true)
+		{
+		   	terminal_scroll(4);
+		   	terminal_scroll_ready=false;
+		   	printf("\n**********HELP*********\n");
 
-		printf("\n***********************\n");
+			printf("\n***********************\n");
+		}
+		else
+		{
+        	printf("\n**********HELP*********\n");
+
+			printf("\n***********************\n");
+		}  
+	
+	}
+	else if(Lib::str::strcmp(val_total,"Help")==0)
+	{
+		if(terminal_scroll_ready==true)
+		{
+		   	terminal_scroll(2);
+		   	terminal_scroll_ready=false;
+		   	printf("\nDid you mean 'help' ?\n");
+		}
+		else
+		{
+        	printf("\nDid you mean 'help' ?\n");
+		}  
+		
+	}
+	else if(Lib::str::strcmp(val_total,"help")==0)
+	{
+		if(terminal_scroll_ready==true)
+		{
+		   	terminal_scroll(2);
+		   	terminal_scroll_ready=false;
+		   	printf("\nDid you mean 'help' ?\n");
+		}
+		else
+		{
+        	printf("\nDid you mean 'help' ?\n");
+		}  
+	}
+	else if(Lib::str::strcmp(val_total,"help")==0)
+	{
+		if(terminal_scroll_ready==true)
+		{
+		   	terminal_scroll(2);
+		   	terminal_scroll_ready=false;
+		   	printf("\nDid you mean 'help' ?\n");
+		}
+		else
+		{
+        	printf("\nDid you mean 'help' ?\n");
+		}  
+	}
+	else if(Lib::str::strcmp(val_total,"help")==0)
+	{
+		if(terminal_scroll_ready==true)
+		{
+		   	terminal_scroll(2);
+		   	terminal_scroll_ready=false;
+		   	printf("\nDid you mean 'help' ?\n");
+		}
+		else
+		{
+        	printf("\nDid you mean 'help' ?\n");
+		}  
 	}		
 	else
-		printf("\n%s Command Not Found\n", val_total);
+	{
+		if(terminal_scroll_ready==true)
+		{
+		   	terminal_scroll(2);
+		   	terminal_scroll_ready=false;
+		   	printf("\n%s Command Not Found\n", val_total);
+		}
+		else
+		{
+        	printf("\n%s Command Not Found\n", val_total);
+		}  
+		
+	}
 
 }
 
@@ -131,8 +213,14 @@ void Terminal::initalize(uint8_t FLAGS)
 		printf("\n\n\n");
 		while(true)
 		{
-		   printf_color_fg_bg(2,0,"[root@boneos /] ");
-		   //printf_color(0x20," ");
+		   printf_color_fg_bg(2,0,"[root@boneos");
+		   printf("<%d,%d>",terminal_row,terminal_column);
+		   
+
+		   if(terminal_row>=24 && terminal_column>=12)
+		   	terminal_scroll_ready = true;
+		   printf_color_fg_bg(2,0," /] ");
+		   
 		   get_scan_code_terminal();
 		   enter_fini:
 		   this->handle_input();
