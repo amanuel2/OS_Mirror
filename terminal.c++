@@ -131,7 +131,8 @@ void Terminal::initalize(uint8_t FLAGS)
 		printf("\n\n\n");
 		while(true)
 		{
-		   printf_color_fg_bg(2,0,"root@boneos / ");
+		   printf_color_fg_bg(2,0,"[root@boneos /] ");
+		   //printf_color(0x20," ");
 		   get_scan_code_terminal();
 		   enter_fini:
 		   this->handle_input();
