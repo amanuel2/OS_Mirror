@@ -348,11 +348,15 @@ void flpydsk_enable_controller () {
 void flpydsk_reset () {
 
 	uint32_t st0, cyl;
-
+	_FloppyDiskIRQ = 0;
 	//! reset the controller
 	flpydsk_disable_controller ();
 	flpydsk_enable_controller ();
-	flpydsk_wait_irq ();
+	//flpydsk_wait_irq ();
+	printf("STARTED WAITING");
+	while(_FloppyDiskIRQ == 0);
+		_FloppyDiskIRQ = 0;
+	printf("ENDED WAITING FOR IRQ");
 
 	//! send CHECK_INT/SENSE INTERRUPT command to all drives
 	for (int i=0; i<4; i++)
