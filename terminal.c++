@@ -29,6 +29,12 @@ static uint8_t alphabet[26] =
 uint8_t val_total[999999] = "";
 int val_total_index=0;
 
+void add_char_val_term(uint8_t data)
+{
+	val_total[val_total_index] = data;
+	val_total_index++;
+}
+
 Terminal::Terminal()
 {
 
@@ -153,8 +159,7 @@ void OnKeyDown(uint8_t scancode)
 	{
 		pressed_recognize = true;
 		uint8_t letter_key_press = return_pressed_letter(scancode);
-		val_total[val_total_index] = letter_key_press;
-		val_total_index++;
+		add_char_val_term(letter_key_press);
 		//printf("VALTOTAL=%s",val_total);
 	    printf("%c" , letter_key_press);
 	}
@@ -162,18 +167,30 @@ void OnKeyDown(uint8_t scancode)
 	{
 		pressed_recognize = true;
 		if(shift==false)
+		{
+			add_char_val_term('-');
 			printf("-");
+		}
 		else
+		{
+			add_char_val_term('_');
 			printf("_");
+		}
 
 	}
 	else if(scancode == 13)
 	{
 		pressed_recognize = true;
 		if(shift==false)
+		{
+			add_char_val_term('=');
 			printf("=");
+		}
 		else
+		{
+			add_char_val_term('+');
 			printf("+");
+		}
 	}
 	else if(scancode == 14)
 	{
@@ -183,13 +200,23 @@ void OnKeyDown(uint8_t scancode)
 
 	else if(scancode == 15)
 	{
+		//for(int i=0;i<=3;i++)add_char_val_term(' ');
 		pressed_recognize = true;
-		printf("\t");
+		//printf("\t");
 	}
 	else if(scancode == 52)
 	{
 		pressed_recognize = true;
-		printf(".");
+		if(shift==false)
+		{
+			add_char_val_term('.');
+			printf(".");
+		}
+		else
+		{
+			add_char_val_term('>');
+			printf(">");
+		}
 	}
 
 	else if(scancode == 91)
@@ -207,12 +234,8 @@ void OnKeyDown(uint8_t scancode)
 	else if(scancode == 57)
 	{
 		pressed_recognize = true;
+		add_char_val_term(' ');
 		printf(" ");
-	}
-	else
-	{
-		if(pressed_recognize != false)
-			printf("%c" , letter_key_press);
 	}
 }
 void get_scan_code_terminal()

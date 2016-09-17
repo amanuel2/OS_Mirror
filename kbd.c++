@@ -8,6 +8,7 @@ bool shift = false;
 
 extern void install_handler_irq(int irq, regs_func handler);
 extern char *itoa(int val);
+extern void add_char_val_term(uint8_t data);
 
 bool enter_presed;
 
@@ -177,12 +178,12 @@ void control_char()
     {
       if(scancode != 11)
       {
-        //increase_val_term((number_shift[(((int)scancode)-2)]));
+        add_char_val_term((number_shift[(((int)scancode)-2)]));
         printf("%c" , (number_shift[(((int)scancode)-2)]));
       }
       else
       {
-        //increase_val_term(number_shift[9]);
+        add_char_val_term(number_shift[9]);
         printf("%c", number_shift[9]);
       }
     }
@@ -190,7 +191,7 @@ void control_char()
     {
       if(scancode != 11)
       {
-        //increase_val_term( '0' + (((int)scancode)-1) );
+        add_char_val_term( '0' + (((int)scancode)-1) );
         printf("%d" , (((int)scancode)-1));
       }
     }
