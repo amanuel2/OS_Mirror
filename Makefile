@@ -12,7 +12,8 @@ objects = stdlib.o stdio.o kernel.o isr.o \
 		  irq_a.o kbd.o mouse.o terminal.o vga.o pci.o \
 		  graphics.o widget.o desktop.o rand.o rand_a.o \
 		  guiletter.o task.o task_a.o time.o sound.o \
-		  bfs.o ata.o flpdisk.o filealgorithms.o
+		  bfs.o ata.o flpdisk.o filealgorithms.o \
+		  vata.o
 		  
 i686 = i686-elf-
 Asm_files =  idt boot isr port gdt_flush irq
@@ -57,6 +58,7 @@ compile:
 	$(i686)g++ $(GPPARAMS) -o ata.o -c ata.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o flpdisk.o -c flpdisk.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o filealgorithms.o -c filealgorithms.c++ -ffreestanding
+	$(i686)g++ $(GPPARAMS) -o vata.o -c vata.c++ -ffreestanding
 	nasm -f elf32 boot.asm -o boot.o
 	nasm -f elf32 isr.asm -o isr_a.o
 	nasm -f elf32 port.asm -o port_a.o

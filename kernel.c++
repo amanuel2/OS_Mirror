@@ -32,6 +32,7 @@
 #include "ata.h"
 #include "flpdisk.h"
 #include "filealgorithms.h"
+#include "vata.h"
 
 
 //Call all class constructor
@@ -172,19 +173,9 @@ printf("***********\n");
        		 printf("%d : %s \n" ,i, vert_check.get_val(i));
 
 
-
-       	//vert.insert_index(5);	
 #endif
 
        cls();
-
-  //      printf("Delay 5 Seconds\n");
-  //     delay(5); 
-  //     printf("Delay Finished!");
-
-  //     printf("Delay 2Seconds\n");
-  //     delay(2); 
-  //     printf("Delay Finished!");
 
   //    Sound sound;
   //    sound.beep(2);
@@ -193,55 +184,14 @@ printf("***********\n");
      File anotherSampleFile;
      anotherSampleFile.header.name="WkstMathsTODO";
      sampleFile.header.name = "FileName";
-     //printf("%d\n",sizeof(sampleFile));
+     Vata vata;
 
-     AdvancedTechnologyAttachment atapm(0x1F0,MASTER);
-     atapm.Identify();
+     vata.return_ata().Write28(0,filealgo.File_to_char(sampleFile),0, Lib::str::strlen(filealgo.File_to_char(sampleFile)));
+     vata.return_ata().Flush();
+     vata.return_ata().Read28(0);
 
-     if(atapm.accesible)
-     {
-       printf("\nWritting Info In Primary Master\n");
-     	 atapm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
-    	 atapm.Flush();
-     	 atapm.Read28(0);
-     }
-
-     AdvancedTechnologyAttachment ataps(0x1F0,SLAVE);
-     ataps.Identify();
-     if(ataps.accesible)
-     {
-       printf("\nWritting Info In Primary Slave\n");
-     	 ataps.Write28(0, (char*)"Info Written to Hard Drive",0, 26);
-    	 ataps.Flush();
-     	 ataps.Read28(0);
-     }
-    
-
-	 AdvancedTechnologyAttachment atasm(0x170,MASTER);
-	 atasm.Identify();
-     if(atasm.accesible)
-     {
-       printf("\nWritting Info In Secondary Master\n");
-       atasm.Write28(0, (char*)"Info Written to Hard Drive", 0,26);
-       atasm.Flush();
-       atasm.Read28(0);
-     }
-
-
-     AdvancedTechnologyAttachment atass(0x170,SLAVE);
-     atass.Identify();
-     if(atass.accesible)
-     {
-       printf("\nWritting Info In Secondary Slave\n");
-       atass.Write28(0,filealgo.File_to_char(sampleFile),0, Lib::str::strlen(filealgo.File_to_char(sampleFile)));
-       atass.Flush();
-       atass.Read28(0);
-     }
-
-    
 // File file_sam = filealgo.char_to_File(filealgo.File_to_char(anotherSampleFile));
 // printf("%s",file_sam.header.name);
-  //    delay(2);
 
      // Terminal terminal;
      // terminal.initalize(0x00);

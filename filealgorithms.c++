@@ -21,6 +21,11 @@ char* FileAlgo::File_to_char(File file)
   for(uint32_t i=25+header_name_size; i<=(25+header_name_size+16);i++)
      return_str[i] = done[count++];
  // printf("%s",return_str);
+
+  // char *return_str_ptr="";
+   
+   //Lib::str::strcpy(return_str_ptr,return_str,Lib::str::strlen(return_str));
+  //printf("%s" , return_str_ptr);       
  return (char*)return_str;
 }
 
