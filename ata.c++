@@ -84,15 +84,15 @@ void AdvancedTechnologyAttachment::Identify()
     }	
 
 }
-void AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
+char* AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
 {
 	if(!(accesible))
 	{
 		printf("Failed : Not Accessible");
-		return;
+		while(true);
 	}
 	if(sectorNum > 0x0FFFFFFF)
-        return;
+        while(true);
 	//Identify What 
 	//Drive You want to comunicate with
 	//MASTER || SLAVE
@@ -106,7 +106,7 @@ void AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
 	p8b.out( sectorNum & 0x000000FF,port_def + 0x3);
 	p8b.out((sectorNum & 0x0000FF00) >> 8,port_def + 0x4);
 	p8b.out((sectorNum & 0x00FF0000) >> 16,port_def + 0x5);
-	p8b.out(0x20,port_def + 0x7); //WRITE COMMAND
+	p8b.out(0x20,port_def + 0x7); //READ COMMAND
 
 
     uint8_t status = p8b.in(port_def + 0x7);
@@ -117,31 +117,37 @@ void AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
      if(status & 0x01)
     {
         printf("ERROR");
-        return;
+        while(true);
     }
 
-     printf("\nReading ATA Drive: ");
-    
-    for(uint32_t i = 7; i < count; i += 2)
+//     printf("\nReading ATA Drive: ");
+  char return_text[999]="";  
+  uint32_t count_index=0;
+
+     for(uint32_t i = 7; i < count; i += 2)
     {
         uint16_t wdata = p16b.in(port_def);
         
         char *text = "  \0";
-        printf("%c" , wdata & 0xFF);
+        //printf("%c" , wdata & 0xFF);
         text[0] = wdata & 0xFF;
+        return_text[count_index] = wdata & 0xFF;
+        count_index++;
         
         if(i+1 < count)
         {
-        	printf("%c" , (wdata >> 8) & 0xFF);
+           // printf("%c" , (wdata >> 8) & 0xFF);
             text[1] = (wdata >> 8) & 0xFF;
+            return_text[count_index] = (wdata >> 8) & 0xFF;
+             count_index++;
         }
         else
             text[1] = '\0';
-    }    
-    
+    }      
+
     for(int i = count + (count%2); i < 512; i += 2)
         p16b.in(port_def);
-    printf("\n");
+   return (char*)return_text;
 }
 void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32_t start, uint32_t count)
 {

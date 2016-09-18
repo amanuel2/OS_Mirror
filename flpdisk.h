@@ -18,4 +18,8 @@ extern uint8_t* flpydsk_read_sector (int sectorLBA);
 //! converts an LBA address to CHS
 extern void flpydsk_lba_to_chs (int lba,int *head,int *track,int *sector);
 
+extern void flpydsk_write_dor (uint8_t val );
+extern uint8_t flpydsk_read_data ();
+
+extern void flpydsk_read_sector_imp (uint8_t head, uint8_t track, uint8_t sector) ;
 #endif

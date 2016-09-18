@@ -66,6 +66,21 @@ int Lib::str::strncmp(const char *str1, const char *str2, size_t n)
     return *(const unsigned char*)str1-*(const unsigned char*)str2;
 }
 
+
+char* Lib::str::strcat(char *dest, char *src)
+{
+   size_t dest_len = strlen(dest);
+   size_t src_len = strlen(src);
+   char* return_str="";
+   uint32_t count_return_str=0;
+    for(uint32_t i=0;i<=dest_len;i++)
+   		return_str[count_return_str++] = dest[i];
+   	count_return_str=dest_len;
+     for(uint32_t i=0;i<=src_len;i++)
+     		return_str[count_return_str++] = src[i];
+   	return return_str;
+}
+
 int Lib::str::startswith(char* P, char* T){
 	    int n = Lib::str::strlen(T);
 	    int m = Lib::str::strlen(P);

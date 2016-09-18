@@ -20,6 +20,7 @@ namespace Lib
 			uint32_t hex2dec(char* hex);
 			int startswith(char* P, char* T);
 			int toLower(int chr);
+			char* strcat(char *dest, char *src);
 
 	}
 

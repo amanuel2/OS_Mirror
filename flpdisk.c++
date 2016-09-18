@@ -239,7 +239,6 @@ inline void flpydsk_wait_irq () {
 void  i86_flpy_irq (struct regs *r) {
 	//! irq fired
 	_FloppyDiskIRQ = 1;
-	printf("IRQ 6 HIT");
 }
 //! check interrupt status command
 void flpydsk_check_int (uint32_t* st0, uint32_t* cyl) {
@@ -285,7 +284,7 @@ void flpydsk_control_motor (bool b) {
 		flpydsk_write_dor (FLPYDSK_DOR_MASK_RESET);
 
 	//! in all cases; wait a little bit for the motor to spin up/turn off
-	sleep (20);
+	//sleep (1);
 }
 
 //! configure drive
@@ -308,12 +307,12 @@ int flpydsk_calibrate (uint32_t drive) {
 
 	if (drive >= 4)
 		return -2;
-
+printf("TURNING MOTOR ON");
 	//! turn on the motor
-	flpydsk_control_motor (true);
-
+	flpydsk_control_motor (true); 
+printf("FLPDISK MOTOR ON");
 	for (int i = 0; i < 10; i++) {
-
+		printf("ITTERATE %d",i);
 		//! send command
 		flpydsk_send_command ( FDC_CMD_CALIBRATE );
 		flpydsk_send_command ( drive );
@@ -353,14 +352,15 @@ void flpydsk_reset () {
 	flpydsk_disable_controller ();
 	flpydsk_enable_controller ();
 	//flpydsk_wait_irq ();
-	printf("STARTED WAITING");
 	while(_FloppyDiskIRQ == 0);
 		_FloppyDiskIRQ = 0;
-	printf("ENDED WAITING FOR IRQ");
+
+
 
 	//! send CHECK_INT/SENSE INTERRUPT command to all drives
 	for (int i=0; i<4; i++)
 		flpydsk_check_int (&st0,&cyl);
+
 
 	//! transfer speed 500kb/s
 	flpydsk_write_ccr (0);
@@ -368,8 +368,13 @@ void flpydsk_reset () {
 	//! pass mechanical drive info. steprate=3ms, unload time=240ms, load time=16ms
 	flpydsk_drive_data (3,16,240,true);
 
+
 	//! calibrate the disk
 	flpydsk_calibrate ( _CurrentDrive );
+
+
+	printf("End Wait");
+
 }
 
 //! read a sector
@@ -444,18 +449,18 @@ void flpydsk_lba_to_chs (int lba,int *head,int *track,int *sector) {
 
 //! install floppy driver
 void flpydsk_install (int irq) {
-
 	//! install irq handler
 	install_handler_irq (irq, i86_flpy_irq);
 
 	//! initialize the DMA for FDC
 	flpydsk_initialize_dma ();
-
+printf("FLP_START");
 	//! reset the fdc
-	//flpydsk_reset ();
-
+	flpydsk_reset ();
+printf("FLPDISK_END_RESET");
 	//! set drive information
-	//flpydsk_drive_data (13, 1, 0xf, true);
+	flpydsk_drive_data (13, 1, 0xf, true);
+	printf("FLPDISK_END");
 }
 
 //! set current working drive

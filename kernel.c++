@@ -117,12 +117,17 @@ extern "C" void kernelMain
 	   	MOUSE mouse;
 	   	mouse.install_mouse_driver();
 
-     // flpydsk_install(6);
+      
 
 	   	__asm__ __volatile__ ("sti");
 
+flpydsk_install(6);
       printf("\nHello :) \n");
+uint8_t* sector = 0;
+     //! read sector from disk
+  sector = flpydsk_read_sector ( 0 );
 
+  printf("%x",sector);
 // 	   	cls();
 
 
@@ -147,51 +152,36 @@ extern "C" void kernelMain
         Desktop desktop(0x23);
 #endif
 
-#ifdef DEBUG_MODE
-        Vertex<int> vert;
-        vert.insert_begin(3);
-        vert.insert_begin(4);
-        vert.insert_begin(5);
-        vert.insert_end(20);
-        vert.insert_end(70);
-        vert.insert_index(3,1000);
-
-        vert.insert_before_val(70,342);
-
-   
-    vert.sort(REVERSE);
-         for(uint32_t i=0; i<vert.get_amount(); i++)
-       		 printf("%d : %d \n" ,i, vert.get_val(i));
-
-
-printf("***********\n");
-	Vertex<char*> vert_check;
-	vert_check.insert_begin("a");
-	vert_check.insert_end("b");
-	vert_check.sort(REVERSE);
- for(uint32_t i=0; i<vert_check.get_amount(); i++)
-       		 printf("%d : %s \n" ,i, vert_check.get_val(i));
-
-
-#endif
 
        cls();
 
-  //    Sound sound;
-  //    sound.beep(2);
+     // Sound sound;
+     // sound.beep(2);
      FileAlgo filealgo;
-     File sampleFile;
+     File sampleFile; 
      File anotherSampleFile;
      anotherSampleFile.header.name="WkstMathsTODO";
      sampleFile.header.name = "FileName";
      Vata vata;
 
-     vata.return_ata().Write28(0,filealgo.File_to_char(sampleFile),0, Lib::str::strlen(filealgo.File_to_char(sampleFile)));
-     vata.return_ata().Flush();
-     vata.return_ata().Read28(0);
+    
 
-// File file_sam = filealgo.char_to_File(filealgo.File_to_char(anotherSampleFile));
-// printf("%s",file_sam.header.name);
+ // char* already_read = vata.return_ata().Read28(0);
+ // char* file_contents=filealgo.File_to_char(sampleFile);
+ // char* added_up = Lib::str::strcat(already_read,file_contents);
+ //  printf("\n\nADDED_UP: %s",added_up);
+
+ //  added_up = "Amanuel";
+char* prev_result_prev = vata.return_ata().Read28(0);
+
+
+   vata.return_ata().Write28(0, Lib::str::strcat("Amanuel","IsAWESOME"),0, 50);
+   vata.return_ata().Flush();
+
+    char* prev_result = vata.return_ata().Read28(0);
+char* current_res = Lib::str::strcat(prev_result,"IsAWESOME");
+
+   printf("READ : %s",prev_result);
 
      // Terminal terminal;
      // terminal.initalize(0x00);
