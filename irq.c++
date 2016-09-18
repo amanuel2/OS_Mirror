@@ -161,6 +161,7 @@ extern "C" void irq_handler(struct regs *r)
         handler(r);
     }
 
+
     //irq_taskmanager->Schedule((CPUState*)r);
 
     /* If the IDT entry that was invoked was greater than 40

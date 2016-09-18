@@ -21,7 +21,7 @@ public:
 
 	void Identify();
 	void Read28(uint8_t sectorNum,uint32_t count = 512);
-	void Write28(uint8_t sectorNum, char* data,uint32_t start, uint32_t count);
+	void Write28(uint8_t sectorNum, void* data,uint32_t start, uint32_t count);
 	void Flush();
 	bool accesible = true;
 private:

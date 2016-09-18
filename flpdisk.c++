@@ -452,7 +452,7 @@ void flpydsk_install (int irq) {
 	flpydsk_initialize_dma ();
 
 	//! reset the fdc
-	flpydsk_reset ();
+	//flpydsk_reset ();
 
 	//! set drive information
 	//flpydsk_drive_data (13, 1, 0xf, true);
