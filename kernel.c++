@@ -31,6 +31,8 @@
 #include "sound.h"
 #include "ata.h"
 #include "flpdisk.h"
+#include "filealgorithms.h"
+
 
 //Call all class constructor
 //for global objects before
@@ -47,16 +49,7 @@ extern "C" void callConstructors()
 
 extern void printf(char *str, ...);
 
-struct Header
-{
-  char* name;
-};
 
-struct File
-{
-  struct Header header;
-  char* contents;
-};
 
 void taskA();
 void taskB();
@@ -195,8 +188,10 @@ printf("***********\n");
 
   //    Sound sound;
   //    sound.beep(2);
-
+     FileAlgo filealgo;
      File sampleFile;
+     File anotherSampleFile;
+     anotherSampleFile.header.name="WkstMathsTODO";
      sampleFile.header.name = "FileName";
      //printf("%d\n",sizeof(sampleFile));
 
@@ -238,11 +233,14 @@ printf("***********\n");
      if(atass.accesible)
      {
        printf("\nWritting Info In Secondary Slave\n");
-       atass.Write28(0,&sampleFile ,0, 8);
+       atass.Write28(0,filealgo.File_to_char(sampleFile),0, Lib::str::strlen(filealgo.File_to_char(sampleFile)));
        atass.Flush();
        atass.Read28(0);
      }
 
+    
+// File file_sam = filealgo.char_to_File(filealgo.File_to_char(anotherSampleFile));
+// printf("%s",file_sam.header.name);
   //    delay(2);
 
      // Terminal terminal;

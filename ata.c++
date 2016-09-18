@@ -143,7 +143,7 @@ void AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
         p16b.in(port_def);
     printf("\n");
 }
-void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, void* data, uint32_t start, uint32_t count)
+void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32_t start, uint32_t count)
 {
 	if(!(accesible))
 	{
@@ -183,9 +183,9 @@ void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, void* data, uint32
             wdata |= ((uint16_t)data[i+1]) << 8;
         p16b.out(wdata,port_def);
         
-        // char *text = "  \0";
-        // text[0] = (wdata >> 8) & 0xFF;
-        // text[1] = wdata & 0xFF;
+        char *text = "  \0";
+        text[0] = (wdata >> 8) & 0xFF;
+        text[1] = wdata & 0xFF;
  //       printf(text);
     }
     

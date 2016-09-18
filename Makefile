@@ -2,7 +2,7 @@ GPPARAMS =  -m32 -g -Iinclude -fno-use-cxa-atexit -o3 -nostdlib \
 		    -fno-builtin -std=c++11 -fno-rtti -fno-exceptions -fno-leading-underscore \
 		    -Wno-write-strings -Wno-unused-function -Wno-unused-label \
 		     -Wno-unused-but-set-variable -ffreestanding -Wall -Werror \
-		     -Wno-unused-variable -Wno-maybe-uninitialized
+		     -Wno-unused-variable -Wno-maybe-uninitialized -Wno-return-local-addr
 		    
 LDPARAMS =  -melf_i386
 objects = stdlib.o stdio.o kernel.o isr.o \
@@ -12,7 +12,7 @@ objects = stdlib.o stdio.o kernel.o isr.o \
 		  irq_a.o kbd.o mouse.o terminal.o vga.o pci.o \
 		  graphics.o widget.o desktop.o rand.o rand_a.o \
 		  guiletter.o task.o task_a.o time.o sound.o \
-		  bfs.o ata.o flpdisk.o
+		  bfs.o ata.o flpdisk.o filealgorithms.o
 		  
 i686 = i686-elf-
 Asm_files =  idt boot isr port gdt_flush irq
@@ -56,6 +56,7 @@ compile:
 	$(i686)g++ $(GPPARAMS) -o bfs.o -c bfs.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o ata.o -c ata.c++ -ffreestanding
 	$(i686)g++ $(GPPARAMS) -o flpdisk.o -c flpdisk.c++ -ffreestanding
+	$(i686)g++ $(GPPARAMS) -o filealgorithms.o -c filealgorithms.c++ -ffreestanding
 	nasm -f elf32 boot.asm -o boot.o
 	nasm -f elf32 isr.asm -o isr_a.o
 	nasm -f elf32 port.asm -o port_a.o
