@@ -129,14 +129,14 @@ char* AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
         uint16_t wdata = p16b.in(port_def);
         
         char *text = "  \0";
-        //printf("%c" , wdata & 0xFF);
+       // printf("%c" , wdata & 0xFF);
         text[0] = wdata & 0xFF;
         return_text[count_index] = wdata & 0xFF;
         count_index++;
         
         if(i+1 < count)
         {
-           // printf("%c" , (wdata >> 8) & 0xFF);
+            //printf("%c" , (wdata >> 8) & 0xFF);
             text[1] = (wdata >> 8) & 0xFF;
             return_text[count_index] = (wdata >> 8) & 0xFF;
              count_index++;

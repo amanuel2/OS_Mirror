@@ -167,24 +167,24 @@ uint8_t* sector = 0;
     
 
  // char* already_read = vata.return_ata().Read28(0);
- // char* file_contents=filealgo.File_to_char(sampleFile);
+  char* file_contents=filealgo.File_to_char(sampleFile);
  // char* added_up = Lib::str::strcat(already_read,file_contents);
  //  printf("\n\nADDED_UP: %s",added_up);
 
  //  added_up = "Amanuel";
-char* prev_result_prev = vata.return_ata().Read28(0);
 
+// char* prev_result_prev = Lib::str::strcat(vata.return_ata().Read28(0),"DOUBLEAWESOME");
+// //printf("STR : %s" , prev_result_prev);
 
-   vata.return_ata().Write28(0, Lib::str::strcat("Amanuel","IsAWESOME"),0, 50);
+   vata.return_ata().Write28(0, file_contents,0, Lib::str::strlen(file_contents));
    vata.return_ata().Flush();
 
-    char* prev_result = vata.return_ata().Read28(0);
-char* current_res = Lib::str::strcat(prev_result,"IsAWESOME");
+    char* result_sector_one = vata.return_ata().Read28(0);
 
-   printf("READ : %s",prev_result);
+   //printf("READ : %s",prev_result);
 
-     // Terminal terminal;
-     // terminal.initalize(0x00);
+     Terminal terminal;
+     terminal.initalize(0x00,result_sector_one);
 
    while(1);
    err:

@@ -147,7 +147,22 @@ void Terminal::handle_input()
 		{
         	printf("\nDid you mean 'help' ?\n");
 		}  
-	}		
+	}	
+	else if(Lib::str::strcmp(val_total,"ls")==0)
+	{
+		char* answer = this->filealgo.return_file_names_from_encoded_char(this->result_sector_one);
+		if(terminal_scroll_ready==true)
+		{
+		   	terminal_scroll(2);
+		   	terminal_scroll_ready=false;
+		   	printf("\n%s\n",answer);
+		}
+		else
+		{
+        	printf("\n%s\n",answer);
+		}  
+		
+	}	
 	else
 	{
 		if(terminal_scroll_ready==true)
@@ -165,8 +180,9 @@ void Terminal::handle_input()
 
 }
 
-void Terminal::initalize(uint8_t FLAGS)
+void Terminal::initalize(uint8_t FLAGS,char* result_sector_one)
 {
+	this->result_sector_one = result_sector_one;
 		// printf_color_fg_bg(1,0,"[GDT LOADED]");
 		// printf("\n");
 		// delay(0.1);
