@@ -155,10 +155,10 @@ void mouse_ps2_handler(struct regs *a_r)
 #else
 
 
-            		if(buttons & (0x1<<i))
-            			printf("Mouse UP");
-                    else
-                    	printf("Mouse DOWN");
+//            		if(buttons & (0x1<<i))
+//            			printf("Mouse UP");
+//                    else
+//                    	printf("Mouse DOWN");
 #endif
         	}
      	 }
