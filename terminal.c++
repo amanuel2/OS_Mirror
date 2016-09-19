@@ -84,13 +84,13 @@ void Terminal::handle_input()
 		   	terminal_scroll(4);
 		   	terminal_scroll_ready=false;
 		   	printf("\n**********HELP*********\n");
-
+		   	printf("[Commands] : ls");
 			printf("\n***********************\n");
 		}
 		else
 		{
         	printf("\n**********HELP*********\n");
-
+			printf("[Commands] : ls");
 			printf("\n***********************\n");
 		}  
 	
