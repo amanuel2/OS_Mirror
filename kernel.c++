@@ -121,13 +121,13 @@ extern "C" void kernelMain
 
 	   	__asm__ __volatile__ ("sti");
 
-flpydsk_install(6);
-      printf("\nHello :) \n");
-uint8_t* sector = 0;
+//flpydsk_install(6);
+  //    printf("\nHello :) \n");
+//uint8_t* sector = 0;
      //! read sector from disk
-  sector = flpydsk_read_sector ( 0 );
+  //sector = flpydsk_read_sector ( 0 );
 
-  printf("%x",sector);
+  //printf("%x",sector);
 // 	   	cls();
 
 
