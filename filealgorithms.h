@@ -28,6 +28,8 @@ public:
 	char* File_to_char(File file);
 	File char_to_File(char* val);
 	char* return_file_names_from_encoded_char(char *val);	
+	uint32_t number_of_files(char* val);
+	char** return_file_names_from_encoded_char_multiple(char* val);
 };
 
 #endif

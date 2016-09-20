@@ -21,6 +21,9 @@ namespace Lib
 			int startswith(char* P, char* T);
 			int toLower(int chr);
 			char* strcat(char *dest, char *src);
+			int find_occurence_chr(char* val, char other);
+			int count_substr(char *str, char* substr, bool overlap);
+
 
 	}
 

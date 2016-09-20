@@ -169,16 +169,18 @@ extern "C" void kernelMain
  
   char* file_contents=filealgo.File_to_char(sampleFile);
   char* math_wkst_file= filealgo.File_to_char(anotherSampleFile);
+  char* res_default = Lib::str::strcat(file_contents,math_wkst_file);
 
-
-   vata.return_ata().Write28(0, file_contents,0, Lib::str::strlen(file_contents));
+   vata.return_ata().Write28(0, res_default,0, Lib::str::strlen(res_default));
    vata.return_ata().Flush();
 
     char* result_sector_one = vata.return_ata().Read28(0);
+    char** result_names = filealgo.return_file_names_from_encoded_char_multiple(result_sector_one);
+printf("\n\nSTRING : %s \n\n NUMBER OF FILES : %d", result_sector_one,filealgo.number_of_files(result_sector_one));
 
 
-     Terminal terminal;
-     terminal.initalize(0x00,result_sector_one);
+     // Terminal terminal;
+     // terminal.initalize(0x00,result_sector_one);
 
    while(1);
    err:

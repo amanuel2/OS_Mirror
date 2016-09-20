@@ -15,8 +15,9 @@ FileAlgo::~FileAlgo()
 
 char* FileAlgo::File_to_char(File file)
 {
-  char return_str[999] = "FSTART_FILE__VALID::NAME=";
-  char done[17] = "/ENDFILENAME/END";
+  //LANA = Label Name
+  char return_str[999] = "FSTART_FILE__VALID::LANA=";
+  char done[17] = "/ENDFILENAME/CEF";
   int count=0;
   size_t header_name_size = Lib::str::strlen(file.header.name);
   for(uint32_t i=25; i<=25+header_name_size; i++)
@@ -65,4 +66,34 @@ char* FileAlgo::return_file_names_from_encoded_char(char *val)
   File file_temp = this->char_to_File(val_temp);
   name = file_temp.header.name;
   return deblank(name);
+}
+
+char** FileAlgo::return_file_names_from_encoded_char_multiple(char* val)
+{
+  uint32_t num_files = this->number_of_files(val);
+  char* names [99]= {0};
+  uint32_t index_names = 0;
+  for(uint32_t i=0; i<Lib::str::strlen(val); i++)
+  {
+    if(val[i]=='L' && val[i+1]=='A' && val[i+2]=='N'
+        && val[i+3]=='A' && val[i+4]=='=')
+    {
+      uint32_t start = i+5;
+      int start_index=0;
+      while(val[start]!='/')
+      {
+        printf("%c",val[start]);
+        //names[index_names][start_index] = val[start];
+        index_names++;
+        start++;
+        start_index++;
+      }
+    }  
+  }
+ return names;
+}
+
+uint32_t FileAlgo::number_of_files(char* val)
+{
+  return (uint32_t)(Lib::str::count_substr(val,"/CEF",true));
 }

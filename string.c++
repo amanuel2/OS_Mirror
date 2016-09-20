@@ -81,6 +81,32 @@ char* Lib::str::strcat(char *dest, char *src)
    	return return_str;
 }
 
+char *
+strstr(char* string, char* substring)	
+{
+    register char *a, *b;
+    b = substring;
+    if (*b == 0) {
+	return string;
+    }
+    for ( ; *string != 0; string += 1) {
+	if (*string != *b) {
+	    continue;
+	}
+	a = string;
+	while (1) {
+	    if (*b == 0) {
+		return string;
+	    }
+	    if (*a++ != *b++) {
+		break;
+	    }
+	}
+	b = substring;
+    }
+    return (char *) 0;
+}
+
 int Lib::str::startswith(char* P, char* T){
 	    int n = Lib::str::strlen(T);
 	    int m = Lib::str::strlen(P);
@@ -95,6 +121,26 @@ int Lib::str::startswith(char* P, char* T){
 	    }
 	    return -1;
 }
+
+int Lib::str::count_substr(char *str, char* substr, bool overlap) {
+  if (strlen(substr) == 0) return -1; 
+
+  int count = 0;
+  int increment = overlap ? 1 : strlen(substr);
+  for (char* s = (char*)str; (s = strstr(s, substr)); s += increment)
+    ++count;
+  return count;
+}
+
+int Lib::str::find_occurence_chr(char* val, char other)
+{
+  int count=0;    
+    for(int i=0; i<(signed)strlen(val);i++)
+        if(val[i]==other)
+            count++;
+    return count;
+}
+
 
 uint32_t Lib::str::hex2dec(char* hex)
 {
