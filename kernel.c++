@@ -160,6 +160,12 @@ extern "C" void kernelMain
      FileAlgo filealgo;
      File sampleFile; 
      File anotherSampleFile;
+     File file1;
+     File file2;
+     File file3;
+     file1.header.name = "FILE 1";
+     file2.header.name = "FILE 2";
+     file3.header.name = "FILE 3";
      anotherSampleFile.header.name="WkstMathsTODO";
      sampleFile.header.name = "FileName";
      Vata vata;
@@ -167,20 +173,32 @@ extern "C" void kernelMain
     
 
  
-  char* file_contents=filealgo.File_to_char(sampleFile);
-  char* math_wkst_file= filealgo.File_to_char(anotherSampleFile);
-  char* res_default = Lib::str::strcat(file_contents,math_wkst_file);
+  ret_chr_arr file_contents=filealgo.File_to_char(sampleFile);
+  ret_chr_arr math_wkst_file= filealgo.File_to_char(anotherSampleFile);
+
+  ret_chr_arr file_1_contents = filealgo.File_to_char(file1);
+  ret_chr_arr file_2_contents = filealgo.File_to_char(file2);
+  ret_chr_arr file_3_contents = filealgo.File_to_char(file3);
+
+
+  char* res_default = Lib::str::strcat(file_contents.str,math_wkst_file.str);
+  res_default = Lib::str::strcat(res_default,file_1_contents.str);
+  res_default = Lib::str::strcat(res_default,file_2_contents.str);
+  res_default = Lib::str::strcat(res_default,file_3_contents.str);
+
+//printf("\nres_default %s",res_default);
 
    vata.return_ata().Write28(0, res_default,0, Lib::str::strlen(res_default));
    vata.return_ata().Flush();
 
     char* result_sector_one = vata.return_ata().Read28(0);
-    char** result_names = filealgo.return_file_names_from_encoded_char_multiple(result_sector_one);
-printf("\n\nSTRING : %s \n\n NUMBER OF FILES : %d", result_sector_one,filealgo.number_of_files(result_sector_one));
+    char_two_ret result_names = filealgo.return_file_names_from_encoded_char_multiple(result_sector_one);
+ //printf("\n\n\nSTRING : %s \n\n NUMBER OF FILES : %d", result_sector_one,filealgo.number_of_files(result_sector_one));
 
 
-     // Terminal terminal;
-     // terminal.initalize(0x00,result_sector_one);
+
+      Terminal terminal;
+      terminal.initalize(0x00,result_sector_one);
 
    while(1);
    err:

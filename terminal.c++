@@ -150,16 +150,28 @@ void Terminal::handle_input()
 	}	
 	else if(Lib::str::strcmp(val_total,"ls")==0)
 	{
-		char* answer = this->filealgo.return_file_names_from_encoded_char(this->result_sector_one);
+		char_two_ret result_names = filealgo.return_file_names_from_encoded_char_multiple(result_sector_one);
 		if(terminal_scroll_ready==true)
 		{
-		   	terminal_scroll(2);
+		   	terminal_scroll(result_names.index_num+1);
 		   	terminal_scroll_ready=false;
-		   	printf("\n%s\n",answer);
+		   	for(uint32_t i=1; i<=result_names.index_num; i++)
+			{
+				if(i==result_names.index_num)
+					printf("\n%s\n",result_names.names_two[i]);
+				else
+					printf("\n%s", result_names.names_two[i]);
+			}
 		}
 		else
 		{
-        	printf("\n%s\n",answer);
+        	for(uint32_t i=1; i<=result_names.index_num; i++)
+			{
+				if(i==result_names.index_num)
+					printf("\n%s\n",result_names.names_two[i]);
+				else
+					printf("\n%s", result_names.names_two[i]);
+			}
 		}  
 		
 	}	
@@ -183,47 +195,47 @@ void Terminal::handle_input()
 void Terminal::initalize(uint8_t FLAGS,char* result_sector_one)
 {
 	this->result_sector_one = result_sector_one;
-		printf_color_fg_bg(1,0,"[GDT LOADED]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(2,0,"[IRQ'S LOADED]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(3,0,"[ISR'S LOADED]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(4,0,"[IDT  LOADED]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(5,0,"[INTERRUPTS READY]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(6,0,"[GRAPHICS LOADED]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(7,0,"[TIME LOADED]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(8,0,"[SOUND LOADED]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(9,0,"[ATA LOADED]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(10,0,"[MOUSE READY]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(11,0,"[KEYBOARD READY]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(12,0,"[LIBRARIES SET]");
-		printf("\n");
-		sleep(0.1);
-		printf_color_fg_bg(13,0,"[TERMINAL INITALIZED]");
-		update_cursor(terminal_row,terminal_column);
-		printf("\n");
-		printf("TERMIAL WILL RUN SOON!");
-		sleep(2.1);
+		// printf_color_fg_bg(1,0,"[GDT LOADED]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(2,0,"[IRQ'S LOADED]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(3,0,"[ISR'S LOADED]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(4,0,"[IDT  LOADED]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(5,0,"[INTERRUPTS READY]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(6,0,"[GRAPHICS LOADED]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(7,0,"[TIME LOADED]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(8,0,"[SOUND LOADED]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(9,0,"[ATA LOADED]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(10,0,"[MOUSE READY]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(11,0,"[KEYBOARD READY]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(12,0,"[LIBRARIES SET]");
+		// printf("\n");
+		// sleep(0.1);
+		// printf_color_fg_bg(13,0,"[TERMINAL INITALIZED]");
+		// update_cursor(terminal_row,terminal_column);
+		// printf("\n");
+		// printf("TERMIAL WILL RUN SOON!");
+		// sleep(2.1);
 		cls();
 		this->print_logo();
 		printf("\n\n\n");
