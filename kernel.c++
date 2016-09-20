@@ -193,8 +193,6 @@ extern "C" void kernelMain
 
     char* result_sector_one = vata.return_ata().Read28(0);
     char_two_ret result_names = filealgo.return_file_names_from_encoded_char_multiple(result_sector_one);
- //printf("\n\n\nSTRING : %s \n\n NUMBER OF FILES : %d", result_sector_one,filealgo.number_of_files(result_sector_one));
-
 
 
       Terminal terminal;
