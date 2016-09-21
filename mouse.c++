@@ -16,6 +16,9 @@ extern void redraw_desktop_button_click(int x , int y, bool up);
 
 extern MOUSE_DIMENSIONS_DRAW MDD;
 
+
+extern bool cleared_mouse;
+
 static PORT::Port8Bits p8b_mouse_drv;
 
 #ifdef GRAPHICS_MODE
@@ -119,9 +122,23 @@ void mouse_ps2_handler(struct regs *a_r)
 #else
 
                 static uint16_t* VideoMemoryMouse = (uint16_t*)0xc00b8000;
-                               VideoMemoryMouse[80*y_vga + x_vga] = (VideoMemoryMouse[80*y_vga + x_vga] & 0x0F00) << 4
+              
+
+                 if(cleared_mouse==false)
+                 {
+                  VideoMemoryMouse[80*y_vga + x_vga] = (VideoMemoryMouse[80*y_vga + x_vga] & 0x0F00) << 4
                                                    | (VideoMemoryMouse[80*y_vga + x_vga] & 0xF000) >> 4
                                                    | (VideoMemoryMouse[80*y_vga + x_vga] & 0x00FF);
+
+                                                                 
+                }
+
+                if(cleared_mouse==true)
+                {
+                  cleared_mouse=false;
+                }
+                
+                               
 
                                x_vga += buffer[1];
                                if(x_vga >= 80) x_vga = 79;
@@ -130,10 +147,12 @@ void mouse_ps2_handler(struct regs *a_r)
                                if(y_vga >= 25) y_vga = 24;
                                if(y_vga < 0) y_vga = 0;
 
+if(cleared_mouse==false)
+                 {
                                VideoMemoryMouse[80*y_vga + x_vga] = (VideoMemoryMouse[80*y_vga + x_vga] & 0x0F00) << 4
                                                    | (VideoMemoryMouse[80*y_vga + x_vga] & 0xF000) >> 4
                                                    | (VideoMemoryMouse[80*y_vga + x_vga] & 0x00FF);
-
+}
 
 
 

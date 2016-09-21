@@ -20,6 +20,9 @@ extern size_t terminal_column;
 
 bool terminal_scroll_ready = false;
 
+extern uint8_t x_vga,y_vga;
+uint8_t x_bef_enter=0 , y_bef_enter=0;
+
 
 void get_scan_code_terminal();
 
@@ -385,7 +388,12 @@ void get_scan_code_terminal()
 		    else
 		    {
 		    	if(scancode_term==28)
+		    	{
+		    		x_bef_enter = x_vga;
+		    		y_bef_enter = y_vga;
+		    		//printf("%d:%d",x_bef_enter,y_bef_enter);
 		    		return;
+		    	}
 		    	OnKeyDown(scancode_term);
 		    }
 				

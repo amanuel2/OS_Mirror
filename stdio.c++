@@ -20,7 +20,13 @@ static PORT::Port8Bits p8b_stdio_drv;
 
 
 extern void emptyString(char* str);
+extern uint8_t x_vga,y_vga;
+uint8_t x_vga_before_res,y_vga_before_res;
+extern uint8_t x_bef_enter,y_bef_enter;
+uint8_t x_bef_scroll,y_bef_scroll;
 char *convert(unsigned int num, int base);
+
+bool cleared_mouse = false;
 	
 SerialPort sp_std_io;
 //80 * 25
@@ -38,12 +44,57 @@ void terminal_bg_fg_ccolor(size_t width, size_t height, int bg, int fg)
 		}
 }
 
+void clear_mouse()
+{
+	
+
+	 uint16_t* VideoMemoryMouse = (uint16_t*)0xc00b8000;
+	 const size_t index =  (y_vga * VGA_WIDTH +  x_vga);
+	  	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|((char)0);
+
+uint8_t y_vga_temp = y_vga - 10;
+const size_t index_2 =  (y_vga-10 * VGA_WIDTH +  x_vga);
+	  	VideoMemory[index_2]= (VideoMemory[index_2] & 0xFF00)|((char)0);
+	 
+	 uint8_t y_temp = y_bef_enter -2;
+	  const size_t index_3 =  (y_temp * VGA_WIDTH +  x_bef_enter);
+	  	VideoMemory[index_3]= (VideoMemory[index_3] & 0xFF00)|((char)0); 
+
+	  	VideoMemoryMouse[index_3] = (VideoMemoryMouse[index_3] & 0x0F00) << 4
+                                                   | (VideoMemoryMouse[index_3] & 0xF000) >> 4
+                                                   | (VideoMemoryMouse[index_3] & 0x00FF);
+
+
+
+
+
+
+    if(y_vga == y_vga_before_res && x_vga == x_vga_before_res)
+    {
+
+	uint8_t y_temp_other = y_vga -2;
+	  const size_t index_32 =  (y_temp_other * VGA_WIDTH +  x_vga);
+	  		VideoMemoryMouse[index_32] = (VideoMemoryMouse[index_32] & 0x0F00) << 4
+                                                   | (VideoMemoryMouse[index_32] & 0xF000) >> 4
+                                                   | (VideoMemoryMouse[index_32] & 0x00FF);
+    }
+
+
+	cleared_mouse = true;
+	//printf("BEF : X:[%d]:Y:[%d] SCL: X:[%d]:Y[%d]",x_bef_enter,y_bef_enter,x_bef_scroll,y_bef_scroll);
+	x_vga_before_res = x_vga;
+	y_vga_before_res = y_vga;
+}
+
 void terminal_scroll(int scroll_by){
+	x_bef_scroll = x_vga;
+	y_bef_scroll = y_vga;
     for(int i = 0; i < 25; i++){
         for (int m = 0; m < 80; m++){
             VideoMemory[i * 80 + m] = VideoMemory[(i + scroll_by) * 80 + m];
         }
     }
+    clear_mouse();
     terminal_row -=scroll_by;
 }
 
