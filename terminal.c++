@@ -21,6 +21,8 @@ extern size_t terminal_column;
 bool terminal_scroll_ready = false;
 
 extern uint8_t x_vga,y_vga;
+
+extern Vata vata;
 uint8_t x_bef_enter=0 , y_bef_enter=0;
 
 
@@ -84,10 +86,12 @@ void Terminal::handle_input()
 	{
 		if(terminal_scroll_ready==true)
 		{
-		   	terminal_scroll(4);
+		   	terminal_scroll(7);
 		   	terminal_scroll_ready=false;
 		   	printf("\n**********HELP*********\n");
-		   	printf("[Commands] : ls");
+		   	printf("[Commands]\n");
+		   	printf("1) ls\n");
+		   	printf("2) mkfile\n");
 			printf("\n***********************\n");
 		}
 		else
@@ -112,7 +116,7 @@ void Terminal::handle_input()
 		}  
 		
 	}
-	else if(Lib::str::strcmp(val_total,"help")==0)
+	else if(Lib::str::strcmp(val_total,"hElp")==0)
 	{
 		if(terminal_scroll_ready==true)
 		{
@@ -125,7 +129,7 @@ void Terminal::handle_input()
         	printf("\nDid you mean 'help' ?\n");
 		}  
 	}
-	else if(Lib::str::strcmp(val_total,"help")==0)
+	else if(Lib::str::strcmp(val_total,"heLp")==0)
 	{
 		if(terminal_scroll_ready==true)
 		{
@@ -138,7 +142,7 @@ void Terminal::handle_input()
         	printf("\nDid you mean 'help' ?\n");
 		}  
 	}
-	else if(Lib::str::strcmp(val_total,"help")==0)
+	else if(Lib::str::strcmp(val_total,"helP")==0)
 	{
 		if(terminal_scroll_ready==true)
 		{
@@ -178,6 +182,20 @@ void Terminal::handle_input()
 		}  
 		
 	}	
+
+	else if(Lib::str::strcmp(val_total,"mkfile")==0)
+	{
+		if(terminal_scroll_ready==true)
+		{
+		   	terminal_scroll(2);
+		   	terminal_scroll_ready=false;
+		   	printf("\nMaking File\n");
+		}
+		else
+		{
+        	printf("\nMaking File\n");
+		}  
+	}
 	else
 	{
 		if(terminal_scroll_ready==true)

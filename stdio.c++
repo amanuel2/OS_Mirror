@@ -52,9 +52,9 @@ void clear_mouse()
 	 const size_t index =  (y_vga * VGA_WIDTH +  x_vga);
 	  	VideoMemory[index]= (VideoMemory[index] & 0xFF00)|((char)0);
 
-uint8_t y_vga_temp = y_vga - 10;
-const size_t index_2 =  (y_vga-10 * VGA_WIDTH +  x_vga);
-	  	VideoMemory[index_2]= (VideoMemory[index_2] & 0xFF00)|((char)0);
+	uint8_t y_vga_temp = y_vga - 10;
+	const size_t index_2 =  (y_vga-10 * VGA_WIDTH +  x_vga);
+		  	VideoMemory[index_2]= (VideoMemory[index_2] & 0xFF00)|((char)0);
 	 
 	 uint8_t y_temp = y_bef_enter -2;
 	  const size_t index_3 =  (y_temp * VGA_WIDTH +  x_bef_enter);

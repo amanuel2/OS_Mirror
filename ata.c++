@@ -120,7 +120,7 @@ char* AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
         while(true);
     }
 
-//     printf("\nReading ATA Drive: ");
+
   char return_text[999]="";  
   uint32_t count_index=0;
 

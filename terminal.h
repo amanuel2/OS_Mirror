@@ -5,6 +5,7 @@
 #include "string.h"
 #include "time.h"
 #include "mem.h"
+#include "vata.h"
 #include "filealgorithms.h"
 //extern FileAlgo filealgo;
 
