@@ -121,7 +121,7 @@ char* AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
     }
 
 
-  char return_text[999]="";  
+  char* return_text="";  
   uint32_t count_index=0;
 
      for(uint32_t i = 7; i < count; i += 2)
@@ -147,7 +147,7 @@ char* AdvancedTechnologyAttachment::Read28(uint8_t sectorNum,uint32_t count)
 
     for(int i = count + (count%2); i < 512; i += 2)
         p16b.in(port_def);
-   return (char*)return_text;
+   return return_text;
 }
 void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32_t start, uint32_t count)
 {

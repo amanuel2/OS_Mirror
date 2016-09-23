@@ -22,7 +22,7 @@ bool terminal_scroll_ready = false;
 
 extern uint8_t x_vga,y_vga;
 
-extern Vata vata;
+static Vata vata;
 uint8_t x_bef_enter=0 , y_bef_enter=0;
 
 
@@ -86,18 +86,22 @@ void Terminal::handle_input()
 	{
 		if(terminal_scroll_ready==true)
 		{
-		   	terminal_scroll(7);
+		   	terminal_scroll(8);
 		   	terminal_scroll_ready=false;
 		   	printf("\n**********HELP*********\n");
 		   	printf("[Commands]\n");
 		   	printf("1) ls\n");
 		   	printf("2) mkfile\n");
+		   	printf("3) clear\n");
 			printf("\n***********************\n");
 		}
 		else
 		{
         	printf("\n**********HELP*********\n");
-			printf("[Commands] : ls");
+			printf("[Commands]\n");
+		   	printf("1) ls\n");
+		   	printf("2) mkfile\n");
+		   	printf("3) clear\n");
 			printf("\n***********************\n");
 		}  
 	
@@ -183,17 +187,28 @@ void Terminal::handle_input()
 		
 	}	
 
-	else if(Lib::str::strcmp(val_total,"mkfile")==0)
+	else if(Lib::str::strcmp(val_total,"clear")==0)
+	{
+		clear_color();
+		terminal_scroll_ready=false;
+	}
+	else if(Lib::str::startswith(val_total,"mkfile")==0)
 	{
 		if(terminal_scroll_ready==true)
 		{
 		   	terminal_scroll(2);
 		   	terminal_scroll_ready=false;
-		   	printf("\nMaking File\n");
+		   	
 		}
 		else
 		{
-        	printf("\nMaking File\n");
+			File tempFile;
+     		tempFile.header.name = "FileGenerated";
+     		ret_chr_arr file_contents_temp=filealgo.File_to_char(tempFile);
+			result_sector_one = Lib::str::strcat(result_sector_one,file_contents_temp.str);
+        	vata.return_ata().Write28(0, result_sector_one,0, Lib::str::strlen(result_sector_one));
+   			vata.return_ata().Flush();
+   			printf("\n%s\n",vata.return_ata().Read28(0));
 		}  
 	}
 	else
