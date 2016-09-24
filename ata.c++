@@ -159,10 +159,16 @@ void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32
 		//Larger Addressing Than 28
 	//check first 4 bits are 0
 	if(sectorNum > 0x0FFFFFFF)
+    {
+        printf("ERR");
 		return;
+    }
 
 	if(count>512)
+    {
+        printf("ERR");
 		return;
+    }
 //Identify What 
 	//Drive You want to comunicate with
 	//MASTER || SLAVE
@@ -198,7 +204,6 @@ void AdvancedTechnologyAttachment::Write28(uint8_t sectorNum, char* data, uint32
     for(int i = count + (count%2); i < 512; i += 2)
     	p16b.out(0x0000,port_def);
 
- //   printf("\n");
         
 }
 void AdvancedTechnologyAttachment::Flush()
